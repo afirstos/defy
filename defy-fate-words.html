@@ -476,11 +476,20 @@
 
   /* 背包页 */
   .bag-empty { text-align:center; color:var(--text-dim); padding:40px 20px; font-size:0.9rem; }
-  .bag-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .bag-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding-bottom: 10px;
+  }
+  .bag-grid::-webkit-scrollbar { width: 4px; }
+  .bag-grid::-webkit-scrollbar-thumb { background: var(--border-bronze); border-radius: 2px; }
   .treasure-card {
     background: var(--bg-panel);
     border: 2px solid var(--border-bronze);
-    padding: 12px;
+    padding: 8px;
     position: relative;
     cursor: pointer;
     transition: all 0.3s;
@@ -488,17 +497,17 @@
   .treasure-card:hover { border-color: var(--border-gold); transform: translateY(-2px); }
   .treasure-card.rarity-rare  { border-color: #4a7fb9; }
   .treasure-card.rarity-epic  { border-color: #9b59b6; box-shadow: 0 0 8px rgba(155,89,182,0.3); }
-  .treasure-icon { font-size: 2rem; text-align: center; margin-bottom: 6px; }
-  .treasure-name { font-size: 0.9rem; color: var(--text-primary); margin-bottom: 4px; font-weight: bold; }
-  .treasure-rarity { font-size: 0.65rem; padding: 2px 6px; border-radius: 3px; display: inline-block; margin-bottom: 5px; }
+  .treasure-icon { font-size: 1.6rem; text-align: center; margin-bottom: 4px; }
+  .treasure-name { font-size: 0.8rem; color: var(--text-primary); margin-bottom: 3px; font-weight: bold; line-height: 1.2; }
+  .treasure-rarity { font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; display: inline-block; margin-bottom: 3px; }
   .rarity-common .treasure-rarity  { background: rgba(139,115,85,0.3); color: var(--border-bronze); }
   .rarity-rare   .treasure-rarity  { background: rgba(74,127,185,0.3); color: var(--accent-blue); }
   .rarity-epic   .treasure-rarity  { background: rgba(155,89,182,0.3); color: #c39bd3; }
-  .treasure-desc { font-size: 0.72rem; color: var(--text-dim); margin-bottom: 6px; line-height: 1.4; }
-  .treasure-count { position: absolute; top: 8px; right: 10px; font-size: 0.75rem; color: var(--border-gold); font-weight: bold; }
+  .treasure-desc { font-size: 0.65rem; color: var(--text-dim); margin-bottom: 4px; line-height: 1.3; }
+  .treasure-count { position: absolute; top: 6px; right: 8px; font-size: 0.7rem; color: var(--border-gold); font-weight: bold; }
   .give-btn {
     width: 100%; background: var(--border-gold); border: none; color: var(--bg-dark);
-    padding: 7px; font-size: 0.8rem; cursor: pointer; border-radius: 5px; margin-top: 5px;
+    padding: 5px; font-size: 0.75rem; cursor: pointer; border-radius: 4px; margin-top: 4px;
     font-family: 'Noto Serif SC', serif;
   }
   .give-btn:hover { opacity: 0.9; }
@@ -542,6 +551,175 @@
   .drop-item-info { font-size: 0.8rem; }
   .drop-item-name { color: var(--text-primary); }
   .drop-item-flavor { color: var(--text-dim); font-size: 0.7rem; }
+
+  /* ===== 连连看游戏（古风配色） ===== */
+  .match-screen { padding: 20px 16px; }
+  .match-screen .m-topbar {
+    width: 100%; max-width: 480px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 18px;
+    background: var(--bg-panel);
+    border-radius: 12px;
+    margin: 0 auto 10px;
+    border: 1px solid var(--border-bronze);
+  }
+  .match-screen .m-score { font-size: 1.1rem; font-weight: 700; color: var(--border-gold); }
+  .match-screen .m-timer { font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; color: var(--text-secondary); }
+  .match-screen .m-timer.danger { color: var(--accent-red); animation: mBlink .6s infinite; }
+  @keyframes mBlink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .match-screen .m-progress { font-size: .82rem; color: var(--text-dim); font-weight: 600; }
+  .match-screen .m-combo {
+    height: 44px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 900;
+    opacity: 0; transform: scale(0.7);
+    transition: all .2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .match-screen .m-combo.show { opacity: 1; transform: scale(1.1); }
+  .match-screen .m-board-wrap {
+    width: 100%; max-width: 480px;
+    background: var(--bg-panel);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--border-bronze);
+    margin: 0 auto;
+  }
+  .match-screen .m-board {
+    display: flex; justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    min-height: 320px;
+  }
+  .match-screen .m-l, .match-screen .m-r {
+    display: flex; flex-direction: column;
+    min-width: 140px; max-width: 155px;
+  }
+  .match-screen .m-r { margin-left: 72px; }
+  .match-screen .m-canvas {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 10;
+  }
+  .match-screen .m-col-header {
+    text-align: center; font-size: .6rem; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 0 0 12px; opacity: .6;
+    color: var(--text-dim);
+  }
+  .match-screen .m-tile {
+    background: var(--bg-card);
+    border: 2px solid var(--border-bronze);
+    border-radius: 10px;
+    padding: 9px 8px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: all .18s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative; overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .match-screen .m-tile:hover {
+    border-color: var(--accent-red);
+    background: rgba(201,76,76,0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(201,76,76,0.15);
+  }
+  .match-screen .m-tile.selected {
+    border-color: var(--border-gold);
+    background: rgba(201,162,39,0.15);
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 6px 20px rgba(201,162,39,0.25), 0 0 0 3px rgba(201,162,39,0.1);
+  }
+  .match-screen .m-tile.matched {
+    border-color: var(--accent-green);
+    background: rgba(90,158,90,0.12);
+    opacity: .4;
+    cursor: default; pointer-events: none;
+  }
+  .match-screen .m-tile.wrong-flash {
+    animation: mShake .35s ease;
+    border-color: var(--accent-red);
+    background: rgba(201,76,76,0.2);
+  }
+  @keyframes mShake {
+    0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)}
+  }
+  .match-screen .m-tile.match-pop { animation: mPop .45s ease forwards; }
+  @keyframes mPop {
+    0%{transform:scale(1.08)} 50%{transform:scale(1.18);border-color:var(--accent-green);box-shadow:0 0 30px rgba(90,158,90,0.4)} 100%{transform:scale(1);opacity:.4}
+  }
+  .match-screen .t-fr { font-size: .82rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+  .match-screen .t-cn { font-size: .78rem; color: var(--text-secondary); line-height: 1.4; }
+  .match-screen .m-hint {
+    text-align: center; font-size: .82rem; color: var(--text-dim);
+    margin: 10px 0 8px; min-height: 20px; transition: color .3s;
+    max-width: 480px; margin-left: auto; margin-right: auto;
+  }
+  .match-screen .m-prog { height: 6px; background: var(--bg-card); border-radius: 99px; overflow: hidden; margin-bottom: 12px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .match-screen .m-prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg,var(--accent-green),var(--border-gold),var(--accent-red));
+    background-size: 200% 100%;
+    border-radius: 99px;
+    transition: width .4s cubic-bezier(0.34,1.56,0.64,1);
+    animation: mGradMove 2s linear infinite;
+  }
+  @keyframes mGradMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+  .match-screen .m-coin-pop {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2rem; font-weight: 900;
+    color: var(--border-gold);
+    pointer-events: none;
+    animation: mCoinRise .9s ease forwards;
+    z-index: 100;
+  }
+  @keyframes mCoinRise {
+    0%{opacity:1;transform:translate(-50%,-50%) scale(.5)}
+    60%{opacity:1;transform:translate(-50%,-80%) scale(1.2)}
+    100%{opacity:0;transform:translate(-50%,-120%) scale(.9)}
+  }
+  .match-screen .m-overlay {
+    position: fixed; inset: 0;
+    background: rgba(13,11,8,0.92);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 200;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+  }
+  .match-screen .m-overlay.show { opacity: 1; pointer-events: all; }
+  .match-screen .m-overlay-panel {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 32px 40px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(201,162,39,0.15), inset 0 0 20px rgba(201,162,39,0.03);
+    max-width: 360px;
+  }
+  .match-screen .m-overlay-icon { font-size: 4rem; margin-bottom: 12px; }
+  .match-screen .m-overlay-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; color: var(--border-gold); font-family: 'Ma Shan Zheng', cursive; }
+  .match-screen .m-overlay-sub { font-size: .9rem; color: var(--text-secondary); margin-bottom: 24px; }
+  .match-screen .m-overlay-btn {
+    background: var(--border-gold); color: var(--bg-dark);
+    border: none; border-radius: 10px;
+    padding: 12px 32px; font-size: 1rem; font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .match-screen .m-overlay-btn:hover {
+    background: #e8b82e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201,162,39,0.3);
+  }
+  .match-screen .m-back-btn {
+    display: block;
+    background: var(--bg-panel); color: var(--text-dim);
+    border: 1px solid var(--border-bronze); border-radius: 10px;
+    padding: 10px 20px; font-size: .85rem; cursor: pointer;
+    margin: 12px auto 0;
+    max-width: 480px;
+  }
 </style>
 </head>
 <body>
@@ -601,7 +779,7 @@
     <div class="quick-actions">
       <div class="action-card" onclick="openQuiz()"><div class="action-icon">📖</div><div class="action-name">法语修炼</div><div class="action-cost">消耗 1 行动点</div></div>
       <div class="action-card" onclick="doAction('visit')"><div class="action-icon">🗣️</div><div class="action-name">拜访人物</div><div class="action-cost">消耗 1 行动点</div></div>
-      <div class="action-card" onclick="doAction('explore')"><div class="action-icon">🗺️</div><div class="action-name">游历天下</div><div class="action-cost">消耗 1 行动点</div></div>
+      <div class="action-card" onclick="doAction('explore')"><div class="action-icon">🔗</div><div class="action-name">中法互连</div><div class="action-cost">连连看 · 法语</div></div>
     </div>
     <div class="status-grid">
       <div class="status-card"><div class="status-label">❤️ 体力</div><div class="status-bar"><div class="status-fill hp" id="hpBar" style="width:100%"></div></div><div class="status-value"><span id="hpValue">100</span></div></div>
@@ -677,6 +855,50 @@
     <div class="combo-text" id="comboText"></div>
   </div>
   <div class="quiz-area" id="quizArea"></div>
+</div>
+
+<!-- 连连看界面 -->
+<div id="matchScreen" class="match-screen" style="display:none; position:fixed; inset:0; background:var(--bg-dark); z-index:100; overflow-y:auto;">
+  <div class="m-topbar">
+    <div class="m-score">🪙 <span id="mScore">0</span></div>
+    <div class="m-timer" id="mTimer">⏱ 2:00</div>
+    <div class="m-progress" id="mProgress">0/6 对</div>
+  </div>
+  <div class="m-combo" id="mCombo"></div>
+  <div class="m-board-wrap">
+    <div class="m-board" id="mBoard">
+      <div class="m-l">
+        <div class="m-col-header">FRANÇAIS</div>
+        <div id="mLeft"></div>
+      </div>
+      <canvas class="m-canvas" id="mCanvas"></canvas>
+      <div class="m-r">
+        <div class="m-col-header">中文</div>
+        <div id="mRight"></div>
+      </div>
+    </div>
+  </div>
+  <div class="m-hint" id="mHint">👆 先点法语单词，再点中文翻译配对</div>
+  <div class="m-prog"><div class="m-prog-fill" id="mFill" style="width:0%"></div></div>
+  <button class="m-back-btn" id="mBackBtn">← 返回</button>
+
+  <div class="m-overlay" id="mWinOverlay">
+    <div class="m-overlay-panel">
+      <div class="m-overlay-icon">🏆</div>
+      <div class="m-overlay-title">全部配对！</div>
+      <div class="m-overlay-sub" id="mWinSub"></div>
+      <button class="m-overlay-btn" onclick="mInit()">再来一局</button>
+    </div>
+  </div>
+
+  <div class="m-overlay" id="mLoseOverlay">
+    <div class="m-overlay-panel">
+      <div class="m-overlay-icon">⏱</div>
+      <div class="m-overlay-title">时间到！</div>
+      <div class="m-overlay-sub" id="mLoseSub"></div>
+      <button class="m-overlay-btn" onclick="mInit()">再试一次</button>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1795,8 +2017,8 @@ function updateActionUI() {
         <div class="action-cost">消耗 1 行动点</div>
       </div>
       <div class="action-option" onclick="doAction('explore')" ${gameState.actionPoints <= 0 ? 'disabled' : ''}>
-        <h4>🗺️ 游历天下</h4>
-        <p>四处游历，可能遇见机遇</p>
+        <h4>🔗 中法互连</h4>
+        <p>法语连连看，匹配单词记忆更深</p>
         <div class="action-cost">消耗 1 行动点</div>
       </div>
       <div class="action-option" onclick="doAction('work')" ${gameState.actionPoints <= 0 ? 'disabled' : ''}>
@@ -1821,18 +2043,9 @@ function doAction(type) {
     addLog(`拜访了${person.name}，关系+${gain}`);
     addExp(10);
   } else if (type === 'explore') {
-    const events = ['遇见商人', '路遇劫匪', '发现古书', '结识散人'];
-    const event = events[Math.floor(Math.random() * events.length)];
-    if (event === '路遇劫匪') {
-      const hpLoss = 10 + Math.floor(Math.random() * 20);
-      gameState.hp = Math.max(1, gameState.hp - hpLoss);
-      addLog(`${event}，体力-${hpLoss}`);
-    } else {
-      const gold = 20 + Math.floor(Math.random() * 30);
-      gameState.money += gold;
-      addLog(`${event}，获得${gold}金`);
-    }
-    addExp(15);
+    // 打开连连看游戏
+    openMatchGame();
+    return; // 不执行后面的 updateMainUI，连连看结束后会处理
   } else if (type === 'work') {
     const gold = 30 + Math.floor(Math.random() * 20);
     gameState.money += gold;
@@ -2243,14 +2456,236 @@ function closeQuizResult(drops) {
   }
 }
 
+// ============ 连连看系统 ============
+const mState = {
+  left: [], right: [],
+  matched: 0, total: 0,
+  score: 0, combo: 0, maxCombo: 0,
+  timeLeft: 120, timer: null,
+  selected: null,
+};
+
+function openMatchGame() {
+  // 应用匹配样式到 body
+  document.body.classList.add('match-css');
+  document.getElementById('matchScreen').style.display = 'block';
+  mInit();
+}
+
+function closeMatchGame() {
+  document.getElementById('matchScreen').style.display = 'none';
+  document.body.classList.remove('match-css');
+  updateMainUI();
+  saveGame();
+}
+
+function mResizeCanvas(){
+  const board = document.getElementById('mBoard');
+  const canvas = document.getElementById('mCanvas');
+  canvas.width = board.offsetWidth;
+  canvas.height = board.offsetHeight;
+}
+
+function mInit(){
+  document.getElementById('mWinOverlay').classList.remove('show');
+  document.getElementById('mLoseOverlay').classList.remove('show');
+
+  // 从 WORD_LIBRARY 随机选 6 对
+  const pool = [...WORD_LIBRARY].sort(()=>Math.random()-0.5).slice(0,6);
+  mState.left = pool.map(w=>({...w, side:'left'}));
+  mState.right = [...pool].sort(()=>Math.random()-0.5).map(w=>({...w, side:'right'}));
+  mState.matched = 0; mState.total = pool.length;
+  mState.score = 0; mState.combo = 0; mState.maxCombo = 0;
+  mState.timeLeft = 120; mState.selected = null;
+  clearInterval(mState.timer);
+
+  mRender();
+  mUpdateUI();
+  mResizeCanvas();
+  mStartTimer();
+}
+
+function mRender(){
+  const leftEl = document.getElementById('mLeft');
+  const rightEl = document.getElementById('mRight');
+  leftEl.innerHTML=''; rightEl.innerHTML='';
+
+  mState.left.forEach((item,i)=>{
+    const div = document.createElement('div');
+    div.className='m-tile';
+    div.innerHTML=`<div class="t-fr">${item.french}</div>`;
+    div.onclick=()=>mClick(div,'left',item);
+    leftEl.appendChild(div);
+  });
+
+  mState.right.forEach((item,i)=>{
+    const div = document.createElement('div');
+    div.className='m-tile';
+    div.innerHTML=`<div class="t-cn">${item.meaning}</div>`;
+    div.onclick=()=>mClick(div,'right',item);
+    rightEl.appendChild(div);
+  });
+}
+
+function mClick(el, side, item){
+  if(el.classList.contains('matched')) return;
+
+  if(mState.selected){
+    if(mState.selected.side===side){
+      mState.selected.el.classList.remove('selected');
+      if(mState.selected.el!==el){ el.classList.add('selected'); mState.selected={el,side,item}; }
+      else mState.selected=null;
+      return;
+    }
+    // 尝试匹配
+    el.classList.add('selected');
+    const ok = mState.selected.item.french===item.french;
+    if(ok){
+      const leftTile = mState.selected.el;
+      const rightTile = el;
+      el.classList.remove('selected');
+      leftTile.classList.add('match-pop');
+      rightTile.classList.add('match-pop');
+      mState.selected=null;
+      mState.matched++;
+      mState.combo++;
+      if(mState.combo>mState.maxCombo) mState.maxCombo=mState.combo;
+      const bonus = mState.combo>=5?2:mState.combo>=3?1.5:1;
+      const coins = Math.round(10*bonus);
+      mState.score += coins;
+      mDrawLine(leftTile, rightTile, '#06d6a0');
+      mSpawnCoin('+'+coins);
+      if(mState.combo>=3) mShowCombo();
+      setTimeout(()=>{
+        leftTile.classList.remove('match-pop');
+        rightTile.classList.remove('match-pop');
+        leftTile.classList.add('matched');
+        rightTile.classList.add('matched');
+      }, 450);
+      document.getElementById('mHint').textContent='✅ '+item.french+' = '+item.meaning;
+      document.getElementById('mHint').style.color='#06d6a0';
+      mUpdateUI();
+      if(mState.matched>=mState.total) setTimeout(mWin,600);
+    } else {
+      el.classList.remove('selected');
+      el.classList.add('wrong-flash');
+      mState.selected.el.classList.add('wrong-flash');
+      mState.combo=0;
+      setTimeout(()=>{
+        el.classList.remove('wrong-flash');
+        mState.selected.el.classList.remove('wrong-flash');
+        mState.selected=null;
+      },400);
+      document.getElementById('mHint').textContent='❌ 不匹配，再试试';
+      document.getElementById('mHint').style.color='#e94560';
+      mUpdateUI();
+    }
+  } else {
+    el.classList.add('selected');
+    mState.selected={el,side,item};
+    document.getElementById('mHint').textContent=side==='left'?'👆 现在点中文':'👆 现在点法语';
+    document.getElementById('mHint').style.color='#ffd166';
+  }
+}
+
+function mDrawLine(el1, el2, color){
+  const canvas = document.getElementById('mCanvas');
+  const ctx = canvas.getContext('2d');
+  const board = document.getElementById('mBoard');
+  const br = board.getBoundingClientRect();
+  const r1 = el1.getBoundingClientRect();
+  const r2 = el2.getBoundingClientRect();
+  const x1=r1.right-br.left, y1=r1.top+r1.height/2-br.top;
+  const x2=r2.left-br.left, y2=r2.top+r2.height/2-br.top;
+  ctx.strokeStyle=color; ctx.lineWidth=3; ctx.lineCap='round';
+  ctx.setLineDash([6,4]); ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); ctx.setLineDash([]);
+  let a=1;
+  const fade=setInterval(()=>{
+    a-=0.06;
+    if(a<=0){clearInterval(fade);ctx.clearRect(0,0,canvas.width,canvas.height);return;}
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.globalAlpha=a; ctx.strokeStyle=color; ctx.lineWidth=3;
+    ctx.setLineDash([6,4]); ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha=1;
+  },30);
+}
+
+function mShowCombo(){
+  const el = document.getElementById('mCombo');
+  const map = {3:['🔥','#ff6b6b','三连斩！'],4:['⚡','#ffd166','四连斩！'],5:['🌈','#06d6a0','五连斩！！'],6:['💥','#e94560','六连斩！！！']};
+  const t=map[Math.min(mState.combo,6)]||['✨','#a78bfa',mState.combo+'连斩！'];
+  el.style.color=t[1]; el.textContent=t[0]+' '+t[2];
+  el.className='m-combo show';
+  setTimeout(()=>el.className='m-combo',1400);
+}
+
+function mUpdateUI(){
+  document.getElementById('mScore').textContent=mState.score;
+  document.getElementById('mProgress').textContent=`${mState.matched}/${mState.total} 对`;
+  const pct=mState.total>0?(mState.matched/mState.total)*100:0;
+  document.getElementById('mFill').style.width=pct+'%';
+}
+
+function mStartTimer(){
+  clearInterval(mState.timer);
+  const el=document.getElementById('mTimer');
+  el.classList.remove('danger');
+  mState.timer=setInterval(()=>{
+    mState.timeLeft--;
+    const m=Math.floor(mState.timeLeft/60), s=mState.timeLeft%60;
+    el.textContent=`⏱ ${m}:${s.toString().padStart(2,'0')}`;
+    if(mState.timeLeft<=10) el.classList.add('danger');
+    if(mState.timeLeft<=0){ clearInterval(mState.timer); mLose(); }
+  },1000);
+}
+
+function mSpawnCoin(text){
+  const div=document.createElement('div');
+  div.className='m-coin-pop'; div.textContent=text;
+  document.body.appendChild(div);
+  setTimeout(()=>div.remove(),900);
+}
+
+function mWin(){
+  clearInterval(mState.timer);
+  const timeBonus=Math.max(0,mState.timeLeft*2);
+  const total=Math.round(mState.score+timeBonus);
+  // 奖励给游戏状态
+  gameState.money += total;
+  gameState.masteredWords += mState.total;
+  gameState.maxCombo = Math.max(gameState.maxCombo || 0, mState.maxCombo);
+  addLog(`🔗 中法互连完成：金币+${total}，词汇+${mState.total}，最高${mState.maxCombo}连击`);
+  document.getElementById('mWinSub').textContent=`金币 +${total} · 最高${mState.maxCombo}连击 · 剩余${mState.timeLeft}秒`;
+  document.getElementById('mWinOverlay').classList.add('show');
+  // 修改再来一局按钮
+  const btn = document.querySelector('#mWinOverlay .m-overlay-btn');
+  btn.onclick = () => { mInit(); };
+}
+
+function mLose(){
+  clearInterval(mState.timer);
+  const total=Math.round(mState.score*0.3);
+  gameState.money += total;
+  addLog(`🔗 中法互连结束：配对了 ${mState.matched}/${mState.total} 对，金币+${total}`);
+  document.getElementById('mLoseSub').textContent=`配对了 ${mState.matched}/${mState.total} 对 · 金币 +${total}`;
+  document.getElementById('mLoseOverlay').classList.add('show');
+  const btn = document.querySelector('#mLoseOverlay .m-overlay-btn');
+  btn.onclick = () => { mInit(); };
+}
+
+// 返回按钮
+document.getElementById('mBackBtn').addEventListener('click', () => {
+  clearInterval(mState.timer);
+  closeMatchGame();
+});
+
+window.addEventListener('resize', mResizeCanvas);
+
 // ============ 初始化 ============
 document.addEventListener('DOMContentLoaded', () => {
   initCharSelect();
   initTitleScreen();
 });
-</script>
-</body>
-</html>
 </script>
 </body>
 </html>
