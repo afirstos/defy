@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>逆命游戏合集 Defy Fate</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: #e0e0e0;
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: #f39c12; }
+        .subtitle { color: #888; margin-bottom: 3rem; }
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 900px;
+            width: 100%;
+        }
+        .game-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-4px);
+            border-color: #f39c12;
+            background: rgba(255,255,255,0.08);
+        }
+        .game-card h2 { color: #f39c12; margin-bottom: 0.5rem; }
+        .game-card p { color: #aaa; font-size: 0.9rem; }
+        .tag {
+            display: inline-block;
+            background: #f39c12;
+            color: #1a1a2e;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+        }
+        footer {
+            margin-top: 3rem;
+            color: #666;
+            font-size: 0.85rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎮 逆命游戏合集</h1>
+    <p class="subtitle">Defy Fate Collection</p>
+    
+    <div class="games">
+        <a href="defy-fate-words.html" class="game-card">
+            <h2>🗣️ 法语单词游戏</h2>
+            <p>法语 A1 词汇闯关，边玩边学</p>
+            <span class="tag">学习中</span>
+        </a>
+        
+        <a href="defy-fate-chu-han.html" class="game-card">
+            <h2>⚔️ 逆命：楚汉</h2>
+            <p>太阁立志传风格 RPG，感受英雄改变战局</p>
+            <span class="tag">开发中</span>
+        </a>
+    </div>
+    
+    <footer>
+        <p>GitHub: <a href="https://github.com/afirstos/defy" style="color: #f39c12;">afirstos/defy</a></p>
+    </footer>
+</body>
+</html>
