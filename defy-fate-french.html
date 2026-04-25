@@ -265,6 +265,27 @@
     flex-direction: column;
   }
   .quiz-screen.active { display: flex; }
+  .quiz-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 49px,
+        rgba(201,162,39,0.04) 49px,
+        rgba(201,162,39,0.04) 50px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(201,162,39,0.02) 3px,
+        rgba(201,162,39,0.02) 4px
+      );
+    pointer-events: none;
+  }
   .quiz-header {
     background: var(--bg-panel);
     padding: 15px;
@@ -304,7 +325,7 @@
   }
   .word-en { font-size: 2rem; font-weight: bold; color: var(--border-gold); margin-bottom: 10px; }
   .word-hint { font-size: 0.9rem; color: var(--text-secondary); }
-  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; max-width: 420px; }
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; max-width: 420px; }
   .option-btn {
     background: var(--bg-panel);
     border: 2px solid var(--border-bronze);
@@ -897,8 +918,26 @@
     border-radius: 10px;
     padding: 10px 14px;
     margin: 0 0 12px 0;
-    cursor: default;
   }
+  .daily-quote-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .quote-tts-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: color 0.2s, background 0.2s;
+    line-height: 1;
+  }
+  .quote-tts-btn:hover { color: var(--border-gold); background: rgba(201,162,39,0.1); }
+  .quote-tts-btn.speaking { color: var(--accent-green); }
   .daily-quote-fr {
     font-size: 0.9rem;
     color: var(--text-primary);
@@ -916,6 +955,77 @@
     margin-top: 2px;
   }
 
+  /* ===== 学习日历（GitHub热力图风格）===== */
+  .heatmap-wrap { overflow-x: auto; padding-bottom: 2px; }
+  .heatmap-label { font-size: 0.65rem; color: var(--text-dim); margin-bottom: 4px; }
+  .heatmap-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 14px);
+    gap: 2px;
+  }
+  .heatmap-week {
+    display: contents;
+  }
+  .heatmap-cell {
+    width: 14px; height: 14px;
+    border-radius: 2px;
+    background: rgba(201,162,39,0.05);
+    border: 1px solid rgba(201,162,39,0.05);
+    transition: background 0.2s;
+    cursor: default;
+    position: relative;
+  }
+  .heatmap-cell[data-level="0"] { background: rgba(201,162,39,0.05); }
+  .heatmap-cell[data-level="1"] { background: rgba(201,162,39,0.2); }
+  .heatmap-cell[data-level="2"] { background: rgba(201,162,39,0.45); }
+  .heatmap-cell[data-level="3"] { background: rgba(201,162,39,0.7); }
+  .heatmap-cell[data-level="4"] { background: rgba(201,162,39,1); }
+  .heatmap-cell:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%; transform: translateX(-50%);
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bronze);
+    border-radius: 4px;
+    padding: 2px 5px;
+    font-size: 0.55rem;
+    color: var(--text-primary);
+    white-space: nowrap;
+    z-index: 10;
+    pointer-events: none;
+  }
+  .heatmap-legend {
+    display: flex; align-items: center; gap: 2px;
+    margin-top: 6px; justify-content: flex-end;
+    font-size: 0.5rem; color: var(--text-dim);
+  }
+  .heatmap-legend-cell {
+    width: 12px; height: 12px; border-radius: 2px;
+  }
+
+  /* ===== 个人纪录 ===== */
+  .records-cards {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;
+  }
+  .record-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bronze);
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .record-icon { font-size: 1.4rem; margin-bottom: 4px; }
+  .record-value {
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--border-gold);
+    font-family: 'Ma Shan Zheng', cursive;
+    line-height: 1;
+  }
+  .record-label { font-size: 0.65rem; color: var(--text-dim); margin-top: 3px; }
+
+
+
   /* ===== 统计页 ===== */
   .stats-section { margin-bottom: 20px; }
   .stats-section-title {
@@ -925,9 +1035,63 @@
     padding-bottom: 6px;
     border-bottom: 1px solid rgba(201,162,39,0.15);
   }
-  .stats-cards {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+
+  /* 正确率 + 总览 并排 */
+  .stats-overview-row {
+    display: flex; align-items: center; gap: 20px;
+    margin-bottom: 20px; padding: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-bronze);
+    border-radius: 12px;
   }
+  .accuracy-ring-wrap { flex-shrink: 0; }
+  .stats-brief-cards {
+    flex: 1; display: grid;
+    grid-template-columns: 1fr 1fr; gap: 8px;
+  }
+  .brief-card {
+    background: var(--bg-panel);
+    border-radius: 8px; padding: 10px 8px;
+    text-align: center;
+  }
+  .brief-value {
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--border-gold);
+    font-family: 'Ma Shan Zheng', cursive;
+    line-height: 1;
+  }
+  .brief-value.accent-red { color: var(--accent-red); }
+  .brief-value.accent-green { color: var(--accent-green); }
+  .brief-label { font-size: 0.65rem; color: var(--text-dim); margin-top: 2px; }
+
+  /* 词汇掌握紧凑版 */
+  .vocab-mastery-compact {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .vocab-item {
+    display: flex; align-items: center; gap: 8px;
+  }
+  .vocab-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .dot-new { background: var(--text-dim); }
+  .dot-learn { background: #4a9eff; }
+  .dot-review { background: #ffb347; }
+  .dot-master { background: var(--accent-green); }
+  .vocab-name { font-size: 0.78rem; color: var(--text-secondary); width: 50px; }
+  .vocab-count { font-size: 0.75rem; font-weight: 700; color: var(--border-gold); width: 30px; text-align: right; }
+  .vocab-bar {
+    flex: 1; height: 6px; background: var(--bg-card);
+    border-radius: 99px; overflow: hidden;
+  }
+  .vocab-fill { height: 100%; border-radius: 99px; transition: width 0.8s ease; }
+  .fill-new { background: var(--text-dim); }
+  .fill-learn { background: #4a9eff; }
+  .fill-review { background: #ffb347; }
+  .fill-master { background: var(--accent-green); }
+
+  /* 旧样式保留兼容 */
+  .stats-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .stat-card {
     background: var(--bg-panel);
     border: 1px solid var(--border-bronze);
@@ -939,12 +1103,9 @@
     font-size: 1.8rem; font-weight: 700;
     color: var(--border-gold);
     font-family: 'Ma Shan Zheng', cursive;
-    line-height: 1;
-    margin-bottom: 4px;
+    line-height: 1; margin-bottom: 4px;
   }
-  .stat-card-label {
-    font-size: 0.72rem; color: var(--text-dim);
-  }
+  .stat-card-label { font-size: 0.72rem; color: var(--text-dim); }
   .stat-card.accent-red .stat-card-value { color: var(--accent-red); }
   .stat-card.accent-green .stat-card-value { color: var(--accent-green); }
 
@@ -973,48 +1134,6 @@
   }
   .accuracy-ring-sub { font-size: 0.65rem; color: var(--text-dim); }
   .accuracy-ring-title { font-size: 0.8rem; color: var(--text-secondary); }
-
-  /* 词汇掌握进度 */
-  .vocab-mastery-item {
-    background: var(--bg-panel);
-    border: 1px solid var(--border-bronze);
-    border-radius: 10px;
-    padding: 12px 14px;
-    margin-bottom: 10px;
-  }
-  .vocab-mastery-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 8px;
-  }
-  .vocab-mastery-label { font-size: 0.82rem; color: var(--text-secondary); }
-  .vocab-mastery-count { font-size: 0.82rem; font-weight: 700; color: var(--border-gold); }
-  .vocab-mastery-bar {
-    height: 6px; background: var(--bg-card); border-radius: 99px; overflow: hidden;
-  }
-  .vocab-mastery-fill {
-    height: 100%; border-radius: 99px;
-    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .fill-new    { background: var(--text-dim); }
-  .fill-learn  { background: var(--accent-red); }
-  .fill-review { background: var(--border-gold); }
-  .fill-master { background: var(--accent-green); }
-
-  /* 最佳连击横幅 */
-  .best-combo-banner {
-    background: linear-gradient(135deg, rgba(201,162,39,0.08), rgba(201,162,39,0.03));
-    border: 1px solid rgba(201,162,39,0.3);
-    border-radius: 10px;
-    padding: 14px 18px;
-    display: flex; align-items: center; gap: 14px;
-  }
-  .best-combo-icon { font-size: 2rem; }
-  .best-combo-info { flex: 1; }
-  .best-combo-value {
-    font-size: 1.5rem; font-weight: 700; color: var(--border-gold);
-    font-family: 'Ma Shan Zheng', cursive; line-height: 1;
-  }
-  .best-combo-desc { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
 
   /* ===== 2c. 自定义滚动条 ===== */
   ::-webkit-scrollbar { width: 6px; }
@@ -1133,6 +1252,53 @@
   .char-card.selected {
     box-shadow: 0 0 30px rgba(201,162,39,0.25), 0 0 0 2px var(--border-gold);
   }
+
+  /* ===== 统计页顶部：日历+趋势并排 ===== */
+  .stats-calendar-row {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .stats-calendar-row .stats-section {
+    flex: 1;
+    min-width: 0;
+  }
+  .stats-calendar-row .heatmap-wrap {
+    overflow-x: visible;
+  }
+
+  /* ===== 近7日趋势 ===== */
+  .trend-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+    height: 80px;
+    padding: 8px 0 0;
+  }
+  .trend-bar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .trend-bar {
+    width: 100%;
+    max-width: 36px;
+    background: linear-gradient(to top, var(--border-gold), rgba(201,162,39,0.4));
+    border-radius: 3px 3px 0 0;
+    min-height: 4px;
+    transition: height 0.3s;
+  }
+  .trend-bar-label {
+    font-size: 0.6rem;
+    color: var(--text-dim);
+  }
+  .trend-bar-value {
+    font-size: 0.5rem;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
 </style>
 </head>
 <body>
@@ -1207,6 +1373,10 @@
   <div id="tabHome" class="tab-content active">
     <!-- 每日一言 -->
     <div class="daily-quote" id="dailyQuote">
+      <div class="daily-quote-header">
+        <span style="font-size:0.65rem;color:var(--text-dim)">每日一言</span>
+        <button class="quote-tts-btn" id="quoteTtsBtn" title="朗读法语">🔊</button>
+      </div>
       <div class="daily-quote-fr" id="quoteFr"></div>
       <div class="daily-quote-cn" id="quoteCn"></div>
       <div class="daily-quote-src" id="quoteSrc"></div>
@@ -1267,88 +1437,110 @@
 
   <!-- 统计页 -->
   <div id="tabStats" class="tab-content">
-    <!-- 正确率环形 -->
-    <div class="accuracy-ring-wrap">
-      <div class="accuracy-ring">
-        <svg viewBox="0 0 100 100">
-          <circle class="accuracy-ring-bg" cx="50" cy="50" r="45"/>
-          <circle class="accuracy-ring-fill" id="statsRingFill" cx="50" cy="50" r="45"/>
-        </svg>
-        <div class="accuracy-ring-text">
-          <div class="accuracy-ring-pct" id="statsAccPct">0%</div>
-          <div class="accuracy-ring-sub">正确率</div>
+    <!-- 学习日历 + 近7日答题量 并排 -->
+    <div class="stats-calendar-row">
+      <!-- 学习日历 -->
+      <div class="stats-section">
+        <div class="stats-section-title">学习日历</div>
+        <div class="heatmap-wrap">
+        <div class="heatmap-grid" id="heatmapGrid"></div>
         </div>
       </div>
-      <div class="accuracy-ring-title">综合答题正确率</div>
-    </div>
 
-    <!-- 数字概览 -->
-    <div class="stats-section">
-      <div class="stats-section-title">总览</div>
-      <div class="stats-cards">
-        <div class="stat-card">
-          <div class="stat-card-value" id="statsTotalAnswered">0</div>
-          <div class="stat-card-label">累计答题</div>
-        </div>
-        <div class="stat-card accent-green">
-          <div class="stat-card-value" id="statsTotalCorrect">0</div>
-          <div class="stat-card-label">答对次数</div>
-        </div>
-        <div class="stat-card accent-red">
-          <div class="stat-card-value" id="statsTotalWrong">0</div>
-          <div class="stat-card-label">答错次数</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-value" id="statsWordsSeen">0</div>
-          <div class="stat-card-label">接触词汇</div>
-        </div>
+      <!-- 近7日答题量 -->
+      <div class="stats-section">
+        <div class="stats-section-title">近7日答题量</div>
+        <div class="trend-bars" id="trendBars"></div>
       </div>
     </div>
 
-    <!-- 最佳连击 -->
-    <div class="stats-section">
-      <div class="stats-section-title">连击</div>
-      <div class="best-combo-banner">
-        <div class="best-combo-icon">🔥</div>
-        <div class="best-combo-info">
-          <div class="best-combo-value" id="statsBestCombo">0</div>
-          <div class="best-combo-desc">历史最高连击数</div>
+    <!-- 正确率 + 总览 -->
+    <div class="stats-overview-row">
+      <div class="accuracy-ring-wrap">
+        <div class="accuracy-ring">
+          <svg viewBox="0 0 100 100">
+            <circle class="accuracy-ring-bg" cx="50" cy="50" r="45"/>
+            <circle class="accuracy-ring-fill" id="statsRingFill" cx="50" cy="50" r="45"/>
+          </svg>
+          <div class="accuracy-ring-text">
+            <div class="accuracy-ring-pct" id="statsAccPct">0%</div>
+            <div class="accuracy-ring-sub">正确率</div>
+          </div>
+        </div>
+      </div>
+      <div class="stats-brief-cards">
+        <div class="brief-card">
+          <div class="brief-value" id="statsTotalAnswered">0</div>
+          <div class="brief-label">累计答题</div>
+        </div>
+        <div class="brief-card">
+          <div class="brief-value accent-green" id="statsTotalCorrect">0</div>
+          <div class="brief-label">答对</div>
+        </div>
+        <div class="brief-card">
+          <div class="brief-value accent-red" id="statsTotalWrong">0</div>
+          <div class="brief-label">答错</div>
+        </div>
+        <div class="brief-card">
+          <div class="brief-value" id="statsWordsSeen">0</div>
+          <div class="brief-label">接触词</div>
         </div>
       </div>
     </div>
 
-    <!-- 词汇掌握分布 -->
+    <!-- 词汇掌握 -->
     <div class="stats-section">
       <div class="stats-section-title">词汇掌握</div>
-      <div class="vocab-mastery-item">
-        <div class="vocab-mastery-header">
-          <span class="vocab-mastery-label">🌱 未接触</span>
-          <span class="vocab-mastery-count" id="statsBoxNew">0 词</span>
+      <div class="vocab-mastery-compact">
+        <div class="vocab-item">
+          <span class="vocab-dot dot-new"></span>
+          <span class="vocab-name">未接触</span>
+          <span class="vocab-count" id="statsBoxNew">0</span>
+          <div class="vocab-bar"><div class="vocab-fill fill-new" id="statsBarNew" style="width:0%"></div></div>
         </div>
-        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-new" id="statsBarNew" style="width:0%"></div></div>
-      </div>
-      <div class="vocab-mastery-item">
-        <div class="vocab-mastery-header">
-          <span class="vocab-mastery-label">📖 学习中</span>
-          <span class="vocab-mastery-count" id="statsBoxLearn">0 词</span>
+        <div class="vocab-item">
+          <span class="vocab-dot dot-learn"></span>
+          <span class="vocab-name">学习中</span>
+          <span class="vocab-count" id="statsBoxLearn">0</span>
+          <div class="vocab-bar"><div class="vocab-fill fill-learn" id="statsBarLearn" style="width:0%"></div></div>
         </div>
-        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-learn" id="statsBarLearn" style="width:0%"></div></div>
-      </div>
-      <div class="vocab-mastery-item">
-        <div class="vocab-mastery-header">
-          <span class="vocab-mastery-label">🔁 复习中</span>
-          <span class="vocab-mastery-count" id="statsBoxReview">0 词</span>
+        <div class="vocab-item">
+          <span class="vocab-dot dot-review"></span>
+          <span class="vocab-name">复习中</span>
+          <span class="vocab-count" id="statsBoxReview">0</span>
+          <div class="vocab-bar"><div class="vocab-fill fill-review" id="statsBarReview" style="width:0%"></div></div>
         </div>
-        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-review" id="statsBarReview" style="width:0%"></div></div>
-      </div>
-      <div class="vocab-mastery-item">
-        <div class="vocab-mastery-header">
-          <span class="vocab-mastery-label">✅ 已掌握</span>
-          <span class="vocab-mastery-count" id="statsBoxMaster">0 词</span>
+        <div class="vocab-item">
+          <span class="vocab-dot dot-master"></span>
+          <span class="vocab-name">已掌握</span>
+          <span class="vocab-count" id="statsBoxMaster">0</span>
+          <div class="vocab-bar"><div class="vocab-fill fill-master" id="statsBoxMasterBar" style="width:0%"></div></div>
         </div>
-        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-master" id="statsBoxMasterBar" style="width:0%"></div></div>
       </div>
     </div>
+
+    <!-- 个人纪录 -->
+    <div class="stats-section">
+      <div class="stats-section-title">个人纪录</div>
+      <div class="records-cards">
+        <div class="record-card">
+          <div class="record-icon">🔥</div>
+          <div class="record-value" id="statsPBCombo">0</div>
+          <div class="record-label">最高连击</div>
+        </div>
+        <div class="record-card">
+          <div class="record-icon">⚡</div>
+          <div class="record-value" id="statsPBMatch">0</div>
+          <div class="record-label">单日最多题</div>
+        </div>
+        <div class="record-card">
+          <div class="record-icon">📅</div>
+          <div class="record-value" id="statsPBDays">0</div>
+          <div class="record-label">学习天数</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -2300,6 +2492,24 @@ function initDailyQuote() {
   document.getElementById('quoteSrc').textContent = '';
 }
 
+// ── 朗读法语 ──
+function speakFrench(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'fr-FR';
+  utt.rate = 0.85;
+  const btn = document.getElementById('quoteTtsBtn');
+  utt.onstart = () => btn && btn.classList.add('speaking');
+  utt.onend = utt.onerror = () => btn && btn.classList.remove('speaking');
+  window.speechSynthesis.speak(utt);
+}
+
+document.getElementById('quoteTtsBtn').addEventListener('click', () => {
+  const fr = document.getElementById('quoteFr').textContent;
+  speakFrench(fr);
+});
+
 // ============ 界面控制 ============
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => {
@@ -2314,16 +2524,20 @@ function showScreen(id) {
 // 标签切换
 document.querySelectorAll('.tab-btn').forEach(btn => {
   btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    if (!tab) return; // 更多按钮等没有 tab 的按钮直接跳过
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => {
       c.classList.remove('active');
       c.classList.remove('screen-enter');
     });
     btn.classList.add('active');
-    const tabEl = document.getElementById('tab' + btn.dataset.tab.charAt(0).toUpperCase() + btn.dataset.tab.slice(1));
-    tabEl.classList.add('active');
-    tabEl.classList.add('screen-enter');
-    if (btn.dataset.tab === 'stats') renderStatsPage();
+    const tabEl = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+    if (tabEl) {
+      tabEl.classList.add('active');
+      tabEl.classList.add('screen-enter');
+    }
+    if (tab === 'stats') renderStatsPage();
   });
 });
 
@@ -2397,7 +2611,9 @@ function confirmCharacter() {
     wordStats: {},
     hints: 0,
     doubleXP: false,
-    nextQuizReview: false
+    nextQuizReview: false,
+    dailyLog: {},
+    personalBests: { bestCombo: 0, maxInDay: 0, learnDays: 0 }
   };
   ALL_SKILLS['武艺系'].forEach(s => gameState.skills[s.id] = selectedCharacter.skills.includes(s.name) ? 15 : 5);
   ALL_SKILLS['谋略系'].forEach(s => gameState.skills[s.id] = selectedCharacter.skills.includes(s.name) ? 15 : 5);
@@ -3265,6 +3481,9 @@ function showQuizResult() {
   const drops = rollTreasureDrops(correct, total, maxCombo);
   drops.forEach(id => { if (!gameState.bag) gameState.bag = []; gameState.bag.push(id); });
 
+  // ── 记录每日数据 ──
+  logDailySession(total, correct, maxCombo);
+
   addLog(`📖 法语修炼完成：答对${correct}/${total}题，连击x${maxCombo}`);
   addLog(`   技能「${trainName}」+${skillGain}，经验+${expGain}`);
   if (drops.length > 0) {
@@ -3521,6 +3740,7 @@ function mWin(){
   gameState.money += total;
   gameState.masteredWords += mState.total;
   gameState.maxCombo = Math.max(gameState.maxCombo || 0, mState.maxCombo);
+  logDailySession(mState.total, mState.matched, mState.maxCombo);
   addLog(`🔗 中法互连完成：金币+${total}，词汇+${mState.total}，最高${mState.maxCombo}连击`);
   document.getElementById('mWinSub').textContent=`金币 +${total} · 最高${mState.maxCombo}连击 · 剩余${mState.timeLeft}秒`;
   document.getElementById('mWinOverlay').classList.add('show');
@@ -3850,6 +4070,26 @@ function openDrawerTab(tab) {
   }
   if (tab === 'stats') renderStatsPage();
 }
+// ============ 每日数据记录 ============
+function logDailySession(answered, correct, combo) {
+  if (!gameState) return;
+  const today = new Date().toISOString().slice(0, 10);
+  if (!gameState.dailyLog) gameState.dailyLog = {};
+  if (!gameState.dailyLog[today]) {
+    gameState.dailyLog[today] = { answered: 0, correct: 0, combo: 0 };
+  }
+  const d = gameState.dailyLog[today];
+  d.answered += answered;
+  d.correct  += correct;
+  d.combo    = Math.max(d.combo, combo);
+
+  if (!gameState.personalBests) gameState.personalBests = { bestCombo: 0, maxInDay: 0, learnDays: 0 };
+  const pb = gameState.personalBests;
+  pb.bestCombo  = Math.max(pb.bestCombo, combo);
+  pb.maxInDay   = Math.max(pb.maxInDay, d.answered);
+  pb.learnDays  = Object.keys(gameState.dailyLog).length;
+}
+
 function renderStatsPage() {
   if (!gameState) return;
 
@@ -3880,7 +4120,6 @@ function renderStatsPage() {
   document.getElementById('statsTotalCorrect').textContent  = totalCorrect;
   document.getElementById('statsTotalWrong').textContent    = totalWrong;
   document.getElementById('statsWordsSeen').textContent     = seenKeys.size;
-  document.getElementById('statsBestCombo').textContent     = gameState.maxCombo || 0;
   document.getElementById('statsAccPct').textContent        = accPct + '%';
 
   // 环形图（r=45 → 周长 ≈ 282.7）
@@ -3898,7 +4137,7 @@ function renderStatsPage() {
 
   // 词汇掌握进度条
   function setBar(labelId, barId, count) {
-    document.getElementById(labelId).textContent = count + ' 词';
+    document.getElementById(labelId).textContent = count;
     const pct = totalWords > 0 ? Math.round((count / totalWords) * 100) : 0;
     document.getElementById(barId).style.width = pct + '%';
   }
@@ -3906,6 +4145,63 @@ function renderStatsPage() {
   setBar('statsBoxLearn',  'statsBarLearn',     boxLearn);
   setBar('statsBoxReview', 'statsBarReview',    boxReview);
   setBar('statsBoxMaster', 'statsBoxMasterBar', boxMaster);
+
+  // ── 个人纪录 ──
+  const pb = gameState.personalBests || { bestCombo: 0, maxInDay: 0, learnDays: 0 };
+  document.getElementById('statsPBCombo').textContent = pb.bestCombo;
+  document.getElementById('statsPBMatch').textContent = pb.maxInDay;
+  document.getElementById('statsPBDays').textContent  = pb.learnDays;
+
+  // ── 7日趋势柱状图 ──
+  const trendBars = document.getElementById('trendBars');
+  const dayNames = ['日','一','二','三','四','五','六'];
+  const today2   = new Date();
+  const days = [];
+  let maxDay = 1;
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date(today2);
+    d.setDate(d.getDate() - i);
+    const key = d.toISOString().slice(0, 10);
+    const answered = (gameState.dailyLog && gameState.dailyLog[key]) ? gameState.dailyLog[key].answered : 0;
+    days.push({ key, answered, day: dayNames[d.getDay()] });
+    if (answered > maxDay) maxDay = answered;
+  }
+  trendBars.innerHTML = days.map(d => {
+    const h = maxDay > 0 ? Math.round((d.answered / maxDay) * 55) + 4 : 4;
+    return `<div class="trend-bar-item">
+      <div class="trend-bar-value">${d.answered || ''}</div>
+      <div class="trend-bar" style="height:${h}px"></div>
+      <div class="trend-bar-label">${d.day}</div>
+    </div>`;
+  }).join('');
+
+  // ── 学习日历热力图（过去5周）── 行=周，列=周日到周六
+  const heatmapGrid = document.getElementById('heatmapGrid');
+  const today3 = new Date();
+  const todayStr = today3.toISOString().slice(0, 10); // '2026-04-25'
+
+  // 找到起始周日：today - 4*7 - dow，确保今天在第5周
+  const startDate = new Date(today3);
+  startDate.setDate(startDate.getDate() - 4 * 7 - startDate.getDay());
+  const startDay = startDate.getDate();
+
+  // 生成所有格子，一行7格=一周
+  const cells = [];
+  for (let w = 0; w < 5; w++) {
+    for (let dow = 0; dow < 7; dow++) {
+      const cellDate = new Date(startDate);
+      cellDate.setDate(startDay + w * 7 + dow);
+      const key = cellDate.toISOString().slice(0, 10);
+      if (key > todayStr) {
+        cells.push(`<div class="heatmap-cell" style="opacity:0"></div>`);
+      } else {
+        const answered = (gameState.dailyLog && gameState.dailyLog[key]) ? gameState.dailyLog[key].answered : 0;
+        const level = answered === 0 ? 0 : answered <= 3 ? 1 : answered <= 8 ? 2 : answered <= 15 ? 3 : 4;
+        cells.push(`<div class="heatmap-cell" data-level="${level}" data-tip="${key} · ${answered}题"></div>`);
+      }
+    }
+  }
+  heatmapGrid.innerHTML = cells.join('');
 }
 </script>
 </body>
