@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>逆命：楚汉 — 法语修炼版</title>
+<title>逆命：楚汉 — 法语专项</title>
 <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -290,8 +290,8 @@
     transition: all 0.3s;
   }
   .combo-text.show { opacity: 1; transform: scale(1); }
-  .combo-fire { color: #ff6b35; }
-  .combo-rainbow { background: linear-gradient(90deg, #f43f5e, #a855f7, #3b82f6, #06d6a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .combo-fire { color: var(--accent-red); }
+  .combo-rainbow { background: linear-gradient(90deg, var(--accent-red), var(--border-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
   .quiz-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
   .word-display {
@@ -304,21 +304,37 @@
   }
   .word-en { font-size: 2rem; font-weight: bold; color: var(--border-gold); margin-bottom: 10px; }
   .word-hint { font-size: 0.9rem; color: var(--text-secondary); }
-  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 400px; }
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; max-width: 420px; }
   .option-btn {
     background: var(--bg-panel);
     border: 2px solid var(--border-bronze);
     color: var(--text-primary);
-    padding: 15px;
-    font-size: 1rem;
+    padding: 18px 12px;
+    font-size: 1.1rem;
     font-family: 'Noto Serif SC', serif;
     cursor: pointer;
     border-radius: 10px;
     transition: all 0.2s;
+    line-height: 1.4;
   }
-  .option-btn:hover:not(:disabled) { border-color: var(--border-gold); transform: scale(1.02); }
-  .option-btn.correct { border-color: var(--success); background: rgba(90,200,90,0.2); color: var(--success); }
-  .option-btn.wrong { border-color: var(--danger); background: rgba(200,50,50,0.2); color: var(--danger); animation: shake 0.3s; }
+  .option-btn:hover:not(:disabled) { border-color: var(--border-gold); transform: scale(1.03); background: rgba(201,162,39,0.05); }
+  .option-btn.correct {
+    border-color: var(--accent-green);
+    background: rgba(90,158,90,0.2);
+    color: var(--accent-green);
+    animation: optionPop 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  .option-btn.wrong {
+    border-color: var(--accent-red);
+    background: rgba(201,76,76,0.2);
+    color: var(--accent-red);
+    animation: shake 0.3s;
+  }
+  @keyframes optionPop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.08); box-shadow: 0 0 20px rgba(90,158,90,0.35); }
+    100% { transform: scale(1.03); }
+  }
   .option-btn:disabled { cursor: default; }
 
   @keyframes shake {
@@ -831,6 +847,175 @@
     padding-bottom: 8px;
   }
 
+  /* ===== 「更多」抽屉 ===== */
+  .more-drawer-mask {
+    display: none;
+    position: fixed; inset: 0; z-index: 300;
+    background: rgba(13,11,8,0.6);
+  }
+  .more-drawer-mask.show { display: block; }
+  .more-drawer {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 301;
+    background: var(--bg-panel);
+    border-top: 2px solid rgba(201,162,39,0.25);
+    border-radius: 18px 18px 0 0;
+    padding: 14px 20px 90px;
+    transform: translateY(100%);
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+  .more-drawer.show { transform: translateY(0); }
+  .more-drawer-title {
+    text-align: center; font-size: 0.72rem;
+    color: var(--text-dim); letter-spacing: 3px;
+    margin-bottom: 14px;
+  }
+  .more-drawer-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .more-drawer-item {
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; padding: 14px 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-bronze);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .more-drawer-item:hover, .more-drawer-item:active {
+    border-color: var(--border-gold);
+    background: rgba(201,162,39,0.06);
+    transform: translateY(-2px);
+  }
+  .more-drawer-item .di-icon { font-size: 1.8rem; }
+  .more-drawer-item .di-label { font-size: 0.75rem; color: var(--text-secondary); }
+
+  /* ===== 每日一言 ===== */
+  .daily-quote {
+    background: linear-gradient(135deg, rgba(201,162,39,0.06), rgba(201,76,76,0.04));
+    border: 1px solid rgba(201,162,39,0.18);
+    border-left: 3px solid var(--border-gold);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin: 0 0 12px 0;
+    cursor: default;
+  }
+  .daily-quote-fr {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    font-style: italic;
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }
+  .daily-quote-cn {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+  .daily-quote-src {
+    font-size: 0.65rem;
+    color: rgba(201,162,39,0.5);
+    margin-top: 2px;
+  }
+
+  /* ===== 统计页 ===== */
+  .stats-section { margin-bottom: 20px; }
+  .stats-section-title {
+    font-size: 0.75rem; font-weight: 700;
+    color: var(--text-dim); letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid rgba(201,162,39,0.15);
+  }
+  .stats-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  .stat-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bronze);
+    border-radius: 10px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .stat-card-value {
+    font-size: 1.8rem; font-weight: 700;
+    color: var(--border-gold);
+    font-family: 'Ma Shan Zheng', cursive;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-card-label {
+    font-size: 0.72rem; color: var(--text-dim);
+  }
+  .stat-card.accent-red .stat-card-value { color: var(--accent-red); }
+  .stat-card.accent-green .stat-card-value { color: var(--accent-green); }
+
+  /* 正确率大圆环 */
+  .accuracy-ring-wrap {
+    display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;
+  }
+  .accuracy-ring {
+    width: 120px; height: 120px; position: relative; margin-bottom: 8px;
+  }
+  .accuracy-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .accuracy-ring-bg { fill: none; stroke: rgba(201,162,39,0.1); stroke-width: 10; }
+  .accuracy-ring-fill {
+    fill: none; stroke: var(--border-gold); stroke-width: 10;
+    stroke-linecap: round;
+    stroke-dasharray: 283; stroke-dashoffset: 283;
+    transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .accuracy-ring-text {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .accuracy-ring-pct {
+    font-size: 1.6rem; font-weight: 700; color: var(--border-gold);
+    font-family: 'Ma Shan Zheng', cursive; line-height: 1;
+  }
+  .accuracy-ring-sub { font-size: 0.65rem; color: var(--text-dim); }
+  .accuracy-ring-title { font-size: 0.8rem; color: var(--text-secondary); }
+
+  /* 词汇掌握进度 */
+  .vocab-mastery-item {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bronze);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .vocab-mastery-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 8px;
+  }
+  .vocab-mastery-label { font-size: 0.82rem; color: var(--text-secondary); }
+  .vocab-mastery-count { font-size: 0.82rem; font-weight: 700; color: var(--border-gold); }
+  .vocab-mastery-bar {
+    height: 6px; background: var(--bg-card); border-radius: 99px; overflow: hidden;
+  }
+  .vocab-mastery-fill {
+    height: 100%; border-radius: 99px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .fill-new    { background: var(--text-dim); }
+  .fill-learn  { background: var(--accent-red); }
+  .fill-review { background: var(--border-gold); }
+  .fill-master { background: var(--accent-green); }
+
+  /* 最佳连击横幅 */
+  .best-combo-banner {
+    background: linear-gradient(135deg, rgba(201,162,39,0.08), rgba(201,162,39,0.03));
+    border: 1px solid rgba(201,162,39,0.3);
+    border-radius: 10px;
+    padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .best-combo-icon { font-size: 2rem; }
+  .best-combo-info { flex: 1; }
+  .best-combo-value {
+    font-size: 1.5rem; font-weight: 700; color: var(--border-gold);
+    font-family: 'Ma Shan Zheng', cursive; line-height: 1;
+  }
+  .best-combo-desc { font-size: 0.75rem; color: var(--text-dim); margin-top: 2px; }
+
   /* ===== 2c. 自定义滚动条 ===== */
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: rgba(26,21,16,0.3); }
@@ -955,7 +1140,7 @@
 <!-- 标题画面 -->
 <div id="titleScreen" class="screen title-screen active">
   <div class="game-title">逆命：楚汉</div>
-  <div class="game-subtitle">乱世之中，逆天改命</div>
+  <div class="game-subtitle">修炼法语，改写命运</div>
   <div class="title-decor"></div>
   <div class="title-buttons">
     <button class="start-btn" onclick="showScreen('charSelect')">开始游戏</button>
@@ -992,16 +1177,41 @@
 
   <nav class="tab-nav">
     <button class="tab-btn active" data-tab="home"><span class="tab-icon">🏠</span><span>首页</span></button>
-    <button class="tab-btn" data-tab="skills"><span class="tab-icon">⚔️</span><span>技能</span></button>
-    <button class="tab-btn" data-tab="bag"><span class="tab-icon">🎒</span><span>背包</span></button>
-    <button class="tab-btn" data-tab="relations"><span class="tab-icon">👥</span><span>人脉</span></button>
     <button class="tab-btn" data-tab="actions"><span class="tab-icon">📋</span><span>行动</span></button>
     <button class="tab-btn" data-tab="vocab"><span class="tab-icon">📚</span><span>词汇本</span></button>
-    <button class="tab-btn" data-tab="achievements"><span class="tab-icon">🏆</span><span>成就</span></button>
+    <button class="tab-btn" data-tab="stats"><span class="tab-icon">📊</span><span>统计</span></button>
+    <button class="tab-btn" id="moreTabBtn" onclick="toggleMoreDrawer()"><span class="tab-icon">☰</span><span>更多</span></button>
   </nav>
+
+  <!-- 更多抽屉 -->
+  <div class="more-drawer-mask" id="moreDrawerMask" onclick="closeMoreDrawer()"></div>
+  <div class="more-drawer" id="moreDrawer">
+    <div class="more-drawer-title">更多功能</div>
+    <div class="more-drawer-grid">
+      <div class="more-drawer-item" onclick="openDrawerTab('achievements')">
+        <span class="di-icon">🏆</span><span class="di-label">成就</span>
+      </div>
+      <div class="more-drawer-item" onclick="openDrawerTab('skills')">
+        <span class="di-icon">⚔️</span><span class="di-label">技能</span>
+      </div>
+      <div class="more-drawer-item" onclick="openDrawerTab('bag')">
+        <span class="di-icon">🎒</span><span class="di-label">背包</span>
+      </div>
+      <div class="more-drawer-item" onclick="openDrawerTab('relations')">
+        <span class="di-icon">👥</span><span class="di-label">人脉</span>
+      </div>
+    </div>
+  </div>
 
   <!-- 首页 -->
   <div id="tabHome" class="tab-content active">
+    <!-- 每日一言 -->
+    <div class="daily-quote" id="dailyQuote">
+      <div class="daily-quote-fr" id="quoteFr"></div>
+      <div class="daily-quote-cn" id="quoteCn"></div>
+      <div class="daily-quote-src" id="quoteSrc"></div>
+    </div>
+
     <div class="char-overview">
       <div class="overview-title" id="overviewName">刘邦</div>
       <div style="font-size:0.8rem;color:var(--text-secondary)">经验: <span id="currentExp">0</span> / <span id="maxExp">100</span></div>
@@ -1053,6 +1263,92 @@
   <!-- 成就页 -->
   <div id="tabAchievements" class="tab-content">
     <div class="achievement-grid" id="achievementGrid"></div>
+  </div>
+
+  <!-- 统计页 -->
+  <div id="tabStats" class="tab-content">
+    <!-- 正确率环形 -->
+    <div class="accuracy-ring-wrap">
+      <div class="accuracy-ring">
+        <svg viewBox="0 0 100 100">
+          <circle class="accuracy-ring-bg" cx="50" cy="50" r="45"/>
+          <circle class="accuracy-ring-fill" id="statsRingFill" cx="50" cy="50" r="45"/>
+        </svg>
+        <div class="accuracy-ring-text">
+          <div class="accuracy-ring-pct" id="statsAccPct">0%</div>
+          <div class="accuracy-ring-sub">正确率</div>
+        </div>
+      </div>
+      <div class="accuracy-ring-title">综合答题正确率</div>
+    </div>
+
+    <!-- 数字概览 -->
+    <div class="stats-section">
+      <div class="stats-section-title">总览</div>
+      <div class="stats-cards">
+        <div class="stat-card">
+          <div class="stat-card-value" id="statsTotalAnswered">0</div>
+          <div class="stat-card-label">累计答题</div>
+        </div>
+        <div class="stat-card accent-green">
+          <div class="stat-card-value" id="statsTotalCorrect">0</div>
+          <div class="stat-card-label">答对次数</div>
+        </div>
+        <div class="stat-card accent-red">
+          <div class="stat-card-value" id="statsTotalWrong">0</div>
+          <div class="stat-card-label">答错次数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value" id="statsWordsSeen">0</div>
+          <div class="stat-card-label">接触词汇</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 最佳连击 -->
+    <div class="stats-section">
+      <div class="stats-section-title">连击</div>
+      <div class="best-combo-banner">
+        <div class="best-combo-icon">🔥</div>
+        <div class="best-combo-info">
+          <div class="best-combo-value" id="statsBestCombo">0</div>
+          <div class="best-combo-desc">历史最高连击数</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 词汇掌握分布 -->
+    <div class="stats-section">
+      <div class="stats-section-title">词汇掌握</div>
+      <div class="vocab-mastery-item">
+        <div class="vocab-mastery-header">
+          <span class="vocab-mastery-label">🌱 未接触</span>
+          <span class="vocab-mastery-count" id="statsBoxNew">0 词</span>
+        </div>
+        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-new" id="statsBarNew" style="width:0%"></div></div>
+      </div>
+      <div class="vocab-mastery-item">
+        <div class="vocab-mastery-header">
+          <span class="vocab-mastery-label">📖 学习中</span>
+          <span class="vocab-mastery-count" id="statsBoxLearn">0 词</span>
+        </div>
+        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-learn" id="statsBarLearn" style="width:0%"></div></div>
+      </div>
+      <div class="vocab-mastery-item">
+        <div class="vocab-mastery-header">
+          <span class="vocab-mastery-label">🔁 复习中</span>
+          <span class="vocab-mastery-count" id="statsBoxReview">0 词</span>
+        </div>
+        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-review" id="statsBarReview" style="width:0%"></div></div>
+      </div>
+      <div class="vocab-mastery-item">
+        <div class="vocab-mastery-header">
+          <span class="vocab-mastery-label">✅ 已掌握</span>
+          <span class="vocab-mastery-count" id="statsBoxMaster">0 词</span>
+        </div>
+        <div class="vocab-mastery-bar"><div class="vocab-mastery-fill fill-master" id="statsBoxMasterBar" style="width:0%"></div></div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1969,6 +2265,41 @@ let quizState = {
   answered: false
 };
 
+// ============ 每日一言 ============
+const QUOTES = [
+  { fr: "Petit à petit, l'oiseau fait son nid.", cn: "积少成多，聚沙成塔。" },
+  { fr: "Qui vivra verra.", cn: "日久见人心。" },
+  { fr: "Il n'y a pas de fumée sans feu.", cn: "无风不起浪。" },
+  { fr: "Tout vient à point à qui sait attendre.", cn: "耐心等待，好事自来。" },
+  { fr: "L'habitude est une seconde nature.", cn: "习惯成自然。" },
+  { fr: "Ce qui est amer à la bouche est doux au cœur.", cn: "良药苦口，忠言逆耳。" },
+  { fr: "On reconnaît le véritable ami dans le malheur.", cn: "患难见真情。" },
+  { fr: "Il faut tourner sept fois sa langue avant de parler.", cn: "三思而后言。" },
+  { fr: "Le chemin le plus long commence par un premier pas.", cn: "千里之行，始于足下。" },
+  { fr: "Chat échaudé craint l'eau froide.", cn: "一朝被蛇咬，十年怕井绳。" },
+  { fr: "Tout ce qui brille n'est pas or.", cn: "闪光的不一定是金子。" },
+  { fr: "Mieux vaut tard que jamais.", cn: "迟做总比不做好。" },
+  { fr: "Qui sème le vent récolte la tempête.", cn: "种瓜得瓜，种豆得豆。" },
+  { fr: "L'union fait la force.", cn: "团结就是力量。" },
+  { fr: "Aux grands maux les grands remèdes.", cn: "大难当前，当用大计。" },
+  { fr: "Nul bien sans peine.", cn: "不劳则无获。" },
+  { fr: "Tel père, tel fils.", cn: "有其父必有其子。" },
+  { fr: "Faire d'une pierre deux coups.", cn: "一箭双雕。" },
+  { fr: "Mettre son eau dans le même moulin.", cn: "志同道合。" },
+  { fr: "Les cordonniers sont les plus mal chaussés.", cn: "医者不自医。" },
+];
+
+function initDailyQuote() {
+  // 用当天日期做种子，确保同一天显示同一句
+  const today = new Date();
+  const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+  const idx = seed % QUOTES.length;
+  const q = QUOTES[idx];
+  document.getElementById('quoteFr').textContent  = q.fr;
+  document.getElementById('quoteCn').textContent  = '— ' + q.cn;
+  document.getElementById('quoteSrc').textContent = '';
+}
+
 // ============ 界面控制 ============
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => {
@@ -1992,6 +2323,7 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     const tabEl = document.getElementById('tab' + btn.dataset.tab.charAt(0).toUpperCase() + btn.dataset.tab.slice(1));
     tabEl.classList.add('active');
     tabEl.classList.add('screen-enter');
+    if (btn.dataset.tab === 'stats') renderStatsPage();
   });
 });
 
@@ -2018,6 +2350,7 @@ function continueGame() {
   gameState = loadGame();
   showScreen('mainScreen');
   updateMainUI();
+  initDailyQuote();
 }
 
 function initCharSelect() {
@@ -2080,6 +2413,7 @@ function confirmCharacter() {
   addLog(`「${selectedCharacter.ability}」`);
   showScreen('mainScreen');
   updateMainUI();
+  initDailyQuote();
   saveGame();
 }
 
@@ -3481,6 +3815,98 @@ document.addEventListener('DOMContentLoaded', () => {
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
   }
 });
+
+// ============ 「更多」抽屉控制 ============
+function toggleMoreDrawer() {
+  const drawer = document.getElementById('moreDrawer');
+  const mask   = document.getElementById('moreDrawerMask');
+  const isOpen = drawer.classList.contains('show');
+  if (isOpen) {
+    closeMoreDrawer();
+  } else {
+    drawer.classList.add('show');
+    mask.classList.add('show');
+    // 「更多」按钮高亮
+    document.getElementById('moreTabBtn').classList.add('active');
+  }
+}
+
+function closeMoreDrawer() {
+  document.getElementById('moreDrawer').classList.remove('show');
+  document.getElementById('moreDrawerMask').classList.remove('show');
+  document.getElementById('moreTabBtn').classList.remove('active');
+}
+
+function openDrawerTab(tab) {
+  closeMoreDrawer();
+  // 取消所有 tab 高亮
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c => {
+    c.classList.remove('active', 'screen-enter');
+  });
+  const tabEl = document.getElementById('tab' + tab.charAt(0).toUpperCase() + tab.slice(1));
+  if (tabEl) {
+    tabEl.classList.add('active', 'screen-enter');
+  }
+  if (tab === 'stats') renderStatsPage();
+}
+function renderStatsPage() {
+  if (!gameState) return;
+
+  const totalWords = WORD_LIBRARY.length;
+  const ws = gameState.wordStats || {};
+
+  // 累计答题/正确/错误
+  let totalAnswered = 0, totalCorrect = 0, totalWrong = 0;
+  let boxNew = 0, boxLearn = 0, boxReview = 0, boxMaster = 0;
+  const seenKeys = new Set(Object.keys(ws));
+
+  Object.values(ws).forEach(s => {
+    totalAnswered += (s.seen || 0);
+    totalCorrect  += (s.correct || 0);
+    totalWrong    += (s.wrong || 0);
+    const box = s.box || 1;
+    if (box <= 1) boxLearn++;
+    else if (box <= 3) boxReview++;
+    else boxMaster++;
+  });
+  boxNew = totalWords - seenKeys.size;
+
+  // 正确率
+  const accPct = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+
+  // 更新数字卡片
+  document.getElementById('statsTotalAnswered').textContent = totalAnswered;
+  document.getElementById('statsTotalCorrect').textContent  = totalCorrect;
+  document.getElementById('statsTotalWrong').textContent    = totalWrong;
+  document.getElementById('statsWordsSeen').textContent     = seenKeys.size;
+  document.getElementById('statsBestCombo').textContent     = gameState.maxCombo || 0;
+  document.getElementById('statsAccPct').textContent        = accPct + '%';
+
+  // 环形图（r=45 → 周长 ≈ 282.7）
+  const circumference = 282.7;
+  const offset = circumference * (1 - accPct / 100);
+  const ring = document.getElementById('statsRingFill');
+  // 根据正确率换色
+  if (accPct >= 80)      ring.style.stroke = 'var(--accent-green)';
+  else if (accPct >= 50) ring.style.stroke = 'var(--border-gold)';
+  else                   ring.style.stroke = 'var(--accent-red)';
+  // 延迟一帧触发过渡动画
+  requestAnimationFrame(() => {
+    ring.style.strokeDashoffset = offset;
+  });
+
+  // 词汇掌握进度条
+  function setBar(labelId, barId, count) {
+    document.getElementById(labelId).textContent = count + ' 词';
+    const pct = totalWords > 0 ? Math.round((count / totalWords) * 100) : 0;
+    document.getElementById(barId).style.width = pct + '%';
+  }
+  setBar('statsBoxNew',    'statsBarNew',       boxNew);
+  setBar('statsBoxLearn',  'statsBarLearn',     boxLearn);
+  setBar('statsBoxReview', 'statsBarReview',    boxReview);
+  setBar('statsBoxMaster', 'statsBoxMasterBar', boxMaster);
+}
 </script>
 </body>
 </html>
