@@ -123,6 +123,66 @@
     transition: all 0.3s;
   }
   .confirm-btn:disabled { background: var(--text-dim); cursor: not-allowed; }
+
+  /* 禁用按钮穿透修复 */
+  button[disabled] { pointer-events: none; opacity: 0.5; }
+
+  /* 复习按钮 */
+  .review-btn { background: var(--accent-blue); }
+  .review-btn:hover { opacity: 0.9; }
+
+  /* 发音按钮 */
+  .pronounce-btn {
+    background: none; border: 1px solid var(--border-bronze);
+    color: var(--border-gold); width: 36px; height: 36px;
+    border-radius: 50%; cursor: pointer; font-size: 1rem;
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  .pronounce-btn:hover { background: rgba(201,162,39,0.15); transform: scale(1.1); }
+
+  /* 商店 */
+  .shop-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .shop-item { background: var(--bg-card); border: 1px solid var(--border-bronze); padding: 12px; border-radius: 6px; text-align: center; }
+  .shop-item:hover { border-color: var(--border-gold); }
+  .shop-icon { font-size: 2rem; margin-bottom: 6px; }
+  .shop-name { font-size: 0.9rem; color: var(--text-primary); margin-bottom: 4px; }
+  .shop-cost { font-size: 0.75rem; color: var(--border-gold); margin-bottom: 6px; }
+  .shop-buy { background: var(--border-gold); border: none; color: var(--bg-dark); padding: 6px 14px; font-size: 0.8rem; cursor: pointer; border-radius: 4px; font-family: 'Noto Serif SC', serif; }
+  .shop-buy:disabled { background: var(--text-dim); cursor: not-allowed; pointer-events: none; opacity: 0.5; }
+  .shop-buy:hover:not([disabled]) { opacity: 0.9; }
+
+  /* 反向题 */
+  .quiz-mode-toggle { display: flex; gap: 8px; justify-content: center; margin-bottom: 12px; }
+  .mode-btn { background: var(--bg-card); border: 1px solid var(--border-bronze); color: var(--text-secondary); padding: 6px 14px; font-size: 0.8rem; cursor: pointer; border-radius: 4px; transition: all 0.2s; font-family: 'Noto Serif SC', serif; }
+  .mode-btn.active { border-color: var(--border-gold); color: var(--border-gold); background: rgba(201,162,39,0.1); }
+
+  /* 错题复习弹窗 */
+  .review-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.85); z-index: 150; display: none; align-items: center; justify-content: center; padding: 20px; }
+  .review-modal.active { display: flex; }
+  .review-box { background: var(--bg-panel); border: 2px solid var(--accent-blue); padding: 20px; width: 100%; max-width: 360px; border-radius: 10px; }
+  .review-title { font-family: 'Ma Shan Zheng', cursive; font-size: 1.3rem; color: var(--accent-blue); margin-bottom: 10px; text-align: center; }
+  .review-hint { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 15px; text-align: center; }
+  .review-count-badge { display: inline-block; background: var(--accent-red); color: white; font-size: 0.65rem; padding: 1px 5px; border-radius: 3px; margin-left: 5px; }
+  .review-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .review-start { flex: 1; background: var(--accent-blue); border: none; color: white; padding: 10px; font-size: 0.9rem; cursor: pointer; border-radius: 6px; font-family: 'Noto Serif SC', serif; }
+  .review-skip { flex: 1; background: none; border: 1px solid var(--border-bronze); color: var(--text-secondary); padding: 10px; font-size: 0.9rem; cursor: pointer; border-radius: 6px; font-family: 'Noto Serif SC', serif; }
+
+  /* 金钱显示 */
+  .money-display { font-size: 0.85rem; color: var(--border-gold); }
+  .money-icon { margin-right: 3px; }
+
+  /* 季节事件横幅 */
+  .season-event-banner { background: linear-gradient(135deg, rgba(201,162,39,0.15), transparent); border: 1px solid var(--border-gold); border-radius: 8px; padding: 10px 14px; margin: 10px 0; font-size: 0.85rem; text-align: center; cursor: pointer; transition: all 0.3s; }
+  .season-event-banner:hover { background: rgba(201,162,39,0.25); }
+  .season-event-title { color: var(--border-gold); font-weight: bold; margin-bottom: 3px; }
+
+  /* 结局画面 */
+  .ending-screen { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.92); z-index: 600; display: none; align-items: center; justify-content: center; flex-direction: column; padding: 30px; text-align: center; }
+  .ending-screen.active { display: flex; }
+  .ending-title { font-family: 'Ma Shan Zheng', cursive; font-size: 2.5rem; color: var(--border-gold); margin-bottom: 15px; }
+  .ending-subtitle { font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 8px; }
+  .ending-stats { font-size: 0.85rem; color: var(--text-dim); margin-bottom: 20px; line-height: 1.8; }
+  .ending-btn { background: var(--border-gold); border: none; color: var(--bg-dark); padding: 12px 40px; font-size: 1rem; cursor: pointer; border-radius: 8px; font-family: 'Ma Shan Zheng', cursive; margin: 5px; }
   .confirm-btn:hover:not(:disabled) { transform: scale(1.05); }
 
   /* 主界面 */
@@ -407,6 +467,28 @@
     font-family: 'Noto Serif SC', serif; letter-spacing: 1px;
   }
   .drop-popup-btn:hover { opacity: 0.9; }
+
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85); z-index: 150;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-box {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-gold);
+    border-radius: 10px; padding: 20px; width: 100%; max-width: 360px;
+  }
+  .modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Ma Shan Zheng', cursive; font-size: 1.3rem; color: var(--border-gold);
+    margin-bottom: 15px;
+  }
+  .modal-header button {
+    background: none; border: 1px solid var(--border-bronze); color: var(--text-secondary);
+    width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 0.9rem;
+  }
+  .modal-header button:hover { border-color: var(--border-gold); color: var(--border-gold); }
 
   /* 星星特效粒子 */
   .sparkle {
@@ -748,6 +830,7 @@
       <div>
         <div class="player-name" id="playerName">刘邦</div>
         <div class="player-level" id="playerLevel">Lv.1 平民</div>
+        <div class="player-level" id="playerMoney" style="color:var(--border-gold);">💰 0</div>
       </div>
     </div>
     <div class="time-info">
@@ -780,6 +863,8 @@
       <div class="action-card" onclick="openQuiz()"><div class="action-icon">📖</div><div class="action-name">法语修炼</div><div class="action-cost">消耗 1 行动点</div></div>
       <div class="action-card" onclick="doAction('visit')"><div class="action-icon">🗣️</div><div class="action-name">拜访人物</div><div class="action-cost">消耗 1 行动点</div></div>
       <div class="action-card" onclick="doAction('explore')"><div class="action-icon">🔗</div><div class="action-name">中法互连</div><div class="action-cost">连连看 · 法语</div></div>
+      <div class="action-card" onclick="openReviewModal()" id="reviewCard"><div class="action-icon">📝</div><div class="action-name">错题复习</div><div class="action-cost" id="reviewCount">0道错题</div></div>
+      <div class="action-card" onclick="openShop()" id="shopCard"><div class="action-icon">🏪</div><div class="action-name">商店</div><div class="action-cost" id="shopMoney">💰 0</div></div>
     </div>
     <div class="status-grid">
       <div class="status-card"><div class="status-label">❤️ 体力</div><div class="status-bar"><div class="status-fill hp" id="hpBar" style="width:100%"></div></div><div class="status-value"><span id="hpValue">100</span></div></div>
@@ -805,7 +890,7 @@
   <!-- 行动页 -->
   <div id="tabActions" class="tab-content">
     <div class="action-panel" id="actionPanel"></div>
-    <button class="end-turn-btn" id="endTurnBtn" onclick="endTurn()">结束本月 (消耗 1 行动点)</button>
+    <button class="end-turn-btn" id="endTurnBtn" onclick="endTurn()">结束本月</button>
   </div>
 
   <!-- 背包页 -->
@@ -908,7 +993,7 @@ const CHARACTERS = [
     {name:'萧何',avatar:'萧',relation:50,status:'friendly'},
     {name:'项羽',avatar:'项',relation:20,status:'hostile'}
   ], ability:'御人之术：魅力判定+10' },
-  { id:'xiangyu', name:'项羽', avatar:'项', title:'项梁之后 → 西楚霸王', desc:'力拔山兮，气盖世', stats:{武力:97,智力:60,魅力:75,统御:95}, skills:['剑术','统兵'], startRelations:[
+  { id:'xiangyu', name:'项羽', avatar:'项', title:'项梁之后 → 西楚霸王', desc:'力拔山兮，气盖世', stats:{武力:97,智力:60,魅力:75,统御:95}, skills:['剑术','弓术','统兵'], startRelations:[
     {name:'范增',avatar:'范',relation:70,status:'trusted'},
     {name:'刘邦',avatar:'刘',relation:20,status:'hostile'}
   ], ability:'霸王之勇：战斗伤害+30%' },
@@ -926,7 +1011,8 @@ const ALL_SKILLS = {
   '武艺系': [
     {id:'sword',name:'剑术',desc:'近战攻击',category:'wu'},
     {id:'archery',name:'弓术',desc:'远程攻击',category:'wu'},
-    {id:'martial',name:'武艺',desc:'综合战斗',category:'wu'}
+    {id:'martial',name:'武艺',desc:'综合战斗',category:'wu'},
+    {id:'command',name:'统兵',desc:'指挥军队',category:'wu'}
   ],
   '谋略系': [
     {id:'strategy',name:'兵法',desc:'战术运用',category:'mou'},
@@ -1532,7 +1618,7 @@ const WORD_LIBRARY = [
   { french: 'la liberté', meaning: '自由' },
   { french: 'la chance', meaning: '运气/机会' },
   { french: 'le danger', meaning: '危险' },
-  { french: "l'espère", meaning: '希望' },
+  { french: "l'espérance", meaning: '希望' },
   { french: 'la joie', meaning: '快乐' },
   { french: "l'espoir", meaning: '希望' },
   { french: 'la peur', meaning: '害怕' },
@@ -1718,9 +1804,8 @@ let quizState = {
   correct: 0,
   combo: 0,
   maxCombo: 0,
-  answered: false
+  isReview: false
 };
-
 // ============ 界面控制 ============
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -1802,7 +1887,13 @@ function confirmCharacter() {
     maxCombo: 0,
     quizCount: 0,
     perfectQuiz: 0,
-    bag: []
+    bag: [],
+    // 新增学习功能字段
+    wrongWords: [],  // 错题本: [{french, meaning, wrongCount}]
+    learnedWords: [], // 已掌握词汇: [french, ...]
+    money: 0,      // 金钱
+    quizMode: 'forward', // 'forward'=法→中, 'reverse'=中→法
+    quizHistory: []    // 本轮答题历史用于展示
   };
   ALL_SKILLS['武艺系'].forEach(s => gameState.skills[s.id] = selectedCharacter.skills.includes(s.name) ? 15 : 5);
   ALL_SKILLS['谋略系'].forEach(s => gameState.skills[s.id] = selectedCharacter.skills.includes(s.name) ? 15 : 5);
@@ -1824,6 +1915,7 @@ function updateMainUI() {
   document.getElementById('playerAvatar').textContent = char.avatar;
   document.getElementById('playerName').textContent = char.name;
   document.getElementById('playerLevel').textContent = `Lv.${gameState.level} ${getLevelTitle()}`;
+  document.getElementById('playerMoney').textContent = `💰 ${gameState.money || 0}`;
   document.getElementById('gameDate').textContent = `公元前${gameState.year}年·${gameState.season}`;
 
   const apDots = document.getElementById('apDots');
@@ -1856,6 +1948,11 @@ function updateMainUI() {
   updateBagUI();
   updateActionUI();
   updateAchievementUI();
+  const wc = gameState.wrongWords ? gameState.wrongWords.length : 0;
+  const revCount = document.getElementById('reviewCount');
+  if (revCount) revCount.textContent = wc > 0 ? `${wc}道错题` : '无错题';
+  const shopMon = document.getElementById('shopMoney');
+  if (shopMon) shopMon.textContent = `💰 ${gameState.money || 0}`;
   document.getElementById('endTurnBtn').disabled = gameState.actionPoints <= 0;
 
   if (gameState.actionPoints <= 0 && gameState.turn > 0) {
@@ -1932,7 +2029,9 @@ function startSkillTrain(skillId) {
 function updateRelationUI() {
   const list = document.getElementById('relationList');
   const hasBag = gameState.bag && gameState.bag.length > 0;
-  list.innerHTML = gameState.relations.map(r => {
+  const selfName = gameState.character ? gameState.character.name : '';
+  const visibleRelations = gameState.relations.filter(r => r.name !== selfName);
+  list.innerHTML = visibleRelations.map(r => {
     const statusClass = r.status === 'hostile' ? 'status-hostile' : r.status === 'trusted' ? 'status-trusted' : r.status === 'friendly' ? 'status-friendly' : 'status-neutral';
     const statusText = r.status === 'hostile' ? '敌对' : r.status === 'trusted' ? '信赖' : r.status === 'friendly' ? '友好' : '陌生';
     // 找出背包里该人偏好的宝物
@@ -2025,6 +2124,17 @@ function updateActionUI() {
         <h4>💰 内政工作</h4>
         <p>处理政务，赚取金钱</p>
         <div class="action-cost">消耗 1 行动点</div>
+      </div>
+    </div>
+    <div class="action-section">
+      <div class="section-header">📝 复习与商店</div>
+      <div class="action-option" onclick="openReviewModal()">
+        <h4>📝 错题复习</h4>
+        <p>复习之前的错题 ${gameState.wrongWords ? `(${gameState.wrongWords.length}道)` : '(0道)'}</p>
+      </div>
+      <div class="action-option" onclick="openShop()">
+        <h4>🏪 商店</h4>
+        <p>💰 金钱: ${gameState.money || 0}</p>
       </div>
     </div>
   `;
@@ -2182,7 +2292,7 @@ function openGiveModal(treasureId) {
   if (t.apBonus   > 0)     effectLines.push(`本月行动力 +${t.apBonus}`);
 
   // 排序：匹配偏好的放前面
-  const sorted = [...gameState.relations].sort((a, b) => {
+  const sorted = [...gameState.relations].filter(r => r.name !== npcName).sort((a, b) => {
     const aP = t.preferredNPCs.includes(a.name) ? -1 : 0;
     const bP = t.preferredNPCs.includes(b.name) ? -1 : 0;
     return aP - bP;
@@ -2232,8 +2342,8 @@ function giveItem(treasureId, npcName) {
 
   if (npc) {
     npc.relation = Math.min(100, npc.relation + relGain);
-    if      (npc.relation >= 80) npc.status = 'trusted';
-    else if (npc.relation >= 50) npc.status = 'friendly';
+    if      (npc.relation >= 70) npc.status = 'trusted';
+    else if (npc.relation >= 40) npc.status = 'friendly';
     else if (npc.relation >= 20) npc.status = 'neutral';
   }
 
@@ -2312,29 +2422,37 @@ function openQuiz() {
   showQuestion();
 }
 
-function closeQuiz() {
-  if (confirm('确定放弃本次修炼？行动点不退还。')) {
-    document.getElementById('quizScreen').classList.remove('active');
-    gameState.lastTrainSkill = null;
-    updateMainUI();
+function closeQuiz(forceClose) {
+  if (!forceClose && quizState.questions.length > 0 && quizState.current < quizState.questions.length) {
+    if (!confirm('确定放弃修炼？消耗的行动点不退还。')) return;
   }
+  document.getElementById('quizScreen').classList.remove('active');
+  gameState.lastTrainSkill = null;
+  gameState.lastTrainSkillName = null;
+  updateMainUI();
+  showScreen('mainScreen');
 }
 
 function showQuestion() {
   const q = quizState.questions[quizState.current];
   document.getElementById('quizCurrent').textContent = quizState.current + 1;
   document.getElementById('quizComboDisplay').textContent = quizState.combo > 0 ? `🔥 ${quizState.combo}连击` : '';
-
-  const wrong = quizState.questions.filter(w => w.french !== q.french).slice(0, 3);
+  const qText = (gameState.quizMode === 'reverse') ? q.meaning : q.french;
+  const wrong = WORD_LIBRARY.filter(w => w.french !== q.french).slice(0, 3);
   const options = [...wrong, q].sort(() => Math.random() - 0.5);
-
+  const chooseText = (opt) => (gameState.quizMode === 'reverse') ? opt.french : opt.meaning;
   document.getElementById('quizArea').innerHTML = `
-    <div class="word-display">
-      <div class="word-en">${q.french}</div>
-      <div class="word-hint">选择正确的中文翻译</div>
+    <div class="quiz-question">
+      <div class="question-text">
+        ${gameState.quizMode === 'reverse' ? `<button class="pronounce-btn" onclick="pronounce('${q.french.replace(/'/g, "\\'")}')">🔊</button> ` : ''}${qText}
+      </div>
+      <div class="quiz-mode-toggle">
+        <button class="mode-btn ${gameState.quizMode === 'forward' ? 'active' : ''}" onclick="setQuizMode('forward')">法→中</button>
+        <button class="mode-btn ${gameState.quizMode === 'reverse' ? 'active' : ''}" onclick="setQuizMode('reverse')">中→法</button>
+      </div>
     </div>
-    <div class="options-grid">
-      ${options.map(o => `<button class="option-btn" onclick="answerQuiz('${o.meaning}', '${q.meaning}', this)">${o.meaning}</button>`).join('')}
+    <div class="option-grid">
+      ${options.map((opt, i) => `<button class="option-btn" onclick="answerQuiz('${chooseText(opt).replace(/'/g, "\\'")}', '${chooseText(q).replace(/'/g, "\\'")}', this)">${chooseText(opt)}</button>`).join('')}
     </div>
   `;
 }
@@ -2363,13 +2481,30 @@ function answerQuiz(chosen, correct, btn) {
       comboText.textContent = `✓ 答对了！`;
       comboText.className = 'combo-text show';
     }
+    // 复习模式下答对立即从错题本移除
+    if (quizState.isReview) {
+      const q = quizState.questions[quizState.current];
+      const idx = gameState.wrongWords.findIndex(w => w.french === q.french);
+      if (idx !== -1) gameState.wrongWords.splice(idx, 1);
+    }
   } else {
     btn.classList.add('wrong');
     btns.forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
     quizState.combo = 0;
     document.getElementById('comboText').textContent = `✗ 正确：${correct}`;
     document.getElementById('comboText').className = 'combo-text show';
+
+    // 错题记录
+    const q = quizState.questions[quizState.current];
+    if (!gameState.wrongWords) gameState.wrongWords = [];
+    const existing = gameState.wrongWords.find(w => w.french === q.french);
+    if (existing) {
+      existing.wrongCount++;
+    } else {
+      gameState.wrongWords.push({ french: q.french, meaning: q.meaning, wrongCount: 1 });
+    }
   }
+
 
   document.getElementById('quizComboDisplay').textContent = quizState.combo > 0 ? `🔥 ${quizState.combo}连击` : '';
 
@@ -2393,9 +2528,9 @@ function showQuizResult() {
   const skillGain = Math.floor(3 + (correct / total) * 10);
   const expGain = 20 + correct * 5 + maxCombo * 2;
   const newWords = Math.floor(correct * 0.5);
-  const trainName = gameState.lastTrainSkillName;
-
-  gameState.skills[gameState.lastTrainSkill] = Math.min(100, (gameState.skills[gameState.lastTrainSkill] || 0) + skillGain);
+  const trainName = gameState.lastTrainSkillName || '错题复习';
+  const skillId = gameState.lastTrainSkill || 'strategy';
+  gameState.skills[skillId] = Math.min(100, (gameState.skills[skillId] || 0) + skillGain);
   gameState.masteredWords += newWords;
   gameState.maxCombo = Math.max(gameState.maxCombo, maxCombo);
   gameState.quizCount++;
@@ -2447,6 +2582,8 @@ function showQuizResult() {
 function closeQuizResult(drops) {
   document.getElementById('quizScreen').classList.remove('active');
   updateMainUI();
+  quizState.isReview = false;
+  quizState.maxCombo = 0;
   // 有宝物则弹出动画弹层
   const safeDrops = Array.isArray(drops) ? drops.filter(Boolean) : [];
   if (safeDrops.length > 0) {
@@ -2454,6 +2591,7 @@ function closeQuizResult(drops) {
   } else {
     checkAchievements();
   }
+  showScreen('mainScreen');
 }
 
 // ============ 连连看系统 ============
@@ -2681,11 +2819,147 @@ document.getElementById('mBackBtn').addEventListener('click', () => {
 
 window.addEventListener('resize', mResizeCanvas);
 
+// ============ 发音功能 ============
+function pronounce(text) {
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'fr-FR';
+    utterance.rate = 0.8;
+    speechSynthesis.speak(utterance);
+  }
+}
+
+// ============ 复习错题 ============
+function openReviewModal() {
+  const wrongs = gameState.wrongWords || [];
+  const modal = document.getElementById('reviewModal');
+  if (!modal) { createReviewModalHTML(); return; }
+  if (wrongs.length < 3) {
+    showToast('错题不足3道，先多做对几个');
+    return;
+  }
+  const reviewList = document.getElementById('reviewList');
+  reviewList.innerHTML = wrongs.slice(0, 10).map(w => `
+    <div class="review-word ${w.wrongCount >= 2 ? 'wrong-count' : ''}">
+      ${w.french} → ${w.meaning}
+      ${w.wrongCount >= 2 ? `<span class="review-count-badge">错${w.wrongCount}次</span>` : ''}
+    </div>
+  `).join('');
+  modal.classList.add('active');
+}
+
+function createReviewModalHTML() {
+  const html = `
+  <div class="review-modal" id="reviewModal">
+    <div class="review-box">
+      <div class="review-title">📝 错题复习</div>
+      <div class="review-hint">全部答对此题从错题本移除</div>
+      <div id="reviewList" style="max-height:200px;overflow-y:auto;"></div>
+      <div class="review-actions">
+        <button class="review-start" onclick="startReviewQuiz()">开始复习</button>
+        <button class="review-skip" onclick="document.getElementById('reviewModal').classList.remove('active')">暂不</button>
+      </div>
+    </div>
+  </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
+function startReviewQuiz() {
+  const wrongs = gameState.wrongWords;
+  if (!wrongs || wrongs.length < 1) {
+    showToast('没有错题了');
+    return;
+  }
+  const reviewQs = [...wrongs].sort(()=>Math.random()-0.5).slice(0, 3);
+  document.getElementById('reviewModal').classList.remove('active');
+  quizState = {
+    questions: reviewQs.map(w => ({ french: w.french, meaning: w.meaning })),
+    current: 0,
+    correct: 0,
+    combo: 0,
+    maxCombo: 0,
+    answers: [],
+    isReview: true
+  };
+  document.getElementById('quizTotal').textContent = quizState.questions.length;
+  document.getElementById('quizCurrent').textContent = '1';
+  document.getElementById('quizComboDisplay').textContent = '';
+  showScreen('quizScreen');
+  showQuestion();
+}
+
+// ============ 商店系统 ============
+const SHOP_ITEMS = [
+  { id:'hint1', name:'提示券', icon:'💡', desc:'答题时多一个错误选项', price: 50 },
+  { id:'time1', name:'延时券', icon:'⏰', desc:'连连看+30秒', price: 40 },
+  { id:'charm1', name:'香囊', icon:'🌸', desc:'魅力+10(永久)', price: 80 },
+  { id:'box1', name:'神秘盒', icon:'🎁', desc:'随机抽取一件宝物', price: 150 }
+];
+
+function openShop() {
+  const modal = document.getElementById('shopModal');
+  if (!modal) { createShopHTML(); return; }
+  const grid = document.getElementById('shopGrid');
+  grid.innerHTML = SHOP_ITEMS.map(item => `
+    <div class="shop-item">
+      <div class="shop-icon">${item.icon}</div>
+      <div class="shop-name">${item.name}</div>
+      <div class="shop-cost">💰 ${item.price}</div>
+      <div style="font-size:0.7rem;color:var(--text-dim);margin-bottom:6px;">${item.desc}</div>
+      <button class="shop-buy" onclick="buyItem('${item.id}')" ${gameState.money < item.price ? 'disabled' : ''}>购买</button>
+    </div>
+  `).join('');
+  modal.classList.add('active');
+}
+
+function buyItem(itemId) {
+  const item = SHOP_ITEMS.find(i => i.id === itemId);
+  if (!item || gameState.money < item.price) return;
+  gameState.money -= item.price;
+  if (itemId === 'hint1') {
+    gameState.hintTickets = (gameState.hintTickets || 0) + 1;
+  } else if (itemId === 'time1') {
+    mState.timeLeft = (mState.timeLeft || 60) + 30;
+  } else if (itemId === 'charm1') {
+    gameState.charm = (gameState.charm || 50) + 10;
+  } else if (itemId === 'box1') {
+    const drops = rollTreasureDrops(3, 10, 2);
+    drops.forEach(id => { if (!gameState.bag) gameState.bag = []; gameState.bag.push(id); });
+    addLog(`🎁 获得：${drops.map(id => TREASURES.find(t => t.id === id)?.name || id).join('、')}`);
+  }
+  showToast(`购买成功：${item.name}`);
+  saveGame();
+  openShop(); // 刷新
+}
+
+function createShopHTML() {
+  const html = `
+  <div class="modal-overlay" id="shopModal">
+    <div class="modal-box" style="max-width:400px;">
+      <div class="modal-header">
+        <span>🏪 商店</span>
+        <button onclick="document.getElementById('shopModal').classList.remove('active')">✕</button>
+      </div>
+      <div class="shop-grid" id="shopGrid"></div>
+      <div style="text-align:center;margin-top:10px;"></div>
+    </div>
+  </div>
+  `;
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
 // ============ 初始化 ============
 document.addEventListener('DOMContentLoaded', () => {
   initCharSelect();
   initTitleScreen();
 });
+
+// ============ 模式切换 ============
+function setQuizMode(mode) {
+  gameState.quizMode = mode;
+  showToast(mode === 'reverse' ? '🔄 已切换：中→法' : '🔄 已切换：法→中');
+}
 </script>
 </body>
 </html>
