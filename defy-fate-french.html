@@ -797,6 +797,14 @@
   .hint-btn { background: rgba(201,162,39,0.15); border: 1px solid var(--border-gold); color: var(--border-gold); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; margin-top: 12px; transition: all 0.3s; }
   .hint-btn:hover { background: rgba(201,162,39,0.3); }
 
+  /* ===== 语音按钮 ===== */
+  .voice-btn { background: linear-gradient(180deg, var(--accent-green) 0%, #3d7a3d 100%); border: 2px solid var(--accent-green); color: white; padding: 8px 16px; font-size: 0.9rem; border-radius: 20px; cursor: pointer; margin-top: 10px; transition: all 0.3s; display: inline-flex; align-items: center; gap: 6px; }
+  .voice-btn:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(90,158,90,0.4); }
+  .voice-btn.listening { background: linear-gradient(180deg, var(--accent-red) 0%, #a33 100%); border-color: var(--accent-red); animation: pulse 1s infinite; }
+  .voice-btn:disabled { opacity: 0.5; cursor: not-allowed; animation: none; }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 5px rgba(201,76,76,0.5); } 50% { box-shadow: 0 0 20px rgba(201,76,76,0.8); } }
+  .voice-hint { font-size: 0.75rem; color: var(--text-dim); margin-top: 8px; font-style: italic; }
+
   /* ===== 1a. 标题页粒子/火星背景 ===== */
   #titleScreen { position: relative; overflow: hidden; }
   #titleScreen::before {
@@ -1312,6 +1320,7 @@
     <button class="start-btn" onclick="showScreen('charSelect')">开始游戏</button>
     <button class="start-btn" id="continueBtn" style="display:none" onclick="continueGame()">继续游戏</button>
   </div>
+  <div id="voiceNotice" style="margin-top: 30px; font-size: 0.75rem; color: var(--text-dim); display: none;"></div>
 </div>
 
 <!-- 角色选择 -->
@@ -3335,6 +3344,8 @@ function showQuestion() {
       </div>
       <div class="options-grid" id="optionsGrid"></div>
       ${gameState.hints > 0 ? `<button class="hint-btn" id="hintBtn" onclick="useHint()">📜 提示 (<span id="hintCount">${gameState.hints}</span>)</button>` : ''}
+      <button class="voice-btn" id="voiceBtn" onclick="startVoiceAnswer()"><span id="voiceBtnText">🎤 语音答题</span></button>
+      <div class="voice-hint">点击后说出法语选项（如：bonjour）</div>
     `;
     const grid = document.getElementById('optionsGrid');
     options.forEach(o => {
@@ -3354,6 +3365,8 @@ function showQuestion() {
       </div>
       <div class="options-grid" id="optionsGrid"></div>
       ${gameState.hints > 0 ? `<button class="hint-btn" id="hintBtn" onclick="useHint()">📜 提示 (<span id="hintCount">${gameState.hints}</span>)</button>` : ''}
+      <button class="voice-btn" id="voiceBtn" onclick="startVoiceAnswer()"><span id="voiceBtnText">🎤 语音答题</span></button>
+      <div class="voice-hint">点击后说出中文选项（如：你好）</div>
     `;
     const grid = document.getElementById('optionsGrid');
     options.forEach(o => {
@@ -3365,6 +3378,10 @@ function showQuestion() {
       grid.appendChild(btn);
     });
   }
+
+  // 初始化语音按钮引用
+  voiceBtn = document.getElementById('voiceBtn');
+  voiceBtnText = document.getElementById('voiceBtnText');
 }
 
 function answerQuiz(chosen, correct, btn) {
@@ -3377,6 +3394,10 @@ function answerQuiz(chosen, correct, btn) {
   // 隐藏提示按钮
   const hintBtn = document.getElementById('hintBtn');
   if (hintBtn) hintBtn.style.display = 'none';
+
+  // 禁用语音按钮
+  const voiceBtnEl = document.getElementById('voiceBtn');
+  if (voiceBtnEl) voiceBtnEl.disabled = true;
 
   // 更新 wordStats
   const currentQ = quizState.questions[quizState.current];
@@ -3782,6 +3803,87 @@ function speakFrench(text) {
     window.speechSynthesis.speak(u);
 }
 
+// ============ Web Speech API 法语语音输入 ============
+let recognition = null;
+
+function initSpeechRecognition() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return null;
+    const rec = new SpeechRecognition();
+    rec.continuous = false;
+    rec.interimResults = false;
+    rec.lang = 'fr-FR';
+    rec.onstart = () => {
+        if (voiceBtn) { voiceBtn.classList.add('listening'); voiceBtn.disabled = true; }
+        if (voiceBtnText) voiceBtnText.textContent = '🎤 聆听中...';
+    };
+    rec.onresult = (event) => {
+        const results = event.results;
+        if (!results || results.length === 0) return;
+        const transcript = results[0][0].transcript.trim().toLowerCase();
+        if (voiceBtnText) voiceBtnText.textContent = '🎤 ' + transcript;
+        setTimeout(() => { matchVoiceAnswer(transcript); }, 500);
+    };
+    rec.onerror = (event) => {
+        resetVoiceBtn();
+        if (event.error === 'not-allowed') showToast('请允许使用麦克风权限');
+        else if (event.error === 'no-speech') showToast('未检测到语音，请重试');
+    };
+    rec.onend = () => { resetVoiceBtn(); };
+    return rec;
+}
+
+function resetVoiceBtn() {
+    if (voiceBtn) { voiceBtn.classList.remove('listening'); voiceBtn.disabled = false; }
+    if (voiceBtnText) voiceBtnText.textContent = '🎤 语音答题';
+}
+
+function matchVoiceAnswer(transcript) {
+    if (quizState.answered) return;
+    const q = quizState.questions[quizState.current];
+    const isReverse = q.reverse;
+    const correctValue = isReverse ? q.french : q.meaning;
+    const cleaned = transcript.replace(/[.,;:!?¿]/g, '').replace(/\s+/g, ' ').trim().toLowerCase();
+    const btns = document.querySelectorAll('#optionsGrid .option-btn');
+    let matched = false;
+    btns.forEach(btn => {
+        const optionText = btn.textContent.toLowerCase().trim();
+        if ((cleaned === optionText || cleaned.includes(optionText) || optionText.includes(cleaned) || levenshtein(cleaned, optionText) <= 2) && !btn.disabled) {
+            btn.click();
+            matched = true;
+        }
+    });
+    if (!matched) showToast(`未匹配到选项：你说的是"${transcript}"`);
+}
+
+function levenshtein(a, b) {
+    if (a.length === 0) return b.length;
+    if (b.length === 0) return a.length;
+    const matrix = [];
+    for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+    for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+    for (let i = 1; i <= b.length; i++) {
+        for (let j = 1; j <= a.length; j++) {
+            if (b.charAt(i-1) === a.charAt(j-1)) matrix[i][j] = matrix[i-1][j-1];
+            else matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, matrix[i][j-1] + 1, matrix[i-1][j] + 1);
+        }
+    }
+    return matrix[b.length][a.length];
+}
+
+function startVoiceAnswer() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) { showToast('当前浏览器不支持语音识别'); return; }
+    if (!recognition) recognition = initSpeechRecognition();
+    if (!recognition) { showToast('无法初始化语音识别'); return; }
+    try {
+        recognition.start();
+    } catch (e) {
+        recognition.stop();
+        setTimeout(() => { recognition.start(); }, 100);
+    }
+}
+
 // ============ 提示功能 ============
 function useHint() {
     if (!gameState.hints || gameState.hints <= 0) return;
@@ -4029,10 +4131,21 @@ document.addEventListener('DOMContentLoaded', () => {
   initCharSelect();
   initTitleScreen();
 
-  // 预加载语音
+  // 预加载语音合成
   if ('speechSynthesis' in window) {
     window.speechSynthesis.getVoices();
     window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  }
+
+  // 检测语音识别支持
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const notice = document.getElementById('voiceNotice');
+  if (SpeechRecognition && notice) {
+    notice.style.display = 'block';
+    notice.innerHTML = '<span style="color: var(--accent-green);">🎤 语音识别可用</span> — 在修炼界面点击麦克风答题';
+  } else if (notice) {
+    notice.style.display = 'block';
+    notice.innerHTML = '<span style="color: var(--accent-red);">⚠️ 语音不可用</span> — 请使用 Chrome/Safari 并在 HTTPS 环境打开';
   }
 });
 
