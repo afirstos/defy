@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>逆命：楚汉 — 游戏合集</title>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Serif SC', serif;
+    background: #0d0b08;
+    color: #e8dcc8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image:
+      radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(139,115,85,0.06) 0%, transparent 50%);
+  }
+  .title {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: clamp(2.2rem, 8vw, 3.5rem);
+    color: #c9a227;
+    text-shadow: 0 0 40px rgba(201,162,39,0.25);
+    margin-bottom: 6px;
+    letter-spacing: 0.05em;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+    color: #a89880;
+    margin-bottom: 50px;
+    letter-spacing: 0.3em;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 920px;
+    padding: 0 20px;
+  }
+  .card {
+    background: #1a1510;
+    border: 1px solid #8b7355;
+    border-radius: 16px;
+    padding: 28px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+  .card:hover {
+    border-color: #c9a227;
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(201,162,39,0.15);
+  }
+  .card-icon { font-size: 2.5rem; margin-bottom: 12px; }
+  .card-title {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 1.5rem;
+    color: #c9a227;
+    margin-bottom: 6px;
+  }
+  .card-desc { font-size: 0.85rem; color: #a89880; line-height: 1.6; margin-bottom: 14px; }
+  .card-tag {
+    display: inline-block;
+    background: rgba(201,162,39,0.12);
+    border: 1px solid rgba(201,162,39,0.3);
+    color: #c9a227;
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  .card-tag.new { background: rgba(201,76,76,0.12); border-color: rgba(201,76,76,0.3); color: #c94c4c; }
+  .footer { margin-top: 50px; font-size: 0.75rem; color: #6b5c4a; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+
+<div class="title">逆命：楚汉</div>
+<div class="subtitle">乱世之中，逆天改命</div>
+
+<div class="card-grid">
+
+  <a class="card" href="defy-fate-words.html">
+    <div class="card-icon">⚔️</div>
+    <div class="card-title">法语修炼版</div>
+    <div class="card-desc">完整游戏：连连看·中法互连、答题背词、太阁式人脉经营、宝物背包与成就系统。</div>
+    <span class="card-tag">🎮 完整版</span>
+    <span class="card-tag">🆕 商店系统</span>
+    <span class="card-tag">🔄 反向题</span>
+  </a>
+
+  <a class="card" href="defy-fate-french.html">
+    <div class="card-icon">📖</div>
+    <div class="card-title">法语专项</div>
+    <div class="card-desc">专注法语词汇学习，中法互译练习，智能复习错题本，记录每日学习进度。</div>
+    <span class="card-tag">📝 专项训练</span>
+    <span class="card-tag new">🆕 新增</span>
+  </a>
+
+  <a class="card" href="defy-fate-chu-han.html">
+    <div class="card-icon">🏛️</div>
+    <div class="card-title">楚汉风云</div>
+    <div class="card-desc">以楚汉历史为背景的角色扮演游戏，招募武将、发展势力、逐鹿天下。</div>
+    <span class="card-tag">🎲 RPG</span>
+  </a>
+
+</div>
+
+<div class="footer">逆命系列 · 法语学习游戏</div>
+
+</body>
+</html>

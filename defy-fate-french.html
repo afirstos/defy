@@ -1,0 +1,3486 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>逆命：楚汉 — 法语修炼版</title>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #0d0b08;
+    --bg-panel: #1a1510;
+    --bg-card: #252015;
+    --border-gold: #c9a227;
+    --border-bronze: #8b7355;
+    --text-primary: #e8dcc8;
+    --text-secondary: #a89880;
+    --text-dim: #6b5c4a;
+    --accent-red: #c94c4c;
+    --accent-blue: #4a7fb9;
+    --accent-green: #5a9e5a;
+    --danger: #d44;
+    --success: #5a5;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Noto Serif SC', serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== SCREENS ===== */
+  .screen { display: none; min-height: 100vh; padding: 20px; }
+  .screen.active { display: block; }
+
+  /* 标题画面 */
+  .title-screen {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #1a1510 0%, #2a2318 50%, #1a1510 100%);
+    text-align: center;
+  }
+  .title-screen.active { display: flex; }
+  .game-title {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: clamp(2.5rem, 10vw, 5rem);
+    color: var(--border-gold);
+    text-shadow: 0 0 30px rgba(201,162,39,0.3);
+  }
+  .game-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 10px 0 40px;
+    letter-spacing: 0.2em;
+  }
+  .title-decor {
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-gold), transparent);
+    margin: 20px auto;
+  }
+  .start-btn {
+    background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg-panel) 100%);
+    border: 2px solid var(--border-gold);
+    color: var(--border-gold);
+    padding: 12px 50px;
+    font-size: 1.1rem;
+    font-family: 'Ma Shan Zheng', cursive;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 8px;
+  }
+  .start-btn:hover { background: var(--border-gold); color: var(--bg-dark); transform: scale(1.05); }
+
+  /* 角色选择 */
+  .char-select { padding-top: 30px; }
+  .section-title {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 2rem;
+    color: var(--border-gold);
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .char-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .char-card {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-bronze);
+    padding: 15px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+  .char-card:hover { border-color: var(--border-gold); transform: translateY(-3px); }
+  .char-card.selected { border-color: var(--border-gold); background: rgba(201,162,39,0.1); }
+  .char-name { font-family: 'Ma Shan Zheng', cursive; font-size: 1.8rem; color: var(--border-gold); margin-bottom: 5px; }
+  .char-title { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; }
+  .char-desc { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 10px; line-height: 1.4; }
+  .char-stats { display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; }
+  .stat { font-size: 0.7rem; padding: 2px 6px; border-radius: 3px; }
+  .stat.s { background: rgba(201,162,39,0.3); color: var(--border-gold); }
+  .stat.a { background: rgba(90,200,90,0.2); color: var(--success); }
+  .stat.b { background: rgba(100,150,255,0.2); color: var(--accent-blue); }
+  .stat.c { background: rgba(200,150,100,0.2); color: var(--border-bronze); }
+  .stat.d { background: rgba(100,100,100,0.2); color: var(--text-dim); }
+  .confirm-btn {
+    display: block;
+    margin: 25px auto 0;
+    background: var(--border-gold);
+    border: none;
+    color: var(--bg-dark);
+    padding: 12px 50px;
+    font-size: 1.1rem;
+    font-family: 'Ma Shan Zheng', cursive;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .confirm-btn:disabled { background: var(--text-dim); cursor: not-allowed; }
+  .confirm-btn:hover:not(:disabled) { transform: scale(1.05); }
+
+  /* 主界面 */
+  .main-screen { padding: 0; max-width: 100%; }
+  .top-bar {
+    background: var(--bg-panel);
+    border-bottom: 2px solid var(--border-bronze);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .player-info { display: flex; align-items: center; gap: 10px; }
+  .player-avatar {
+    width: 40px; height: 40px;
+    background: var(--bg-card);
+    border: 2px solid var(--border-gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+  }
+  .player-name { font-family: 'Ma Shan Zheng', cursive; font-size: 1.1rem; color: var(--border-gold); }
+  .player-level { font-size: 0.75rem; color: var(--text-secondary); }
+  .time-info { text-align: right; }
+  .action-points { display: flex; align-items: center; gap: 5px; justify-content: flex-end; }
+  .ap-icon { font-size: 1rem; }
+  .ap-dots { display: flex; gap: 3px; }
+  .ap-dot {
+    width: 12px; height: 12px;
+    background: var(--text-dim);
+    border-radius: 50%;
+  }
+  .ap-dot.available { background: var(--border-gold); }
+  .game-date { font-size: 0.8rem; color: var(--text-secondary); margin-top: 3px; }
+
+  /* 导航 */
+  .tab-nav {
+    display: flex;
+    background: var(--bg-panel);
+    border-top: 1px solid var(--border-bronze);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 8px 2px;
+    color: var(--text-secondary);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .tab-btn:hover { color: var(--text-primary); }
+  .tab-btn.active { color: var(--border-gold); }
+  .tab-icon { font-size: 1.2rem; }
+  .tab-content { display: none; padding: 15px; padding-bottom: 80px; min-height: calc(100vh - 120px); }
+  .tab-content.active { display: block; }
+
+  /* 首页 */
+  .char-overview { background: var(--bg-panel); border: 1px solid var(--border-bronze); padding: 15px; margin-bottom: 15px; }
+  .overview-title { font-family: 'Ma Shan Zheng', cursive; font-size: 1.3rem; color: var(--border-gold); margin-bottom: 5px; }
+  .exp-bar { width: 100%; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden; margin-top: 8px; }
+  .exp-fill { height: 100%; background: linear-gradient(90deg, var(--accent-green), var(--border-gold)); transition: width 0.5s; }
+  .attributes { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 10px; }
+  .attr-item { text-align: center; padding: 8px 3px; background: var(--bg-card); border-radius: 5px; }
+  .attr-name { font-size: 0.65rem; color: var(--text-secondary); margin-bottom: 3px; }
+  .attr-value { font-size: 1rem; font-weight: bold; color: var(--border-gold); }
+
+  .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+  .action-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bronze);
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .action-card:hover { border-color: var(--border-gold); transform: translateY(-2px); }
+  .action-icon { font-size: 1.5rem; margin-bottom: 5px; }
+  .action-name { font-size: 0.85rem; color: var(--text-primary); margin-bottom: 3px; }
+  .action-cost { font-size: 0.7rem; color: var(--text-dim); }
+
+  .status-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+  .status-card { background: var(--bg-panel); border: 1px solid var(--border-bronze); padding: 10px; text-align: center; }
+  .status-label { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 5px; }
+  .status-bar { height: 4px; background: var(--bg-card); border-radius: 2px; margin-bottom: 3px; }
+  .status-fill { height: 100%; border-radius: 2px; }
+  .status-fill.hp { background: var(--accent-red); }
+  .status-fill.fame { background: var(--border-gold); }
+  .status-fill.mp { background: var(--accent-blue); }
+  .status-value { font-size: 0.8rem; color: var(--text-primary); }
+
+  .log-panel { background: var(--bg-panel); border: 1px solid var(--border-bronze); padding: 12px; max-height: 150px; overflow-y: auto; }
+  .log-title { font-size: 0.8rem; color: var(--border-gold); margin-bottom: 8px; }
+  .log-entry { font-size: 0.75rem; color: var(--text-secondary); padding: 4px 0; border-bottom: 1px solid var(--bg-card); }
+  .log-turn { color: var(--border-gold); margin-right: 5px; }
+
+  /* 技能页 */
+  .skill-category { background: var(--bg-panel); border: 1px solid var(--border-bronze); margin-bottom: 15px; }
+  .category-title { font-size: 0.9rem; color: var(--border-gold); padding: 10px 15px; border-bottom: 1px solid var(--border-bronze); }
+  .skill-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 15px; border-bottom: 1px solid var(--bg-card); }
+  .skill-item:last-child { border-bottom: none; }
+  .skill-name { font-size: 0.85rem; margin-bottom: 5px; }
+  .skill-name span { font-size: 0.7rem; color: var(--text-dim); }
+  .skill-level { display: flex; align-items: center; gap: 8px; }
+  .skill-bar { width: 80px; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden; }
+  .skill-fill { height: 100%; border-radius: 3px; }
+  .skill-fill.wu { background: var(--accent-red); }
+  .skill-fill.mou { background: var(--accent-blue); }
+  .skill-fill.ren { background: var(--accent-green); }
+  .skill-num { font-size: 0.7rem; color: var(--text-dim); }
+  .train-btn {
+    background: var(--border-gold);
+    border: none;
+    color: var(--bg-dark);
+    padding: 8px 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s;
+  }
+  .train-btn:hover { transform: scale(1.05); }
+  .train-btn:disabled { background: var(--text-dim); cursor: not-allowed; }
+
+  /* 单词答题界面 */
+  .quiz-screen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #1a1510 0%, #0d0b08 100%);
+    z-index: 100;
+    display: none;
+    flex-direction: column;
+  }
+  .quiz-screen.active { display: flex; }
+  .quiz-header {
+    background: var(--bg-panel);
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .quiz-close { background: none; border: 1px solid var(--border-bronze); color: var(--text-secondary); padding: 8px 15px; cursor: pointer; border-radius: 5px; font-size: 0.8rem; }
+  .quiz-info { text-align: center; }
+  .quiz-progress { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 5px; }
+  .quiz-combo { font-size: 1.2rem; font-weight: bold; color: var(--border-gold); }
+
+  .combo-bar {
+    padding: 10px 15px;
+    text-align: center;
+    min-height: 40px;
+  }
+  .combo-text {
+    font-size: 1.3rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.3s;
+  }
+  .combo-text.show { opacity: 1; transform: scale(1); }
+  .combo-fire { color: #ff6b35; }
+  .combo-rainbow { background: linear-gradient(90deg, #f43f5e, #a855f7, #3b82f6, #06d6a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+  .quiz-area { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+  .word-display {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-gold);
+    border-radius: 15px;
+    padding: 25px 40px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  .word-en { font-size: 2rem; font-weight: bold; color: var(--border-gold); margin-bottom: 10px; }
+  .word-hint { font-size: 0.9rem; color: var(--text-secondary); }
+  .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 400px; }
+  .option-btn {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-bronze);
+    color: var(--text-primary);
+    padding: 15px;
+    font-size: 1rem;
+    font-family: 'Noto Serif SC', serif;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s;
+  }
+  .option-btn:hover:not(:disabled) { border-color: var(--border-gold); transform: scale(1.02); }
+  .option-btn.correct { border-color: var(--success); background: rgba(90,200,90,0.2); color: var(--success); }
+  .option-btn.wrong { border-color: var(--danger); background: rgba(200,50,50,0.2); color: var(--danger); animation: shake 0.3s; }
+  .option-btn:disabled { cursor: default; }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .quiz-result {
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .result-score { font-size: 3rem; font-weight: bold; color: var(--border-gold); margin-bottom: 10px; }
+  .result-detail { color: var(--text-secondary); margin-bottom: 20px; }
+  .result-btn {
+    background: var(--border-gold);
+    border: none;
+    color: var(--bg-dark);
+    padding: 12px 40px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 8px;
+    margin: 5px;
+  }
+
+  /* 人脉页 */
+  .relation-list { display: flex; flex-direction: column; gap: 10px; }
+  .relation-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bronze);
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .relation-info { display: flex; align-items: center; gap: 12px; }
+  .relation-avatar { font-size: 1.5rem; }
+  .relation-name { font-size: 0.95rem; margin-bottom: 3px; }
+  .relation-status { font-size: 0.75rem; }
+  .status-hostile { color: var(--danger); }
+  .status-neutral { color: var(--text-secondary); }
+  .status-friendly { color: var(--accent-green); }
+  .status-trusted { color: var(--border-gold); }
+  .relation-bar { width: 60px; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden; }
+  .relation-fill { height: 100%; background: var(--border-gold); }
+  .relation-gift-btn {
+    background: none; border: 1px solid var(--border-bronze); color: var(--border-gold);
+    width: 30px; height: 30px; border-radius: 50%; cursor: pointer; font-size: 0.9rem;
+    flex-shrink: 0; transition: all 0.2s; align-self: center;
+  }
+  .relation-gift-btn:hover:not([disabled]) { background: rgba(201,162,39,0.15); border-color: var(--border-gold); transform: scale(1.15); }
+
+  /* 宝物掉落弹层动画 */
+  .drop-popup {
+    position: fixed; top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.85); z-index: 300;
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .drop-popup.active { display: flex; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+  .drop-popup-box {
+    background: var(--bg-panel); border: 2px solid var(--border-gold);
+    padding: 24px 20px; width: 100%; max-width: 340px; text-align: center;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp { from { transform: translateY(30px); opacity:0 } to { transform:translateY(0); opacity:1 } }
+  .drop-popup-title { font-family: 'Ma Shan Zheng', cursive; font-size: 1.4rem; color: var(--border-gold); margin-bottom: 16px; }
+  .drop-popup-items { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+  .drop-popup-item {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--bg-card); border: 1px solid var(--border-bronze);
+    padding: 10px 14px; border-radius: 6px; text-align: left;
+    animation: itemPop 0.4s ease both;
+  }
+  .drop-popup-item.rarity-rare  { border-color: #4a7fb9; }
+  .drop-popup-item.rarity-epic  { border-color: #9b59b6; box-shadow: 0 0 12px rgba(155,89,182,0.4); animation: epicGlow 1.5s infinite alternate, itemPop 0.4s ease both; }
+  @keyframes itemPop { from { transform: scale(0.6); opacity:0 } to { transform:scale(1); opacity:1 } }
+  @keyframes epicGlow { from { box-shadow: 0 0 6px rgba(155,89,182,0.3) } to { box-shadow: 0 0 18px rgba(155,89,182,0.8) } }
+  .drop-popup-icon { font-size: 2.2rem; flex-shrink: 0; }
+  .drop-popup-name { font-size: 0.95rem; color: var(--text-primary); margin-bottom: 3px; font-weight: bold; }
+  .drop-popup-flavor { font-size: 0.72rem; color: var(--text-dim); }
+  .drop-popup-btn {
+    background: var(--border-gold); color: var(--bg-dark); border: none;
+    padding: 10px 30px; font-size: 0.9rem; cursor: pointer; border-radius: 6px;
+    font-family: 'Noto Serif SC', serif; letter-spacing: 1px;
+  }
+  .drop-popup-btn:hover { opacity: 0.9; }
+
+  /* 星星特效粒子 */
+  .sparkle {
+    position: fixed; pointer-events: none; z-index: 400; font-size: 1.4rem;
+    animation: sparkleFly 1s ease forwards;
+  }
+  @keyframes sparkleFly {
+    0%   { transform: translate(-50%,-50%) scale(0); opacity:1 }
+    60%  { transform: translate(-50%,-50%) scale(1.4); opacity:1 }
+    100% { transform: translate(-50%,-150%) scale(0.5); opacity:0 }
+  }
+
+  /* Toast 提示 */
+  .toast {
+    position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%) translateY(20px);
+    background: rgba(30,25,20,0.95); border: 1px solid var(--border-bronze);
+    color: var(--text-primary); padding: 10px 20px; font-size: 0.85rem;
+    border-radius: 6px; z-index: 500; opacity: 0; transition: all 0.3s;
+    white-space: nowrap; pointer-events: none;
+  }
+  .toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
+
+  /* 行动页 */
+  .action-panel { display: flex; flex-direction: column; gap: 12px; }
+  .action-section { background: var(--bg-panel); border: 1px solid var(--border-bronze); padding: 12px; }
+  .section-header { font-size: 0.9rem; color: var(--border-gold); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border-bronze); }
+  .action-option {
+    background: var(--bg-card);
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-bottom: 8px;
+    border-radius: 5px;
+  }
+  .action-option:hover:not(:disabled) { border-left: 3px solid var(--border-gold); }
+  .action-option:disabled { opacity: 0.5; cursor: not-allowed; }
+  .action-option h4 { font-size: 0.9rem; margin-bottom: 3px; }
+  .action-option p { font-size: 0.75rem; color: var(--text-dim); }
+  .action-cost { font-size: 0.75rem; color: var(--border-gold); text-align: right; margin-top: 3px; }
+  .end-turn-btn {
+    background: var(--border-gold);
+    border: none;
+    color: var(--bg-dark);
+    padding: 12px;
+    font-size: 1rem;
+    font-family: 'Ma Shan Zheng', cursive;
+    cursor: pointer;
+    border-radius: 8px;
+    margin-top: 15px;
+    transition: all 0.3s;
+  }
+  .end-turn-btn:hover:not(:disabled) { transform: scale(1.02); }
+  .end-turn-btn:disabled { background: var(--text-dim); cursor: not-allowed; }
+
+  /* 成就页 */
+  .achievement-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .achievement-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-bronze);
+    padding: 12px;
+    text-align: center;
+  }
+  .achievement-card.unlocked { border-color: var(--border-gold); }
+  .achievement-icon { font-size: 1.8rem; margin-bottom: 8px; }
+  .achievement-name { font-size: 0.85rem; color: var(--border-gold); margin-bottom: 3px; }
+  .achievement-desc { font-size: 0.7rem; color: var(--text-dim); }
+
+  /* 背包页 */
+  .bag-empty { text-align:center; color:var(--text-dim); padding:40px 20px; font-size:0.9rem; }
+  .bag-grid { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+    padding-bottom: 10px;
+  }
+  .bag-grid::-webkit-scrollbar { width: 4px; }
+  .bag-grid::-webkit-scrollbar-thumb { background: var(--border-bronze); border-radius: 2px; }
+  .treasure-card {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-bronze);
+    padding: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .treasure-card:hover { border-color: var(--border-gold); transform: translateY(-2px); }
+  .treasure-card.rarity-rare  { border-color: #4a7fb9; }
+  .treasure-card.rarity-epic  { border-color: #9b59b6; box-shadow: 0 0 8px rgba(155,89,182,0.3); }
+  .treasure-icon { font-size: 1.6rem; text-align: center; margin-bottom: 4px; }
+  .treasure-name { font-size: 0.8rem; color: var(--text-primary); margin-bottom: 3px; font-weight: bold; line-height: 1.2; }
+  .treasure-rarity { font-size: 0.6rem; padding: 1px 4px; border-radius: 3px; display: inline-block; margin-bottom: 3px; }
+  .rarity-common .treasure-rarity  { background: rgba(139,115,85,0.3); color: var(--border-bronze); }
+  .rarity-rare   .treasure-rarity  { background: rgba(74,127,185,0.3); color: var(--accent-blue); }
+  .rarity-epic   .treasure-rarity  { background: rgba(155,89,182,0.3); color: #c39bd3; }
+  .treasure-desc { font-size: 0.65rem; color: var(--text-dim); margin-bottom: 4px; line-height: 1.3; }
+  .treasure-count { position: absolute; top: 6px; right: 8px; font-size: 0.7rem; color: var(--border-gold); font-weight: bold; }
+  .give-btn {
+    width: 100%; background: var(--border-gold); border: none; color: var(--bg-dark);
+    padding: 5px; font-size: 0.75rem; cursor: pointer; border-radius: 4px; margin-top: 4px;
+    font-family: 'Noto Serif SC', serif;
+  }
+  .give-btn:hover { opacity: 0.9; }
+
+  /* 赠送弹层 */
+  .give-modal {
+    position: fixed; top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.75); z-index: 200;
+    display: none; align-items: center; justify-content: center;
+    padding: 20px;
+  }
+  .give-modal.active { display: flex; }
+  .give-modal-box {
+    background: var(--bg-panel); border: 2px solid var(--border-gold);
+    padding: 20px; width: 100%; max-width: 360px;
+    max-height: 80vh; overflow-y: auto;
+  }
+  .give-modal-title { font-family: 'Ma Shan Zheng', cursive; font-size: 1.3rem; color: var(--border-gold); margin-bottom: 4px; }
+  .give-modal-desc  { font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 15px; }
+  .give-npc-list { display: flex; flex-direction: column; gap: 8px; }
+  .give-npc-btn {
+    background: var(--bg-card); border: 1px solid var(--border-bronze);
+    padding: 10px 12px; cursor: pointer; text-align: left;
+    transition: all 0.2s; border-radius: 5px;
+  }
+  .give-npc-btn:hover { border-color: var(--border-gold); }
+  .give-npc-name { font-size: 0.9rem; margin-bottom: 3px; }
+  .give-npc-preview { font-size: 0.75rem; color: var(--accent-green); }
+  .give-npc-preferred { color: var(--border-gold); font-size: 0.7rem; margin-left: 4px; }
+  .give-modal-close { margin-top: 12px; width: 100%; background: none; border: 1px solid var(--border-bronze); color: var(--text-secondary); padding: 8px; cursor: pointer; border-radius: 5px; }
+
+  /* 宝物掉落通知 */
+  .treasure-drop-notice {
+    background: linear-gradient(135deg, var(--bg-card), rgba(201,162,39,0.1));
+    border: 1px solid var(--border-gold); border-radius: 10px;
+    padding: 12px 15px; margin-top: 15px;
+  }
+  .drop-notice-title { font-size: 0.85rem; color: var(--border-gold); margin-bottom: 8px; }
+  .drop-item { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+  .drop-item-icon { font-size: 1.4rem; }
+  .drop-item-info { font-size: 0.8rem; }
+  .drop-item-name { color: var(--text-primary); }
+  .drop-item-flavor { color: var(--text-dim); font-size: 0.7rem; }
+
+  /* ===== 连连看游戏（古风配色） ===== */
+  .match-screen { padding: 20px 16px; }
+  .match-screen .m-topbar {
+    width: 100%; max-width: 480px;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 18px;
+    background: var(--bg-panel);
+    border-radius: 12px;
+    margin: 0 auto 10px;
+    border: 1px solid var(--border-bronze);
+  }
+  .match-screen .m-score { font-size: 1.1rem; font-weight: 700; color: var(--border-gold); }
+  .match-screen .m-timer { font-size: 1.1rem; font-weight: 700; letter-spacing: 1px; color: var(--text-secondary); }
+  .match-screen .m-timer.danger { color: var(--accent-red); animation: mBlink .6s infinite; }
+  @keyframes mBlink { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .match-screen .m-progress { font-size: .82rem; color: var(--text-dim); font-weight: 600; }
+  .match-screen .m-combo {
+    height: 44px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 900;
+    opacity: 0; transform: scale(0.7);
+    transition: all .2s cubic-bezier(0.34,1.56,0.64,1);
+  }
+  .match-screen .m-combo.show { opacity: 1; transform: scale(1.1); }
+  .match-screen .m-board-wrap {
+    width: 100%; max-width: 480px;
+    background: var(--bg-panel);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--border-bronze);
+    margin: 0 auto;
+  }
+  .match-screen .m-board {
+    display: flex; justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    min-height: 320px;
+  }
+  .match-screen .m-l, .match-screen .m-r {
+    display: flex; flex-direction: column;
+    min-width: 140px; max-width: 155px;
+  }
+  .match-screen .m-r { margin-left: 72px; }
+  .match-screen .m-canvas {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none; z-index: 10;
+  }
+  .match-screen .m-col-header {
+    text-align: center; font-size: .6rem; font-weight: 800;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 0 0 12px; opacity: .6;
+    color: var(--text-dim);
+  }
+  .match-screen .m-tile {
+    background: var(--bg-card);
+    border: 2px solid var(--border-bronze);
+    border-radius: 10px;
+    padding: 9px 8px;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: all .18s cubic-bezier(0.34,1.56,0.64,1);
+    position: relative; overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .match-screen .m-tile:hover {
+    border-color: var(--accent-red);
+    background: rgba(201,76,76,0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(201,76,76,0.15);
+  }
+  .match-screen .m-tile.selected {
+    border-color: var(--border-gold);
+    background: rgba(201,162,39,0.15);
+    transform: scale(1.08) translateY(-4px);
+    box-shadow: 0 6px 20px rgba(201,162,39,0.25), 0 0 0 3px rgba(201,162,39,0.1);
+  }
+  .match-screen .m-tile.matched {
+    border-color: var(--accent-green);
+    background: rgba(90,158,90,0.12);
+    opacity: .4;
+    cursor: default; pointer-events: none;
+  }
+  .match-screen .m-tile.wrong-flash {
+    animation: mShake .35s ease;
+    border-color: var(--accent-red);
+    background: rgba(201,76,76,0.2);
+  }
+  @keyframes mShake {
+    0%,100%{transform:translateX(0)} 20%{transform:translateX(-7px)} 40%{transform:translateX(7px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)}
+  }
+  .match-screen .m-tile.match-pop { animation: mPop .45s ease forwards; }
+  @keyframes mPop {
+    0%{transform:scale(1.08)} 50%{transform:scale(1.18);border-color:var(--accent-green);box-shadow:0 0 30px rgba(90,158,90,0.4)} 100%{transform:scale(1);opacity:.4}
+  }
+  .match-screen .t-fr { font-size: .82rem; font-weight: 700; color: var(--text-primary); line-height: 1.3; }
+  .match-screen .t-cn { font-size: .78rem; color: var(--text-secondary); line-height: 1.4; }
+  .match-screen .m-hint {
+    text-align: center; font-size: .82rem; color: var(--text-dim);
+    margin: 10px 0 8px; min-height: 20px; transition: color .3s;
+    max-width: 480px; margin-left: auto; margin-right: auto;
+  }
+  .match-screen .m-prog { height: 6px; background: var(--bg-card); border-radius: 99px; overflow: hidden; margin-bottom: 12px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .match-screen .m-prog-fill {
+    height: 100%;
+    background: linear-gradient(90deg,var(--accent-green),var(--border-gold),var(--accent-red));
+    background-size: 200% 100%;
+    border-radius: 99px;
+    transition: width .4s cubic-bezier(0.34,1.56,0.64,1);
+    animation: mGradMove 2s linear infinite;
+  }
+  @keyframes mGradMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+  .match-screen .m-coin-pop {
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2rem; font-weight: 900;
+    color: var(--border-gold);
+    pointer-events: none;
+    animation: mCoinRise .9s ease forwards;
+    z-index: 100;
+  }
+  @keyframes mCoinRise {
+    0%{opacity:1;transform:translate(-50%,-50%) scale(.5)}
+    60%{opacity:1;transform:translate(-50%,-80%) scale(1.2)}
+    100%{opacity:0;transform:translate(-50%,-120%) scale(.9)}
+  }
+  .match-screen .m-overlay {
+    position: fixed; inset: 0;
+    background: rgba(13,11,8,0.92);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    z-index: 200;
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s;
+  }
+  .match-screen .m-overlay.show { opacity: 1; pointer-events: all; }
+  .match-screen .m-overlay-panel {
+    background: var(--bg-panel);
+    border: 2px solid var(--border-gold);
+    border-radius: 16px;
+    padding: 32px 40px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(201,162,39,0.15), inset 0 0 20px rgba(201,162,39,0.03);
+    max-width: 360px;
+  }
+  .match-screen .m-overlay-icon { font-size: 4rem; margin-bottom: 12px; }
+  .match-screen .m-overlay-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 8px; color: var(--border-gold); font-family: 'Ma Shan Zheng', cursive; }
+  .match-screen .m-overlay-sub { font-size: .9rem; color: var(--text-secondary); margin-bottom: 24px; }
+  .match-screen .m-overlay-btn {
+    background: var(--border-gold); color: var(--bg-dark);
+    border: none; border-radius: 10px;
+    padding: 12px 32px; font-size: 1rem; font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .match-screen .m-overlay-btn:hover {
+    background: #e8b82e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(201,162,39,0.3);
+  }
+  .match-screen .m-back-btn {
+    display: block;
+    background: var(--bg-panel); color: var(--text-dim);
+    border: 1px solid var(--border-bronze); border-radius: 10px;
+    padding: 10px 20px; font-size: .85rem; cursor: pointer;
+    margin: 12px auto 0;
+    max-width: 480px;
+  }
+
+  /* ===== 反向题标签 ===== */
+  .reverse-badge { display: inline-block; background: rgba(74,127,185,0.2); color: var(--accent-blue); font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; margin-bottom: 8px; }
+
+  /* ===== 词汇本 ===== */
+  .vocab-card { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-bottom: 1px solid rgba(201,162,39,0.15); }
+  .vocab-french { font-size: 1rem; color: var(--gold, var(--border-gold)); font-weight: 600; }
+  .vocab-meaning { font-size: 0.9rem; color: var(--text-secondary); }
+  .vocab-stats { font-size: 0.8rem; color: var(--text-dim); }
+  .vocab-box { color: var(--border-gold); font-size: 0.75rem; }
+  .vocab-sub-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .vocab-sub-tab { padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; background: rgba(201,162,39,0.1); color: var(--text-secondary); border: 1px solid transparent; transition: all 0.3s; }
+  .vocab-sub-tab.active { background: var(--border-gold); color: var(--bg-dark); border-color: var(--border-gold); }
+  .vocab-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; text-align: center; }
+  .vocab-summary-item { background: rgba(201,162,39,0.08); border-radius: 10px; padding: 12px 8px; }
+  .vocab-summary-number { font-size: 1.5rem; font-weight: bold; color: var(--border-gold); }
+  .vocab-summary-label { font-size: 0.8rem; color: var(--text-dim); margin-top: 4px; }
+  .vocab-list { max-height: calc(100vh - 360px); overflow-y: auto; background: var(--bg-panel); border: 1px solid var(--border-bronze); border-radius: 8px; }
+  .vocab-list::-webkit-scrollbar { width: 4px; }
+  .vocab-list::-webkit-scrollbar-thumb { background: var(--border-bronze); border-radius: 2px; }
+  .vocab-group-title { font-family: 'Ma Shan Zheng', cursive; font-size: 1rem; color: var(--border-gold); padding: 10px 14px; background: rgba(201,162,39,0.05); border-bottom: 1px solid rgba(201,162,39,0.15); }
+
+  /* ===== 商店弹窗 ===== */
+  .shop-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--bg-card); border: 1px solid var(--border-bronze); border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: all 0.2s; }
+  .shop-item:hover { border-color: var(--border-gold); transform: translateY(-1px); }
+  .shop-item.cant-afford { opacity: 0.5; cursor: not-allowed; }
+  .shop-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .shop-info { flex: 1; }
+  .shop-name { font-size: 0.9rem; color: var(--text-primary); font-weight: 600; margin-bottom: 2px; }
+  .shop-desc { font-size: 0.75rem; color: var(--text-dim); }
+  .shop-price { font-size: 0.85rem; color: var(--border-gold); font-weight: 600; white-space: nowrap; }
+
+  /* ===== 发音按钮 ===== */
+  .speak-btn { background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 4px 8px; opacity: 0.7; transition: opacity 0.3s; }
+  .speak-btn:hover { opacity: 1; }
+
+  /* ===== 提示按钮 ===== */
+  .hint-btn { background: rgba(201,162,39,0.15); border: 1px solid var(--border-gold); color: var(--border-gold); padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; margin-top: 12px; transition: all 0.3s; }
+  .hint-btn:hover { background: rgba(201,162,39,0.3); }
+
+  /* ===== 1a. 标题页粒子/火星背景 ===== */
+  #titleScreen { position: relative; overflow: hidden; }
+  #titleScreen::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(1px 1px at 20% 30%, rgba(201,162,39,0.4), transparent),
+      radial-gradient(1px 1px at 60% 70%, rgba(201,162,39,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 80% 20%, rgba(201,162,39,0.5), transparent),
+      radial-gradient(1px 1px at 40% 80%, rgba(255,180,50,0.3), transparent);
+    background-size: 200px 200px, 300px 300px, 250px 250px, 350px 350px;
+    animation: sparkle-drift 20s linear infinite;
+  }
+  @keyframes sparkle-drift {
+    0% { background-position: 0 0, 0 0, 0 0, 0 0; }
+    100% { background-position: 200px 400px, -300px 300px, 150px 500px, -200px 350px; }
+  }
+
+  /* ===== 1b. 水墨晕染背景 ===== */
+  #titleScreen::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 600px 400px at 10% 90%, rgba(60,40,20,0.4), transparent),
+      radial-gradient(ellipse 500px 300px at 90% 10%, rgba(40,30,15,0.3), transparent),
+      radial-gradient(ellipse 800px 600px at 50% 50%, rgba(30,20,10,0.15), transparent);
+  }
+
+  /* 标题内容提升 z-index */
+  #titleScreen .game-title,
+  #titleScreen .game-subtitle,
+  #titleScreen .title-decor,
+  #titleScreen .title-buttons { position: relative; z-index: 1; }
+
+  /* ===== 1c. 标题文字进入动画 ===== */
+  .game-title { animation: title-emerge 2s ease-out; }
+  @keyframes title-emerge {
+    0% { opacity: 0; transform: translateY(-30px) scale(0.9); filter: blur(8px); }
+    60% { opacity: 0.8; filter: blur(2px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  }
+  .game-subtitle { animation: subtitle-fade 2.5s ease-out; }
+  @keyframes subtitle-fade {
+    0%, 30% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .title-decor { animation: decor-expand 2s ease-out 0.5s both; }
+  @keyframes decor-expand {
+    0% { width: 0; opacity: 0; }
+    100% { width: 200px; opacity: 1; }
+  }
+  .title-buttons { animation: buttons-rise 1.5s ease-out 1s both; }
+  @keyframes buttons-rise {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== 2a. 帛书/羊皮纸微纹理 ===== */
+  .char-overview, .char-card, .action-option, .skill-item, .relation-card, .quest-card, .action-card {
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(201,162,39,0.02) 2px, rgba(201,162,39,0.02) 4px);
+  }
+
+  /* ===== 2b. 分隔线古风化 ===== */
+  .section-title, .category-title, .section-header {
+    border-bottom: none !important;
+    background-image: linear-gradient(90deg, transparent, rgba(201,162,39,0.4) 20%, rgba(201,162,39,0.4) 80%, transparent);
+    background-size: 100% 1px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    padding-bottom: 8px;
+  }
+
+  /* ===== 2c. 自定义滚动条 ===== */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: rgba(26,21,16,0.3); }
+  ::-webkit-scrollbar-thumb { background: rgba(201,162,39,0.3); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(201,162,39,0.5); }
+
+  /* ===== 2d. Tab 栏古风化 ===== */
+  .tab-nav {
+    background: linear-gradient(180deg, rgba(26,21,16,0.98), rgba(20,16,10,0.99));
+    border-top: 1px solid rgba(201,162,39,0.2);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.4);
+  }
+  .tab-btn.active {
+    background: rgba(201,162,39,0.08);
+    text-shadow: 0 0 8px rgba(201,162,39,0.3);
+  }
+
+  /* ===== 2e. 顶栏古风增强 ===== */
+  .top-bar {
+    border-bottom: 1px solid rgba(201,162,39,0.15) !important;
+    background: linear-gradient(180deg, rgba(30,24,15,0.95), rgba(26,21,16,0.98));
+    box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+  }
+
+  /* ===== 3a. 答题正确印章 ===== */
+  .stamp-correct {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg) scale(0);
+    font-size: 4rem; color: rgba(180,40,40,0.7); font-weight: bold;
+    font-family: 'Ma Shan Zheng', cursive;
+    text-shadow: 0 0 10px rgba(180,40,40,0.3);
+    border: 4px solid rgba(180,40,40,0.5); border-radius: 8px;
+    padding: 10px 20px; pointer-events: none; z-index: 9999;
+    animation: stamp-hit 0.8s ease-out forwards;
+  }
+  @keyframes stamp-hit {
+    0% { transform: translate(-50%, -50%) rotate(-15deg) scale(2); opacity: 0.3; }
+    20% { transform: translate(-50%, -50%) rotate(-15deg) scale(1); opacity: 0.9; }
+    50% { opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) rotate(-15deg) scale(1); opacity: 0; }
+  }
+
+  /* ===== 3b. 答题错误水墨晕开 ===== */
+  .ink-wrong {
+    position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(180,40,40,0.15) 100%);
+    animation: ink-spread 0.6s ease-out forwards;
+  }
+  @keyframes ink-spread {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    100% { opacity: 0; }
+  }
+
+  /* ===== 3c. 弹窗卷轴边框 ===== */
+  .drop-popup-box, .give-modal-box {
+    border: 2px solid rgba(201,162,39,0.4);
+    box-shadow:
+      0 0 0 1px rgba(201,162,39,0.1),
+      0 0 30px rgba(201,162,39,0.1),
+      inset 0 0 60px rgba(26,21,16,0.3);
+    background-image:
+      linear-gradient(rgba(30,24,16,0.97), rgba(30,24,16,0.97)),
+      repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(201,162,39,0.015) 3px, rgba(201,162,39,0.015) 6px);
+  }
+
+  /* ===== 3d. 连连看匹配毛笔效果 ===== */
+  .match-screen .m-tile.matched {
+    animation: brush-stroke 0.5s ease-out;
+  }
+  @keyframes brush-stroke {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.1) rotate(2deg); }
+    60% { transform: scale(0.95) rotate(-1deg); }
+    100% { transform: scale(1) rotate(0); opacity: 0.3; }
+  }
+
+  /* ===== 4a. 页面切换动画 ===== */
+  .screen-enter { animation: screen-fade-in 0.4s ease-out; }
+  @keyframes screen-fade-in {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== 4c. 按钮微交互增强 ===== */
+  .start-btn, .confirm-btn, .end-turn-btn {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .start-btn:active, .confirm-btn:active, .end-turn-btn:active {
+    transform: scale(0.95);
+  }
+  .start-btn {
+    box-shadow: 0 0 0 0 rgba(201,162,39,0.4);
+    animation: gold-pulse 3s ease-in-out infinite;
+  }
+  @keyframes gold-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(201,162,39,0.4); }
+    50% { box-shadow: 0 0 20px 3px rgba(201,162,39,0.2); }
+  }
+
+  /* ===== 4d. 经验条/状态条增强 ===== */
+  .exp-fill {
+    background: linear-gradient(90deg, var(--accent-green), #d4a830) !important;
+    box-shadow: 0 0 8px rgba(201,162,39,0.3);
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+  .status-fill {
+    box-shadow: 0 0 6px rgba(201,162,39,0.2);
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* ===== 4e. 角色选择卡片悬浮光效 ===== */
+  .char-card:hover {
+    box-shadow: 0 0 25px rgba(201,162,39,0.15), 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .char-card.selected {
+    box-shadow: 0 0 30px rgba(201,162,39,0.25), 0 0 0 2px var(--border-gold);
+  }
+</style>
+</head>
+<body>
+
+<!-- 标题画面 -->
+<div id="titleScreen" class="screen title-screen active">
+  <div class="game-title">逆命：楚汉</div>
+  <div class="game-subtitle">乱世之中，逆天改命</div>
+  <div class="title-decor"></div>
+  <div class="title-buttons">
+    <button class="start-btn" onclick="showScreen('charSelect')">开始游戏</button>
+    <button class="start-btn" id="continueBtn" style="display:none" onclick="continueGame()">继续游戏</button>
+  </div>
+</div>
+
+<!-- 角色选择 -->
+<div id="charSelect" class="screen char-select">
+  <h1 class="section-title">选择你的身份</h1>
+  <div class="char-grid" id="charGrid"></div>
+  <button class="confirm-btn" id="confirmChar" disabled onclick="confirmCharacter()">确认选择</button>
+</div>
+
+<!-- 主界面 -->
+<div id="mainScreen" class="screen main-screen">
+  <div class="top-bar">
+    <div class="player-info">
+      <div class="player-avatar" id="playerAvatar">刘</div>
+      <div>
+        <div class="player-name" id="playerName">刘邦</div>
+        <div class="player-level" id="playerLevel">Lv.1 平民</div>
+      </div>
+    </div>
+    <div class="time-info">
+      <div class="action-points">
+        <span id="moneyDisplay" style="color:var(--border-gold);font-weight:600;font-size:0.8rem;margin-right:8px;">💰 100</span>
+        <span class="ap-icon">⚡</span>
+        <div class="ap-dots" id="apDots"></div>
+      </div>
+      <div class="game-date" id="gameDate">公元前209年·春</div>
+    </div>
+  </div>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" data-tab="home"><span class="tab-icon">🏠</span><span>首页</span></button>
+    <button class="tab-btn" data-tab="skills"><span class="tab-icon">⚔️</span><span>技能</span></button>
+    <button class="tab-btn" data-tab="bag"><span class="tab-icon">🎒</span><span>背包</span></button>
+    <button class="tab-btn" data-tab="relations"><span class="tab-icon">👥</span><span>人脉</span></button>
+    <button class="tab-btn" data-tab="actions"><span class="tab-icon">📋</span><span>行动</span></button>
+    <button class="tab-btn" data-tab="vocab"><span class="tab-icon">📚</span><span>词汇本</span></button>
+    <button class="tab-btn" data-tab="achievements"><span class="tab-icon">🏆</span><span>成就</span></button>
+  </nav>
+
+  <!-- 首页 -->
+  <div id="tabHome" class="tab-content active">
+    <div class="char-overview">
+      <div class="overview-title" id="overviewName">刘邦</div>
+      <div style="font-size:0.8rem;color:var(--text-secondary)">经验: <span id="currentExp">0</span> / <span id="maxExp">100</span></div>
+      <div class="exp-bar"><div class="exp-fill" id="expFill" style="width:0%"></div></div>
+      <div class="attributes" id="attributesGrid"></div>
+    </div>
+    <div class="quick-actions">
+      <div class="action-card" onclick="openQuiz()"><div class="action-icon">📖</div><div class="action-name">法语修炼</div><div class="action-cost">消耗 1 行动点</div></div>
+      <div class="action-card" onclick="doAction('visit')"><div class="action-icon">🗣️</div><div class="action-name">拜访人物</div><div class="action-cost">消耗 1 行动点</div></div>
+      <div class="action-card" onclick="doAction('explore')"><div class="action-icon">🔗</div><div class="action-name">中法互连</div><div class="action-cost">连连看 · 法语</div></div>
+    </div>
+    <div class="status-grid">
+      <div class="status-card"><div class="status-label">❤️ 体力</div><div class="status-bar"><div class="status-fill hp" id="hpBar" style="width:100%"></div></div><div class="status-value"><span id="hpValue">100</span></div></div>
+      <div class="status-card"><div class="status-label">⭐ 名声</div><div class="status-bar"><div class="status-fill fame" id="fameBar" style="width:5%"></div></div><div class="status-value"><span id="fameValue">5</span></div></div>
+      <div class="status-card"><div class="status-label">🎯 词汇</div><div class="status-bar"><div class="status-fill mp" id="wordBar" style="width:0%"></div></div><div class="status-value"><span id="wordValue">0</span></div></div>
+    </div>
+    <div class="log-panel">
+      <div class="log-title">📜 事件日志</div>
+      <div id="logContent"></div>
+    </div>
+  </div>
+
+  <!-- 技能页 -->
+  <div id="tabSkills" class="tab-content">
+    <div class="skill-category" id="skillTree"></div>
+  </div>
+
+  <!-- 人脉页 -->
+  <div id="tabRelations" class="tab-content">
+    <div class="relation-list" id="relationList"></div>
+  </div>
+
+  <!-- 行动页 -->
+  <div id="tabActions" class="tab-content">
+    <div class="action-panel" id="actionPanel"></div>
+    <button class="end-turn-btn" id="endTurnBtn" onclick="endTurn()">结束本月（不消耗行动点）</button>
+  </div>
+
+  <!-- 背包页 -->
+  <div id="tabBag" class="tab-content">
+    <div id="bagContent"></div>
+  </div>
+
+  <!-- 词汇本页 -->
+  <div id="tabVocab" class="tab-content">
+    <div id="vocabContent"></div>
+  </div>
+
+  <!-- 成就页 -->
+  <div id="tabAchievements" class="tab-content">
+    <div class="achievement-grid" id="achievementGrid"></div>
+  </div>
+</div>
+
+<!-- 宝物掉落弹层 -->
+<div id="dropPopup" class="drop-popup">
+  <div class="drop-popup-box">
+    <div class="drop-popup-title">✨ 获得宝物！</div>
+    <div class="drop-popup-items" id="dropPopupItems"></div>
+    <button class="drop-popup-btn" onclick="closeDropPopup()">收入背包</button>
+  </div>
+</div>
+
+<!-- Toast提示 -->
+<div id="toast" class="toast"></div>
+
+<!-- 赠送弹层 -->
+<div id="giveModal" class="give-modal">
+  <div class="give-modal-box">
+    <div class="give-modal-title" id="giveModalTitle">赠送宝物</div>
+    <div class="give-modal-desc" id="giveModalDesc"></div>
+    <div class="give-npc-list" id="giveNpcList"></div>
+    <button class="give-modal-close" onclick="closeGiveModal()">取消</button>
+  </div>
+</div>
+
+<!-- 商店弹窗 -->
+<div id="shopModal" class="event-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.75);z-index:200;align-items:center;justify-content:center;padding:20px;" onclick="if(event.target===this)closeShop()">
+  <div style="background:var(--bg-panel);border:2px solid var(--border-gold);padding:20px;width:100%;max-width:450px;max-height:80vh;overflow-y:auto;border-radius:8px;position:relative;">
+    <span style="position:absolute;top:10px;right:14px;cursor:pointer;font-size:1.2rem;color:var(--text-dim);" onclick="closeShop()">✕</span>
+    <div style="text-align:center;font-size:2rem;margin-bottom:8px;">🏪</div>
+    <div style="text-align:center;font-family:'Ma Shan Zheng',cursive;font-size:1.4rem;color:var(--border-gold);margin-bottom:8px;">商店</div>
+    <div id="shopMoney" style="text-align:center;color:var(--border-gold);margin-bottom:16px;">💰 100</div>
+    <div id="shopItems"></div>
+  </div>
+</div>
+
+<!-- 单词答题界面 -->
+<div id="quizScreen" class="quiz-screen">
+  <div class="quiz-header">
+    <button class="quiz-close" onclick="closeQuiz()">放弃修炼</button>
+    <div class="quiz-info">
+      <div class="quiz-progress">第 <span id="quizCurrent">1</span> / <span id="quizTotal">10</span> 题</div>
+      <div class="quiz-combo" id="quizComboDisplay"></div>
+    </div>
+    <div style="width:70px"></div>
+  </div>
+  <div class="combo-bar">
+    <div class="combo-text" id="comboText"></div>
+  </div>
+  <div class="quiz-area" id="quizArea"></div>
+</div>
+
+<!-- 连连看界面 -->
+<div id="matchScreen" class="match-screen" style="display:none; position:fixed; inset:0; background:var(--bg-dark); z-index:100; overflow-y:auto;">
+  <div class="m-topbar">
+    <div class="m-score">🪙 <span id="mScore">0</span></div>
+    <div class="m-timer" id="mTimer">⏱ 2:00</div>
+    <div class="m-progress" id="mProgress">0/6 对</div>
+  </div>
+  <div class="m-combo" id="mCombo"></div>
+  <div class="m-board-wrap">
+    <div class="m-board" id="mBoard">
+      <div class="m-l">
+        <div class="m-col-header">FRANÇAIS</div>
+        <div id="mLeft"></div>
+      </div>
+      <canvas class="m-canvas" id="mCanvas"></canvas>
+      <div class="m-r">
+        <div class="m-col-header">中文</div>
+        <div id="mRight"></div>
+      </div>
+    </div>
+  </div>
+  <div class="m-hint" id="mHint">👆 先点法语单词，再点中文翻译配对</div>
+  <div class="m-prog"><div class="m-prog-fill" id="mFill" style="width:0%"></div></div>
+  <button class="m-back-btn" id="mBackBtn">← 返回</button>
+
+  <div class="m-overlay" id="mWinOverlay">
+    <div class="m-overlay-panel">
+      <div class="m-overlay-icon">🏆</div>
+      <div class="m-overlay-title">全部配对！</div>
+      <div class="m-overlay-sub" id="mWinSub"></div>
+      <button class="m-overlay-btn" onclick="mInit()">再来一局</button>
+    </div>
+  </div>
+
+  <div class="m-overlay" id="mLoseOverlay">
+    <div class="m-overlay-panel">
+      <div class="m-overlay-icon">⏱</div>
+      <div class="m-overlay-title">时间到！</div>
+      <div class="m-overlay-sub" id="mLoseSub"></div>
+      <button class="m-overlay-btn" onclick="mInit()">再试一次</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============ 数据 ============
+const CHARACTERS = [
+  { id:'liubang', name:'刘邦', avatar:'刘', title:'亭长 → 汉高祖', desc:'善用人，知进退', stats:{武力:45,智力:75,魅力:90,统御:80}, skills:['口才','识人'], startRelations:[
+    {name:'萧何',avatar:'萧',relation:50,status:'friendly'},
+    {name:'项羽',avatar:'项',relation:20,status:'hostile'}
+  ], ability:'御人之术：魅力判定+10' },
+  { id:'xiangyu', name:'项羽', avatar:'项', title:'项梁之后 → 西楚霸王', desc:'力拔山兮，气盖世', stats:{武力:97,智力:60,魅力:75,统御:95}, skills:['剑术','武艺'], startRelations:[
+    {name:'范增',avatar:'范',relation:70,status:'trusted'},
+    {name:'刘邦',avatar:'刘',relation:20,status:'hostile'}
+  ], ability:'霸王之勇：战斗伤害+30%' },
+  { id:'hanxin', name:'韩信', avatar:'韩', title:'胯下乞食 → 兵仙', desc:'连百万之众，战必胜', stats:{武力:65,智力:88,魅力:40,统御:99}, skills:['兵法','奇谋'], startRelations:[
+    {name:'刘邦',avatar:'刘',relation:30,status:'neutral'},
+    {name:'萧何',avatar:'萧',relation:40,status:'friendly'}
+  ], ability:'兵仙天赋：统御判定+30%' },
+  { id:'zhangliang', name:'张良', avatar:'张', title:'刺杀秦始皇 → 帝师', desc:'运筹帷幄之中', stats:{武力:30,智力:98,魅力:70,统御:65}, skills:['兵法','识人'], startRelations:[
+    {name:'刘邦',avatar:'刘',relation:60,status:'friendly'},
+    {name:'韩信',avatar:'韩',relation:50,status:'neutral'}
+  ], ability:'帝王之师：谋略判定+20%' }
+];
+
+const ALL_SKILLS = {
+  '武艺系': [
+    {id:'sword',name:'剑术',desc:'近战攻击',category:'wu'},
+    {id:'archery',name:'弓术',desc:'远程攻击',category:'wu'},
+    {id:'martial',name:'武艺',desc:'综合战斗',category:'wu'}
+  ],
+  '谋略系': [
+    {id:'strategy',name:'兵法',desc:'战术运用',category:'mou'},
+    {id:'insight',name:'识人',desc:'洞察人心',category:'mou'},
+    {id:'cunning',name:'奇谋',desc:'出其不意',category:'mou'}
+  ],
+  '人脉系': [
+    {id:'eloquence',name:'口才',desc:'游说能力',category:'ren'},
+    {id:'charisma',name:'魅力',desc:'个人魅力',category:'ren'},
+    {id:'network',name:'人脉',desc:'结交能力',category:'ren'}
+  ]
+};
+
+const ALL_RELATIONS = [
+  {name:'萧何',avatar:'萧'},{name:'张良',avatar:'张'},{name:'韩信',avatar:'韩'},{name:'樊哙',avatar:'樊'},
+  {name:'项羽',avatar:'项'},{name:'范增',avatar:'范'},{name:'刘邦',avatar:'刘'},{name:'项伯',avatar:'伯'},
+  {name:'英布',avatar:'英'},{name:'彭越',avatar:'彭'},{name:'陈平',avatar:'陈'},{name:'韩王信',avatar:'信'}
+];
+
+const WORD_LIBRARY = [
+  { french: 'Bonjour', meaning: '你好/早上好' },
+  { french: 'Bonsoir', meaning: '晚上好' },
+  { french: 'Salut', meaning: '嗨/再见（非正式）' },
+  { french: 'Au revoir', meaning: '再见' },
+  { french: 'Bonne nuit', meaning: '晚安' },
+  { french: 'Merci', meaning: '谢谢' },
+  { french: 'Merci beaucoup', meaning: '非常感谢' },
+  { french: "S'il vous plaît", meaning: '请（尊称）' },
+  { french: "S'il te plaît", meaning: '请（昵称）' },
+  { french: 'Excusez-moi', meaning: '打扰一下/抱歉' },
+  { french: 'Pardon', meaning: '对不起/请原谅' },
+  { french: 'Oui', meaning: '是/对' },
+  { french: 'Non', meaning: '不/不是' },
+  { french: 'Peut-être', meaning: '也许' },
+  { french: "Je / J'", meaning: '我' },
+  { french: 'Tu', meaning: '你（非正式）' },
+  { french: 'Il', meaning: '他/它' },
+  { french: 'Elle', meaning: '她/它' },
+  { french: 'On', meaning: '我们/人们' },
+  { french: 'Nous', meaning: '我们' },
+  { french: 'Vous', meaning: '你们/您' },
+  { french: 'Ils', meaning: '他们' },
+  { french: 'Elles', meaning: '她们' },
+  { french: 'Être', meaning: '是' },
+  { french: 'Avoir', meaning: '有' },
+  { french: 'Aller', meaning: '去/将要' },
+  { french: 'Faire', meaning: '做/干' },
+  { french: 'Dire', meaning: '说' },
+  { french: 'Pouvoir', meaning: '能够' },
+  { french: 'Vouloir', meaning: '想要' },
+  { french: 'Devoir', meaning: '应该' },
+  { french: 'Savoir', meaning: '知道' },
+  { french: 'Connaître', meaning: '认识/了解' },
+  { french: 'Venir', meaning: '来' },
+  { french: 'Prendre', meaning: '拿/取/乘坐' },
+  { french: 'Donner', meaning: '给' },
+  { french: 'Parler', meaning: '说话/讲' },
+  { french: 'Manger', meaning: '吃' },
+  { french: 'Boire', meaning: '喝' },
+  { french: 'Dormir', meaning: '睡觉' },
+  { french: 'Partir', meaning: '离开' },
+  { french: 'Sortir', meaning: '出去' },
+  { french: 'Arriver', meaning: '到达' },
+  { french: 'Aimer', meaning: '喜欢/爱' },
+  { french: 'Adorer', meaning: '非常喜欢' },
+  { french: 'Détester', meaning: '讨厌' },
+  { french: 'Habiter', meaning: '居住' },
+  { french: 'Travailler', meaning: '工作' },
+  { french: 'Étudier', meaning: '学习' },
+  { french: 'Jouer', meaning: '玩/演奏' },
+  { french: 'Regarder', meaning: '看' },
+  { french: 'Écouter', meaning: '听' },
+  { french: 'Demander', meaning: '问/请求' },
+  { french: 'Chercher', meaning: '寻找' },
+  { french: 'Trouver', meaning: '找到' },
+  { french: 'Penser', meaning: '想/认为' },
+  { french: 'Croire', meaning: '相信' },
+  { french: 'Voir', meaning: '看见' },
+  { french: 'Comprendre', meaning: '理解' },
+  { french: 'Apprendre', meaning: '学习' },
+  { french: 'Mettre', meaning: '放置/穿' },
+  { french: 'Ouvrir', meaning: '打开' },
+  { french: 'Fermer', meaning: '关闭' },
+  { french: 'zéro', meaning: '0' },
+  { french: 'un/une', meaning: '1' },
+  { french: 'deux', meaning: '2' },
+  { french: 'trois', meaning: '3' },
+  { french: 'quatre', meaning: '4' },
+  { french: 'cinq', meaning: '5' },
+  { french: 'six', meaning: '6' },
+  { french: 'sept', meaning: '7' },
+  { french: 'huit', meaning: '8' },
+  { french: 'neuf', meaning: '9' },
+  { french: 'dix', meaning: '10' },
+  { french: 'onze', meaning: '11' },
+  { french: 'douze', meaning: '12' },
+  { french: 'treize', meaning: '13' },
+  { french: 'quatorze', meaning: '14' },
+  { french: 'quinze', meaning: '15' },
+  { french: 'seize', meaning: '16' },
+  { french: 'dix-sept', meaning: '17' },
+  { french: 'dix-huit', meaning: '18' },
+  { french: 'dix-neuf', meaning: '19' },
+  { french: 'vingt', meaning: '20' },
+  { french: 'vingt et un', meaning: '21' },
+  { french: 'trente', meaning: '30' },
+  { french: 'quarante', meaning: '40' },
+  { french: 'cinquante', meaning: '50' },
+  { french: 'soixante', meaning: '60' },
+  { french: 'cent', meaning: '100' },
+  { french: 'mille', meaning: '1000' },
+  { french: 'premier/première', meaning: '第一' },
+  { french: 'deuxième', meaning: '第二' },
+  { french: 'troisième', meaning: '第三' },
+  { french: 'quatrième', meaning: '第四' },
+  { french: 'cinquième', meaning: '第五' },
+  { french: 'une seconde', meaning: '秒' },
+  { french: 'une minute', meaning: '分钟' },
+  { french: 'une heure', meaning: '小时' },
+  { french: 'un jour', meaning: '天' },
+  { french: 'une semaine', meaning: '周' },
+  { french: 'un mois', meaning: '月' },
+  { french: 'un an/une année', meaning: '年' },
+  { french: "aujourd'hui", meaning: '今天' },
+  { french: 'hier', meaning: '昨天' },
+  { french: 'demain', meaning: '明天' },
+  { french: 'maintenant', meaning: '现在' },
+  { french: 'toujours', meaning: '总是' },
+  { french: 'souvent', meaning: '经常' },
+  { french: 'parfois', meaning: '有时' },
+  { french: 'rarement', meaning: '很少' },
+  { french: 'jamais', meaning: '从不' },
+  { french: 'lundi', meaning: '周一' },
+  { french: 'mardi', meaning: '周二' },
+  { french: 'mercredi', meaning: '周三' },
+  { french: 'jeudi', meaning: '周四' },
+  { french: 'vendredi', meaning: '周五' },
+  { french: 'samedi', meaning: '周六' },
+  { french: 'dimanche', meaning: '周日' },
+  { french: 'janvier', meaning: '一月' },
+  { french: 'février', meaning: '二月' },
+  { french: 'mars', meaning: '三月' },
+  { french: 'avril', meaning: '四月' },
+  { french: 'mai', meaning: '五月' },
+  { french: 'juin', meaning: '六月' },
+  { french: 'juillet', meaning: '七月' },
+  { french: 'août', meaning: '八月' },
+  { french: 'septembre', meaning: '九月' },
+  { french: 'octobre', meaning: '十月' },
+  { french: 'novembre', meaning: '十一月' },
+  { french: 'décembre', meaning: '十二月' },
+  { french: 'le printemps', meaning: '春天' },
+  { french: "l'été", meaning: '夏天' },
+  { french: "l'automne", meaning: '秋天' },
+  { french: "l'hiver", meaning: '冬天' },
+  { french: 'la famille', meaning: '家庭' },
+  { french: 'le père', meaning: '父亲' },
+  { french: 'la mère', meaning: '母亲' },
+  { french: 'les parents', meaning: '父母' },
+  { french: 'le fils', meaning: '儿子' },
+  { french: 'la fille', meaning: '女儿/女孩' },
+  { french: 'le frère', meaning: '兄弟' },
+  { french: 'la sœur', meaning: '姐妹' },
+  { french: 'le grand-père', meaning: '祖父/外祖父' },
+  { french: 'la grand-mère', meaning: '祖母/外祖母' },
+  { french: "l'oncle", meaning: '叔叔/舅舅' },
+  { french: 'la tante', meaning: '阿姨/姑姑' },
+  { french: 'le cousin', meaning: '堂/表兄弟' },
+  { french: 'la cousine', meaning: '堂/表姐妹' },
+  { french: 'le mari', meaning: '丈夫' },
+  { french: 'la femme', meaning: '妻子/女人' },
+  { french: "l'homme", meaning: '男人' },
+  { french: "l'enfant", meaning: '孩子' },
+  { french: 'le bébé', meaning: '婴儿' },
+  { french: "l'ami(e)", meaning: '朋友' },
+  { french: 'le voisin', meaning: '邻居' },
+  { french: 'la tête', meaning: '头' },
+  { french: 'les yeux', meaning: '眼睛' },
+  { french: 'le nez', meaning: '鼻子' },
+  { french: 'la bouche', meaning: '嘴巴' },
+  { french: "l'oreille", meaning: '耳朵' },
+  { french: 'la main', meaning: '手' },
+  { french: 'le pied', meaning: '脚' },
+  { french: 'le cœur', meaning: '心脏' },
+  { french: "l'estomac", meaning: '胃' },
+  { french: 'le pain', meaning: '面包' },
+  { french: 'le riz', meaning: '米饭' },
+  { french: 'les pâtes', meaning: '面条/意面' },
+  { french: 'la viande', meaning: '肉' },
+  { french: 'le poulet', meaning: '鸡肉' },
+  { french: 'le bœuf', meaning: '牛肉' },
+  { french: 'le porc', meaning: '猪肉' },
+  { french: 'le poisson', meaning: '鱼' },
+  { french: "l'œuf", meaning: '鸡蛋' },
+  { french: 'le fromage', meaning: '奶酪' },
+  { french: 'le beurre', meaning: '黄油' },
+  { french: 'le sel', meaning: '盐' },
+  { french: 'le sucre', meaning: '糖' },
+  { french: 'le poivre', meaning: '胡椒' },
+  { french: 'la pomme', meaning: '苹果' },
+  { french: 'la banane', meaning: '香蕉' },
+  { french: "l'orange", meaning: '橙子' },
+  { french: 'la fraise', meaning: '草莓' },
+  { french: 'le raisin', meaning: '葡萄' },
+  { french: 'la tomate', meaning: '西红柿' },
+  { french: 'la pomme de terre', meaning: '土豆' },
+  { french: 'la carotte', meaning: '胡萝卜' },
+  { french: "l'oignon", meaning: '洋葱' },
+  { french: 'la salade', meaning: '生菜/沙拉' },
+  { french: "l'eau", meaning: '水' },
+  { french: 'le café', meaning: '咖啡' },
+  { french: 'le thé', meaning: '茶' },
+  { french: 'le lait', meaning: '牛奶' },
+  { french: 'le jus', meaning: '果汁' },
+  { french: 'le vin', meaning: '葡萄酒' },
+  { french: 'la bière', meaning: '啤酒' },
+  { french: 'le petit-déjeuner', meaning: '早餐' },
+  { french: 'le déjeuner', meaning: '午餐' },
+  { french: 'le dîner', meaning: '晚餐' },
+  { french: 'le restaurant', meaning: '餐厅' },
+  { french: 'le menu', meaning: '菜单' },
+  { french: "l'addition", meaning: '账单' },
+  { french: 'bon appétit', meaning: '祝用餐愉快' },
+  { french: 'le vêtement', meaning: '衣服' },
+  { french: 'la chemise', meaning: '衬衫' },
+  { french: 'le pantalon', meaning: '裤子' },
+  { french: 'la robe', meaning: '连衣裙' },
+  { french: 'le manteau', meaning: '外套/大衣' },
+  { french: 'le pull', meaning: '毛衣' },
+  { french: 'les chaussures', meaning: '鞋子' },
+  { french: 'le chapeau', meaning: '帽子' },
+  { french: 'les lunettes', meaning: '眼镜' },
+  { french: 'le sac', meaning: '包' },
+  { french: 'la montre', meaning: '手表' },
+  { french: "l'écharpe", meaning: '围巾' },
+  { french: 'la maison', meaning: '房子' },
+  { french: "l'appartement", meaning: '公寓' },
+  { french: 'la cuisine', meaning: '厨房' },
+  { french: 'le salon', meaning: '客厅' },
+  { french: 'la chambre', meaning: '卧室' },
+  { french: 'la salle de bains', meaning: '浴室' },
+  { french: 'les toilettes', meaning: '卫生间' },
+  { french: 'le jardin', meaning: '花园' },
+  { french: 'le balcon', meaning: '阳台' },
+  { french: 'le lit', meaning: '床' },
+  { french: 'le canapé', meaning: '沙发' },
+  { french: 'la table', meaning: '桌子' },
+  { french: 'la chaise', meaning: '椅子' },
+  { french: "l'armoire", meaning: '衣柜' },
+  { french: "l'étagère", meaning: '书架' },
+  { french: 'le miroir', meaning: '镜子' },
+  { french: 'la lampe', meaning: '灯' },
+  { french: 'le tapis', meaning: '地毯' },
+  { french: 'le réfrigérateur', meaning: '冰箱' },
+  { french: 'le four', meaning: '烤箱' },
+  { french: 'le micro-ondes', meaning: '微波炉' },
+  { french: 'la machine à laver', meaning: '洗衣机' },
+  { french: 'la télévision', meaning: '电视' },
+  { french: "l'ordinateur", meaning: '电脑' },
+  { french: 'le téléphone', meaning: '电话' },
+  { french: 'la ville', meaning: '城市' },
+  { french: 'la rue', meaning: '街道' },
+  { french: 'la place', meaning: '广场' },
+  { french: 'le parc', meaning: '公园' },
+  { french: "l'école", meaning: '学校' },
+  { french: "l'université", meaning: '大学' },
+  { french: 'la bibliothèque', meaning: '图书馆' },
+  { french: 'le musée', meaning: '博物馆' },
+  { french: 'le cinéma', meaning: '电影院' },
+  { french: "l'hôpital", meaning: '医院' },
+  { french: 'la pharmacie', meaning: '药店' },
+  { french: 'la banque', meaning: '银行' },
+  { french: 'le supermarché', meaning: '超市' },
+  { french: 'la boulangerie', meaning: '面包店' },
+  { french: "l'aéroport", meaning: '机场' },
+  { french: 'la gare', meaning: '火车站' },
+  { french: "l'hôtel", meaning: '酒店' },
+  { french: 'la voiture', meaning: '汽车' },
+  { french: 'le bus', meaning: '公交车' },
+  { french: 'le métro', meaning: '地铁' },
+  { french: 'le train', meaning: '火车' },
+  { french: "l'avion", meaning: '飞机' },
+  { french: 'le vélo', meaning: '自行车' },
+  { french: 'le taxi', meaning: '出租车' },
+  { french: 'le bateau', meaning: '船' },
+  { french: 'ici', meaning: '这里' },
+  { french: 'là', meaning: '那里' },
+  { french: 'près de', meaning: '靠近' },
+  { french: 'loin de', meaning: '远离' },
+  { french: 'à côté de', meaning: '在旁边' },
+  { french: 'en face de', meaning: '在对面' },
+  { french: 'entre', meaning: '在...之间' },
+  { french: 'devant', meaning: '在...前面' },
+  { french: 'derrière', meaning: '在...后面' },
+  { french: 'sur', meaning: '在...上面' },
+  { french: 'sous', meaning: '在...下面' },
+  { french: 'dans', meaning: '在...里面' },
+  { french: 'à gauche', meaning: '向左' },
+  { french: 'à droite', meaning: '向右' },
+  { french: 'tout droit', meaning: '直走' },
+  { french: 'rouge', meaning: '红色' },
+  { french: 'bleu(e)', meaning: '蓝色' },
+  { french: 'vert(e)', meaning: '绿色' },
+  { french: 'jaune', meaning: '黄色' },
+  { french: 'orange', meaning: '橙色' },
+  { french: 'violet(te)', meaning: '紫色' },
+  { french: 'rose', meaning: '粉色' },
+  { french: 'noir(e)', meaning: '黑色' },
+  { french: 'blanc(he)', meaning: '白色' },
+  { french: 'gris(e)', meaning: '灰色' },
+  { french: 'marron', meaning: '棕色' },
+  { french: 'doré(e)', meaning: '金色' },
+  { french: 'argenté(e)', meaning: '银色' },
+  { french: 'grand(e)', meaning: '大的' },
+  { french: 'petit(e)', meaning: '小的' },
+  { french: 'gros(se)', meaning: '胖的/粗的' },
+  { french: 'mince', meaning: '瘦的/细的' },
+  { french: 'long(ue)', meaning: '长的' },
+  { french: 'court(e)', meaning: '短的' },
+  { french: 'haut(e)', meaning: '高的' },
+  { french: 'bas(se)', meaning: '低的' },
+  { french: 'large', meaning: '宽的' },
+  { french: 'étroit(e)', meaning: '窄的' },
+  { french: 'lourd(e)', meaning: '重的' },
+  { french: 'léger(ère)', meaning: '轻的' },
+  { french: 'vieux/vieille', meaning: '老的' },
+  { french: 'jeune', meaning: '年轻的' },
+  { french: 'nouveau/nouvelle', meaning: '新的' },
+  { french: 'ancien(ne)', meaning: '旧的/古老的' },
+  { french: 'beau/belle', meaning: '美丽的' },
+  { french: 'laid(e)', meaning: '丑的' },
+  { french: 'bon(ne)', meaning: '好的' },
+  { french: 'mauvais(e)', meaning: '坏的' },
+  { french: 'riche', meaning: '富有的' },
+  { french: 'pauvre', meaning: '贫穷的' },
+  { french: 'fort(e)', meaning: '强壮的' },
+  { french: 'faible', meaning: '虚弱的' },
+  { french: 'rapide', meaning: '快的' },
+  { french: 'lent(e)', meaning: '慢的' },
+  { french: 'chaud(e)', meaning: '热的' },
+  { french: 'froid(e)', meaning: '冷的' },
+  { french: 'propre', meaning: '干净的' },
+  { french: 'sale', meaning: '脏的' },
+  { french: 'facile', meaning: '容易的' },
+  { french: 'difficile', meaning: '困难的' },
+  { french: 'important(e)', meaning: '重要的' },
+  { french: 'possible', meaning: '可能的' },
+  { french: 'impossible', meaning: '不可能的' },
+  { french: 'content(e)', meaning: '高兴的' },
+  { french: 'triste', meaning: '悲伤的' },
+  { french: 'fatigué(e)', meaning: '累的' },
+  { french: 'malade', meaning: '生病的' },
+  { french: 'seul(e)', meaning: '单独的' },
+  { french: 'calme', meaning: '安静的' },
+  { french: 'bruyant(e)', meaning: '吵闹的' },
+  { french: 'gentil(le)', meaning: '友善的' },
+  { french: 'intelligent(e)', meaning: '聪明的' },
+  { french: 'intéressant(e)', meaning: '有趣的' },
+  { french: 'ennuyeux/euse', meaning: '无聊的' },
+  { french: 'dangereux/euse', meaning: '危险的' },
+  { french: 'libre', meaning: '空闲的/自由的' },
+  { french: 'occupé(e)', meaning: '忙碌的' },
+  { french: 'ouvert(e)', meaning: '开着的' },
+  { french: 'fermé(e)', meaning: '关着的' },
+  { french: 'plein(e)', meaning: '满的' },
+  { french: 'vide', meaning: '空的' },
+  { french: 'cher/chère', meaning: '贵的' },
+  { french: 'bon marché', meaning: '便宜的' },
+  { french: 'prêt(e)', meaning: '准备好的' },
+  { french: 'sûr(e)', meaning: '确定的/安全的' },
+  { french: 'Qui ?', meaning: '谁？' },
+  { french: 'Que / Qu\'est-ce que ?', meaning: '什么？' },
+  { french: 'Quoi ?', meaning: '什么？' },
+  { french: 'Où ?', meaning: '哪里？' },
+  { french: 'Quand ?', meaning: '什么时候？' },
+  { french: 'Pourquoi ?', meaning: '为什么？' },
+  { french: 'Comment ?', meaning: '怎么/如何？' },
+  { french: 'Combien ?', meaning: '多少？' },
+  { french: 'Quel(le) ?', meaning: '哪个？' },
+  { french: 'très', meaning: '非常' },
+  { french: 'trop', meaning: '太/过于' },
+  { french: 'assez', meaning: '足够' },
+  { french: 'beaucoup', meaning: '很多' },
+  { french: 'peu', meaning: '很少' },
+  { french: 'plus', meaning: '更多' },
+  { french: 'moins', meaning: '更少' },
+  { french: 'bien', meaning: '好' },
+  { french: 'mal', meaning: '坏/差' },
+  { french: 'vite', meaning: '快' },
+  { french: 'lentement', meaning: '慢慢地' },
+  { french: 'ensemble', meaning: '一起' },
+  { french: 'aussi', meaning: '也' },
+  { french: 'ne...pas', meaning: '不（否定）' },
+  { french: 'déjà', meaning: '已经' },
+  { french: 'encore', meaning: '还/再' },
+  { french: 'bientôt', meaning: '很快' },
+  { french: 'alors', meaning: '那么/当时' },
+  { french: 'ensuite', meaning: '然后' },
+  { french: 'puis', meaning: '然后' },
+  { french: 'et', meaning: '和' },
+  { french: 'ou', meaning: '或' },
+  { french: 'mais', meaning: '但是' },
+  { french: 'donc', meaning: '所以' },
+  { french: 'car', meaning: '因为' },
+  { french: 'parce que', meaning: '因为' },
+  { french: 'si', meaning: '如果' },
+  { french: 'comme', meaning: '如同/因为' },
+  { french: 'pour', meaning: '为了' },
+  { french: 'sans', meaning: '没有' },
+  { french: 'avec', meaning: '和...一起' },
+  { french: 'chez', meaning: '在...家' },
+  { french: 'le temps', meaning: '天气' },
+  { french: 'il fait beau', meaning: '天气好' },
+  { french: 'il fait mauvais', meaning: '天气不好' },
+  { french: 'il fait chaud', meaning: '天气热' },
+  { french: 'il fait froid', meaning: '天气冷' },
+  { french: 'il pleut', meaning: '下雨' },
+  { french: 'il neige', meaning: '下雪' },
+  { french: 'le soleil', meaning: '太阳/阳光' },
+  { french: 'la pluie', meaning: '雨' },
+  { french: 'la neige', meaning: '雪' },
+  { french: 'le vent', meaning: '风' },
+  { french: 'le nuage', meaning: '云' },
+  { french: "l'orage", meaning: '暴风雨' },
+  { french: 'le tonnerre', meaning: '雷' },
+  { french: "l'éclair", meaning: '闪电' },
+  { french: 'le brouillard', meaning: '雾' },
+  { french: 'la terre', meaning: '地球/土地' },
+  { french: 'le monde', meaning: '世界' },
+  { french: 'le pays', meaning: '国家' },
+  { french: 'la campagne', meaning: '乡村' },
+  { french: 'la mer', meaning: '海' },
+  { french: "l'océan", meaning: '海洋' },
+  { french: 'la rivière', meaning: '河流' },
+  { french: 'le lac', meaning: '湖' },
+  { french: 'la montagne', meaning: '山' },
+  { french: 'la forêt', meaning: '森林' },
+  { french: "l'arbre", meaning: '树' },
+  { french: 'la fleur', meaning: '花' },
+  { french: "l'herbe", meaning: '草' },
+  { french: 'le ciel', meaning: '天空' },
+  { french: 'la lune', meaning: '月亮' },
+  { french: "l'étoile", meaning: '星星' },
+  { french: "l'animal", meaning: '动物' },
+  { french: 'le chat', meaning: '猫' },
+  { french: 'le chien', meaning: '狗' },
+  { french: "l'oiseau", meaning: '鸟' },
+  { french: 'la souris', meaning: '老鼠' },
+  { french: 'le lapin', meaning: '兔子' },
+  { french: 'le cheval', meaning: '马' },
+  { french: 'la vache', meaning: '奶牛' },
+  { french: 'le mouton', meaning: '绵羊' },
+  { french: 'le cochon', meaning: '猪' },
+  { french: 'la poule', meaning: '母鸡' },
+  { french: 'le canard', meaning: '鸭子' },
+  { french: "l'oie", meaning: '鹅' },
+  { french: 'le lion', meaning: '狮子' },
+  { french: 'le tigre', meaning: '老虎' },
+  { french: "l'éléphant", meaning: '大象' },
+  { french: 'le singe', meaning: '猴子' },
+  { french: "l'ours", meaning: '熊' },
+  { french: 'le loup', meaning: '狼' },
+  { french: 'le serpent', meaning: '蛇' },
+  { french: 'la grenouille', meaning: '青蛙' },
+  { french: "l'insecte", meaning: '昆虫' },
+  { french: "l'abeille", meaning: '蜜蜂' },
+  { french: 'le papillon', meaning: '蝴蝶' },
+  { french: 'le métier', meaning: '职业' },
+  { french: 'le travail', meaning: '工作' },
+  { french: 'le patron/la patronne', meaning: '老板' },
+  { french: 'le professeur', meaning: '教师' },
+  { french: 'le médecin', meaning: '医生' },
+  { french: "l'infirmier(ère)", meaning: '护士' },
+  { french: 'le policier', meaning: '警察' },
+  { french: 'le pompier', meaning: '消防员' },
+  { french: 'le cuisinier', meaning: '厨师' },
+  { french: 'le serveur/la serveuse', meaning: '服务员' },
+  { french: "l'ingénieur", meaning: '工程师' },
+  { french: "l'artiste", meaning: '艺术家' },
+  { french: 'le journaliste', meaning: '记者' },
+  { french: 'le pilote', meaning: '飞行员' },
+  { french: "l'agriculteur", meaning: '农民' },
+  { french: "l'étudiant(e)", meaning: '学生' },
+  { french: 'la retraite', meaning: '退休' },
+  { french: 'le magasin', meaning: '商店' },
+  { french: 'la boutique', meaning: '小店/精品店' },
+  { french: 'le marché', meaning: '市场' },
+  { french: 'la caisse', meaning: '收银台' },
+  { french: 'le prix', meaning: '价格' },
+  { french: 'gratuit(e)', meaning: '免费的' },
+  { french: 'la réduction', meaning: '折扣' },
+  { french: 'payer', meaning: '付款' },
+  { french: "l'argent", meaning: '钱' },
+  { french: "l'euro", meaning: '欧元' },
+  { french: 'le billet', meaning: '纸币/票' },
+  { french: 'la carte bancaire', meaning: '银行卡' },
+  { french: 'le ticket', meaning: '小票/票' },
+  { french: 'le reçu', meaning: '收据' },
+  { french: 'acheter', meaning: '购买' },
+  { french: 'vendre', meaning: '出售' },
+  { french: 'choisir', meaning: '选择' },
+  { french: 'essayer', meaning: '试穿' },
+  { french: 'porter', meaning: '穿戴' },
+  { french: 'rendre', meaning: '归还/退货' },
+  { french: 'le cadeau', meaning: '礼物' },
+  { french: 'la boîte', meaning: '盒子' },
+  { french: 'la bouteille', meaning: '瓶子' },
+  { french: 'la tasse', meaning: '杯子' },
+  { french: "l'assiette", meaning: '盘子' },
+  { french: 'le couteau', meaning: '刀' },
+  { french: 'la fourchette', meaning: '叉子' },
+  { french: 'la cuillère', meaning: '勺子' },
+  { french: 'la santé', meaning: '健康' },
+  { french: 'la maladie', meaning: '疾病' },
+  { french: 'la douleur', meaning: '疼痛' },
+  { french: 'la fièvre', meaning: '发烧' },
+  { french: 'la toux', meaning: '咳嗽' },
+  { french: 'le rhume', meaning: '感冒' },
+  { french: 'le médicament', meaning: '药物' },
+  { french: "l'urgence", meaning: '急诊' },
+  { french: 'le sport', meaning: '运动' },
+  { french: 'le football', meaning: '足球' },
+  { french: 'le basket', meaning: '篮球' },
+  { french: 'le tennis', meaning: '网球' },
+  { french: 'la natation', meaning: '游泳' },
+  { french: 'le yoga', meaning: '瑜伽' },
+  { french: 'le judo', meaning: '柔道' },
+  { french: 'le karaté', meaning: '空手道' },
+  { french: 'la boxe', meaning: '拳击' },
+  { french: 'le ski', meaning: '滑雪' },
+  { french: 'la voile', meaning: '帆船' },
+  { french: "l'équitation", meaning: '骑马' },
+  { french: 'le jeu', meaning: '游戏' },
+  { french: "s'amuser", meaning: '娱乐' },
+  { french: 'se détendre', meaning: '放松' },
+  { french: 'se reposer', meaning: '休息' },
+  { french: 'lire', meaning: '阅读' },
+  { french: 'écrire', meaning: '写作' },
+  { french: 'dessiner', meaning: '画画' },
+  { french: 'chanter', meaning: '唱歌' },
+  { french: 'danser', meaning: '跳舞' },
+  { french: 'photographier', meaning: '拍照' },
+  { french: 'voyager', meaning: '旅行' },
+  { french: 'cuisiner', meaning: '烹饪' },
+  { french: "Je m'appelle...", meaning: '我叫...' },
+  { french: "J'ai ... ans.", meaning: '我...岁。' },
+  { french: 'Je suis chinois(e).', meaning: '我是中国人。' },
+  { french: "J'habite à...", meaning: '我住在...' },
+  { french: 'Je travaille comme...', meaning: '我的工作是...' },
+  { french: 'Je suis étudiant(e).', meaning: '我是学生。' },
+  { french: 'Enchanté(e).', meaning: '很高兴认识你。' },
+  { french: 'Comment vous appelez-vous ?', meaning: '您叫什么名字？' },
+  { french: 'Quel âge avez-vous ?', meaning: '您多大了？' },
+  { french: "D'où venez-vous ?", meaning: '您来自哪里？' },
+  { french: 'Ça va ? / Comment ça va ?', meaning: '你好吗？' },
+  { french: 'Ça va bien, merci.', meaning: '我很好，谢谢。' },
+  { french: "Qu'est-ce que tu fais ?", meaning: '你在做什么？' },
+  { french: 'Je ne comprends pas.', meaning: '我不明白。' },
+  { french: 'Je ne sais pas.', meaning: '我不知道。' },
+  { french: "Comment dit-on ... en français ?", meaning: '...用法语怎么说？' },
+  { french: 'Je parle un peu français.', meaning: '我会说一点法语。' },
+  { french: 'Je ne parle pas français.', meaning: '我不会说法语。' },
+  { french: "Pouvez-vous m'aider ?", meaning: '您能帮助我吗？' },
+  { french: "J'ai besoin d'aide.", meaning: '我需要帮助。' },
+  { french: 'Où sont les toilettes ?', meaning: '洗手间在哪里？' },
+  { french: 'Comment aller à... ?', meaning: '怎么去...？' },
+  { french: "C'est loin d'ici ?", meaning: '离这里远吗？' },
+  { french: 'Je suis perdu(e).', meaning: '我迷路了。' },
+  { french: 'Au secours !', meaning: '救命！' },
+  { french: 'Une table pour deux, s\'il vous plaît.', meaning: '请给我一张两人桌。' },
+  { french: 'Je voudrais commander.', meaning: '我想点餐。' },
+  { french: "Qu'est-ce que vous recommandez ?", meaning: '您推荐什么？' },
+  { french: "L'addition, s'il vous plaît.", meaning: '请结账。' },
+  { french: 'C\'était délicieux.', meaning: '很好吃。' },
+  { french: 'Combien ça coûte ?', meaning: '这个多少钱？' },
+  { french: "C'est trop cher.", meaning: '太贵了。' },
+  { french: 'Je le/la prends.', meaning: '我买这个。' },
+  { french: 'Quelle heure est-il ?', meaning: '现在几点了？' },
+  { french: 'Il est midi.', meaning: '现在是中午12点' },
+  { french: 'Il est minuit.', meaning: '现在是午夜12点' },
+  { french: 'Tout de suite', meaning: '立刻' },
+  { french: 'la France', meaning: '法国' },
+  { french: 'Paris', meaning: '巴黎' },
+  { french: "l'Europe", meaning: '欧洲' },
+  { french: "l'Asie", meaning: '亚洲' },
+  { french: "l'Amérique", meaning: '美洲' },
+  { french: "l'Afrique", meaning: '非洲' },
+  { french: "l'Océanie", meaning: '大洋洲' },
+  { french: 'la guerre', meaning: '战争' },
+  { french: 'la paix', meaning: '和平' },
+  { french: "l'histoire", meaning: '历史' },
+  { french: 'la politique', meaning: '政治' },
+  { french: "l'économie", meaning: '经济' },
+  { french: 'la culture', meaning: '文化' },
+  { french: "l'amour", meaning: '爱情' },
+  { french: "l'amitié", meaning: '友谊' },
+  { french: 'le voyage', meaning: '旅行' },
+  { french: "l'expérience", meaning: '经验/经历' },
+  { french: 'le problème', meaning: '问题' },
+  { french: 'la solution', meaning: '解决方案' },
+  { french: "l'idée", meaning: '主意' },
+  { french: 'la règle', meaning: '规则' },
+  { french: 'la liberté', meaning: '自由' },
+  { french: 'la chance', meaning: '运气/机会' },
+  { french: 'le danger', meaning: '危险' },
+  { french: "l'espérance", meaning: '希望' },
+  { french: 'la joie', meaning: '快乐' },
+  { french: "l'espoir", meaning: '希望' },
+  { french: 'la peur', meaning: '害怕' },
+  { french: "l'avenir", meaning: '未来' }
+];
+
+// ============ 宝物库 ============
+// 每件宝物有：id/name/icon/desc/rarity/dropCondition/effects/preferredNPCs
+// effects 里的 key：relation(对某人友好度)/fame(名声)/hp(体力)/ap(行动力)
+const TREASURES = [
+  // ── 普通(common) ──
+  { id:'peach_wine',  name:'仙桃美酒', icon:'🍑', rarity:'common',  desc:'清甜甘冽，人见人爱',
+    dropCond:'correct>=5',
+    effects:{ relation:+2 }, fameBonus:0, hpBonus:0, apBonus:0,
+    preferredNPCs:['萧何','樊哙','刘邦'],
+    flavorText:'赠与挚友，关系小增' },
+  { id:'sword_manual',name:'剑谱残卷', icon:'📜', rarity:'common',  desc:'残缺的剑术秘籍',
+    dropCond:'correct>=5',
+    effects:{ relation:+1 }, fameBonus:0, hpBonus:1, apBonus:0,
+    preferredNPCs:['项羽','韩信','樊哙'],
+    flavorText:'武将最爱，友好度+，顺带恢复体力' },
+  { id:'grain',       name:'余粮米袋', icon:'🌾', rarity:'common',  desc:'乱世粮食，价比黄金',
+    dropCond:'correct>=4',
+    effects:{ relation:+1 }, fameBonus:1, hpBonus:0, apBonus:0,
+    preferredNPCs:['萧何','陈平'],
+    flavorText:'赠给谋士，提升名声' },
+
+  // ── 稀有(rare) ──
+  { id:'jade_pendant', name:'和田玉佩', icon:'💎', rarity:'rare',   desc:'传世玉佩，温润如君子',
+    dropCond:'combo>=5',
+    effects:{ relation:+3 }, fameBonus:1, hpBonus:0, apBonus:0,
+    preferredNPCs:['张良','项伯','韩王信'],
+    flavorText:'赠给贵族，友好度大增+名声' },
+  { id:'strategy_book',name:'孙子兵法', icon:'📕', rarity:'rare',   desc:'兵家圣典，谋略之源',
+    dropCond:'combo>=5',
+    effects:{ relation:+2 }, fameBonus:2, hpBonus:0, apBonus:0,
+    preferredNPCs:['韩信','张良','范增'],
+    flavorText:'谋士必爱，名声大涨' },
+  { id:'elixir',       name:'灵芝仙草', icon:'🌿', rarity:'rare',   desc:'传说中的仙草，延年益寿',
+    dropCond:'rate>=80',
+    effects:{ relation:+2 }, fameBonus:0, hpBonus:3, apBonus:0,
+    preferredNPCs:['刘邦','项羽'],
+    flavorText:'恢复体力最佳，适合赠给武将' },
+  { id:'bronze_seal',  name:'铜制印玺', icon:'🏷️', rarity:'rare',   desc:'地方权贵的身份象征',
+    dropCond:'rate>=70',
+    effects:{ relation:+2 }, fameBonus:2, hpBonus:0, apBonus:0,
+    preferredNPCs:['英布','彭越','韩王信'],
+    flavorText:'赠给诸侯，名声暴涨' },
+
+  // ── 史诗(epic) ──
+  { id:'liuma',        name:'追风宝马', icon:'🐎', rarity:'epic',   desc:'日行千里，战场无敌',
+    dropCond:'combo>=10',
+    effects:{ relation:+4 }, fameBonus:2, hpBonus:0, apBonus:1,
+    preferredNPCs:['项羽','韩信','英布'],
+    flavorText:'赠给猛将，行动力+1！' },
+  { id:'swords_pair',  name:'干将莫邪', icon:'⚔️', rarity:'epic',   desc:'传说中的一对宝剑',
+    dropCond:'combo>=10',
+    effects:{ relation:+3 }, fameBonus:3, hpBonus:0, apBonus:0,
+    preferredNPCs:['项羽','樊哙','韩信'],
+    flavorText:'赠给战神，友好度飞升' },
+  { id:'gold_token',   name:'虎符金令', icon:'🏅', rarity:'epic',   desc:'调兵遣将的最高令牌',
+    dropCond:'perfect',
+    effects:{ relation:+4 }, fameBonus:3, hpBonus:0, apBonus:1,
+    preferredNPCs:['萧何','张良','陈平'],
+    flavorText:'全题正确才能获得！赠后名声+行动力双丰收' },
+  { id:'rest_scroll',  name:'养生奇书', icon:'📗', rarity:'epic',   desc:'道家养生秘法，气血双补',
+    dropCond:'rate>=90',
+    effects:{ relation:+2 }, fameBonus:0, hpBonus:5, apBonus:1,
+    preferredNPCs:['刘邦','张良'],
+    flavorText:'超高正确率奖励，体力+行动力' },
+];
+
+// 根据答题结果决定掉落哪个宝物（最多2件）
+function rollTreasureDrops(correct, total, combo) {
+  const rate = (correct / total) * 100;
+  const isPerfect = correct === total;
+  const drops = [];
+
+  // 魅力值浮动：50魅力→+5%，100魅力→+10%，线性插值
+  const charm = Number(gameState?.charm) || 50;
+  const charmBonus = 0.05 + (charm / 100) * 0.05;
+
+  // 遍历每件宝物，记录其「带魅力加成的最终掉率」
+  const candidates = []; // { id, baseChance, finalChance }
+  TREASURES.forEach(t => {
+    let baseChance = 0;
+    switch (t.dropCond) {
+      case 'correct>=4': baseChance = correct >= 4 ? 0.5 : 0; break;
+      case 'correct>=5': baseChance = correct >= 5 ? 0.5 : 0; break;
+      case 'combo>=5':  baseChance = combo >= 5  ? 0.4 : 0; break;
+      case 'combo>=10': baseChance = combo >= 10 ? 0.35 : 0; break;
+      case 'rate>=70':  baseChance = rate >= 70  ? 0.35 : 0; break;
+      case 'rate>=80':  baseChance = rate >= 80  ? 0.3 : 0; break;
+      case 'rate>=90':  baseChance = rate >= 90  ? 0.3 : 0; break;
+      case 'perfect':   baseChance = isPerfect   ? 0.6 : 0; break;
+    }
+    if (baseChance > 0) {
+      // 稀有度折扣：普通×1，稀有×0.5，史诗×0.25
+      const rarityMult = { common: 1, rare: 0.5, epic: 0.25 }[t.rarity] || 1;
+      const finalChance = Math.min(0.98, (baseChance + charmBonus) * rarityMult);
+      candidates.push({ id: t.id, rarity: t.rarity, baseChance, finalChance });
+    }
+  });
+
+  // ── 第一件：加权随机抽取一件 ──
+  if (candidates.length > 0) {
+    const totalWeight = candidates.reduce((s, c) => s + c.finalChance, 0);
+    let r = Math.random() * totalWeight;
+    for (const c of candidates) {
+      r -= c.finalChance;
+      if (r <= 0) { drops.push(c.id); break; }
+    }
+    // 若浮点误差没抽到，取最后一件兜底
+    if (drops.length === 0) drops.push(candidates[candidates.length - 1].id);
+
+    // ── 第二件：若抽到了，用第一件的掉率平方来决定 ──
+    if (drops.length === 1) {
+      const first = candidates.find(c => c.id === drops[0]);
+      if (first) {
+        const secondChance = first.finalChance * first.finalChance; // p²
+        if (Math.random() < secondChance) {
+          // 从剩余候选中再抽一件
+          const rest = candidates.filter(c => c.id !== drops[0]);
+          if (rest.length > 0) {
+            const r2 = Math.random() * rest.reduce((s, c) => s + c.finalChance, 0);
+            let rr = r2;
+            for (const c of rest) {
+              rr -= c.finalChance;
+              if (rr <= 0) { drops.push(c.id); break; }
+            }
+            if (drops.length === 1) drops.push(rest[rest.length - 1].id);
+          }
+        }
+      }
+    }
+  }
+
+  // 保底：correct>=4 但一件都没掉，强制给一件普通
+  if (drops.length === 0 && correct >= 4) {
+    const commons = TREASURES.filter(t => t.rarity === 'common');
+    drops.push(commons[Math.floor(Math.random() * commons.length)].id);
+  }
+
+  // 统计稀有/史诗数量（供成就判断）
+  drops.forEach(id => {
+    const t = TREASURES.find(x => x.id === id);
+    if (!t) return;
+    if (t.rarity === 'rare') gameState.rareTreasures = (gameState.rareTreasures || 0) + 1;
+    if (t.rarity === 'epic') gameState.epicTreasures = (gameState.epicTreasures || 0) + 1;
+  });
+
+  return drops;
+}
+
+const ACHIEVEMENTS = [
+  {id:'word10',icon:'📖',name:'初学乍练',desc:'掌握10个法语词汇',check:s=>s.masteredWords>=10},
+  {id:'word50',icon:'📚',name:'学富五车',desc:'掌握50个法语词汇',check:s=>s.masteredWords>=50},
+  {id:'word100',icon:'🏛️',name:'学贯古今',desc:'掌握100个法语词汇',check:s=>s.masteredWords>=100},
+  {id:'combo5',icon:'🔥',name:'连击达人',desc:'达成5连击',check:s=>s.maxCombo>=5},
+  {id:'combo10',icon:'⚡',name:'连击大师',desc:'达成10连击',check:s=>s.maxCombo>=10},
+  {id:'combo20',icon:'💫',name:'连击传说',desc:'达成20连击',check:s=>s.maxCombo>=20},
+  {id:'quiz5',icon:'🎯',name:'修炼初成',desc:'完成5次修炼',check:s=>s.quizCount>=5},
+  {id:'quiz20',icon:'⭐',name:'修炼圆满',desc:'完成20次修炼',check:s=>s.quizCount>=20},
+  {id:'perfect',icon:'💎',name:'完美修炼',desc:'一次修炼全对',check:s=>s.perfectQuiz>0},
+  {id:'level10',icon:'🎖️',name:'崭露头角',desc:'等级达到10',check:s=>s.level>=10},
+  // ── 宝物成就 ──
+  {id:'first_gift',icon:'🎁',name:'初次赠礼',desc:'第一次赠送宝物',check:s=>(s.totalGifts||0)>=1},
+  {id:'gift5',icon:'🎀',name:'礼遇天下',desc:'累计赠送5件宝物',check:s=>(s.totalGifts||0)>=5},
+  {id:'first_rare',icon:'💠',name:'奇物现世',desc:'获得第一件稀有宝物',check:s=>(s.rareTreasures||0)>=1},
+  {id:'first_epic',icon:'🌟',name:'旷世珍宝',desc:'获得第一件史诗宝物',check:s=>(s.epicTreasures||0)>=1},
+  {id:'gold_token_get',icon:'🏅',name:'天命所归',desc:'获得虎符金令（全题正确）',check:s=>(s.bag||[]).includes('gold_token')||((s.totalGifted||{})[`gold_token`]||0)>=1},
+];
+
+// ============ 游戏状态 ============
+let gameState = {};
+let selectedCharacter = null;
+const SAVE_KEY = 'defy_fate_v2_save';
+
+// 答题状态
+let quizState = {
+  questions: [],
+  current: 0,
+  correct: 0,
+  combo: 0,
+  maxCombo: 0,
+  answered: false
+};
+
+// ============ 界面控制 ============
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+    s.classList.remove('screen-enter');
+  });
+  const target = document.getElementById(id);
+  target.classList.add('active');
+  target.classList.add('screen-enter');
+}
+
+// 标签切换
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => {
+      c.classList.remove('active');
+      c.classList.remove('screen-enter');
+    });
+    btn.classList.add('active');
+    const tabEl = document.getElementById('tab' + btn.dataset.tab.charAt(0).toUpperCase() + btn.dataset.tab.slice(1));
+    tabEl.classList.add('active');
+    tabEl.classList.add('screen-enter');
+  });
+});
+
+// ============ 存档系统 ============
+function saveGame() {
+  if (!gameState || !gameState.character) return;
+  localStorage.setItem(SAVE_KEY, JSON.stringify(gameState));
+}
+
+function loadGame() {
+  const saved = localStorage.getItem(SAVE_KEY);
+  return saved ? JSON.parse(saved) : null;
+}
+
+function initTitleScreen() {
+  const saved = loadGame();
+  if (saved) {
+    document.getElementById('continueBtn').style.display = 'block';
+    document.getElementById('continueBtn').textContent = `继续游戏 (${saved.character.name} Lv.${saved.level})`;
+  }
+}
+
+function continueGame() {
+  gameState = loadGame();
+  showScreen('mainScreen');
+  updateMainUI();
+}
+
+function initCharSelect() {
+  const grid = document.getElementById('charGrid');
+  grid.innerHTML = CHARACTERS.map(c => `
+    <div class="char-card" data-id="${c.id}" onclick="selectCharacter('${c.id}')">
+      <div class="char-name">${c.name}</div>
+      <div class="char-title">${c.title}</div>
+      <div class="char-desc">${c.desc}</div>
+      <div class="char-stats">
+        ${Object.entries(c.stats).map(([k,v]) => {
+          let cls = 'd';
+          if (v >= 90) cls = 's'; else if (v >= 70) cls = 'a'; else if (v >= 50) cls = 'b'; else if (v >= 30) cls = 'c';
+          return `<span class="stat ${cls}">${k[0]}${v}</span>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectCharacter(id) {
+  selectedCharacter = CHARACTERS.find(c => c.id === id);
+  document.querySelectorAll('.char-card').forEach(c => c.classList.remove('selected'));
+  document.querySelector(`[data-id="${id}"]`).classList.add('selected');
+  document.getElementById('confirmChar').disabled = false;
+}
+
+function confirmCharacter() {
+  if (!selectedCharacter) return;
+  gameState = {
+    character: selectedCharacter,
+    charm: selectedCharacter.stats['魅力'] || 50,
+    level: 1, exp: 0, actionPoints: 4, maxActionPoints: 4,
+    turn: 1, year: 209, season: '春',
+    hp: 100, maxHp: 100, fame: 5, money: 100,
+    skills: {},
+    relations: JSON.parse(JSON.stringify(selectedCharacter.startRelations)),
+    log: [],
+    masteredWords: 0,
+    maxCombo: 0,
+    quizCount: 0,
+    perfectQuiz: 0,
+    bag: [],
+    wordStats: {},
+    hints: 0,
+    doubleXP: false,
+    nextQuizReview: false
+  };
+  ALL_SKILLS['武艺系'].forEach(s => gameState.skills[s.id] = selectedCharacter.skills.includes(s.name) ? 15 : 5);
+  ALL_SKILLS['谋略系'].forEach(s => gameState.skills[s.id] = selectedCharacter.skills.includes(s.name) ? 15 : 5);
+  ALL_SKILLS['人脉系'].forEach(s => gameState.skills[s.id] = selectedCharacter.skills.includes(s.name) ? 15 : 5);
+  ALL_RELATIONS.forEach(r => {
+    // 过滤掉与选中角色同名的 NPC
+    if (r.name === selectedCharacter.name) return;
+    if (!gameState.relations.find(gr => gr.name === r.name)) {
+      gameState.relations.push({...r, relation: 20, status: 'neutral'});
+    }
+  });
+  addLog(`你选择了${selectedCharacter.name}的身份开始游戏`);
+  addLog(`「${selectedCharacter.ability}」`);
+  showScreen('mainScreen');
+  updateMainUI();
+  saveGame();
+}
+
+function updateMainUI() {
+  const char = gameState.character;
+  document.getElementById('playerAvatar').textContent = char.avatar;
+  document.getElementById('playerName').textContent = char.name;
+  document.getElementById('playerLevel').textContent = `Lv.${gameState.level} ${getLevelTitle()}`;
+  document.getElementById('gameDate').textContent = `公元前${gameState.year}年·${gameState.season}`;
+
+  document.getElementById('moneyDisplay').textContent = '💰 ' + (gameState.money || 0);
+
+  const apDots = document.getElementById('apDots');
+  apDots.innerHTML = '';
+  for (let i = 0; i < gameState.maxActionPoints; i++) {
+    apDots.innerHTML += `<div class="ap-dot ${i < gameState.actionPoints ? 'available' : ''}"></div>`;
+  }
+
+  document.getElementById('overviewName').textContent = char.name;
+  document.getElementById('currentExp').textContent = gameState.exp;
+  document.getElementById('maxExp').textContent = getExpForLevel(gameState.level + 1);
+  document.getElementById('expFill').style.width = `${(gameState.exp / getExpForLevel(gameState.level + 1)) * 100}%`;
+
+  const attrs = document.getElementById('attributesGrid');
+  attrs.innerHTML = Object.entries(char.stats).map(([k,v]) => `<div class="attr-item"><div class="attr-name">${k[0]}</div><div class="attr-value">${v}</div></div>`).join('');
+
+  document.getElementById('hpValue').textContent = gameState.hp;
+  document.getElementById('hpBar').style.width = `${(gameState.hp / gameState.maxHp) * 100}%`;
+  document.getElementById('fameValue').textContent = gameState.fame;
+  document.getElementById('fameBar').style.width = `${Math.min(100, gameState.fame)}%`;
+  document.getElementById('wordValue').textContent = gameState.masteredWords;
+  document.getElementById('wordBar').style.width = `${Math.min(100, (gameState.masteredWords / 100) * 100)}%`;
+
+  document.getElementById('logContent').innerHTML = gameState.log.slice(-8).reverse().map(l =>
+    `<div class="log-entry"><span class="log-turn">[${l.turn}]</span>${l.text}</div>`
+  ).join('');
+
+  updateSkillUI();
+  updateRelationUI();
+  updateBagUI();
+  updateActionUI();
+  updateVocabUI();
+  updateAchievementUI();
+  document.getElementById('endTurnBtn').disabled = gameState.actionPoints <= 0;
+
+  if (gameState.actionPoints <= 0 && gameState.turn > 0) {
+    const btn = document.getElementById('endTurnBtn');
+    btn.textContent = '⏰ 行动点已用完，自动进入下月...';
+    setTimeout(() => { endTurn(); btn.textContent = '结束本月（不消耗行动点）'; }, 1500);
+  }
+}
+
+function getLevelTitle() {
+  if (gameState.level < 5) return '平民';
+  if (gameState.level < 10) return '士卒';
+  if (gameState.level < 15) return '什长';
+  if (gameState.level < 20) return '屯长';
+  if (gameState.level < 30) return '都尉';
+  return '将军';
+}
+
+function getExpForLevel(lvl) { return Math.floor(lvl * 100 * (1 + lvl * 0.1)); }
+
+function addExp(amount) {
+  if (gameState.doubleXP) { amount *= 2; gameState.doubleXP = false; }
+  gameState.exp += amount;
+  const need = getExpForLevel(gameState.level + 1);
+  while (gameState.exp >= need) {
+    gameState.exp -= need;
+    gameState.level++;
+    gameState.maxHp += 10;
+    gameState.hp = Math.min(gameState.hp + 10, gameState.maxHp);
+    addLog(`升级！现在是 Lv.${gameState.level} ${getLevelTitle()}`);
+  }
+}
+
+function addLog(text) {
+  gameState.log.push({ turn: gameState.turn, text });
+  if (gameState.log.length > 50) gameState.log.shift();
+}
+
+// ============ 技能页 ============
+function updateSkillUI() {
+  const tree = document.getElementById('skillTree');
+  tree.innerHTML = Object.entries(ALL_SKILLS).map(([cat, skills]) => `
+    <div class="skill-category">
+      <div class="category-title">${cat === '武艺系' ? '⚔️' : cat === '谋略系' ? '🧠' : '🗣️'} ${cat}</div>
+      ${skills.map(s => {
+        const level = gameState.skills[s.id] || 0;
+        return `
+          <div class="skill-item">
+            <div class="skill-info">
+              <div class="skill-name">${s.name} <span>(${s.desc})</span></div>
+              <div class="skill-level">
+                <div class="skill-bar"><div class="skill-fill ${s.category}" style="width:${level}%"></div></div>
+                <span class="skill-num">${level}/100</span>
+              </div>
+            </div>
+            <button class="train-btn" onclick="startSkillTrain('${s.id}')" ${gameState.actionPoints <= 0 || level >= 100 ? 'disabled' : ''}>修炼</button>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `).join('');
+}
+
+function startSkillTrain(skillId) {
+  if (gameState.actionPoints <= 0) return;
+  gameState.actionPoints--;
+  const skill = Object.values(ALL_SKILLS).flat().find(s => s.id === skillId);
+  gameState.lastTrainSkill = skillId;
+  gameState.lastTrainSkillName = skill.name;
+  openQuiz();
+  saveGame();
+}
+
+// ============ 人脉页 ============
+function updateRelationUI() {
+  const list = document.getElementById('relationList');
+  const hasBag = gameState.bag && gameState.bag.length > 0;
+  list.innerHTML = gameState.relations.map(r => {
+    const statusClass = r.status === 'hostile' ? 'status-hostile' : r.status === 'trusted' ? 'status-trusted' : r.status === 'friendly' ? 'status-friendly' : 'status-neutral';
+    const statusText = r.status === 'hostile' ? '敌对' : r.status === 'trusted' ? '信赖' : r.status === 'friendly' ? '友好' : '陌生';
+    // 找出背包里该人偏好的宝物
+    const preferred = hasBag ? (() => {
+      const ids = [...new Set(gameState.bag)];
+      const match = ids.find(id => { const t = TREASURES.find(x => x.id === id); return t && t.preferredNPCs.includes(r.name); });
+      return match ? TREASURES.find(x => x.id === match) : null;
+    })() : null;
+    const giftHint = preferred
+      ? `<span style="font-size:0.65rem;color:var(--border-gold);margin-left:6px;">${preferred.icon} 可赠</span>`
+      : (hasBag ? `<span style="font-size:0.65rem;color:var(--text-dim);margin-left:6px;">可赠礼</span>` : '');
+    const giftBtn = hasBag
+      ? `<button class="relation-gift-btn" onclick="openGiveModalForNpc('${r.name}')">🎁</button>`
+      : `<button class="relation-gift-btn" disabled style="opacity:0.35;cursor:not-allowed;">🎁</button>`;
+    return `
+      <div class="relation-card">
+        <div class="relation-info">
+          <span class="relation-avatar">${r.avatar}</span>
+          <div style="flex:1;">
+            <div class="relation-name">${r.name}${giftHint}</div>
+            <div class="relation-status ${statusClass}">${statusText} (${r.relation})</div>
+          </div>
+          ${giftBtn}
+        </div>
+        <div class="relation-bar"><div class="relation-fill" style="width:${r.relation}%"></div></div>
+      </div>
+    `;
+  }).join('');
+}
+
+// 从人脉页打开赠送弹层（预选NPC）
+function openGiveModalForNpc(npcName) {
+  if (!gameState.bag || gameState.bag.length === 0) {
+    showToast('背包里没有宝物，先去背单词吧！');
+    return;
+  }
+  // 构建一个以NPC为目标的选择界面
+  const modal = document.getElementById('giveModal');
+  const uniqueIds = [...new Set(gameState.bag)];
+  const npc = gameState.relations.find(r => r.name === npcName);
+
+  document.getElementById('giveModalTitle').textContent = `选择宝物赠给 ${npc?.avatar||''} ${npcName}`;
+  document.getElementById('giveModalDesc').textContent  = '选择一件宝物赠送（★偏好宝物有加成）';
+
+  document.getElementById('giveNpcList').innerHTML = uniqueIds.map(id => {
+    const t = TREASURES.find(x => x.id === id);
+    if (!t) return '';
+    const isPreferred = t.preferredNPCs.includes(npcName);
+    const extraBonus = isPreferred ? Math.floor(t.effects.relation * 0.3) : 0;
+    const total = t.effects.relation + extraBonus;
+    const cnt = gameState.bag.filter(b => b === id).length;
+    let effectDesc = [`友好度+${total}`];
+    if (t.fameBonus > 0) effectDesc.push(`名声+${t.fameBonus}`);
+    if (t.hpBonus   > 0) effectDesc.push(`体力+${t.hpBonus}`);
+    if (t.apBonus   > 0) effectDesc.push(`行动力+${t.apBonus}`);
+    const rarityColor = { common:'var(--border-bronze)', rare:'var(--accent-blue)', epic:'#c39bd3' }[t.rarity];
+    return `
+      <div class="give-npc-btn" onclick="giveItem('${id}', '${npcName}')">
+        <div class="give-npc-name" style="color:${rarityColor};">${t.icon} ${t.name} x${cnt}${isPreferred ? ' <span style="color:var(--border-gold)">★偏好</span>' : ''}</div>
+        <div class="give-npc-preview">${effectDesc.join(' · ')}${isPreferred ? '（加成！）' : ''}</div>
+      </div>
+    `;
+  }).join('');
+
+  modal.classList.add('active');
+}
+
+// ============ 行动页 ============
+function updateActionUI() {
+  const panel = document.getElementById('actionPanel');
+  panel.innerHTML = `
+    <div class="action-section">
+      <div class="section-header">🎯 本月可行动</div>
+      <div class="action-option${gameState.actionPoints <= 0 ? '" style="opacity:0.5;pointer-events:none;' : '"'} onclick="openQuiz()">
+        <h4>📖 法语修炼</h4>
+        <p>通过答题学习法语词汇</p>
+        <div class="action-cost">消耗 1 行动点</div>
+      </div>
+      <div class="action-option${gameState.actionPoints <= 0 ? '" style="opacity:0.5;pointer-events:none;' : '"'} onclick="doAction('visit')">
+        <h4>🗣️ 拜访人物</h4>
+        <p>拜访人脉中的人物</p>
+        <div class="action-cost">消耗 1 行动点</div>
+      </div>
+      <div class="action-option${gameState.actionPoints <= 0 ? '" style="opacity:0.5;pointer-events:none;' : '"'} onclick="doAction('explore')">
+        <h4>🔗 中法互连</h4>
+        <p>法语连连看，匹配单词记忆更深</p>
+        <div class="action-cost">消耗 1 行动点</div>
+      </div>
+      <div class="action-option${gameState.actionPoints <= 0 ? '" style="opacity:0.5;pointer-events:none;' : '"'} onclick="doAction('work')">
+        <h4>💰 内政工作</h4>
+        <p>处理政务，赚取金钱</p>
+        <div class="action-cost">消耗 1 行动点</div>
+      </div>
+      <div class="action-option" onclick="openShop()">
+        <h4>🏪 商店</h4>
+        <p>购买道具辅助修炼</p>
+        <div class="action-cost">不消耗行动点</div>
+      </div>
+    </div>
+  `;
+}
+
+function doAction(type) {
+  if (gameState.actionPoints <= 0) return;
+  gameState.actionPoints--;
+
+  if (type === 'visit') {
+    const person = gameState.relations[Math.floor(Math.random() * gameState.relations.length)];
+    const gain = 5 + Math.floor(Math.random() * 15);
+    person.relation = Math.min(100, person.relation + gain);
+    if (person.relation >= 80) person.status = 'trusted';
+    else if (person.relation >= 50) person.status = 'friendly';
+    else if (person.relation >= 20) person.status = 'neutral';
+    addLog(`拜访了${person.name}，关系+${gain}`);
+    addExp(10);
+  } else if (type === 'explore') {
+    // 打开连连看游戏
+    openMatchGame();
+    return; // 不执行后面的 updateMainUI，连连看结束后会处理
+  } else if (type === 'work') {
+    const gold = 30 + Math.floor(Math.random() * 20);
+    gameState.money += gold;
+    addLog(`完成内政工作，赚取${gold}金`);
+    addExp(8);
+  }
+
+  updateMainUI();
+  saveGame();
+}
+
+function endTurn() {
+  gameState.turn++;
+  gameState.actionPoints = gameState.maxActionPoints;
+  const seasons = ['春', '夏', '秋', '冬'];
+  let idx = seasons.indexOf(gameState.season);
+  gameState.season = seasons[(idx + 1) % 4];
+  if (gameState.season === '春') gameState.year--;
+  gameState.hp = Math.min(gameState.maxHp, gameState.hp + 10);
+  addLog(`进入公元前${gameState.year}年·${gameState.season}`);
+  updateMainUI();
+  saveGame();
+}
+
+// ============ 掉落弹层 / 特效 ============
+function showDropPopup(drops) {
+  if (!drops || drops.length === 0) return;
+  const container = document.getElementById('dropPopupItems');
+  const rarityLabel = { common:'普通', rare:'稀有', epic:'★ 史诗' };
+  container.innerHTML = drops.map((id, i) => {
+    const t = TREASURES.find(x => x.id === id);
+    if (!t) return '';
+    return `
+      <div class="drop-popup-item rarity-${t.rarity}" style="animation-delay:${i * 0.12}s">
+        <span class="drop-popup-icon">${t.icon}</span>
+        <div>
+          <div class="drop-popup-name">${t.name} <span style="font-size:0.7rem;font-weight:normal;color:${{common:'var(--border-bronze)',rare:'var(--accent-blue)',epic:'#c39bd3'}[t.rarity]}">[${rarityLabel[t.rarity]}]</span></div>
+          <div class="drop-popup-flavor">${t.flavorText}</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('dropPopup').classList.add('active');
+
+  // 史诗宝物触发星星特效
+  const hasEpic = drops.some(id => { const t = TREASURES.find(x=>x.id===id); return t && t.rarity === 'epic'; });
+  if (hasEpic) spawnSparkles();
+}
+
+function closeDropPopup() {
+  document.getElementById('dropPopup').classList.remove('active');
+  updateBagUI();
+  checkAchievements();
+}
+
+function spawnSparkles() {
+  const emojis = ['✨','⭐','💫','🌟','✦'];
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+  for (let i = 0; i < 12; i++) {
+    const el = document.createElement('span');
+    el.className = 'sparkle';
+    el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    const angle = (Math.PI * 2 / 12) * i;
+    const r = 60 + Math.random() * 80;
+    el.style.left = (cx + Math.cos(angle) * r) + 'px';
+    el.style.top  = (cy + Math.sin(angle) * r) + 'px';
+    el.style.animationDelay = (Math.random() * 0.3) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1200);
+  }
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+// ============ 背包系统 ============
+function updateBagUI() {
+  const container = document.getElementById('bagContent');
+  if (!gameState.bag || gameState.bag.length === 0) {
+    container.innerHTML = `<div class="bag-empty">🎒<br><br>背包空空如也<br><br>背单词后有机会获得宝物<br><span style="font-size:0.75rem;color:var(--text-dim)">答对越多、连击越高，掉落越稀有</span></div>`;
+    return;
+  }
+
+  // 合并相同宝物，统计数量
+  const countMap = {};
+  gameState.bag.forEach(id => { countMap[id] = (countMap[id] || 0) + 1; });
+  const uniqueIds = [...new Set(gameState.bag)];
+
+  container.innerHTML = `
+    <div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:12px;">共持有 ${gameState.bag.length} 件宝物</div>
+    <div class="bag-grid">
+      ${uniqueIds.map(id => {
+        const t = TREASURES.find(x => x.id === id);
+        if (!t) return '';
+        const cnt = countMap[id];
+        const rarityLabel = { common:'普通', rare:'稀有', epic:'史诗' }[t.rarity];
+        let effectDesc = [];
+        if (t.effects.relation)  effectDesc.push(`友好度+${t.effects.relation}`);
+        if (t.fameBonus > 0)     effectDesc.push(`名声+${t.fameBonus}`);
+        if (t.hpBonus   > 0)     effectDesc.push(`体力+${t.hpBonus}`);
+        if (t.apBonus   > 0)     effectDesc.push(`行动力+${t.apBonus}`);
+        return `
+          <div class="treasure-card rarity-${t.rarity}">
+            <div class="treasure-count">x${cnt}</div>
+            <div class="treasure-icon">${t.icon}</div>
+            <div class="treasure-name">${t.name}</div>
+            <div><span class="treasure-rarity">${rarityLabel}</span></div>
+            <div class="treasure-desc">${t.desc}</div>
+            <div style="font-size:0.7rem;color:var(--accent-green);margin-bottom:4px;">${effectDesc.join(' · ')}</div>
+            <button class="give-btn" onclick="openGiveModal('${id}')">🎁 赠送</button>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+}
+
+// 打开赠送弹层
+function openGiveModal(treasureId) {
+  const t = TREASURES.find(x => x.id === treasureId);
+  if (!t) return;
+
+  let effectLines = [];
+  if (t.effects.relation)  effectLines.push(`受赠者友好度 +${t.effects.relation}`);
+  if (t.fameBonus > 0)     effectLines.push(`你的名声 +${t.fameBonus}`);
+  if (t.hpBonus   > 0)     effectLines.push(`你的体力 +${t.hpBonus}`);
+  if (t.apBonus   > 0)     effectLines.push(`本月行动力 +${t.apBonus}`);
+
+  // 排序：匹配偏好的放前面
+  const sorted = [...gameState.relations].sort((a, b) => {
+    const aP = t.preferredNPCs.includes(a.name) ? -1 : 0;
+    const bP = t.preferredNPCs.includes(b.name) ? -1 : 0;
+    return aP - bP;
+  });
+
+  const modal = document.getElementById('giveModal');
+  document.getElementById('giveModalTitle').textContent = `赠送 ${t.icon} ${t.name}`;
+  document.getElementById('giveModalDesc').textContent  = effectLines.join(' | ');
+
+  document.getElementById('giveNpcList').innerHTML = sorted.map(r => {
+    const isPreferred = t.preferredNPCs.includes(r.name);
+    const extraBonus = isPreferred ? Math.floor(t.effects.relation * 0.3) : 0;
+    const total = t.effects.relation + extraBonus;
+    const preferred = isPreferred ? `<span class="give-npc-preferred">★ 最爱此物</span>` : '';
+    return `
+      <div class="give-npc-btn" onclick="giveItem('${treasureId}', '${r.name}')">
+        <div class="give-npc-name">${r.avatar} ${r.name} ${preferred}</div>
+        <div class="give-npc-preview">
+          友好度 ${r.relation} → ${Math.min(100, r.relation + total)}${isPreferred ? '（加成！）' : ''}
+          ${effectLines.slice(1).length > 0 ? ' | ' + effectLines.slice(1).join(' | ') : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  modal.classList.add('active');
+  modal._currentTreasure = treasureId;
+}
+
+function closeGiveModal() {
+  document.getElementById('giveModal').classList.remove('active');
+}
+
+// 执行赠送
+function giveItem(treasureId, npcName) {
+  const t = TREASURES.find(x => x.id === treasureId);
+  if (!t) return;
+
+  const idx = gameState.bag.indexOf(treasureId);
+  if (idx === -1) { alert('背包中没有此宝物'); closeGiveModal(); return; }
+  gameState.bag.splice(idx, 1);
+
+  const npc = gameState.relations.find(r => r.name === npcName);
+  const isPreferred = t.preferredNPCs.includes(npcName);
+  const extraBonus = isPreferred ? Math.floor(t.effects.relation * 0.3) : 0;
+  const relGain = t.effects.relation + extraBonus;
+
+  if (npc) {
+    npc.relation = Math.min(100, npc.relation + relGain);
+    if      (npc.relation >= 80) npc.status = 'trusted';
+    else if (npc.relation >= 50) npc.status = 'friendly';
+    else if (npc.relation >= 20) npc.status = 'neutral';
+  }
+
+
+  if (t.fameBonus > 0) gameState.fame += t.fameBonus;
+  if (t.hpBonus   > 0) gameState.hp   = Math.min(gameState.maxHp, gameState.hp + t.hpBonus);
+  if (t.apBonus   > 0) gameState.actionPoints = Math.min(gameState.maxActionPoints, gameState.actionPoints + t.apBonus);
+
+  // 成就统计
+  gameState.totalGifts = (gameState.totalGifts || 0) + 1;
+
+  let logMsg = `赠送「${t.name}」给${npcName}，关系+${relGain}`;
+  if (isPreferred) logMsg += '（深得欢心！）';
+  if (t.fameBonus > 0) logMsg += `，名声+${t.fameBonus}`;
+  if (t.hpBonus   > 0) logMsg += `，体力+${t.hpBonus}`;
+  if (t.apBonus   > 0) logMsg += `，行动力+${t.apBonus}`;
+  addLog(logMsg);
+  const toastParts = [`${t.icon} 赠予${npcName}，关系+${relGain}${isPreferred?' ★':''}`];
+  if (t.fameBonus > 0) toastParts.push(`名声+${t.fameBonus}`);
+  if (t.hpBonus   > 0) toastParts.push(`体力+${t.hpBonus}`);
+  if (t.apBonus   > 0) toastParts.push(`行动力+${t.apBonus}`);
+  showToast(toastParts.join('  '));
+  addExp(5 + relGain);
+
+  closeGiveModal();
+  updateMainUI();
+  updateBagUI();
+  saveGame();
+}
+
+// ============ 成就 ============
+function updateAchievementUI() {
+  const grid = document.getElementById('achievementGrid');
+  grid.innerHTML = ACHIEVEMENTS.map(a => {
+    const unlocked = a.check(gameState);
+    return `
+      <div class="achievement-card ${unlocked ? 'unlocked' : ''}">
+        <div class="achievement-icon">${a.icon}</div>
+        <div class="achievement-name">${a.name}</div>
+        <div class="achievement-desc">${a.desc}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function checkAchievements() {
+  const unlocked = ACHIEVEMENTS.filter(a => a.check(gameState));
+  if (unlocked.length > 0) {
+    updateAchievementUI();
+  }
+}
+
+// ============ Fisher-Yates 洗牌 ============
+function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// ============ 词汇分类映射 ============
+const WORD_CATEGORIES = {};
+(function buildCategories(){
+  const map = {
+    'greeting': ['Bonjour','Bonsoir','Salut','Au revoir','Bonne nuit','Merci','Merci beaucoup',"S'il vous plaît","S'il te plaît",'Excusez-moi','Pardon'],
+    'pronoun': ["Je / J'",'Tu','Il','Elle','On','Nous','Vous','Ils','Elles'],
+    'verb_core': ['Être','Avoir','Aller','Faire','Dire','Pouvoir','Vouloir','Devoir','Savoir','Connaître','Venir','Prendre','Donner','Parler'],
+    'verb_daily': ['Manger','Boire','Dormir','Partir','Sortir','Arriver','Aimer','Adorer','Détester','Habiter','Travailler','Étudier','Jouer','Regarder','Écouter','Demander','Chercher','Trouver','Penser','Croire','Voir','Comprendre','Apprendre','Mettre','Ouvrir','Fermer'],
+    'number': ['zéro','un/une','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf','vingt','vingt et un','trente','quarante','cinquante','soixante','cent','mille'],
+    'ordinal': ['premier/première','deuxième','troisième','quatrième','cinquième'],
+    'time': ['une seconde','une minute','une heure','un jour','une semaine','un mois',"un an/une année","aujourd'hui",'hier','demain','maintenant','toujours','souvent','parfois','rarement','jamais'],
+    'weekday': ['lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche'],
+    'month': ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'],
+    'season': ['le printemps',"l'été","l'automne","l'hiver"],
+    'family': ['la famille','le père','la mère','les parents','le fils','la fille','le frère','la sœur','le grand-père','la grand-mère',"l'oncle",'la tante','le cousin','la cousine','le mari','la femme',"l'homme","l'enfant",'le bébé',"l'ami(e)",'le voisin'],
+    'body': ['la tête','les yeux','le nez','la bouche',"l'oreille",'la main','le pied','le cœur',"l'estomac"],
+    'food': ['le pain','le riz','les pâtes','la viande','le poulet','le bœuf','le porc','le poisson',"l'œuf",'le fromage','le beurre','le sel','le sucre','le poivre','la pomme','la banane',"l'orange",'la fraise','le raisin','la tomate','la pomme de terre','la carotte',"l'oignon",'la salade'],
+    'drink': ["l'eau",'le café','le thé','le lait','le jus','le vin','la bière'],
+    'meal': ['le petit-déjeuner','le déjeuner','le dîner','le restaurant','le menu',"l'addition",'bon appétit'],
+    'clothing': ['le vêtement','la chemise','le pantalon','la robe','le manteau','le pull','les chaussures','le chapeau','les lunettes','le sac','la montre',"l'écharpe"],
+    'house': ['la maison',"l'appartement",'la cuisine','le salon','la chambre','la salle de bains','les toilettes','le jardin','le balcon'],
+    'furniture': ['le lit','le canapé','la table','la chaise',"l'armoire","l'étagère",'le miroir','la lampe','le tapis'],
+    'appliance': ['le réfrigérateur','le four','le micro-ondes','la machine à laver','la télévision',"l'ordinateur",'le téléphone'],
+    'place': ['la ville','la rue','la place','le parc',"l'école","l'université",'la bibliothèque','le musée','le cinéma',"l'hôpital",'la pharmacie','la banque','le supermarché','la boulangerie',"l'aéroport",'la gare',"l'hôtel"],
+    'transport': ['la voiture','le bus','le métro','le train',"l'avion",'le vélo','le taxi','le bateau'],
+    'position': ['ici','là','près de','loin de','à côté de','en face de','entre','devant','derrière','sur','sous','dans','à gauche','à droite','tout droit'],
+    'color': ['rouge','bleu(e)','vert(e)','jaune','orange','violet(te)','rose','noir(e)','blanc(he)','gris(e)','marron','doré(e)','argenté(e)'],
+    'adjective_size': ["grand(e)","petit(e)","gros(se)",'mince',"long(ue)","court(e)","haut(e)","bas(se)",'large',"étroit(e)","lourd(e)","léger(ère)"],
+    'adjective_quality': ['vieux/vieille','jeune','nouveau/nouvelle','ancien(ne)','beau/belle','laid(e)','bon(ne)','mauvais(e)','riche','pauvre','fort(e)','faible','rapide','lent(e)','chaud(e)','froid(e)','propre','sale','facile','difficile','important(e)','possible','impossible'],
+    'adjective_state': ['content(e)','triste','fatigué(e)','malade','seul(e)','calme','bruyant(e)','gentil(le)','intelligent(e)','intéressant(e)','ennuyeux/euse','dangereux/euse','libre','occupé(e)','ouvert(e)','fermé(e)','plein(e)','vide','cher/chère','bon marché','prêt(e)','sûr(e)'],
+    'question': ['Qui ?',"Que / Qu'est-ce que ?",'Quoi ?','Où ?','Quand ?','Pourquoi ?','Comment ?','Combien ?','Quel(le) ?'],
+    'adverb': ['très','trop','assez','beaucoup','peu','plus','moins','bien','mal','vite','lentement','ensemble','aussi','ne...pas','déjà','encore','bientôt','alors','ensuite','puis'],
+    'conjunction': ['et','ou','mais','donc','car','parce que','si','comme','pour','sans','avec','chez'],
+    'weather': ['le temps','il fait beau','il fait mauvais','il fait chaud','il fait froid','il pleut','il neige','le soleil','la pluie','la neige','le vent','le nuage',"l'orage",'le tonnerre',"l'éclair",'le brouillard'],
+    'nature': ['la terre','le monde','le pays','la campagne','la mer',"l'océan",'la rivière','le lac','la montagne','la forêt',"l'arbre",'la fleur',"l'herbe",'le ciel','la lune',"l'étoile"],
+    'animal': ["l'animal",'le chat','le chien',"l'oiseau",'la souris','le lapin','le cheval','la vache','le mouton','le cochon','la poule','le canard',"l'oie",'le lion','le tigre',"l'éléphant",'le singe',"l'ours",'le loup','le serpent','la grenouille',"l'insecte","l'abeille",'le papillon'],
+    'profession': ['le métier','le travail','le patron/la patronne','le professeur','le médecin',"l'infirmier(ère)",'le policier','le pompier','le cuisinier','le serveur/la serveuse',"l'ingénieur","l'artiste",'le journaliste','le pilote',"l'agriculteur","l'étudiant(e)",'la retraite'],
+    'shopping': ['le magasin','la boutique','le marché','la caisse','le prix','gratuit(e)','la réduction','payer',"l'argent","l'euro",'le billet','la carte bancaire','le ticket','le reçu','acheter','vendre','choisir','essayer','porter','rendre'],
+    'object': ['le cadeau','la boîte','la bouteille','la tasse',"l'assiette",'le couteau','la fourchette','la cuillère'],
+    'health': ['la santé','la maladie','la douleur','la fièvre','la toux','le rhume','le médicament',"l'urgence"],
+    'sport': ['le sport','le football','le basket','le tennis','la natation','le yoga','le judo','le karaté','la boxe','le ski','la voile',"l'équitation"],
+    'hobby': ['le jeu',"s'amuser",'se détendre','se reposer','lire','écrire','dessiner','chanter','danser','photographier','voyager','cuisiner'],
+    'phrase_intro': ["Je m'appelle...","J'ai ... ans.",'Je suis chinois(e).',"J'habite à...",'Je travaille comme...','Je suis étudiant(e).','Enchanté(e).','Comment vous appelez-vous ?','Quel âge avez-vous ?',"D'où venez-vous ?"],
+    'phrase_daily': ["Ça va ? / Comment ça va ?",'Ça va bien, merci.',"Qu'est-ce que tu fais ?",'Je ne comprends pas.','Je ne sais pas.','Comment dit-on ... en français ?','Je parle un peu français.','Je ne parle pas français.',"Pouvez-vous m'aider ?","J'ai besoin d'aide."],
+    'phrase_travel': ['Où sont les toilettes ?','Comment aller à... ?',"C'est loin d'ici ?",'Je suis perdu(e).','Au secours !'],
+    'phrase_restaurant': ["Une table pour deux, s'il vous plaît.",'Je voudrais commander.',"Qu'est-ce que vous recommandez ?","L'addition, s'il vous plaît.",'C\'était délicieux.'],
+    'phrase_shopping': ['Combien ça coûte ?',"C'est trop cher.",'Je le/la prends.'],
+    'phrase_time': ['Quelle heure est-il ?','Il est midi.','Il est minuit.','Tout de suite'],
+    'geography': ['la France','Paris',"l'Europe","l'Asie","l'Amérique","l'Afrique","l'Océanie"],
+    'abstract': ['la guerre','la paix',"l'histoire",'la politique',"l'économie",'la culture',"l'amour","l'amitié",'le voyage',"l'expérience",'le problème','la solution',"l'idée",'la règle','la liberté','la chance','le danger','la joie',"l'espoir",'la peur',"l'avenir"],
+    'yesno': ['Oui','Non','Peut-être'],
+  };
+  for (const [cat, words] of Object.entries(map)) {
+    words.forEach(fr => { WORD_CATEGORIES[fr] = cat; });
+  }
+})();
+
+// ============ 间隔重复：加权选词 ============
+function selectQuizWords(count = 10) {
+    const now = Date.now();
+    const stats = gameState.wordStats || {};
+
+    const weighted = WORD_LIBRARY.map(w => {
+        const s = stats[w.french] || { box: 1, seen: 0, correct: 0, wrong: 0, lastSeen: 0 };
+        let weight = 1;
+
+        // box越低权重越高（不熟的词优先）
+        weight *= (6 - s.box);
+
+        // 从未见过的词高权重
+        if (s.seen === 0) weight *= 3;
+
+        // 错误率高的词高权重
+        if (s.seen > 0) {
+            const errorRate = s.wrong / s.seen;
+            weight *= (1 + errorRate * 2);
+        }
+
+        // 长时间未见的词权重提升
+        if (s.lastSeen > 0) {
+            const hoursSince = (now - s.lastSeen) / 3600000;
+            const reviewIntervals = [1, 4, 24, 72, 168];
+            const targetInterval = reviewIntervals[Math.min(s.box - 1, 4)];
+            if (hoursSince >= targetInterval) weight *= 2;
+        }
+
+        return { word: w, weight };
+    });
+
+    return weightedSample(weighted, count);
+}
+
+function weightedSample(items, count) {
+    const result = [];
+    const pool = [...items];
+    for (let i = 0; i < count && pool.length > 0; i++) {
+        const totalWeight = pool.reduce((sum, it) => sum + it.weight, 0);
+        let r = Math.random() * totalWeight;
+        let idx = 0;
+        for (let j = 0; j < pool.length; j++) {
+            r -= pool[j].weight;
+            if (r <= 0) { idx = j; break; }
+        }
+        result.push(pool[idx].word);
+        pool.splice(idx, 1);
+    }
+    return result;
+}
+
+// ============ 错误选项生成（全库+同类优先） ============
+function getWrongOptions(correctWord, count = 3) {
+    const correctCat = WORD_CATEGORIES[correctWord.french] || '_none_';
+
+    // 优先选同类词作为干扰
+    const sameCategory = WORD_LIBRARY.filter(w =>
+        w.french !== correctWord.french &&
+        (WORD_CATEGORIES[w.french] || '_none_') === correctCat &&
+        w.meaning !== correctWord.meaning
+    );
+    shuffle(sameCategory);
+
+    // 不够的话从全库补充
+    const others = WORD_LIBRARY.filter(w =>
+        w.french !== correctWord.french &&
+        w.meaning !== correctWord.meaning &&
+        (WORD_CATEGORIES[w.french] || '_none_') !== correctCat
+    );
+    shuffle(others);
+
+    const result = [];
+    const sameCatCount = Math.min(sameCategory.length, Math.ceil(count / 2));
+    result.push(...sameCategory.slice(0, sameCatCount));
+    result.push(...others.slice(0, count - result.length));
+
+    return result.slice(0, count);
+}
+
+// ============ 单词答题系统 ============
+// 选择错题复习词
+function selectReviewWords(count = 10) {
+    const stats = gameState.wordStats || {};
+    const wrongWords = WORD_LIBRARY.filter(w => {
+        const s = stats[w.french];
+        return s && s.wrong > 0;
+    });
+    if (wrongWords.length === 0) return selectQuizWords(count);
+    shuffle(wrongWords);
+    return wrongWords.slice(0, count);
+}
+
+function openQuiz() {
+  if (gameState.actionPoints <= 0 && !gameState.lastTrainSkill) {
+    addLog('行动点不足，无法修炼');
+    return;
+  }
+  if (!gameState.lastTrainSkill) {
+    gameState.lastTrainSkill = 'strategy';
+    gameState.lastTrainSkillName = '兵法';
+    gameState.actionPoints--;
+  }
+
+  // 复习模式：商店购买复习符咒后触发
+  let words;
+  if (gameState.nextQuizReview) {
+    words = selectReviewWords(10);
+    gameState.nextQuizReview = false;
+  } else {
+    words = selectQuizWords(10);
+  }
+
+  // 为每题标记是否反向（50%概率）
+  const questions = words.map(w => ({ ...w, reverse: Math.random() < 0.5 }));
+
+  quizState = {
+    questions: questions,
+    current: 0,
+    correct: 0,
+    combo: 0,
+    maxCombo: 0,
+    answered: false
+  };
+
+  document.getElementById('quizTotal').textContent = quizState.questions.length;
+  document.getElementById('quizScreen').classList.add('active');
+  showQuestion();
+}
+
+function closeQuiz() {
+  if (confirm('确定放弃本次修炼？行动点不退还。')) {
+    document.getElementById('quizScreen').classList.remove('active');
+    gameState.lastTrainSkill = null;
+    updateMainUI();
+  }
+}
+
+function showQuestion() {
+  const q = quizState.questions[quizState.current];
+  const isReverse = q.reverse;
+  document.getElementById('quizCurrent').textContent = quizState.current + 1;
+  document.getElementById('quizComboDisplay').textContent = quizState.combo > 0 ? `🔥 ${quizState.combo}连击` : '';
+
+  const wrong = getWrongOptions(q, 3);
+  const options = shuffle([...wrong, q]);
+
+  const area = document.getElementById('quizArea');
+
+  if (isReverse) {
+    // 反向题：显示中文含义，选法语词
+    area.innerHTML = `
+      <div class="word-display">
+        <div class="reverse-badge">🔄 中→法</div>
+        <div class="word-en">${q.meaning}</div>
+        <div class="word-hint">选择正确的法语单词</div>
+      </div>
+      <div class="options-grid" id="optionsGrid"></div>
+      ${gameState.hints > 0 ? `<button class="hint-btn" id="hintBtn" onclick="useHint()">📜 提示 (<span id="hintCount">${gameState.hints}</span>)</button>` : ''}
+    `;
+    const grid = document.getElementById('optionsGrid');
+    options.forEach(o => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = o.french;
+      btn.dataset.french = o.french;
+      btn.addEventListener('click', () => answerQuiz(o.french, q.french, btn));
+      grid.appendChild(btn);
+    });
+  } else {
+    // 正向题：显示法语词，选中文含义
+    area.innerHTML = `
+      <div class="word-display">
+        <div class="word-en">${q.french} <button class="speak-btn" onclick="speakFrench('${q.french.replace(/'/g, "\\'")}')">🔊</button></div>
+        <div class="word-hint">选择正确的中文翻译</div>
+      </div>
+      <div class="options-grid" id="optionsGrid"></div>
+      ${gameState.hints > 0 ? `<button class="hint-btn" id="hintBtn" onclick="useHint()">📜 提示 (<span id="hintCount">${gameState.hints}</span>)</button>` : ''}
+    `;
+    const grid = document.getElementById('optionsGrid');
+    options.forEach(o => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = o.meaning;
+      btn.dataset.french = o.french;
+      btn.addEventListener('click', () => answerQuiz(o.meaning, q.meaning, btn));
+      grid.appendChild(btn);
+    });
+  }
+}
+
+function answerQuiz(chosen, correct, btn) {
+  if (quizState.answered) return;
+  quizState.answered = true;
+
+  const btns = document.querySelectorAll('.option-btn');
+  btns.forEach(b => b.disabled = true);
+
+  // 隐藏提示按钮
+  const hintBtn = document.getElementById('hintBtn');
+  if (hintBtn) hintBtn.style.display = 'none';
+
+  // 更新 wordStats
+  const currentQ = quizState.questions[quizState.current];
+  const isReverse = currentQ.reverse;
+  if (!gameState.wordStats) gameState.wordStats = {};
+  const wsKey = currentQ.french;
+  const ws = gameState.wordStats[wsKey] || { box: 1, seen: 0, correct: 0, wrong: 0, lastSeen: 0 };
+
+  if (chosen === correct) {
+    btn.classList.add('correct');
+    quizState.correct++;
+    quizState.combo++;
+    quizState.maxCombo = Math.max(quizState.maxCombo, quizState.combo);
+
+    ws.seen++;
+    ws.correct++;
+    ws.box = Math.min(5, ws.box + 1);
+    ws.lastSeen = Date.now();
+
+    // 答对后朗读法语词
+    speakFrench(currentQ.french);
+
+    const comboText = document.getElementById('comboText');
+    if (quizState.combo >= 10) {
+      comboText.textContent = `💫 ${quizState.combo}连击！彩虹连击！`;
+      comboText.className = 'combo-text show combo-rainbow';
+    } else if (quizState.combo >= 5) {
+      comboText.textContent = `🔥 ${quizState.combo}连击！`;
+      comboText.className = 'combo-text show combo-fire';
+    } else {
+      comboText.textContent = `✓ 答对了！`;
+      comboText.className = 'combo-text show';
+    }
+
+    // 印章效果
+    const stamp = document.createElement('div');
+    stamp.className = 'stamp-correct';
+    stamp.textContent = '善';
+    document.body.appendChild(stamp);
+    setTimeout(() => stamp.remove(), 900);
+  } else {
+    btn.classList.add('wrong');
+    if (isReverse) {
+      btns.forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+    } else {
+      btns.forEach(b => { if (b.textContent === correct) b.classList.add('correct'); });
+    }
+    quizState.combo = 0;
+
+    ws.seen++;
+    ws.wrong++;
+    ws.box = 1;
+    ws.lastSeen = Date.now();
+
+    // 答错时朗读正确的法语词
+    speakFrench(currentQ.french);
+
+    const correctDisplay = isReverse ? correct : correct;
+    document.getElementById('comboText').textContent = `✗ 正确：${correctDisplay}`;
+    document.getElementById('comboText').className = 'combo-text show';
+
+    // 水墨晕开效果
+    const inkWrong = document.createElement('div');
+    inkWrong.className = 'ink-wrong';
+    document.body.appendChild(inkWrong);
+    setTimeout(() => inkWrong.remove(), 700);
+  }
+
+  gameState.wordStats[wsKey] = ws;
+
+  document.getElementById('quizComboDisplay').textContent = quizState.combo > 0 ? `🔥 ${quizState.combo}连击` : '';
+
+  setTimeout(() => {
+    quizState.current++;
+    quizState.answered = false;
+    document.getElementById('comboText').className = 'combo-text';
+
+    if (quizState.current >= quizState.questions.length) {
+      showQuizResult();
+    } else {
+      showQuestion();
+    }
+  }, 1200);
+}
+
+function showQuizResult() {
+  const { correct, maxCombo, questions } = quizState;
+  const total = questions.length;
+  const rate = Math.round((correct / total) * 100);
+  const skillGain = Math.floor(3 + (correct / total) * 10);
+  const expGain = 20 + correct * 5 + maxCombo * 2;
+  const newWords = Math.floor(correct * 0.5);
+  const trainName = gameState.lastTrainSkillName;
+
+  gameState.skills[gameState.lastTrainSkill] = Math.min(100, (gameState.skills[gameState.lastTrainSkill] || 0) + skillGain);
+  gameState.masteredWords += newWords;
+  gameState.maxCombo = Math.max(gameState.maxCombo, maxCombo);
+  gameState.quizCount++;
+  if (correct === total) gameState.perfectQuiz++;
+
+  // ── 宝物掉落 ──
+  const drops = rollTreasureDrops(correct, total, maxCombo);
+  drops.forEach(id => { if (!gameState.bag) gameState.bag = []; gameState.bag.push(id); });
+
+  addLog(`📖 法语修炼完成：答对${correct}/${total}题，连击x${maxCombo}`);
+  addLog(`   技能「${trainName}」+${skillGain}，经验+${expGain}`);
+  if (drops.length > 0) {
+    const names = drops.map(id => TREASURES.find(t => t.id === id)?.name || id).join('、');
+    addLog(`🎁 获得宝物：${names}`);
+  }
+
+  addExp(expGain);
+  gameState.lastTrainSkill = null;
+  gameState.lastTrainSkillName = null;
+  saveGame();
+
+  // ── 结算界面（简洁版）──
+  const dropHint = drops.length > 0
+    ? `<div style="color:var(--border-gold);font-size:0.8rem;margin-top:10px;">🎁 获得 ${drops.length} 件宝物，稍后查看</div>`
+    : `<div style="font-size:0.75rem;color:var(--text-dim);margin-top:10px;">无宝物掉落（答对更多试试）</div>`;
+
+  document.getElementById('quizArea').innerHTML = `
+    <div class="quiz-result">
+      <div class="result-score">${correct}/${total}</div>
+      <div class="result-detail">
+        正确率 ${rate}% | 最高连击 🔥${maxCombo}
+        <br><br>
+        技能「${trainName}」提升 +${skillGain}
+        <br>
+        经验 +${expGain} | 词汇 +${newWords}
+      </div>
+      ${dropHint}
+      <button class="result-btn" id="resultDoneBtn">完成修炼</button>
+    </div>
+  `;
+
+  // 用事件监听器代替 onclick HTML 属性，彻底避免 JSON 注入问题
+  const doneBtn = document.getElementById('resultDoneBtn');
+  if (doneBtn) {
+    doneBtn.addEventListener('click', () => closeQuizResult(drops));
+  }
+}
+
+function closeQuizResult(drops) {
+  document.getElementById('quizScreen').classList.remove('active');
+  updateMainUI();
+  // 有宝物则弹出动画弹层
+  const safeDrops = Array.isArray(drops) ? drops.filter(Boolean) : [];
+  if (safeDrops.length > 0) {
+    setTimeout(() => showDropPopup(safeDrops), 200);
+  } else {
+    checkAchievements();
+  }
+}
+
+// ============ 连连看系统 ============
+const mState = {
+  left: [], right: [],
+  matched: 0, total: 0,
+  score: 0, combo: 0, maxCombo: 0,
+  timeLeft: 120, timer: null,
+  selected: null,
+};
+
+function openMatchGame() {
+  // 应用匹配样式到 body
+  document.body.classList.add('match-css');
+  document.getElementById('matchScreen').style.display = 'block';
+  mInit();
+}
+
+function closeMatchGame() {
+  document.getElementById('matchScreen').style.display = 'none';
+  document.body.classList.remove('match-css');
+  updateMainUI();
+  saveGame();
+}
+
+function mResizeCanvas(){
+  const board = document.getElementById('mBoard');
+  const canvas = document.getElementById('mCanvas');
+  canvas.width = board.offsetWidth;
+  canvas.height = board.offsetHeight;
+}
+
+function mInit(){
+  document.getElementById('mWinOverlay').classList.remove('show');
+  document.getElementById('mLoseOverlay').classList.remove('show');
+
+  // 从 WORD_LIBRARY 随机选 6 对
+  const pool = selectQuizWords(6);
+  mState.left = pool.map(w=>({...w, side:'left'}));
+  mState.right = shuffle([...pool]).map(w=>({...w, side:'right'}));
+  mState.matched = 0; mState.total = pool.length;
+  mState.score = 0; mState.combo = 0; mState.maxCombo = 0;
+  mState.timeLeft = 120; mState.selected = null;
+  clearInterval(mState.timer);
+
+  mRender();
+  mUpdateUI();
+  mResizeCanvas();
+  mStartTimer();
+}
+
+function mRender(){
+  const leftEl = document.getElementById('mLeft');
+  const rightEl = document.getElementById('mRight');
+  leftEl.innerHTML=''; rightEl.innerHTML='';
+
+  mState.left.forEach((item,i)=>{
+    const div = document.createElement('div');
+    div.className='m-tile';
+    div.innerHTML=`<div class="t-fr">${item.french}</div>`;
+    div.onclick=()=>mClick(div,'left',item);
+    leftEl.appendChild(div);
+  });
+
+  mState.right.forEach((item,i)=>{
+    const div = document.createElement('div');
+    div.className='m-tile';
+    div.innerHTML=`<div class="t-cn">${item.meaning}</div>`;
+    div.onclick=()=>mClick(div,'right',item);
+    rightEl.appendChild(div);
+  });
+}
+
+function mClick(el, side, item){
+  if(el.classList.contains('matched')) return;
+
+  if(mState.selected){
+    if(mState.selected.side===side){
+      mState.selected.el.classList.remove('selected');
+      if(mState.selected.el!==el){ el.classList.add('selected'); mState.selected={el,side,item}; }
+      else mState.selected=null;
+      return;
+    }
+    // 尝试匹配
+    el.classList.add('selected');
+    const ok = mState.selected.item.french===item.french;
+    if(ok){
+      const leftTile = mState.selected.el;
+      const rightTile = el;
+      el.classList.remove('selected');
+      leftTile.classList.add('match-pop');
+      rightTile.classList.add('match-pop');
+      mState.selected=null;
+      mState.matched++;
+      mState.combo++;
+      if(mState.combo>mState.maxCombo) mState.maxCombo=mState.combo;
+      // 更新 wordStats（连连看匹配成功 = 答对效果）
+      if(!gameState.wordStats) gameState.wordStats={};
+      const mwKey = item.french;
+      const mws = gameState.wordStats[mwKey] || {box:1,seen:0,correct:0,wrong:0,lastSeen:0};
+      mws.seen++; mws.correct++; mws.box=Math.min(5,mws.box+1); mws.lastSeen=Date.now();
+      gameState.wordStats[mwKey]=mws;
+      const bonus = mState.combo>=5?2:mState.combo>=3?1.5:1;
+      const coins = Math.round(10*bonus);
+      mState.score += coins;
+      mDrawLine(leftTile, rightTile, '#06d6a0');
+      mSpawnCoin('+'+coins);
+      if(mState.combo>=3) mShowCombo();
+      setTimeout(()=>{
+        leftTile.classList.remove('match-pop');
+        rightTile.classList.remove('match-pop');
+        leftTile.classList.add('matched');
+        rightTile.classList.add('matched');
+      }, 450);
+      document.getElementById('mHint').textContent='✅ '+item.french+' = '+item.meaning;
+      document.getElementById('mHint').style.color='#06d6a0';
+      speakFrench(item.french);
+      mUpdateUI();
+      if(mState.matched>=mState.total) setTimeout(mWin,600);
+    } else {
+      el.classList.remove('selected');
+      el.classList.add('wrong-flash');
+      mState.selected.el.classList.add('wrong-flash');
+      mState.combo=0;
+      setTimeout(()=>{
+        el.classList.remove('wrong-flash');
+        mState.selected.el.classList.remove('wrong-flash');
+        mState.selected=null;
+      },400);
+      document.getElementById('mHint').textContent='❌ 不匹配，再试试';
+      document.getElementById('mHint').style.color='#e94560';
+      mUpdateUI();
+    }
+  } else {
+    el.classList.add('selected');
+    mState.selected={el,side,item};
+    document.getElementById('mHint').textContent=side==='left'?'👆 现在点中文':'👆 现在点法语';
+    document.getElementById('mHint').style.color='#ffd166';
+  }
+}
+
+function mDrawLine(el1, el2, color){
+  const canvas = document.getElementById('mCanvas');
+  const ctx = canvas.getContext('2d');
+  const board = document.getElementById('mBoard');
+  const br = board.getBoundingClientRect();
+  const r1 = el1.getBoundingClientRect();
+  const r2 = el2.getBoundingClientRect();
+  const x1=r1.right-br.left, y1=r1.top+r1.height/2-br.top;
+  const x2=r2.left-br.left, y2=r2.top+r2.height/2-br.top;
+  ctx.strokeStyle=color; ctx.lineWidth=3; ctx.lineCap='round';
+  ctx.setLineDash([6,4]); ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke(); ctx.setLineDash([]);
+  let a=1;
+  const fade=setInterval(()=>{
+    a-=0.06;
+    if(a<=0){clearInterval(fade);ctx.clearRect(0,0,canvas.width,canvas.height);return;}
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.globalAlpha=a; ctx.strokeStyle=color; ctx.lineWidth=3;
+    ctx.setLineDash([6,4]); ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    ctx.setLineDash([]); ctx.globalAlpha=1;
+  },30);
+}
+
+function mShowCombo(){
+  const el = document.getElementById('mCombo');
+  const map = {3:['🔥','#ff6b6b','三连斩！'],4:['⚡','#ffd166','四连斩！'],5:['🌈','#06d6a0','五连斩！！'],6:['💥','#e94560','六连斩！！！']};
+  const t=map[Math.min(mState.combo,6)]||['✨','#a78bfa',mState.combo+'连斩！'];
+  el.style.color=t[1]; el.textContent=t[0]+' '+t[2];
+  el.className='m-combo show';
+  setTimeout(()=>el.className='m-combo',1400);
+}
+
+function mUpdateUI(){
+  document.getElementById('mScore').textContent=mState.score;
+  document.getElementById('mProgress').textContent=`${mState.matched}/${mState.total} 对`;
+  const pct=mState.total>0?(mState.matched/mState.total)*100:0;
+  document.getElementById('mFill').style.width=pct+'%';
+}
+
+function mStartTimer(){
+  clearInterval(mState.timer);
+  const el=document.getElementById('mTimer');
+  el.classList.remove('danger');
+  mState.timer=setInterval(()=>{
+    mState.timeLeft--;
+    const m=Math.floor(mState.timeLeft/60), s=mState.timeLeft%60;
+    el.textContent=`⏱ ${m}:${s.toString().padStart(2,'0')}`;
+    if(mState.timeLeft<=10) el.classList.add('danger');
+    if(mState.timeLeft<=0){ clearInterval(mState.timer); mLose(); }
+  },1000);
+}
+
+function mSpawnCoin(text){
+  const div=document.createElement('div');
+  div.className='m-coin-pop'; div.textContent=text;
+  document.body.appendChild(div);
+  setTimeout(()=>div.remove(),900);
+}
+
+function mWin(){
+  clearInterval(mState.timer);
+  const timeBonus=Math.max(0,mState.timeLeft*2);
+  const total=Math.round(mState.score+timeBonus);
+  // 奖励给游戏状态
+  gameState.money += total;
+  gameState.masteredWords += mState.total;
+  gameState.maxCombo = Math.max(gameState.maxCombo || 0, mState.maxCombo);
+  addLog(`🔗 中法互连完成：金币+${total}，词汇+${mState.total}，最高${mState.maxCombo}连击`);
+  document.getElementById('mWinSub').textContent=`金币 +${total} · 最高${mState.maxCombo}连击 · 剩余${mState.timeLeft}秒`;
+  document.getElementById('mWinOverlay').classList.add('show');
+  // 修改再来一局按钮
+  const btn = document.querySelector('#mWinOverlay .m-overlay-btn');
+  btn.onclick = () => { mInit(); };
+}
+
+function mLose(){
+  clearInterval(mState.timer);
+  const total=Math.round(mState.score*0.3);
+  gameState.money += total;
+  addLog(`🔗 中法互连结束：配对了 ${mState.matched}/${mState.total} 对，金币+${total}`);
+  document.getElementById('mLoseSub').textContent=`配对了 ${mState.matched}/${mState.total} 对 · 金币 +${total}`;
+  document.getElementById('mLoseOverlay').classList.add('show');
+  const btn = document.querySelector('#mLoseOverlay .m-overlay-btn');
+  btn.onclick = () => { mInit(); };
+}
+
+// 返回按钮
+document.getElementById('mBackBtn').addEventListener('click', () => {
+  clearInterval(mState.timer);
+  closeMatchGame();
+});
+
+window.addEventListener('resize', mResizeCanvas);
+
+// ============ Web Speech API 法语发音 ============
+function speakFrench(text) {
+    if (!('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.lang = 'fr-FR';
+    u.rate = 0.85;
+    u.pitch = 1;
+    const voices = window.speechSynthesis.getVoices();
+    const frVoice = voices.find(v => v.lang.startsWith('fr'));
+    if (frVoice) u.voice = frVoice;
+    window.speechSynthesis.speak(u);
+}
+
+// ============ 提示功能 ============
+function useHint() {
+    if (!gameState.hints || gameState.hints <= 0) return;
+    if (quizState.answered) return;
+    gameState.hints--;
+    const currentQ = quizState.questions[quizState.current];
+    const isReverse = currentQ.reverse;
+    const correctValue = isReverse ? currentQ.french : currentQ.meaning;
+    const btns = document.querySelectorAll('#optionsGrid .option-btn');
+    const wrongBtns = [];
+    btns.forEach(b => {
+        if (b.textContent !== correctValue && !b.disabled) wrongBtns.push(b);
+    });
+    if (wrongBtns.length > 0) {
+        const target = wrongBtns[Math.floor(Math.random() * wrongBtns.length)];
+        target.disabled = true;
+        target.style.opacity = '0.3';
+    }
+    const hintCountEl = document.getElementById('hintCount');
+    if (hintCountEl) hintCountEl.textContent = gameState.hints;
+    if (gameState.hints <= 0) {
+        const hintBtn = document.getElementById('hintBtn');
+        if (hintBtn) hintBtn.style.display = 'none';
+    }
+    saveGame();
+}
+
+// ============ 商店系统 ============
+const SHOP_ITEMS = [
+    { id: 'hint', name: '提示卷轴', desc: '答题时可消除一个错误选项', price: 50, icon: '📜' },
+    { id: 'extraAP', name: '行动力药水', desc: '立即获得 1 点行动力', price: 80, icon: '⚡' },
+    { id: 'review', name: '复习符咒', desc: '下次答题全部出错题', price: 30, icon: '🔮' },
+    { id: 'doubleXP', name: '双倍经验符', desc: '下次答题经验翻倍', price: 100, icon: '✨' },
+    { id: 'gift_box', name: '锦囊礼盒', desc: '随机获得一个宝物', price: 120, icon: '🎁' },
+];
+
+function openShop() {
+    const modal = document.getElementById('shopModal');
+    modal.style.display = 'flex';
+    renderShop();
+}
+
+function closeShop() {
+    document.getElementById('shopModal').style.display = 'none';
+}
+
+function renderShop() {
+    document.getElementById('shopMoney').textContent = '💰 ' + (gameState.money || 0);
+    const container = document.getElementById('shopItems');
+    container.innerHTML = SHOP_ITEMS.map(item => {
+        const canAfford = (gameState.money || 0) >= item.price;
+        return `
+            <div class="shop-item ${canAfford ? '' : 'cant-afford'}" onclick="${canAfford ? `buyItem('${item.id}')` : ''}">
+                <div class="shop-icon">${item.icon}</div>
+                <div class="shop-info">
+                    <div class="shop-name">${item.name}</div>
+                    <div class="shop-desc">${item.desc}</div>
+                </div>
+                <div class="shop-price">💰 ${item.price}</div>
+            </div>
+        `;
+    }).join('');
+}
+
+function buyItem(itemId) {
+    const item = SHOP_ITEMS.find(i => i.id === itemId);
+    if (!item) return;
+    if ((gameState.money || 0) < item.price) {
+        showToast('金钱不足！');
+        return;
+    }
+    gameState.money -= item.price;
+
+    switch (itemId) {
+        case 'hint':
+            gameState.hints = (gameState.hints || 0) + 1;
+            showToast(`📜 获得提示卷轴！(共${gameState.hints}个)`);
+            break;
+        case 'extraAP':
+            gameState.actionPoints = Math.min(gameState.maxActionPoints + 1, gameState.actionPoints + 1);
+            showToast('⚡ 行动力+1！');
+            break;
+        case 'review':
+            gameState.nextQuizReview = true;
+            showToast('🔮 下次修炼将全部出错题！');
+            break;
+        case 'doubleXP':
+            gameState.doubleXP = true;
+            showToast('✨ 下次修炼经验翻倍！');
+            break;
+        case 'gift_box': {
+            const drops = rollTreasureDrops(8, 10, 5);
+            if (drops.length === 0) {
+                const commons = TREASURES.filter(t => t.rarity === 'common');
+                drops.push(commons[Math.floor(Math.random() * commons.length)].id);
+            }
+            drops.forEach(id => { if (!gameState.bag) gameState.bag = []; gameState.bag.push(id); });
+            const names = drops.map(id => TREASURES.find(t => t.id === id)?.name || id).join('、');
+            addLog(`🎁 锦囊礼盒开出：${names}`);
+            showToast(`🎁 获得：${names}`);
+            closeShop();
+            setTimeout(() => showDropPopup(drops), 300);
+            break;
+        }
+    }
+
+    renderShop();
+    updateMainUI();
+    saveGame();
+}
+
+// ============ 词汇本 ============
+let vocabSubTab = 'all';
+
+function updateVocabUI() {
+    const container = document.getElementById('vocabContent');
+    if (!container) return;
+    const stats = gameState.wordStats || {};
+    const allWords = WORD_LIBRARY;
+    const totalWords = allWords.length;
+
+    // 统计
+    let learnedCount = 0;
+    let masteredCount = 0;
+    let totalAnswers = 0;
+    const wordData = allWords.map(w => {
+        const s = stats[w.french] || { box: 1, seen: 0, correct: 0, wrong: 0, lastSeen: 0 };
+        if (s.seen > 0) learnedCount++;
+        if (s.box >= 4) masteredCount++;
+        totalAnswers += s.seen;
+        return { ...w, ...s };
+    });
+    const masteryRate = learnedCount > 0 ? Math.round((masteredCount / learnedCount) * 100) : 0;
+
+    // 顶部统计
+    let html = `
+        <div class="vocab-summary">
+            <div class="vocab-summary-item">
+                <div class="vocab-summary-number">${learnedCount}/${totalWords}</div>
+                <div class="vocab-summary-label">已学/总词数</div>
+            </div>
+            <div class="vocab-summary-item">
+                <div class="vocab-summary-number">${masteryRate}%</div>
+                <div class="vocab-summary-label">掌握率(box≥4)</div>
+            </div>
+            <div class="vocab-summary-item">
+                <div class="vocab-summary-number">${totalAnswers}</div>
+                <div class="vocab-summary-label">总答题次数</div>
+            </div>
+        </div>
+        <div class="vocab-sub-tabs">
+            <div class="vocab-sub-tab ${vocabSubTab==='all'?'active':''}" onclick="switchVocabTab('all')">全部</div>
+            <div class="vocab-sub-tab ${vocabSubTab==='review'?'active':''}" onclick="switchVocabTab('review')">待复习</div>
+            <div class="vocab-sub-tab ${vocabSubTab==='wrong'?'active':''}" onclick="switchVocabTab('wrong')">错题</div>
+        </div>
+    `;
+
+    if (vocabSubTab === 'all') {
+        // 按 box 等级分组
+        const groups = {1:[], 2:[], 3:[], 4:[], 5:[]};
+        wordData.filter(w => w.seen > 0).forEach(w => {
+            groups[w.box] = groups[w.box] || [];
+            groups[w.box].push(w);
+        });
+        html += '<div class="vocab-list">';
+        for (let box = 1; box <= 5; box++) {
+            const stars = '⭐'.repeat(box);
+            const words = groups[box] || [];
+            if (words.length === 0) continue;
+            html += `<div class="vocab-group-title">${stars} 盒子${box} (${words.length}词)</div>`;
+            words.forEach(w => { html += renderVocabCard(w); });
+        }
+        // 未学的词
+        const unseen = wordData.filter(w => w.seen === 0);
+        if (unseen.length > 0) {
+            html += `<div class="vocab-group-title">📦 未学 (${unseen.length}词)</div>`;
+            unseen.slice(0, 30).forEach(w => { html += renderVocabCard(w); });
+            if (unseen.length > 30) html += `<div style="padding:10px 14px;color:var(--text-dim);font-size:0.8rem;">...还有 ${unseen.length - 30} 个未显示</div>`;
+        }
+        html += '</div>';
+    } else if (vocabSubTab === 'review') {
+        const now = Date.now();
+        const reviewIntervals = [1, 4, 24, 72, 168]; // hours
+        const reviewWords = wordData.filter(w => {
+            if (w.seen === 0 || w.box >= 4) return false;
+            if (w.lastSeen === 0) return true;
+            const hoursSince = (now - w.lastSeen) / 3600000;
+            const targetInterval = reviewIntervals[Math.min(w.box - 1, 4)];
+            return hoursSince >= targetInterval;
+        });
+        html += '<div class="vocab-list">';
+        if (reviewWords.length === 0) {
+            html += '<div style="padding:30px;text-align:center;color:var(--text-dim);">暂无待复习词汇 ✅</div>';
+        } else {
+            html += `<div class="vocab-group-title">📖 待复习 (${reviewWords.length}词)</div>`;
+            reviewWords.forEach(w => { html += renderVocabCard(w); });
+        }
+        html += '</div>';
+    } else if (vocabSubTab === 'wrong') {
+        const wrongWords = wordData.filter(w => w.wrong > 0).sort((a, b) => {
+            const rateA = a.seen > 0 ? a.wrong / a.seen : 0;
+            const rateB = b.seen > 0 ? b.wrong / b.seen : 0;
+            return rateB - rateA;
+        });
+        html += '<div class="vocab-list">';
+        if (wrongWords.length === 0) {
+            html += '<div style="padding:30px;text-align:center;color:var(--text-dim);">没有错题，太厉害了！🎉</div>';
+        } else {
+            html += `<div class="vocab-group-title">❌ 错题 (${wrongWords.length}词)</div>`;
+            wrongWords.forEach(w => { html += renderVocabCard(w); });
+        }
+        html += '</div>';
+    }
+
+    container.innerHTML = html;
+}
+
+function renderVocabCard(w) {
+    const accuracy = w.seen > 0 ? Math.round((w.correct / w.seen) * 100) : 0;
+    const stars = '⭐'.repeat(w.box || 1);
+    const lastTime = w.lastSeen > 0 ? new Date(w.lastSeen).toLocaleDateString('zh-CN') : '未学';
+    const escapedFrench = w.french.replace(/'/g, "\\'");
+    return `
+        <div class="vocab-card">
+            <div style="flex:1;">
+                <div class="vocab-french">${w.french} <button class="speak-btn" onclick="speakFrench('${escapedFrench}')">🔊</button></div>
+                <div class="vocab-meaning">${w.meaning}</div>
+            </div>
+            <div style="text-align:right;">
+                <div class="vocab-box">${stars}</div>
+                <div class="vocab-stats">正确率 ${accuracy}% · ${w.seen || 0}次</div>
+                <div class="vocab-stats">${lastTime}</div>
+            </div>
+        </div>
+    `;
+}
+
+function switchVocabTab(tab) {
+    vocabSubTab = tab;
+    updateVocabUI();
+}
+
+// ============ 初始化 ============
+document.addEventListener('DOMContentLoaded', () => {
+  initCharSelect();
+  initTitleScreen();
+
+  // 预加载语音
+  if ('speechSynthesis' in window) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+  }
+});
+</script>
+</body>
+</html>
