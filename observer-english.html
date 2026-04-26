@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBSERVER · 观心英语</title>
+<style>
+  :root {
+    --bg-deep: #0a0f0d;
+    --bg: #111a16;
+    --bg-card: #182420;
+    --bg-hover: #1f302a;
+    --text: #e0e8e4;
+    --text-dim: #7a9a8c;
+    --text-muted: #4a6a5c;
+    --accent: #8cc0a8;
+    --accent-glow: rgba(140,192,168,0.15);
+    --gold: #c4a84d;
+    --gold-dim: rgba(196,168,77,0.2);
+    --warm: #d4a574;
+    --soft-red: #c47a6a;
+    --border: rgba(140,192,168,0.12);
+    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+    background: var(--bg-deep);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== SPLASH / WELCOME ===== */
+  #splash {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 100vh; text-align: center;
+    padding: 2rem;
+    background: radial-gradient(ellipse at 50% 30%, var(--bg-card) 0%, var(--bg-deep) 70%);
+    animation: fadeIn 1.5s ease;
+  }
+  #splash.hidden { display: none; }
+
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  @keyframes breathe { 0%,100% { transform:scale(1); opacity:0.6; } 50% { transform:scale(1.1); opacity:1; } }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes gentlePulse { 0%,100% { box-shadow: 0 0 0 0 var(--accent-glow); } 50% { box-shadow: 0 0 30px 8px var(--accent-glow); } }
+
+  .splash-breath {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--accent);
+    animation: breathe 4s ease-in-out infinite;
+    margin-bottom: 2rem;
+  }
+
+  .splash-title {
+    font-size: 2.2rem; font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .splash-sub {
+    font-size: 0.95rem; color: var(--text-dim);
+    letter-spacing: 0.15em; margin-bottom: 3rem;
+  }
+
+  .splash-question {
+    max-width: 420px; font-size: 1.05rem;
+    line-height: 1.8; color: var(--text);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .splash-options { display: flex; flex-direction: column; gap: 0.7rem; width: 100%; max-width: 320px; }
+  .splash-opt {
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.85rem 1.2rem;
+    border-radius: 10px; cursor: pointer;
+    font-family: inherit; font-size: 0.92rem;
+    transition: all 0.3s;
+  }
+  .splash-opt:hover { background: var(--bg-hover); color: var(--text); border-color: var(--accent); }
+
+  .splash-hint {
+    margin-top: 2rem; font-size: 0.8rem; color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ===== MAIN APP ===== */
+  #app { display:none; max-width:520px; margin:0 auto; padding:1rem; padding-bottom:6rem; }
+  #app.active { display:block; animation: fadeIn 0.6s ease; }
+
+  /* --- NAV --- */
+  .top-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem 0; margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-day { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.1em; }
+  .nav-tree { font-size: 1.2rem; }
+  .nav-map-btn {
+    background: none; border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.4rem 0.9rem;
+    border-radius: 20px; cursor: pointer; font-family: inherit;
+    font-size: 0.8rem; transition: all 0.3s;
+  }
+  .nav-map-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* --- DAILY QUESTION --- */
+  .daily-question {
+    text-align: center; padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--bg-card), var(--bg));
+    border-radius: 16px; border: 1px solid var(--border);
+    animation: slideUp 0.8s ease;
+  }
+  .daily-question .label {
+    font-size: 0.7rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.2em;
+    margin-bottom: 0.8rem;
+  }
+  .daily-question .question {
+    font-size: 1.1rem; line-height: 1.7;
+    color: var(--gold); font-style: italic;
+  }
+  .daily-question .note {
+    font-size: 0.75rem; color: var(--text-muted);
+    margin-top: 0.8rem;
+  }
+
+  /* --- QUOTE CARD --- */
+  .quote-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    margin-bottom: 1.5rem;
+    animation: slideUp 0.8s ease 0.2s both;
+  }
+  .quote-card .theme-tag {
+    display: inline-block;
+    font-size: 0.65rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.2em;
+    border: 1px solid var(--border); border-radius: 20px;
+    padding: 0.25rem 0.7rem; margin-bottom: 1rem;
+  }
+  .quote-text {
+    font-size: 1.05rem; line-height: 2;
+    color: var(--text); margin-bottom: 1rem;
+  }
+  .quote-text .touchable {
+    color: var(--accent);
+    cursor: pointer;
+    border-bottom: 1px dashed var(--accent);
+    transition: all 0.2s;
+    padding: 0 2px;
+    border-radius: 3px;
+  }
+  .quote-text .touchable:hover {
+    background: var(--accent-glow);
+  }
+  .quote-text .touchable.active {
+    background: var(--accent-glow);
+    border-bottom-style: solid;
+  }
+  .quote-source {
+    font-size: 0.8rem; color: var(--text-muted);
+    text-align: right;
+  }
+
+  /* --- WORD PANEL --- */
+  .word-panel {
+    position: fixed; bottom:0; left:0; right:0;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    border-radius: 20px 20px 0 0;
+    padding: 1.2rem 1.5rem 2rem;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    z-index: 100;
+    max-width: 520px; margin: 0 auto;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+  }
+  .word-panel.open { transform: translateY(0); }
+  .word-panel-handle {
+    width: 36px; height: 4px;
+    background: var(--text-muted); border-radius: 2px;
+    margin: 0 auto 1rem; cursor: pointer;
+  }
+  .word-panel .word-head {
+    display: flex; align-items: baseline; gap: 0.8rem;
+    margin-bottom: 0.6rem;
+  }
+  .word-panel .word-en {
+    font-size: 1.5rem; color: var(--accent);
+    font-weight: 300; letter-spacing: 0.05em;
+  }
+  .word-panel .word-pos {
+    font-size: 0.7rem; color: var(--text-muted);
+    font-style: italic;
+  }
+  .word-panel .word-phonetic {
+    font-size: 0.8rem; color: var(--text-dim);
+    margin-bottom: 0.8rem;
+  }
+  .word-panel .word-meaning {
+    font-size: 0.95rem; color: var(--text);
+    line-height: 1.7; margin-bottom: 0.6rem;
+  }
+  .word-panel .word-context {
+    font-size: 0.82rem; color: var(--gold);
+    font-style: italic; line-height: 1.7;
+    margin-bottom: 1rem; padding: 0.8rem;
+    background: var(--gold-dim); border-radius: 10px;
+  }
+  .word-panel .word-reflect {
+    font-size: 0.85rem; color: var(--text-dim);
+    line-height: 1.6; font-style: italic;
+  }
+
+  /* --- UNDERSTANDING SECTION --- */
+  .section {
+    margin-bottom: 1.5rem;
+    animation: slideUp 0.8s ease 0.4s both;
+  }
+  .section-label {
+    font-size: 0.7rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.2em;
+    margin-bottom: 0.8rem;
+  }
+
+  .quiz-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+  .quiz-prompt {
+    font-size: 0.95rem; color: var(--text);
+    line-height: 1.7; margin-bottom: 1.2rem;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 0.6rem; }
+  .quiz-opt {
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.8rem 1rem;
+    border-radius: 10px; cursor: pointer;
+    font-family: inherit; font-size: 0.88rem;
+    transition: all 0.3s; text-align: left;
+  }
+  .quiz-opt:hover { background: var(--bg-hover); color: var(--text); border-color: var(--accent); }
+  .quiz-opt.selected { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+  .quiz-opt.correct { border-color: #5cb87a; color: #5cb87a; background: rgba(92,184,122,0.1); }
+  .quiz-opt.wrong { border-color: var(--soft-red); color: var(--soft-red); background: rgba(196,122,106,0.1); }
+
+  /* --- OBSERVATION FEEDBACK --- */
+  .observation {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    margin-top: 1rem;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    display: none;
+  }
+  .observation.show { display: block; animation: slideUp 0.5s ease; }
+  .observation .obs-label {
+    font-size: 0.7rem; color: var(--accent);
+    text-transform: uppercase; letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+
+  /* --- WRITING SECTION --- */
+  .writing-area {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+  }
+  .writing-prompt {
+    font-size: 0.88rem; color: var(--gold);
+    font-style: italic; margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .writing-box {
+    width: 100%; min-height: 100px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.9rem;
+    color: var(--text); font-family: inherit;
+    font-size: 0.9rem; line-height: 1.8;
+    resize: vertical;
+    transition: border-color 0.3s;
+  }
+  .writing-box:focus { outline:none; border-color: var(--accent); }
+  .writing-box::placeholder { color: var(--text-muted); font-style: italic; }
+  .writing-tools {
+    display: flex; gap: 0.6rem; margin-top: 0.8rem; flex-wrap: wrap;
+  }
+  .writing-tool {
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.35rem 0.8rem;
+    border-radius: 20px; cursor: pointer;
+    font-family: inherit; font-size: 0.75rem;
+    transition: all 0.3s;
+  }
+  .writing-tool:hover { border-color: var(--accent); color: var(--accent); }
+  .writing-save {
+    margin-top: 0.8rem;
+    background: var(--accent); color: var(--bg-deep);
+    border: none; padding: 0.65rem 1.5rem;
+    border-radius: 10px; cursor: pointer;
+    font-family: inherit; font-size: 0.85rem;
+    font-weight: 600; letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+  .writing-save:hover { opacity: 0.85; }
+
+  /* --- MARKS SECTION --- */
+  .marks-row {
+    display: flex; gap: 0.8rem; justify-content: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+  }
+  .mark {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.3rem;
+    font-size: 0.7rem; color: var(--text-muted);
+    transition: all 0.3s;
+  }
+  .mark.earned { color: var(--accent); }
+  .mark-icon {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    transition: all 0.5s;
+  }
+  .mark.earned .mark-icon {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+    animation: gentlePulse 3s infinite;
+  }
+
+  /* --- BOTTOM NAV --- */
+  .bottom-nav {
+    position: fixed; bottom:0; left:0; right:0;
+    background: var(--bg-deep);
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-around;
+    padding: 0.6rem 0 0.8rem;
+    max-width: 520px; margin: 0 auto;
+    z-index: 90;
+  }
+  .bnav-item {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.2rem;
+    cursor: pointer; background: none; border: none;
+    color: var(--text-muted); font-family: inherit;
+    font-size: 0.65rem; letter-spacing: 0.05em;
+    transition: color 0.3s;
+    padding: 0.3rem;
+  }
+  .bnav-item:hover, .bnav-item.active { color: var(--accent); }
+  .bnav-icon { font-size: 1.2rem; }
+
+  /* --- THEME MAP MODAL --- */
+  .modal-overlay {
+    position: fixed; top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.7);
+    z-index: 200; display:none;
+    align-items: center; justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    max-width: 480px; width: 100%;
+    max-height: 80vh; overflow-y: auto;
+    animation: slideUp 0.4s ease;
+  }
+  .modal h3 {
+    font-size: 1rem; color: var(--accent);
+    font-weight: 300; letter-spacing: 0.15em;
+    margin-bottom: 1.2rem; text-align: center;
+  }
+  .theme-clusters { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+  .theme-bubble {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .theme-bubble:hover { border-color: var(--accent); color: var(--accent); }
+  .theme-bubble.learned { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+  .modal-close {
+    display: block; margin: 1.5rem auto 0;
+    background: none; border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.5rem 1.5rem;
+    border-radius: 20px; cursor: pointer;
+    font-family: inherit; font-size: 0.8rem;
+    transition: all 0.3s;
+  }
+  .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* --- DIARY MODAL --- */
+  .diary-entries { display: flex; flex-direction: column; gap: 0.8rem; }
+  .diary-entry {
+    padding: 0.8rem 1rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .diary-entry .de-day { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+  .diary-entry .de-text { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
+  .diary-empty { text-align: center; color: var(--text-muted); font-style: italic; font-size: 0.85rem; padding: 2rem 0; }
+
+  /* --- STREAK VISUAL --- */
+  .forest {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    justify-content: center; padding: 1rem 0;
+  }
+  .forest-tree {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.7rem;
+    transition: all 0.3s;
+  }
+  .forest-tree.grown {
+    background: var(--accent-glow);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Responsive */
+  @media (max-width: 380px) {
+    .splash-title { font-size: 1.6rem; }
+    .quote-text { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SPLASH SCREEN ===== -->
+<div id="splash">
+  <div class="splash-breath"></div>
+  <div class="splash-title">OBSERVER</div>
+  <div class="splash-sub">观 心 英 语</div>
+  <div class="splash-question">
+    When you meet a word you don't know,<br>
+    what do you usually do?
+  </div>
+  <div class="splash-options">
+    <button class="splash-opt" onclick="startGame('skip')">Skip it and keep reading</button>
+    <button class="splash-opt" onclick="startGame('lookup')">Look it up in a dictionary</button>
+    <button class="splash-opt" onclick="startGame('guess')">Guess from context</button>
+    <button class="splash-opt" onclick="startGame('anxious')">Feel anxious and stuck</button>
+  </div>
+  <div class="splash-hint">There is no wrong answer — only observation.</div>
+</div>
+
+<!-- ===== MAIN APP ===== -->
+<div id="app">
+  <!-- TOP NAV -->
+  <div class="top-nav">
+    <span class="nav-day" id="navDay">Day 1</span>
+    <span class="nav-tree" id="navTree">🌱</span>
+    <button class="nav-map-btn" onclick="openModal('themeMap')">MAP</button>
+  </div>
+
+  <!-- DAILY QUESTION -->
+  <div class="daily-question">
+    <div class="label">Today's Question</div>
+    <div class="question" id="dailyQuestion"></div>
+    <div class="note">You don't need to answer now. Just carry it with you.</div>
+  </div>
+
+  <!-- QUOTE CARD -->
+  <div class="quote-card">
+    <span class="theme-tag" id="themeTag">Fear</span>
+    <div class="quote-text" id="quoteText"></div>
+    <div class="quote-source">— Jiddu Krishnamurti, <em>The Book of Life</em></div>
+  </div>
+
+  <!-- TOUCH MARKS -->
+  <div class="marks-row" id="marksRow">
+    <div class="mark" id="markTouch"><div class="mark-icon">🌱</div>Touch</div>
+    <div class="mark" id="markDeep"><div class="mark-icon">🌿</div>Deepen</div>
+    <div class="mark" id="markQuiz"><div class="mark-icon">🍃</div>Observe</div>
+    <div class="mark" id="markWrite"><div class="mark-icon">🌳</div>Express</div>
+  </div>
+
+  <!-- QUIZ SECTION -->
+  <div class="section" id="quizSection">
+    <div class="section-label">Observation</div>
+    <div class="quiz-card">
+      <div class="quiz-prompt" id="quizPrompt"></div>
+      <div class="quiz-options" id="quizOptions"></div>
+      <div class="observation" id="observation"></div>
+    </div>
+  </div>
+
+  <!-- WRITING SECTION -->
+  <div class="section" id="writingSection" style="animation-delay:0.6s">
+    <div class="section-label">Contemplation</div>
+    <div class="writing-area">
+      <div class="writing-prompt" id="writingPrompt"></div>
+      <textarea class="writing-box" id="writingBox" placeholder="Write your observation in English... even one sentence is enough."></textarea>
+      <div class="writing-tools">
+        <button class="writing-tool" onclick="suggestWord()">💡 Suggest a word</button>
+        <button class="writing-tool" onclick="showHint()">🔍 Grammar hint</button>
+      </div>
+      <button class="writing-save" onclick="saveWriting()">Save Reflection</button>
+    </div>
+  </div>
+</div>
+
+<!-- WORD PANEL (bottom sheet) -->
+<div class="word-panel" id="wordPanel">
+  <div class="word-panel-handle" onclick="closeWordPanel()"></div>
+  <div class="word-head">
+    <span class="word-en" id="wpWord"></span>
+    <span class="word-pos" id="wpPos"></span>
+  </div>
+  <div class="word-phonetic" id="wpPhonetic"></div>
+  <div class="word-meaning" id="wpMeaning"></div>
+  <div class="word-context" id="wpContext"></div>
+  <div class="word-reflect" id="wpReflect"></div>
+</div>
+
+<!-- THEME MAP MODAL -->
+<div class="modal-overlay" id="themeMapModal">
+  <div class="modal">
+    <h3>Inner Landscape</h3>
+    <div class="theme-clusters" id="themeClusters"></div>
+    <div class="forest" id="forest" style="margin-top:1.2rem"></div>
+    <button class="modal-close" onclick="closeModal('themeMap')">Close</button>
+  </div>
+</div>
+
+<!-- DIARY MODAL -->
+<div class="modal-overlay" id="diaryModal">
+  <div class="modal">
+    <h3>Journal</h3>
+    <div class="diary-entries" id="diaryEntries"></div>
+    <button class="modal-close" onclick="closeModal('diary')">Close</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottomNav" style="display:none">
+  <button class="bnav-item active" onclick="navTo('today')">
+    <span class="bnav-icon">🌅</span>Today
+  </button>
+  <button class="bnav-item" onclick="navTo('map')">
+    <span class="bnav-icon">🗺</span>Map
+  </button>
+  <button class="bnav-item" onclick="navTo('journal')">
+    <span class="bnav-icon">📓</span>Journal
+  </button>
+  <button class="bnav-item" onclick="navTo('streak')">
+    <span class="bnav-icon">🌿</span>Forest
+  </button>
+</div>
+
+<script>
+// ===== DATA: 7 SAMPLE DAYS =====
+const LESSONS = [
+  {
+    day: 1, theme: "Fear",
+    question: "What is it you are afraid of losing?",
+    quote: "Can you look at {fear} without the {observer}? When the {observer} is, there is a {division} between you and the thing you call fear. In that {division} there is {conflict}, and therefore there is no {understanding} of fear.",
+    words: {
+      fear: { pos: "n.", phonetic: "/fɪr/", meaning: "An unpleasant emotion caused by threat — something Krishnamurti asks us to observe directly, without trying to escape it.", context: "In this passage, fear is not something to overcome, but something to simply watch.", reflect: "What happens when you sit with a fear instead of running from it?" },
+      observer: { pos: "n.", phonetic: "/əbˈzɜːrvər/", meaning: "The one who watches; the thinking mind that separates itself from experience. A key concept in Krishnamurti's teaching.", context: "The 'observer' creates a split — 'I am watching my fear.' But are you separate from it?", reflect: "When you say 'I am afraid,' who is the 'I' that stands apart?" },
+      division: { pos: "n.", phonetic: "/dɪˈvɪʒən/", meaning: "The act of separating into parts; the gap created when the mind judges itself from a distance.", context: "Division creates the illusion that 'I' can control 'my fear.' Krishnamurti says this gap is the root of conflict.", reflect: "Where in your life do you feel a division between 'me' and 'my feelings'?" },
+      conflict: { pos: "n.", phonetic: "/ˈkɒnflɪkt/", meaning: "A struggle between opposing forces. Here, the friction between what is and what the mind wants.", context: "Conflict arises because we resist what is. Understanding begins when resistance ends.", reflect: "Can you notice a moment of resistance in your body right now?" },
+      understanding: { pos: "n.", phonetic: "/ˌʌndərˈstændɪŋ/", meaning: "True seeing — not intellectual analysis, but direct perception without judgment.", context: "Understanding here means seeing fear completely, not analyzing it or trying to fix it.", reflect: "Is understanding the same as agreeing? Or is it something deeper?" }
+    },
+    quiz: {
+      prompt: "According to the passage, what creates <em>conflict</em>?",
+      options: ["Fear itself", "The division between observer and observed", "Lack of education", "External circumstances"],
+      answer: 1,
+      observation: "You noticed that conflict arises not from fear, but from the <em>split</em> the mind creates. This is a radical idea: the problem isn't fear — it's the way we relate to it."
+    },
+    writingPrompt: "Think of a moment when you felt afraid. Without analyzing it — just describe what you observed."
+  },
+  {
+    day: 2, theme: "Love",
+    question: "Is love a thought, or something else entirely?",
+    quote: "Love is not a {word}, it is not a {memory}. It has no {cause}. Where there is a {cause}, there is an effect, and the effect is not love. Love is {spontaneous}, it is not something that you can {cultivate}.",
+    words: {
+      word: { pos: "n.", phonetic: "/wɜːrd/", meaning: "A unit of language. Here, Krishnamurti points out the danger of confusing the symbol with the reality it points to.", context: "The word 'love' is not love itself. The menu is not the meal.", reflect: "Can you think of something that no word can fully capture?" },
+      memory: { pos: "n.", phonetic: "/ˈmeməri/", meaning: "The faculty by which the mind stores and recalls past experiences. A central theme: memory is always of the past, never of the living present.", context: "If love is memory, it's just the past repeating itself. Can you love without remembering?", reflect: "Do you love the person, or your memory of who they were?" },
+      cause: { pos: "n.", phonetic: "/kɔːz/", meaning: "That which produces an effect. Krishnamurti says true love has no motive — no 'because.'", context: "'I love you because...' — the moment there's a reason, it becomes a transaction.", reflect: "Can you love without expecting anything in return?" },
+      spontaneous: { pos: "adj.", phonetic: "/spɒnˈteɪniəs/", meaning: "Happening naturally, without being planned or forced. A quality of genuine presence.", context: "Love arises on its own, like a flower. You can't force it to bloom.", reflect: "When was the last time something beautiful happened without you planning it?" },
+      cultivate: { pos: "v.", phonetic: "/ˈkʌltɪveɪt/", meaning: "To try to acquire or develop a quality. But Krishnamurti says you cannot cultivate love — it's not a skill.", context: "You can cultivate a garden. But can you cultivate a sunrise?", reflect: "What have you been trying to cultivate? What if it cannot be cultivated?" }
+    },
+    quiz: {
+      prompt: "Why does Krishnamurti say love cannot be <em>cultivated</em>?",
+      options: ["Because it's too difficult", "Because cultivation implies a future goal, while love is always present", "Because people don't try hard enough", "Because love doesn't exist"],
+      answer: 1,
+      observation: "You observed something subtle: to 'cultivate' means to work toward a future result. But love, for Krishnamurti, is not a goal — it's what remains when the mind is fully present."
+    },
+    writingPrompt: "Describe something you love — not why you love it, just what it feels like."
+  },
+  {
+    day: 3, theme: "Time",
+    question: "Are you living in the present, or always preparing for the future?",
+    quote: "We are always {becoming} something — I will be {happy} tomorrow, I will be {free} someday. This constant movement of {becoming} is the {essence} of time, and time is {sorrow}.",
+    words: {
+      becoming: { pos: "n./v.", phonetic: "/bɪˈkʌmɪŋ/", meaning: "The process of changing into something else. Krishnamurti's central critique: we're always in the process of becoming, never simply being.", context: "'Becoming' means you reject what is now in favor of an imagined future. This rejection IS suffering.", reflect: "Are you becoming something? Or are you trying to escape what you already are?" },
+      happy: { pos: "adj.", phonetic: "/ˈhæpi/", meaning: "Feeling pleasure and contentment. But here, the promise of 'tomorrow' happiness becomes a trap.", context: "Happiness is always 'tomorrow.' When tomorrow comes, it's still tomorrow. The mind never arrives.", reflect: "Can you find happiness not in the future, but in this exact moment?" },
+      free: { pos: "adj.", phonetic: "/friː/", meaning: "Not restricted. But freedom through time is an illusion — you can't become free by planning.", context: "Freedom, for Krishnamurti, is not a destination. It's the absence of the one who seeks freedom.", reflect: "What would it feel like to stop trying to become free?" },
+      essence: { pos: "n.", phonetic: "/ˈesəns/", meaning: "The intrinsic nature of something; its most fundamental quality.", context: "Time is not just clock-time. It's the psychological movement from 'what is' to 'what should be.'", reflect: "What is the essence of a moment you remember vividly?" },
+      sorrow: { pos: "n.", phonetic: "/ˈsɒroʊ/", meaning: "A feeling of deep distress. Krishnamurti links sorrow directly to time — to the gap between reality and desire.", context: "Sorrow exists because we want to be somewhere else, someone else, something else than what we are.", reflect: "Is there a connection between wanting and suffering in your own experience?" }
+    },
+    quiz: {
+      prompt: "What does Krishnamurti identify as the <em>essence</em> of time?",
+      options: ["Clocks and calendars", "The movement of 'becoming'", "Progress and growth", "History repeating itself"],
+      answer: 1,
+      observation: "You saw that time, for Krishnamurti, is not clock-time — it's the psychological momentum of always seeking to become something else. The present moment is the only place where time stops."
+    },
+    writingPrompt: "What are you becoming? And what would it feel like to just... be?"
+  },
+  {
+    day: 4, theme: "Thought",
+    question: "Can you watch your thoughts without being watched by them?",
+    quote: "Thought is {limited}. It is the {response} of {memory}, and memory is always {incomplete}. When thought says 'I have {understood},' it has merely created another {image}.",
+    words: {
+      limited: { pos: "adj.", phonetic: "/ˈlɪmɪtɪd/", meaning: "Restricted in scope; not all-encompassing. Thought can only work with what it already knows.", context: "Thought is limited because it's always working from the past. It can never grasp the new, the unknown.", reflect: "Where do you feel the limits of your own thinking?" },
+      response: { pos: "n.", phonetic: "/rɪˈspɒns/", meaning: "A reaction to something. Thought doesn't act — it reacts based on stored patterns.", context: "A response is not the same as a fresh perception. It's an old pattern replaying.", reflect: "How often do you truly respond, versus react from habit?" },
+      memory: { pos: "n.", phonetic: "/ˈmeməri/", meaning: "The store of past experiences. Essential for practical life, but dangerous when it claims to understand life itself.", context: "Memory can tell you how to drive a car. But can it tell you how to love, how to live?", reflect: "Is there a difference between useful memory and psychological memory?" },
+      incomplete: { pos: "adj.", phonetic: "/ˌɪnkəmˈpliːt/", meaning: "Not whole; missing parts. Memory is always a fragment of the whole, never the full picture.", context: "Your memory of yesterday is not yesterday itself. It's a story you tell about yesterday.", reflect: "Can you sense the gap between your memory of something and the thing itself?" },
+      image: { pos: "n.", phonetic: "/ˈɪmɪdʒ/", meaning: "A mental picture. Krishnamurti warns that the 'I' is itself an image — a collection of memories pretending to be real.", context: "When you think you understand, you've created a picture. The picture is not the reality.", reflect: "What images do you carry about yourself? Are they really you?" }
+    },
+    quiz: {
+      prompt: "Why is thought always <em>incomplete</em>, according to the passage?",
+      options: ["Because humans are imperfect", "Because thought is based on memory, which is always a fragment of experience", "Because we don't think enough", "Because the world is too complex"],
+      answer: 1,
+      observation: "A profound observation: thought can never be complete because it's always built from the past. No matter how much you think, you can never 'think your way' to total understanding."
+    },
+    writingPrompt: "Sit quietly for a moment. What thought keeps repeating? Describe it without judging it."
+  },
+  {
+    day: 5, theme: "Relationship",
+    question: "Do your relationships mirror who you are, or who you pretend to be?",
+    quote: "Relationship is a {mirror} in which you can see yourself as you are, not as you {wish} to be. But we run away from the mirror, we {decorate} it, we don't want to see what is {actually} there.",
+    words: {
+      mirror: { pos: "n.", phonetic: "/ˈmɪrər/", meaning: "A reflective surface; metaphorically, any situation that reveals your true nature. For Krishnamurti, relationships are the ultimate mirror.", context: "In relationship, your conditioning, your fears, your desires — all become visible. If you're willing to look.", reflect: "Who in your life acts as a mirror? What do you see when you look?" },
+      wish: { pos: "v.", phonetic: "/wɪʃ/", meaning: "To desire something. The wish to be different from what you are prevents genuine self-knowledge.", context: "Wishing creates a gap: 'I am this, I wish I were that.' That gap IS self-deception.", reflect: "What do you wish you were? Can you see the gap between that wish and reality?" },
+      decorate: { pos: "v.", phonetic: "/ˈdekəreɪt/", meaning: "To make something look more attractive. Here, the act of covering up truth with pleasing illusions.", context: "We decorate the mirror with blame, with ideals, with social masks — anything to avoid seeing ourselves clearly.", reflect: "How do you 'decorate' yourself in relationships?" },
+      actually: { pos: "adv.", phonetic: "/ˈæktʃuəli/", meaning: "In fact; as it truly is, not as imagined. A deceptively powerful word in Krishnamurti's vocabulary.", context: "'Actually there' — not the ideal version, not the version you show to others. Just what is.", reflect: "Can you describe one thing about yourself that is 'actually there'?" }
+    },
+    quiz: {
+      prompt: "Why do we 'decorate' the mirror of relationship?",
+      options: ["To make it look beautiful", "To avoid seeing ourselves as we truly are", "Because relationships need effort", "To show respect to others"],
+      answer: 1,
+      observation: "You noticed the uncomfortable truth: we modify, manage, and perform in relationships — not to connect, but to hide. Krishnamurti says the courage to see clearly IS the beginning of real relationship."
+    },
+    writingPrompt: "Think of someone close to you. What does this relationship reveal about you?"
+  },
+  {
+    day: 6, theme: "Freedom",
+    question: "Are you free, or are you choosing between prisons?",
+    quote: "Freedom is not at the end of {discipline}. It is not a {state} to be achieved. Freedom is the {beginning}, and it is there only when there is no {conditioning} operating.",
+    words: {
+      discipline: { pos: "n.", phonetic: "/ˈdɪsəplɪn/", meaning: "Training to act in accordance with rules. But Krishnamurti distinguishes outer discipline from inner awareness.", context: "Discipline creates conformity. True freedom needs no discipline — it needs attention.", reflect: "Do you act from discipline or from awareness? Is there a difference?" },
+      state: { pos: "n.", phonetic: "/steɪt/", meaning: "A condition of being. Freedom is not a state you reach — it's the absence of the barriers that prevent it.", context: "If freedom is a 'state,' you need time to reach it. But freedom is now, or never.", reflect: "Do you treat freedom as something to earn? What if it's already here?" },
+      beginning: { pos: "n.", phonetic: "/bɪˈɡɪnɪŋ/", meaning: "The point in time at which something starts. Krishnamurti turns this upside down: freedom is the start, not the finish line.", context: "Freedom is not the reward at the end of the journey. It's the ground you stand on — if you dare.", reflect: "What would change if you started from freedom, not toward it?" },
+      conditioning: { pos: "n.", phonetic: "/kənˈdɪʃənɪŋ/", meaning: "The process of being trained to think and behave in certain ways. Society, culture, family — all condition us.", context: "Conditioning is invisible. You don't see it because you ARE it. Seeing it requires the kind of attention that has no motive.", reflect: "Can you name one belief you hold that you simply inherited from your upbringing?" }
+    },
+    quiz: {
+      prompt: "According to Krishnamurti, where is freedom found?",
+      options: ["At the end of spiritual practice", "In the beginning, when conditioning stops operating", "In choosing the right path", "In understanding philosophy"],
+      answer: 1,
+      observation: "A radical insight: freedom isn't somewhere you go — it's what remains when all the layers of conditioning fall away. You don't achieve freedom. You remove what blocks it."
+    },
+    writingPrompt: "What conditioning shapes the way you see the world? Can you see it from the outside, even for a moment?"
+  },
+  {
+    day: 7, theme: "Silence",
+    question: "What happens when the mind becomes completely quiet?",
+    quote: "In {silence}, there is a {quality} of {attention} that is not the {product} of thought. This attention is {intelligence}, and it is this intelligence that {transforms} what is.",
+    words: {
+      silence: { pos: "n.", phonetic: "/ˈsaɪləns/", meaning: "Complete absence of sound — but here, it means the quieting of the entire mental machinery.", context: "Silence is not emptiness. It's fullness. The mind, when truly still, has a capacity that noise drowns out.", reflect: "When was the last time your mind was truly quiet?" },
+      quality: { pos: "n.", phonetic: "/ˈkwɒlɪti/", meaning: "A distinctive attribute. The 'quality' of this attention is different from ordinary focused attention.", context: "This quality of attention has no center, no direction, no purpose. It just is. And in that 'just is,' everything becomes clear.", reflect: "Have you ever experienced attention without effort?" },
+      attention: { pos: "n.", phonetic: "/əˈtenʃən/", meaning: "The act of directing one's mind. But Krishnamurti's attention is passive — like sunlight, not a spotlight.", context: "Ordinary attention focuses on something. This attention illuminates everything equally, without choosing.", reflect: "What would it be like to attend to everything equally?" },
+      product: { pos: "n.", phonetic: "/ˈprɒdʌkt/", meaning: "Something produced. Thought produces results. Silence produces nothing — yet everything becomes possible.", context: "The 'product' of thought is always limited. The 'quality' that arises in silence is not made — it's discovered.", reflect: "Do you tend to value what you produce over what you discover?" },
+      intelligence: { pos: "n.", phonetic: "/ɪnˈtelɪdʒəns/", meaning: "The ability to understand. For Krishnamurti, true intelligence is not IQ — it's the natural clarity that emerges when the mind is still.", context: "Intelligence is not accumulated knowledge. It's the living response to what is happening now, seen without the filter of the past.", reflect: "Is intelligence the same as being smart? Or is it something else?" },
+      transforms: { pos: "v.", phonetic: "/trænsˈfɔːrmz/", meaning: "To make a thorough change in form or appearance. But here, it happens without effort — naturally, like snow melting.", context: "Transformation doesn't require willpower. It happens by itself when the mind sees clearly. The seeing IS the transformation.", reflect: "Has something ever shifted in you without effort — just from seeing something clearly?" }
+    },
+    quiz: {
+      prompt: "What is the nature of the 'intelligence' that arises in silence?",
+      options: ["It is the product of deep thinking", "It is accumulated knowledge applied wisely", "It is not made by thought — it arises naturally when the mind is still", "It is a special ability only some people have"],
+      answer: 2,
+      observation: "You've touched the heart of Krishnamurti's teaching: true intelligence is not something you build or earn. It's what the mind discovers when it stops churning. It's already there — you just can't hear it in the noise."
+    },
+    writingPrompt: "Sit in silence for one minute. Then write what you noticed — in the world, and in yourself."
+  }
+];
+
+const THEMES = ["Fear","Love","Time","Thought","Relationship","Freedom","Silence",
+  "Desire","Death","Awareness","Conditioning","Violence","Compassion","Solitude",
+  "Authority","Happiness","Suffering","Truth","Action","Meditation"];
+
+const SUGGEST_WORDS = [
+  "observe","notice","feel","sense","become","emerge","dissolve",
+  "aware","present","gentle","deep","quiet","still","whole","true",
+  "moment","breath","attention","reflect","simply","direct","between"
+];
+
+// ===== STATE =====
+let state = {
+  learnerProfile: null,
+  currentDay: 0,
+  touchedWords: new Set(),
+  quizAnswered: false,
+  writingSaved: false,
+  marks: { touch: false, deep: false, quiz: false, write: false },
+  streak: [],
+  diary: [],
+  learnedThemes: new Set()
+};
+
+function loadState() {
+  try {
+    const saved = localStorage.getItem('observer_state');
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      state.currentDay = parsed.currentDay || 0;
+      state.touchedWords = new Set(parsed.touchedWords || []);
+      state.marks = parsed.marks || { touch:false, deep:false, quiz:false, write:false };
+      state.streak = parsed.streak || [];
+      state.diary = parsed.diary || [];
+      state.learnedThemes = new Set(parsed.learnedThemes || []);
+      state.learnerProfile = parsed.learnerProfile || null;
+      state.quizAnswered = false;
+      state.writingSaved = false;
+      state.touchedWords.clear();
+      state.marks = { touch:false, deep:false, quiz:false, write:false };
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('observer_state', JSON.stringify({
+      learnerProfile: state.learnerProfile,
+      currentDay: state.currentDay,
+      touchedWords: [...state.touchedWords],
+      marks: state.marks,
+      streak: state.streak,
+      diary: state.diary,
+      learnedThemes: [...state.learnedThemes]
+    }));
+  } catch(e) {}
+}
+
+// ===== SPLASH =====
+function startGame(profile) {
+  state.learnerProfile = profile;
+  saveState();
+  document.getElementById('splash').classList.add('hidden');
+  document.getElementById('app').classList.add('active');
+  document.getElementById('bottomNav').style.display = 'flex';
+  loadDay(state.currentDay);
+}
+
+// ===== LOAD DAY =====
+function loadDay(dayIndex) {
+  dayIndex = dayIndex % LESSONS.length;
+  state.currentDay = dayIndex;
+  const lesson = LESSONS[dayIndex];
+
+  // Nav
+  document.getElementById('navDay').textContent = `Day ${dayIndex + 1}`;
+  const treeEmoji = state.streak.length >= 7 ? '🌳' : state.streak.length >= 3 ? '🌿' : '🌱';
+  document.getElementById('navTree').textContent = treeEmoji;
+
+  // Question
+  document.getElementById('dailyQuestion').textContent = lesson.question;
+
+  // Theme tag
+  document.getElementById('themeTag').textContent = lesson.theme;
+
+  // Quote with touchable words
+  let html = lesson.quote;
+  Object.keys(lesson.words).forEach(w => {
+    html = html.replace(`{${w}}`, `<span class="touchable" onclick="touchWord('${w}')" id="tw_${w}">${w}</span>`);
+  });
+  document.getElementById('quoteText').innerHTML = html;
+
+  // Quiz
+  document.getElementById('quizPrompt').innerHTML = lesson.quiz.prompt;
+  const quizDiv = document.getElementById('quizOptions');
+  quizDiv.innerHTML = '';
+  lesson.quiz.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-opt';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuiz(i);
+    quizDiv.appendChild(btn);
+  });
+  document.getElementById('observation').classList.remove('show');
+
+  // Writing
+  document.getElementById('writingPrompt').textContent = lesson.writingPrompt;
+  document.getElementById('writingBox').value = '';
+
+  // Reset marks
+  state.touchedWords.clear();
+  state.quizAnswered = false;
+  state.writingSaved = false;
+  state.marks = { touch:false, deep:false, quiz:false, write:false };
+  updateMarks();
+
+  closeWordPanel();
+}
+
+// ===== TOUCH WORD =====
+function touchWord(word) {
+  const lesson = LESSONS[state.currentDay];
+  const w = lesson.words[word];
+  if (!w) return;
+
+  state.touchedWords.add(word);
+  state.marks.touch = true;
+  if (state.touchedWords.size >= 3) state.marks.deep = true;
+  updateMarks();
+
+  // Highlight word
+  const el = document.getElementById('tw_' + word);
+  if (el) el.classList.add('active');
+
+  // Show panel
+  document.getElementById('wpWord').textContent = word;
+  document.getElementById('wpPos').textContent = w.pos;
+  document.getElementById('wpPhonetic').textContent = w.phonetic;
+  document.getElementById('wpMeaning').textContent = w.meaning;
+  document.getElementById('wpContext').textContent = `"${w.context}"`;
+  document.getElementById('wpReflect').textContent = '💭 ' + w.reflect;
+  document.getElementById('wordPanel').classList.add('open');
+}
+
+function closeWordPanel() {
+  document.getElementById('wordPanel').classList.remove('open');
+}
+
+// ===== QUIZ =====
+function answerQuiz(idx) {
+  if (state.quizAnswered) return;
+  state.quizAnswered = true;
+  state.marks.quiz = true;
+  updateMarks();
+
+  const lesson = LESSONS[state.currentDay];
+  const opts = document.querySelectorAll('.quiz-opt');
+  opts.forEach((btn, i) => {
+    if (i === lesson.quiz.answer) btn.classList.add('correct');
+    else if (i === idx && i !== lesson.quiz.answer) btn.classList.add('wrong');
+    btn.style.pointerEvents = 'none';
+  });
+
+  const obsEl = document.getElementById('observation');
+  obsEl.innerHTML = `<div class="obs-label">Observation</div>${lesson.quiz.observation}`;
+  obsEl.classList.add('show');
+}
+
+// ===== WRITING =====
+function suggestWord() {
+  const random = SUGGEST_WORDS[Math.floor(Math.random() * SUGGEST_WORDS.length)];
+  const box = document.getElementById('writingBox');
+  const start = box.selectionStart;
+  const end = box.selectionEnd;
+  const text = box.value;
+  box.value = text.slice(0, start) + random + ' ' + text.slice(end);
+  box.focus();
+  box.setSelectionRange(start + random.length + 1, start + random.length + 1);
+}
+
+function showHint() {
+  const lesson = LESSONS[state.currentDay];
+  const words = Object.keys(lesson.words);
+  const random = words[Math.floor(Math.random() * words.length)];
+  const w = lesson.words[random];
+  alert(`💡 Try using "${random}" (${w.pos})\n\n"${random}" ${w.meaning.split('.')[0]}.`);
+}
+
+function saveWriting() {
+  const text = document.getElementById('writingBox').value.trim();
+  if (!text) return;
+
+  state.marks.write = true;
+  state.writingSaved = true;
+  updateMarks();
+
+  // Add to diary
+  const lesson = LESSONS[state.currentDay];
+  if (!state.streak.includes(state.currentDay)) {
+    state.streak.push(state.currentDay);
+  }
+  state.diary.unshift({
+    day: state.currentDay + 1,
+    theme: lesson.theme,
+    text: text,
+    date: new Date().toLocaleDateString()
+  });
+  state.learnedThemes.add(lesson.theme);
+
+  saveState();
+
+  const btn = document.querySelector('.writing-save');
+  btn.textContent = '✓ Saved';
+  btn.style.opacity = '0.6';
+  btn.style.pointerEvents = 'none';
+}
+
+// ===== MARKS =====
+function updateMarks() {
+  const markMap = { touch:'markTouch', deep:'markDeep', quiz:'markQuiz', write:'markWrite' };
+  Object.entries(state.marks).forEach(([key, val]) => {
+    const el = document.getElementById(markMap[key]);
+    if (val) el.classList.add('earned');
+    else el.classList.remove('earned');
+  });
+}
+
+// ===== NAVIGATION =====
+function navTo(section) {
+  document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  if (section === 'map') openModal('themeMap');
+  else if (section === 'journal') openModal('diary');
+  else if (section === 'streak') openModal('themeMap');
+  // 'today' = do nothing, already on main
+}
+
+// ===== MODALS =====
+function openModal(type) {
+  if (type === 'themeMap') {
+    const clustersDiv = document.getElementById('themeClusters');
+    clustersDiv.innerHTML = '';
+    THEMES.forEach(t => {
+      const bubble = document.createElement('span');
+      bubble.className = 'theme-bubble' + (state.learnedThemes.has(t) ? ' learned' : '');
+      bubble.textContent = t;
+      bubble.onclick = () => {
+        // Find a lesson with this theme
+        const idx = LESSONS.findIndex(l => l.theme === t);
+        if (idx >= 0) {
+          closeModal('themeMap');
+          loadDay(idx);
+        } else {
+          bubble.style.animation = 'breathe 1s';
+          setTimeout(() => bubble.style.animation = '', 1000);
+        }
+      };
+      clustersDiv.appendChild(bubble);
+    });
+
+    // Forest
+    const forestDiv = document.getElementById('forest');
+    forestDiv.innerHTML = '';
+    for (let i = 0; i < 30; i++) {
+      const tree = document.createElement('div');
+      tree.className = 'forest-tree' + (state.streak.includes(i) ? ' grown' : '');
+      tree.textContent = state.streak.includes(i) ? '🌳' : '·';
+      tree.title = `Day ${i + 1}`;
+      forestDiv.appendChild(tree);
+    }
+
+    document.getElementById('themeMapModal').classList.add('open');
+  }
+  else if (type === 'diary') {
+    const entriesDiv = document.getElementById('diaryEntries');
+    if (state.diary.length === 0) {
+      entriesDiv.innerHTML = '<div class="diary-empty">Your journal is empty.<br>Begin by writing your first reflection today.</div>';
+    } else {
+      entriesDiv.innerHTML = '';
+      state.diary.slice(0, 10).forEach(e => {
+        const entry = document.createElement('div');
+        entry.className = 'diary-entry';
+        entry.innerHTML = `<div class="de-day">Day ${e.day} · ${e.theme} · ${e.date}</div><div class="de-text">${e.text}</div>`;
+        entriesDiv.appendChild(entry);
+      });
+    }
+    document.getElementById('diaryModal').classList.add('open');
+  }
+}
+
+function closeModal(type) {
+  if (type === 'themeMap') document.getElementById('themeMapModal').classList.remove('open');
+  else if (type === 'diary') document.getElementById('diaryModal').classList.remove('open');
+}
+
+// Close modals on overlay click
+document.querySelectorAll('.modal-overlay').forEach(overlay => {
+  overlay.addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.classList.remove('open');
+    }
+  });
+});
+
+// ===== INIT =====
+loadState();
+</script>
+</body>
+</html>
