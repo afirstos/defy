@@ -568,13 +568,13 @@
 <!-- DAY PICKER MODAL -->
 <div class="modal-overlay" id="dayPickerModal">
   <div class="modal">
-    <h3 id="dayPickerTitle">January - Listening</h3>
-    <div id="dayPickerGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:300px;margin:0 auto"></div>
-    <div style="display:flex;justify-content:center;gap:1rem;margin-top:1rem">
-      <button class="modal-close" onclick="goPrevDay();closeModal('dayPicker')">← Prev</button>
-      <button class="modal-close" onclick="goNextDay();closeModal('dayPicker')">Next →</button>
+    <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem">
+      <button class="modal-close" onclick="dayPickerMonth(-1)" style="margin:0;padding:0.4rem 0.8rem" id="dpPrev">←</button>
+      <h3 id="dayPickerTitle" style="margin:0">January</h3>
+      <button class="modal-close" onclick="dayPickerMonth(1)" style="margin:0;padding:0.4rem 0.8rem" id="dpNext">→</button>
     </div>
-    <button class="modal-close" onclick="closeModal('dayPicker')" style="margin-top:0.8rem">Close</button>
+    <div id="dayPickerGrid" style="display:grid;grid-template-columns:repeat(7,1fr);gap:6px;max-width:300px;margin:0 auto"></div>
+    <button class="modal-close" onclick="closeModal('dayPicker')" style="margin-top:1rem">Close</button>
   </div>
 </div>
 
@@ -5799,7 +5799,7 @@ const LESSONS = [
     "theme": "Desire",
     "title": "Understanding Desire",
     "question": "Can you observe Understanding Desire without wanting to change it?",
-    "quote": "We  have  to  understand  {desire};  and  it  is  very  difficult  to understand  something  which  is  so  vital,  so  demanding,  so  urgent, because  in  the  very  fulfillment  of  desire  passion  is  engendered,  with the  {pleasure}  and  the  pain  of  it.  And  if  one  is  to  understand  desire, obviously, there must be  no choice.",
+    "quote": "We  have  to  understand  {desire};  and  it  is  very  difficult  to understand  something  which  is  so  vital,  so  demanding,  so  urgent, because  in  the  very  fulfillment  of  desire  passion  is  engendered,  with the  {pleasure}  and  the  pain  of  it.  And  if  one  is  to  understand  desire, obviously, there must be  no choice. You cannot {judge} desire as {being} good or bad, noble or ignoble, or say, “I will keep this desire and deny that one.” All that must  be  set aside if we are  to  find  out the truth of desire—the {beauty} of it, the ugliness or whatever it may be.",
     "words": {
       "pleasure": {
         "pos": "n.",
@@ -7411,13 +7411,6 @@ const LESSONS = [
         "context": "In this passage about Passion Without a Cause: Being in conflict with oneself; human beings are a bundle of contradictions.",
         "reflect": "How does \"contradiction\" relate to your own experience?"
       },
-      "conditioning": {
-        "pos": "n.",
-        "phonetic": "/kənˈdɪʃənɪŋ/",
-        "meaning": "The accumulated influence of culture, society, family - the invisible prison of the mind.",
-        "context": "In this passage about Passion Without a Cause: The accumulated influence of culture, society, family - the invisible prison of the mind.",
-        "reflect": "How does \"conditioning\" relate to your own experience?"
-      },
       "attachment": {
         "pos": "n.",
         "phonetic": "/əˈtætʃmənt/",
@@ -7431,6 +7424,13 @@ const LESSONS = [
         "meaning": "Friction between opposites; arises when we resist what is.",
         "context": "In this passage about Passion Without a Cause: Friction between opposites; arises when we resist what is.",
         "reflect": "How does \"conflict\" relate to your own experience?"
+      },
+      "examine": {
+        "pos": "v.",
+        "phonetic": "/ɪɡˈzæmɪn/",
+        "meaning": "To inspect closely; can you examine yourself without the examiner?",
+        "context": "In this passage about Passion Without a Cause: To inspect closely; can you examine yourself without the examiner?.",
+        "reflect": "How does \"examine\" relate to your own experience?"
       }
     },
     "quiz": {
@@ -8307,7 +8307,7 @@ const LESSONS = [
     "theme": "Perception",
     "title": "Memory Clouds Perception",
     "question": "Can you observe Memory Clouds Perception without wanting to change it?",
-    "quote": ".",
+    "quote": "Are  you  speculating,  or  are  you  actually  {experiencing}  as  we  are going along? You do not know what a {religious} {mind} is, do you? From what you have said, you don’t know what it means; you may have just a  flutter  or  a  glimpse  of  it,  just  as  you  see  the  clear,  lovely  blue  sky when  the  cloud  is  broken  through;  but  the  moment  you  have perceived the blue sky, you have a {memory} of it, you want more of it and  therefore  you  are  lost  in  it;  the  more  you  want  the  word  for storing it as an {experience}, the more you are lost in it.",
     "words": {
       "experience": {
         "pos": "n.",
@@ -10923,9 +10923,9 @@ const LESSONS = [
     },
     "writingPrompt": "Reflect on: \"That Thing Which You Fight You Become\". What does this mean in your own life? Write 1-3 sentences."
   }
-];;;;;;
+];;;;;;;
 
-const THEMES = ["Action", "Attention", "Authority", "Awareness", "Belief", "Change", "Conditioning", "Conflict", "Desire", "Duality", "Emotion", "Energy", "Ethics", "Evolution", "Experience", "Fear", "Feeling", "Freedom", "Innocence", "Intelligence", "Learning", "Listening", "Love", "Memory", "Mind", "Passion", "Perception", "Pleasure", "Relationship", "Self-Knowledge", "Sex", "Suffering", "Thought", "Violence"];;;;;;
+const THEMES = ["Action", "Attention", "Authority", "Awareness", "Belief", "Change", "Conditioning", "Conflict", "Desire", "Duality", "Emotion", "Energy", "Ethics", "Evolution", "Experience", "Fear", "Feeling", "Freedom", "Innocence", "Intelligence", "Learning", "Listening", "Love", "Memory", "Mind", "Passion", "Perception", "Pleasure", "Relationship", "Self-Knowledge", "Sex", "Suffering", "Thought", "Violence"];;;;;;;
 
 const SUGGEST_WORDS = [
   "observe","notice","feel","sense","become","emerge","dissolve",
@@ -11229,22 +11229,45 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 // ===== DAY NAVIGATION =====
+const MONTH_NAMES = ['','January','February','March','April','May','June','July','August','September','October','November','December'];
+let _dpMonth = 1;
+
 function showDayPicker() {
-  const overlay = document.getElementById('dayPickerModal');
+  const lesson = LESSONS[state.currentDay];
+  if (lesson) _dpMonth = lesson.month;
+  renderDayPicker();
+  document.getElementById('dayPickerModal').classList.add('open');
+}
+
+function dayPickerMonth(delta) {
+  const maxMonth = LESSONS.reduce((m, l) => Math.max(m, l.month), 1);
+  _dpMonth = Math.max(1, Math.min(maxMonth, _dpMonth + delta));
+  renderDayPicker();
+}
+
+function renderDayPicker() {
   const grid = document.getElementById('dayPickerGrid');
-  if (!overlay) return;
+  const title = document.getElementById('dayPickerTitle');
+  const prev = document.getElementById('dpPrev');
+  const next = document.getElementById('dpNext');
+  const maxMonth = LESSONS.reduce((m, l) => Math.max(m, l.month), 1);
+
+  title.textContent = MONTH_NAMES[_dpMonth];
+  prev.style.visibility = _dpMonth <= 1 ? 'hidden' : 'visible';
+  next.style.visibility = _dpMonth >= maxMonth ? 'hidden' : 'visible';
+
   grid.innerHTML = '';
-  for (let i = 0; i < LESSONS.length; i++) {
+  const monthLessons = LESSONS.filter(l => l.month === _dpMonth);
+  monthLessons.forEach(lesson => {
+    const idx = LESSONS.indexOf(lesson);
     const btn = document.createElement('button');
-    btn.className = 'day-pick-btn' + (i === state.currentDay ? ' current' : '');
-    btn.textContent = i + 1;
-    const d = i + 1;
-    btn.title = LESSONS[i].title;
-    if (state.streak.includes(i)) btn.classList.add('done');
-    btn.onclick = () => { closeModal('dayPicker'); loadDay(i); window.scrollTo(0,0); };
+    btn.className = 'day-pick-btn' + (idx === state.currentDay ? ' current' : '');
+    btn.textContent = lesson.day;
+    btn.title = lesson.title;
+    if (state.streak.includes(idx)) btn.classList.add('done');
+    btn.onclick = () => { closeModal('dayPicker'); loadDay(idx); window.scrollTo(0,0); };
     grid.appendChild(btn);
-  }
-  overlay.classList.add('open');
+  });
 }
 
 function goPrevDay() {
