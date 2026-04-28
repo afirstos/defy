@@ -608,6 +608,7 @@
     .quote-text { font-size: 0.95rem; }
   }
 </style>
+<script src="game_lessons.js"></script>
 </head>
 <body>
 
@@ -818,37 +819,30 @@ let LESSONS = [];
 let THEMES = [];
 
 (function loadData() {
-  const loadingEl = document.getElementById('dataLoading');
-  // resolve path: same dir as this HTML
-  const base = (document.currentScript && document.currentScript.src)
-    ? document.currentScript.src.replace(/[^/]+$/, '')
-    : (location.pathname.replace(/[^/]+$/, '') || '/');
-  const jsonUrl = base + 'game_lessons.json';
-
+  var loadingEl = document.getElementById('dataLoading');
+  function onData(data) {
+    LESSONS = data;
+    THEMES = Array.from(new Set(data.map(function(l){return l.theme}))).sort();
+    if (loadingEl) loadingEl.style.display = 'none';
+    loadState();
+    if (state.learnerProfile) startGame(state.learnerProfile);
+  }
+  function onError(msg) {
+    console.error('Failed to load lesson data:', msg);
+    if (loadingEl) {
+      loadingEl.innerHTML = '<div style="color:#c47a6a;text-align:center;padding:2rem">' +
+        'Could not load lesson data.<br><small>' + msg + '</small><br>' +
+        '<button onclick="location.reload()" style="margin-top:1rem;padding:0.5rem 1.2rem;' +
+        'border:1px solid #c47a6a;background:transparent;color:#c47a6a;border-radius:8px;cursor:pointer">Retry</button></div>';
+    }
+  }
+  if (window.__LESSONS_DATA__) { onData(window.__LESSONS_DATA__); return; }
   if (loadingEl) loadingEl.style.display = 'flex';
-
-  fetch(jsonUrl)
-    .then(r => {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
-    .then(data => {
-      LESSONS = data;
-      THEMES = [...new Set(data.map(l => l.theme))].sort();
-      if (loadingEl) loadingEl.style.display = 'none';
-      // resume app boot
-      loadState();
-      if (state.learnerProfile) startGame(state.learnerProfile);
-    })
-    .catch(err => {
-      console.error('Failed to load game_lessons.json:', err);
-      if (loadingEl) {
-        loadingEl.innerHTML = '<div style="color:#c47a6a;text-align:center;padding:2rem">' +
-          '⚠️ Could not load lesson data.<br><small>' + err.message + '</small><br>' +
-          '<button onclick="location.reload()" style="margin-top:1rem;padding:0.5rem 1.2rem;' +
-          'border:1px solid #c47a6a;background:transparent;color:#c47a6a;border-radius:8px;cursor:pointer">Retry</button></div>';
-      }
-    });
+  var base = location.href.replace(/[^\/]+$/, '');
+  fetch(base + 'game_lessons.json')
+    .then(function(r){ if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(onData)
+    .catch(function(e){ onError(e.message); });
 })();
 
 const SUGGEST_WORDS = [
