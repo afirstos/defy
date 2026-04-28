@@ -908,7 +908,16 @@ function loadState() {
       }
     }
   } catch(e) {}
-  if (state.currentDay < 0) state.currentDay = getTodayDayIndex();
+  // Always update to today's index if the app is reopened on a new day
+  const todayIdx = getTodayDayIndex();
+  if (state.currentDay < 0 || state.currentDay !== todayIdx) {
+    state.currentDay = todayIdx;
+    // Reset per-day progress for the new day
+    state.quizAnswered = false;
+    state.writingSaved = false;
+    state.touchedWords = new Set();
+    state.marks = { touch: false, deep: false, quiz: false, write: false };
+  }
 }
 
 function saveState() {
@@ -954,8 +963,10 @@ function loadDay(dayIndex) {
   state.currentDay = dayIndex;
   const lesson = LESSONS[dayIndex];
 
-  // Nav
-  document.getElementById('navDay').textContent = `Day ${dayIndex + 1}`;
+  // Nav - show month/day format
+  const monthNames = ['','Jan','Feb','Mar','Apr','May','Jun'];
+  const dayOfMonth = dayIndex - (MONTH_OFFSETS[lesson.month] || 0) + 1;
+  document.getElementById('navDay').textContent = `${monthNames[lesson.month]} ${dayOfMonth}`;
   const treeEmoji = state.streak.length >= 7 ? '🌳' : state.streak.length >= 3 ? '🌿' : '🌱';
   document.getElementById('navTree').textContent = treeEmoji;
 
@@ -1572,7 +1583,7 @@ function renderMapPage() {
       if (i === todayIdx) cls += " today";
       if (i === state.currentDay) cls += " current";
       dot.className = cls;
-      dot.textContent = i + 1;
+      dot.textContent = i - md.offset + 1;
       dot.title = LESSONS[i].title + " (" + LESSONS[i].theme + ")";
       dot.setAttribute("data-day", i);
       daysDiv.appendChild(dot);
@@ -1639,11 +1650,12 @@ function renderDayPicker() {
 
   grid.innerHTML = '';
   const monthLessons = LESSONS.filter(l => l.month === _dpMonth);
+  const monthOffsets = {1:0, 2:31, 3:59, 4:90, 5:120, 6:151};
   monthLessons.forEach(lesson => {
     const idx = LESSONS.indexOf(lesson);
     const btn = document.createElement('button');
     btn.className = 'day-pick-btn' + (idx === state.currentDay ? ' current' : '');
-    btn.textContent = lesson.day;
+    btn.textContent = lesson.day - (monthOffsets[lesson.month] || 0);
     btn.title = lesson.title;
     if (state.streak.includes(idx)) btn.classList.add('done');
     btn.onclick = () => { closeModal('dayPicker'); loadDay(idx); window.scrollTo(0,0); };
