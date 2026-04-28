@@ -836,7 +836,10 @@ let THEMES = [];
         'border:1px solid #c47a6a;background:transparent;color:#c47a6a;border-radius:8px;cursor:pointer">Retry</button></div>';
     }
   }
-  if (window.__LESSONS_DATA__) { onData(window.__LESSONS_DATA__); return; }
+  if (window.__LESSONS_DATA__) {
+    document.addEventListener('DOMContentLoaded', function(){ onData(window.__LESSONS_DATA__); });
+    return;
+  }
   if (loadingEl) loadingEl.style.display = 'flex';
   var base = location.href.replace(/[^\/]+$/, '');
   fetch(base + 'game_lessons.json')
