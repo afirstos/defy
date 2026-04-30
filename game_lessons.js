@@ -49,15 +49,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Listen with Ease</em>, what is the speaker asking us to observe?",
+      "prompt": "What makes true listening different from ordinary hearing?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Hearing uses ears, listening uses the mind",
+        "Listening requires no effort, no projection, no desire",
+        "Hearing is physical, listening is intellectual analysis",
+        "Listening needs concentration and focus"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "True listening is effortless awareness that takes in everything without the filter of past knowledge or desire. It is not an act of will but a state of receptive attention.",
+      "hint": "The quote speaks of a quality of attention that is different from the ordinary mind..."
     },
     "writingPrompt": "Reflect on: \"Listen with Ease\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -142,15 +143,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"projection\"</em> play in this teaching?",
+      "prompt": "Why does the speaker say that effort prevents listening?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Effort creates noise and distraction in the mind",
+        "Effort is needed for everything worthwhile",
+        "Only lazy people can truly listen",
+        "Effort should be directed outward, not inward"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"projection\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 0,
+      "observation": "When you make an effort to listen, the very effort becomes the center of your attention - not the sound, not the meaning. The listener disappears when effort arises.",
+      "hint": "Notice what the quote says about effort and trying..."
     },
     "writingPrompt": "Think of a moment when \"Putting Aside Screens\" was real for you. Describe what you noticed.",
     "fill": {
@@ -237,15 +239,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What happens when we listen through the 'screen' of our desires?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "We hear more clearly what we need to hear",
+        "We only hear our own voice, our own projections",
+        "We become better at filtering information",
+        "We learn to protect ourselves from harm"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The screen of desire, fear, hope - these are not windows but walls. Through them, we never meet reality; we only meet our own reflection again and again.",
+      "hint": "The quote mentions something that comes naturally when the mind is quiet..."
     },
     "writingPrompt": "If you could explain \"Beyond the Noise of Words\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -333,15 +336,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Listening Without Thought</em>, what is the speaker asking us to observe?",
+      "prompt": "According to this passage, what is the relationship between listening and freedom?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Freedom is the reward for listening well",
+        "Listening itself is freedom - the act brings its own liberation",
+        "You must be free before you can listen",
+        "They are unrelated concepts"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "This is a radical insight: listening is not a means to freedom. The very act of listening, when complete and total, IS freedom. There is no gap between the act and its fruit.",
+      "hint": "What allows the mind to receive without distortion?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"Listening Without Thought\"? Observe without judging.",
     "fill": {
@@ -434,15 +438,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"comparison\"</em> play in this teaching?",
+      "prompt": "Why is listening called an 'art' in this teaching?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because it requires special talent and skill",
+        "Because it cannot be taught, only discovered",
+        "Because it creates beauty and understanding",
+        "Because it is a refined cultural activity"
       ],
       "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"comparison\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "observation": "Art creates beauty through direct perception, not through technique. Listening is art because it transforms both listener and that which is heard - there is beauty, there is understanding.",
+      "hint": "The speaker in the quote is describing a state of being, not a technique..."
     },
     "writingPrompt": "Reflect on: \"Listening Brings Freedom\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -529,15 +534,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What makes true listening different from ordinary hearing?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Hearing uses ears, listening uses the mind",
+        "Listening requires no effort, no projection, no desire",
+        "Hearing is physical, listening is intellectual analysis",
+        "Listening needs concentration and focus"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "True listening is effortless awareness that takes in everything without the filter of past knowledge or desire. It is not an act of will but a state of receptive attention.",
+      "hint": "The quote speaks of a quality of attention that is different from the ordinary mind..."
     },
     "writingPrompt": "Think of a moment when \"Listening Without Effort\" was real for you. Describe what you noticed.",
     "fill": {
@@ -614,15 +620,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Listening to Yourself</em>, what is the speaker asking us to observe?",
+      "prompt": "Why does the speaker say that effort prevents listening?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Effort creates noise and distraction in the mind",
+        "Effort is needed for everything worthwhile",
+        "Only lazy people can truly listen",
+        "Effort should be directed outward, not inward"
       ],
       "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "observation": "When you make an effort to listen, the very effort becomes the center of your attention - not the sound, not the meaning. The listener disappears when effort arises.",
+      "hint": "Notice what the quote says about effort and trying..."
     },
     "writingPrompt": "If you could explain \"Listening to Yourself\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -710,15 +717,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"contradiction\"</em> play in this teaching?",
+      "prompt": "What does it mean to be aware without the observer?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "To watch yourself as if from outside",
+        "To observe without judgment, naming, or the 'me' looking",
+        "To dissociate from your emotions",
+        "To become like a camera recording events"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"contradiction\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The observer is the past - memory, judgment, the 'me'. When you observe without this observer, there is only observation. The division between seer and seen dissolves.",
+      "hint": "Notice how awareness is described in relation to time and practice..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Look with Intensity\"? Observe without judging.",
     "fill": {
@@ -808,15 +816,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "How does awareness relate to thought?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Awareness stops thought completely",
+        "Awareness sees thought arising without being caught in it",
+        "Thought must be controlled before awareness can happen",
+        "They are opposing forces that cannot coexist"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Awareness doesn't fight thought. It sees thought moving, sees its origin, sees its ending. In that seeing, thought loses its binding power - not through resistance, but through understanding.",
+      "hint": "What does the quote reveal about the nature of watching?"
     },
     "writingPrompt": "Reflect on: \"To Learn, the Mind Must Be Quiet\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -889,15 +898,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Learning Is Not Experience</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the relationship between learning and humility?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "You must be humble to learn",
+        "Learning cultivates humility as a virtue",
+        "A mind that learns is naturally humble - it doesn't know",
+        "Humility is a prerequisite for spiritual learning"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 2,
+      "observation": "The moment you say 'I know', learning stops. Humility is not a practice or a virtue to cultivate - it is the natural state of a mind that is learning, that doesn't accumulate.",
+      "hint": "Look for what the quote says about the relationship between learning and freedom..."
     },
     "writingPrompt": "Think of a moment when \"Learning Is Not Experience\" was real for you. Describe what you noticed.",
     "fill": {
@@ -991,15 +1001,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "Why does the speaker distinguish learning from knowledge?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Knowledge is dangerous and should be avoided",
+        "Learning is active, knowledge is static accumulation from the past",
+        "Knowledge is for school, learning is for life",
+        "Learning makes you humble, knowledge makes you proud"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Knowledge is always of the past - what you have read, experienced, accumulated. Learning is the movement of discovery NOW. One is dead weight, the other is alive movement.",
+      "hint": "The quote speaks of a kind of knowing that is always fresh..."
     },
     "writingPrompt": "If you could explain \"When Is Learning Possible?\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -1084,15 +1095,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What does it mean that 'learning has no past'?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Forget everything you know before learning",
+        "Each moment of learning must be fresh, not built on accumulation",
+        "Children learn better than adults",
+        "The past has no value in education"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "If you learn from the past, you are not learning - you are projecting. True learning is to meet each moment without the background of yesterday, to see as if for the first time.",
+      "hint": "Notice how the quote distinguishes two kinds of knowing..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Learning Is Never Accumulative\"? Observe without judging.",
     "fill": {
@@ -1178,15 +1190,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Learning Has No Past</em>, what is the speaker asking us to observe?",
+      "prompt": "What does it mean to be aware without the observer?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "To watch yourself as if from outside",
+        "To observe without judgment, naming, or the 'me' looking",
+        "To dissociate from your emotions",
+        "To become like a camera recording events"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The observer is the past - memory, judgment, the 'me'. When you observe without this observer, there is only observation. The division between seer and seen dissolves.",
+      "hint": "Notice how awareness is described in relation to time and practice..."
     },
     "writingPrompt": "Reflect on: \"Learning Has No Past\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -1274,15 +1287,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"experience\"</em> play in this teaching?",
+      "prompt": "What does it mean to be free from authority?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "To rebel against all leaders and teachers",
+        "To see the truth for yourself, without intermediaries",
+        "To become your own authority",
+        "To reject all guidance and tradition"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"experience\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Freedom from authority is not rebellion - it is independence. Not 'I know better' but 'I must see for myself'. The truth is not transmitted; it must be discovered.",
+      "hint": "The speaker is pointing to a universal tendency of the mind..."
     },
     "writingPrompt": "Think of a moment when \"Authority Prevents Learning\" was real for you. Describe what you noticed.",
     "fill": {
@@ -1372,15 +1386,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why is the 'old mind' bound by authority?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because tradition is valuable and should be preserved",
+        "The old mind has accumulated patterns, beliefs, fears - all authority",
+        "Older people are more set in their ways",
+        "The old mind has more experience of authority"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The old mind is the conditioned mind - layers of tradition, belief, fear, authority. It cannot see anew because it IS the past. Freedom requires a new mind, not a reformed old one.",
+      "hint": "Look for what the quote says about certainty and security..."
     },
     "writingPrompt": "If you could explain \"To Destroy Is to Create\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -1468,15 +1483,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Virtue Has No Authority</em>, what is the speaker asking us to observe?",
+      "prompt": "Why do we seek authority according to this teaching?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Because we are naturally followers, not leaders",
+        "To be certain, safe, to avoid the responsibility of finding out",
+        "Because authorities have more experience and wisdom",
+        "Because society is structured around hierarchy"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "We want certainty. We want someone to tell us. We are afraid to stand alone, to find out for ourselves. Authority is our escape from the responsibility of freedom.",
+      "hint": "The quote speaks of something we all carry that creates division..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Virtue Has No Authority\"? Observe without judging.",
     "fill": {
@@ -1565,15 +1581,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "What happens to both leader and follower in the relationship of authority?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Both benefit from the exchange of guidance",
+        "Both are corrupted - one dominates, one submits",
+        "The leader grows wiser, the follower grows dependent",
+        "The relationship is neutral if the leader is genuine"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Authority corrupts both. The leader becomes the authority, which blinds them. The follower gives away their intelligence. Neither is free. Both are trapped in the same movement.",
+      "hint": "Notice what the quote says about following and the self..."
     },
     "writingPrompt": "Reflect on: \"The Old Mind Is Bound by Authority\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -1660,15 +1677,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can freedom exist while there is fear?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, freedom is acting despite fear",
+        "No - fear binds the mind to security and the known",
+        "Fear and freedom are unrelated",
+        "Freedom gradually reduces fear"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Fear is the movement away from 'what is' - it is the seeking of security. Freedom is the ending of this movement. Where there is fear, there is bondage; where there is freedom, fear cannot exist.",
+      "hint": "What does the quote reveal about the nature of choice?"
     },
     "writingPrompt": "Think of a moment when \"Free at the Beginning\" was real for you. Describe what you noticed.",
     "fill": {
@@ -1739,15 +1757,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Liberation from Ignorance</em>, what is the speaker asking us to observe?",
+      "prompt": "Why do we cling to suffering?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "We don't; we want to be free of it",
+        "Because suffering gives the 'me' continuity and importance",
+        "Because we don't know how to let go",
+        "Because suffering has lessons to teach"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "'I suffer' - this suffering is my identity, my story, my importance. Without it, who am I? The 'me' feeds on suffering. This is why it continues despite our wanting to be free.",
+      "hint": "The speaker is pointing to a gap that we ourselves create..."
     },
     "writingPrompt": "If you could explain \"Liberation from Ignorance\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -1820,15 +1839,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"experience\"</em> play in this teaching?",
+      "prompt": "Why is the 'old mind' bound by authority?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because tradition is valuable and should be preserved",
+        "The old mind has accumulated patterns, beliefs, fears - all authority",
+        "Older people are more set in their ways",
+        "The old mind has more experience of authority"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"experience\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The old mind is the conditioned mind - layers of tradition, belief, fear, authority. It cannot see anew because it IS the past. Freedom requires a new mind, not a reformed old one.",
+      "hint": "Look for what the quote says about certainty and security..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Why Do We Follow?\"? Observe without judging.",
     "fill": {
@@ -1917,15 +1937,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why do we seek authority according to this teaching?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because we are naturally followers, not leaders",
+        "To be certain, safe, to avoid the responsibility of finding out",
+        "Because authorities have more experience and wisdom",
+        "Because society is structured around hierarchy"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "We want certainty. We want someone to tell us. We are afraid to stand alone, to find out for ourselves. Authority is our escape from the responsibility of freedom.",
+      "hint": "The quote speaks of something we all carry that creates division..."
     },
     "writingPrompt": "Reflect on: \"Authority Corrupts Both Leader and Follower\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -1998,15 +2019,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Can I Rely on My Experience?</em>, what is the speaker asking us to observe?",
+      "prompt": "Can experience ever be fresh?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, when it is new and exciting",
+        "No - the moment you recognize it, it is already old",
+        "Yes, if you are fully present",
+        "No, because experience is always of the past"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The moment you say 'this is beautiful', you have named it - and it is no longer fresh. The word, the recognition, the experience - these are the old meeting the new and killing it.",
+      "hint": "Notice how the passage describes the residue of living..."
     },
     "writingPrompt": "Think of a moment when \"Can I Rely on My Experience?\" was real for you. Describe what you noticed.",
     "fill": {
@@ -2096,15 +2118,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"extraordinary\"</em> play in this teaching?",
+      "prompt": "What is the relationship between self-knowledge and change?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Self-knowledge helps you plan your changes",
+        "Seeing yourself as you are IS the change",
+        "You must change before you can know yourself",
+        "Self-knowledge and change are separate processes"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"extraordinary\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The moment you see your anger, not after, not before, but as it is - in that seeing, the anger transforms. The seeing IS the change. Not 'I will change' but 'I see'.",
+      "hint": "What does the quote reveal about the relationship between self and other?"
     },
     "writingPrompt": "If you could explain \"Self-Knowledge Is a Process\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -2177,15 +2200,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why is self-knowledge said to have no end?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because the self is infinitely complex",
+        "Because the self is constantly changing and revealing new layers",
+        "Because complete self-knowledge is impossible",
+        "Because you should never stop trying to improve"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The self is not a static thing to be known once and for all. It is a living movement. Self-knowledge is not accumulation but constant discovery - each moment reveals, if you are looking.",
+      "hint": "The speaker is pointing to a way of seeing that is already present..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"The Untethered Mind\"? Observe without judging.",
     "fill": {
@@ -2271,15 +2295,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Active Self-Knowledge</em>, what is the speaker asking us to observe?",
+      "prompt": "What happens when awareness is continuous?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "The mind becomes exhausted",
+        "There is no accumulation of psychological memory",
+        "You become hyper-vigilant and anxious",
+        "You achieve a special state of consciousness"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Continuous awareness means each moment is met fresh - not through the screen of yesterday's memory. The past doesn't accumulate; it doesn't build the 'me'. Life becomes a movement, not a record.",
+      "hint": "The passage speaks of something that cannot be cultivated or achieved..."
     },
     "writingPrompt": "Reflect on: \"Active Self-Knowledge\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -2354,15 +2379,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "Why is relationship called a mirror?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because relationship reflects your past",
+        "Because in relationship, you see your reactions, fears, desires revealed",
+        "Because relationship shows your true self to others",
+        "Because relationship is a reflection of society"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "In isolation, you can deceive yourself. In relationship, reactions arise - irritation, jealousy, dependence. These reactions ARE you. Relationship reveals what is; it is the mirror.",
+      "hint": "The quote speaks of looking in an unexpected place..."
     },
     "writingPrompt": "Think of a moment when \"Creativeness Through Self-Knowledge\" was real for you. Describe what you noticed.",
     "fill": {
@@ -2448,15 +2474,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why can't awareness be practiced?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because practice implies a goal in the future",
+        "Because awareness is too difficult for most people",
+        "Because it requires natural talent",
+        "Because practice makes it mechanical"
       ],
-      "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "answer": 0,
+      "observation": "Practice means: 'I am not aware now, but if I practice, I will be aware tomorrow.' This very movement creates time, creates the practitioner - and awareness disappears.",
+      "hint": "The quote hints at a quality that observes without the observer..."
     },
     "writingPrompt": "If you could explain \"Quiet Mind, Simple Mind\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -2541,15 +2568,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Self-Knowing</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the relationship between self-knowledge and change?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Self-knowledge helps you plan your changes",
+        "Seeing yourself as you are IS the change",
+        "You must change before you can know yourself",
+        "Self-knowledge and change are separate processes"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The moment you see your anger, not after, not before, but as it is - in that seeing, the anger transforms. The seeing IS the change. Not 'I will change' but 'I see'.",
+      "hint": "What does the quote reveal about the relationship between self and other?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"Self-Knowing\"? Observe without judging.",
     "fill": {
@@ -2637,15 +2665,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "How does awareness relate to thought?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Awareness stops thought completely",
+        "Awareness sees thought arising without being caught in it",
+        "Thought must be controlled before awareness can happen",
+        "They are opposing forces that cannot coexist"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Awareness doesn't fight thought. It sees thought moving, sees its origin, sees its ending. In that seeing, thought loses its binding power - not through resistance, but through understanding.",
+      "hint": "What does the quote reveal about the nature of watching?"
     },
     "writingPrompt": "Reflect on: \"Creative Emptiness\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -2718,15 +2747,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What happens when there is no self-knowledge?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "You live a normal, functional life",
+        "There is confusion, conflict, and no possibility of order",
+        "You are free from self-absorption",
+        "You can focus on helping others"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Without knowing yourself, your actions spring from hidden motives. You think you are acting from love, but it is attachment. You think you are seeking truth, but it is security. Chaos.",
+      "hint": "Look for what the passage says about the observer and the observed..."
     },
     "writingPrompt": "Think of a moment when \"Self-Knowledge\" was real for you. Describe what you noticed.",
     "fill": {
@@ -2816,15 +2846,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Relationship Is a Mirror</em>, what is the speaker asking us to observe?",
+      "prompt": "Why is relationship the mirror of the self?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Because relationship shows how others see us",
+        "Because our reactions in relationship reveal our conditioning",
+        "Because we need others to know ourselves",
+        "Because relationship is about mutual understanding"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "In relationship, reactions arise: attachment, jealousy, irritation, dependence. These reactions are not 'about the other' - they reveal the self. The other is the occasion; the mirror shows you.",
+      "hint": "The quote speaks of something that reveals what we are..."
     },
     "writingPrompt": "If you could explain \"Relationship Is a Mirror\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -2911,15 +2942,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"consciousness\"</em> play in this teaching?",
+      "prompt": "What is the relationship between will and change?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Will is necessary for any real change",
+        "Will is resistance; change happens when will ceases",
+        "Will can change behavior but not the self",
+        "Will and change are the same movement"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"consciousness\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Will is the 'me' trying to become something else - it is conflict. Real change is not 'I will change' but 'I see what is'. In seeing, the 'what is' dissolves - no will needed.",
+      "hint": "Notice what the passage says about seeing and time..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Becoming Is Strife\"? Observe without judging.",
     "fill": {
@@ -3008,15 +3040,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why do most attempts at change fail?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because people lack discipline and perseverance",
+        "Because the changer is the thing to be changed",
+        "Because change requires expert guidance",
+        "Because the methods used are incorrect"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Who is the one trying to change? The same self that needs changing. The entity that says 'I must change' IS the problem. When this is seen, the division ends - and with it, the false movement.",
+      "hint": "What does the quote reveal about the nature of psychological change?"
     },
     "writingPrompt": "Reflect on: \"All Becoming Is Disintegration\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -3098,15 +3131,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Can the Crude Mind Become Sensitive?</em>, what is the speaker asking us to observe?",
+      "prompt": "How does awareness relate to thought?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Awareness stops thought completely",
+        "Awareness sees thought arising without being caught in it",
+        "Thought must be controlled before awareness can happen",
+        "They are opposing forces that cannot coexist"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Awareness doesn't fight thought. It sees thought moving, sees its origin, sees its ending. In that seeing, thought loses its binding power - not through resistance, but through understanding.",
+      "hint": "What does the quote reveal about the nature of watching?"
     },
     "writingPrompt": "Think of a moment when \"Can the Crude Mind Become Sensitive?\" was real for you. Describe what you noticed.",
     "fill": {
@@ -3193,15 +3227,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"transformation\"</em> play in this teaching?",
+      "prompt": "Is freedom from desire possible?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, by fulfilling all desires",
+        "Yes - when desire is understood, not suppressed",
+        "No, desire is part of being human",
+        "Yes, through renunciation and discipline"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"transformation\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "To suppress desire is to create conflict. But to understand desire - to see how thought creates it, how it creates the 'me' who desires - in this seeing, desire loses its hold.",
+      "hint": "Look for what the passage says about desire and the self..."
     },
     "writingPrompt": "If you could explain \"Opportunities for Self-Expansion\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -3289,15 +3324,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why is experience called a burden?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because painful experiences weigh us down",
+        "Because experience accumulates as memory that screens the present",
+        "Because experience makes us cynical",
+        "Because we should live in the present, not the past"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Experience is not the event; it is the residue - the memory, the conclusion, the knowledge. This residue becomes the lens through which you see. The fresh is never met; only the old is projected.",
+      "hint": "The quote speaks of something that becomes a burden..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Beyond All Experiencing\"? Observe without judging.",
     "fill": {
@@ -3386,15 +3422,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>What Is the Self?</em>, what is the speaker asking us to observe?",
+      "prompt": "Can self-knowledge be given by another?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, through therapy or spiritual guidance",
+        "No - you must see yourself; no one can see for you",
+        "Yes, if the other has deep insight",
+        "No, because the self cannot be known"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Another can point, but you must look. The word 'jealousy' is not jealousy. The description is not the described. Self-knowledge is direct perception, not information received.",
+      "hint": "Notice how the passage describes a mirror that never lies..."
     },
     "writingPrompt": "Reflect on: \"What Is the Self?\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -3479,15 +3516,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"experiencing\"</em> play in this teaching?",
+      "prompt": "What is the relationship between love and attachment?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Attachment is a form of love",
+        "They are opposites - love frees, attachment binds",
+        "Attachment naturally grows into love",
+        "They are different stages of relationship"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"experiencing\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "'I love you' - but do I? Or do I need you, possess you, fear losing you? This is attachment, not love. Love says 'be free'; attachment says 'be mine'. They cannot coexist.",
+      "hint": "What does the quote reveal about the nature of love?"
     },
     "writingPrompt": "Think of a moment when \"When There Is Love, Self Is Not\" was real for you. Describe what you noticed.",
     "fill": {
@@ -3575,15 +3613,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "How does awareness relate to thought?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Awareness stops thought completely",
+        "Awareness sees thought arising without being caught in it",
+        "Thought must be controlled before awareness can happen",
+        "They are opposing forces that cannot coexist"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Awareness doesn't fight thought. It sees thought moving, sees its origin, sees its ending. In that seeing, thought loses its binding power - not through resistance, but through understanding.",
+      "hint": "What does the quote reveal about the nature of watching?"
     },
     "writingPrompt": "If you could explain \"Understanding What Is\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -3671,15 +3710,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>What We Believe</em>, what is the speaker asking us to observe?",
+      "prompt": "Can the mind be free from all belief?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "No, some beliefs are necessary for life",
+        "Yes - freedom is freedom from belief",
+        "No, the mind needs beliefs to function",
+        "Yes, but only for advanced seekers"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "To be free from belief is not to have no principles; it is to see 'what is' without the screen of 'what should be'. The mind that is free from belief can look - and in looking, discover.",
+      "hint": "Look for what the quote says about the gap between belief and seeing..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"What We Believe\"? Observe without judging.",
     "fill": {
@@ -3772,15 +3812,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "Why do we hold beliefs?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because beliefs give us security and certainty",
+        "Because beliefs are based on evidence and reason",
+        "Because beliefs connect us to our community",
+        "Because beliefs guide our moral behavior"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 0,
+      "observation": "Belief is a cushion against uncertainty. 'I believe' means 'I don't know, but I want to be sure'. Belief is not truth; it is a substitute for truth when we cannot bear not knowing.",
+      "hint": "The quote speaks of a need that creates limitation..."
     },
     "writingPrompt": "Reflect on: \"Agitated by Belief\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -3853,15 +3894,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can belief lead to truth?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, if the belief is true",
+        "No - belief is a screen; truth must be seen directly",
+        "Yes, belief can point toward truth",
+        "It depends on the nature of the belief"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Belief is a conclusion, a closed door. Through belief, you never see what is - you see what you believe. Truth is not reached through belief; it is reached when belief ends.",
+      "hint": "Notice what the passage says about certainty and truth..."
     },
     "writingPrompt": "Think of a moment when \"Beyond Belief\" was real for you. Describe what you noticed.",
     "fill": {
@@ -3943,15 +3985,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Screen of Belief</em>, what is the speaker asking us to observe?",
+      "prompt": "How does belief create conflict?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "By making us intolerant of others",
+        "By dividing 'I believe' from 'what is' - creating duality",
+        "By challenging our assumptions",
+        "By creating cognitive dissonance"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Belief separates: 'I believe this, you believe that'. It separates the believer from reality: 'I believe in love' but act with hate. Belief creates the division that is conflict.",
+      "hint": "What does the quote reveal about the nature of faith?"
     },
     "writingPrompt": "If you could explain \"The Screen of Belief\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -4039,15 +4082,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "Why is there a gap between idea and action?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because implementation is difficult",
+        "Because the idea is not the reality; the gap is the self",
+        "Because we lack willpower",
+        "Because circumstances interfere"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "'I should be kind' - but I am not. Why? Because the idea is the 'me' wanting to be something. The gap is the self. When there is no idea, only seeing, action is immediate.",
+      "hint": "The speaker is pointing to action without the actor..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Meeting Life Anew\"? Observe without judging.",
     "fill": {
@@ -4118,15 +4162,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What happens when awareness is continuous?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "The mind becomes exhausted",
+        "There is no accumulation of psychological memory",
+        "You become hyper-vigilant and anxious",
+        "You achieve a special state of consciousness"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Continuous awareness means each moment is met fresh - not through the screen of yesterday's memory. The past doesn't accumulate; it doesn't build the 'me'. Life becomes a movement, not a record.",
+      "hint": "The passage speaks of something that cannot be cultivated or achieved..."
     },
     "writingPrompt": "Reflect on: \"Belief Hinders True Understanding\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -4212,15 +4257,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Direct Observation</em>, what is the speaker asking us to observe?",
+      "prompt": "Why do we hold beliefs?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Because beliefs give us security and certainty",
+        "Because beliefs are based on evidence and reason",
+        "Because beliefs connect us to our community",
+        "Because beliefs guide our moral behavior"
       ],
       "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "observation": "Belief is a cushion against uncertainty. 'I believe' means 'I don't know, but I want to be sure'. Belief is not truth; it is a substitute for truth when we cannot bear not knowing.",
+      "hint": "The quote speaks of a need that creates limitation..."
     },
     "writingPrompt": "Think of a moment when \"Direct Observation\" was real for you. Describe what you noticed.",
     "fill": {
@@ -4305,15 +4351,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"experiencing\"</em> play in this teaching?",
+      "prompt": "Why can't awareness be practiced?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because practice implies a goal in the future",
+        "Because awareness is too difficult for most people",
+        "Because it requires natural talent",
+        "Because practice makes it mechanical"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"experiencing\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 0,
+      "observation": "Practice means: 'I am not aware now, but if I practice, I will be aware tomorrow.' This very movement creates time, creates the practitioner - and awareness disappears.",
+      "hint": "The quote hints at a quality that observes without the observer..."
     },
     "writingPrompt": "If you could explain \"Action Without Idea\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -4401,15 +4448,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can there be action without motive?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "No, all action has a motive",
+        "Yes - action from seeing has no motive; it is response, not seeking",
+        "No, but we can have noble motives",
+        "Yes, in spontaneous moments"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Motive is 'I act for this result'. This is not action; it is transaction. True action is not for result; it is the flowering of seeing. It has no cause, no future, no motive.",
+      "hint": "What does the quote reveal about the nature of doing?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"Action Without the Process of Thought\"? Observe without judging.",
     "fill": {
@@ -4498,15 +4546,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Do Ideas Limit Action?</em>, what is the speaker asking us to observe?",
+      "prompt": "What is true action?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Deliberate and purposeful behavior",
+        "Action without the actor - responding from seeing, not from the past",
+        "Action aligned with values",
+        "Spontaneous and authentic behavior"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Usually action is from the past: 'I should do this'. True action is not from should, not from habit, not from the 'me'. It is response to the moment - fresh, immediate, complete.",
+      "hint": "The speaker is pointing to action without the actor..."
     },
     "writingPrompt": "Reflect on: \"Do Ideas Limit Action?\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -4593,15 +4642,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "Why is there a gap between idea and action?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because implementation is difficult",
+        "Because the idea is not the reality; the gap is the self",
+        "Because we lack willpower",
+        "Because circumstances interfere"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "'I should be kind' - but I am not. Why? Because the idea is the 'me' wanting to be something. The gap is the self. When there is no idea, only seeing, action is immediate.",
+      "hint": "Look for what the passage says about response and reaction..."
     },
     "writingPrompt": "Think of a moment when \"Ideology Prevents Action\" was real for you. Describe what you noticed.",
     "fill": {
@@ -4689,15 +4739,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can there be action without motive?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "No, all action has a motive",
+        "Yes - action from seeing has no motive; it is response, not seeking",
+        "No, but we can have noble motives",
+        "Yes, in spontaneous moments"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Motive is 'I act for this result'. This is not action; it is transaction. True action is not for result; it is the flowering of seeing. It has no cause, no future, no motive.",
+      "hint": "The quote speaks of a quality of response that is fresh..."
     },
     "writingPrompt": "If you could explain \"Action Without Ideation\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -4790,15 +4841,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Acting Without Idea Is the Way of Love</em>, what is the speaker asking us to observe?",
+      "prompt": "Is love an emotion?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, a deep and positive emotion",
+        "No - emotions fluctuate; love is not a movement of like and dislike",
+        "Yes, but the highest emotion",
+        "No, love is a choice or commitment"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Emotion is reaction: I like, I dislike, I feel. Love is not reaction; it is not 'I love you because...'. Love is not a movement of the 'me' at all. It is not emotion; it is something else.",
+      "hint": "Notice what the passage says about possession and freedom..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Acting Without Idea Is the Way of Love\"? Observe without judging.",
     "fill": {
@@ -4883,15 +4935,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"compassion\"</em> play in this teaching?",
+      "prompt": "What is duality?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Seeing two sides of an issue",
+        "The division between observer and observed, thinker and thought",
+        "The existence of opposites like good and evil",
+        "A philosophical concept"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"compassion\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Duality is not just opposites; it is the split in the mind: 'I' and 'my anger', 'I' and 'the world'. This division is the root of conflict. Non-duality is not a philosophy; it is the ending of division.",
+      "hint": "What does the quote reveal about the nature of separation?"
     },
     "writingPrompt": "Reflect on: \"Conflict of the Opposites\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -4980,15 +5033,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can duality be overcome?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, by seeing that observer IS the observed",
+        "No, duality is the nature of reality",
+        "Yes, through non-dual philosophy",
+        "No, but we can manage it"
       ],
-      "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "answer": 0,
+      "observation": "The observer thinks it is separate from the observed. But the observer IS the observed - both are movements of the same mind. Seeing this is not overcoming; it is understanding.",
+      "hint": "The speaker is pointing to the root of all human conflict..."
     },
     "writingPrompt": "Think of a moment when \"Beyond Duality\" was real for you. Describe what you noticed.",
     "fill": {
@@ -5076,15 +5130,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Justifying Evil</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the central insight of this passage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A new technique or method to practice",
+        "A direct seeing that transforms understanding",
+        "An intellectual concept to remember",
+        "A moral lesson to follow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The teaching points not to a method but to a seeing - direct perception that transforms. It is not 'do this' but 'look'. The looking itself is the transformation.",
+      "hint": "Look for what the passage says about method and insight..."
     },
     "writingPrompt": "If you could explain \"Justifying Evil\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -5170,15 +5225,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"attention\"</em> play in this teaching?",
+      "prompt": "How does this passage challenge our usual way of thinking?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "By offering a better philosophy",
+        "By showing that the thinker is the thought",
+        "By providing new information",
+        "By contradicting common beliefs"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"attention\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The challenge is not to accept a new belief but to see the nature of thought itself - that the thinker who seeks truth IS thought, IS the problem. This seeing dissolves the seeker.",
+      "hint": "The quote speaks of behavior that cannot be prescribed..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Goodness Has No Motive\"? Observe without judging.",
     "fill": {
@@ -5263,15 +5319,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Is psychological evolution possible?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, we can grow and develop",
+        "No - the 'me' cannot evolve; it can only be seen through",
+        "Yes, through spiritual practice",
+        "No, but consciousness can evolve"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The self wants to become better - more evolved, more spiritual. But this becoming IS the self. The 'me' cannot evolve; it can only end. Evolution of the soul is another illusion of time.",
+      "hint": "Notice what the passage says about becoming and being..."
     },
     "writingPrompt": "Reflect on: \"Human Evolution\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -5360,15 +5417,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Freedom from Occupation</em>, what is the speaker asking us to observe?",
+      "prompt": "Can freedom exist while there is fear?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, freedom is acting despite fear",
+        "No - fear binds the mind to security and the known",
+        "Fear and freedom are unrelated",
+        "Freedom gradually reduces fear"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Fear is the movement away from 'what is' - it is the seeking of security. Freedom is the ending of this movement. Where there is fear, there is bondage; where there is freedom, fear cannot exist.",
+      "hint": "What does the quote reveal about the nature of choice?"
     },
     "writingPrompt": "Think of a moment when \"Freedom from Occupation\" was real for you. Describe what you noticed.",
     "fill": {
@@ -5454,15 +5512,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"discipline\"</em> play in this teaching?",
+      "prompt": "What is the relationship between thought and time?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Thought happens in time",
+        "Thought IS time - the movement from past to future",
+        "Time gives thought its structure",
+        "They are separate dimensions"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"discipline\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Thought is memory projecting into the future: 'I was, I will be'. This movement IS time - psychological time. Without thought, there is no psychological time, only the now.",
+      "hint": "The speaker is pointing to the mechanical nature of the mind..."
     },
     "writingPrompt": "If you could explain \"Thinking Begets Effort\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -5549,15 +5608,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is true relationship?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Mutual respect and understanding",
+        "Relationship without image - seeing each other directly",
+        "A relationship without conflict or demands",
+        "A spiritual connection between souls"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "I look at you through my image of you - my memories, my expectations. This is not relationship; it is relationship with an image. True relationship is to see without image, to meet directly.",
+      "hint": "Look for what the passage says about image and reality in connection..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"A Free Mind Has Humility\"? Observe without judging.",
     "fill": {
@@ -5639,15 +5699,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>We Never Question the Problem of Dependence</em>, what is the speaker asking us to observe?",
+      "prompt": "Why is relationship the mirror of the self?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Because relationship shows how others see us",
+        "Because our reactions in relationship reveal our conditioning",
+        "Because we need others to know ourselves",
+        "Because relationship is about mutual understanding"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "In relationship, reactions arise: attachment, jealousy, irritation, dependence. These reactions are not 'about the other' - they reveal the self. The other is the occasion; the mirror shows you.",
+      "hint": "The quote speaks of something that reveals what we are..."
     },
     "writingPrompt": "Reflect on: \"We Never Question the Problem of Dependence\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -5733,15 +5794,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "What is the difference between love and attachment?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Attachment is immature love",
+        "Love is freedom; attachment is possessiveness and fear",
+        "Attachment is necessary until love develops",
+        "They are stages of the same thing"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Love says 'be free'. Attachment says 'be mine'. Love has no fear; attachment is fear - fear of losing, fear of being alone. They are not the same; they are opposites.",
+      "hint": "Notice how the passage describes relationship as a mirror..."
     },
     "writingPrompt": "Think of a moment when \"There Is Some Deeper Factor That Makes Us Depend\" was real for you. Describe what you noticed.",
     "fill": {
@@ -5828,15 +5890,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What does it mean to be aware without the observer?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "To watch yourself as if from outside",
+        "To observe without judgment, naming, or the 'me' looking",
+        "To dissociate from your emotions",
+        "To become like a camera recording events"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The observer is the past - memory, judgment, the 'me'. When you observe without this observer, there is only observation. The division between seer and seen dissolves.",
+      "hint": "Notice how awareness is described in relation to time and practice..."
     },
     "writingPrompt": "If you could explain \"Become Deeply Aware\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -5922,15 +5985,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Relationship</em>, what is the speaker asking us to observe?",
+      "prompt": "Can relationship end loneliness?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, that is the purpose of relationship",
+        "No - loneliness is the sense of being separate; relationship cannot end it",
+        "Yes, if the relationship is deep enough",
+        "No, loneliness is a natural human condition"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Loneliness is the sense of being isolated, separate. We seek relationship to escape it. But the seeker is still separate; the loneliness continues under the cover of relationship.",
+      "hint": "The speaker is pointing to how we use others..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Relationship\"? Observe without judging.",
     "fill": {
@@ -6020,15 +6084,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"experience\"</em> play in this teaching?",
+      "prompt": "What is true relationship?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Mutual respect and understanding",
+        "Relationship without image - seeing each other directly",
+        "A relationship without conflict or demands",
+        "A spiritual connection between souls"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"experience\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "I look at you through my image of you - my memories, my expectations. This is not relationship; it is relationship with an image. True relationship is to see without image, to meet directly.",
+      "hint": "Look for what the passage says about image and reality in connection..."
     },
     "writingPrompt": "Reflect on: \"The Me Is the Possession\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -6115,15 +6180,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why is relationship the mirror of the self?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because relationship shows how others see us",
+        "Because our reactions in relationship reveal our conditioning",
+        "Because we need others to know ourselves",
+        "Because relationship is about mutual understanding"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "In relationship, reactions arise: attachment, jealousy, irritation, dependence. These reactions are not 'about the other' - they reveal the self. The other is the occasion; the mirror shows you.",
+      "hint": "The quote speaks of something that reveals what we are..."
     },
     "writingPrompt": "Think of a moment when \"To Exploit Is to Be Exploited\" was real for you. Describe what you noticed.",
     "fill": {
@@ -6196,15 +6262,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Cultivation of Detachment</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the difference between love and attachment?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Attachment is immature love",
+        "Love is freedom; attachment is possessiveness and fear",
+        "Attachment is necessary until love develops",
+        "They are stages of the same thing"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Love says 'be free'. Attachment says 'be mine'. Love has no fear; attachment is fear - fear of losing, fear of being alone. They are not the same; they are opposites.",
+      "hint": "Notice how the passage describes relationship as a mirror..."
     },
     "writingPrompt": "If you could explain \"The Cultivation of Detachment\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -6297,15 +6364,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "Why do relationships breed conflict?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because people have different needs and expectations",
+        "Because each person is seeking security through the other",
+        "Because communication is difficult",
+        "Because relationships require compromise"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "I want you to make me secure; you want me to make you secure. Each is using the other. When the other fails to fulfill my need, conflict arises. Relationship as mutual dependency is conflict.",
+      "hint": "What does the quote reveal about the nature of intimacy?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"Attachment Is Self-Deception\"? Observe without judging.",
     "fill": {
@@ -6393,15 +6461,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can relationship end loneliness?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, that is the purpose of relationship",
+        "No - loneliness is the sense of being separate; relationship cannot end it",
+        "Yes, if the relationship is deep enough",
+        "No, loneliness is a natural human condition"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Loneliness is the sense of being isolated, separate. We seek relationship to escape it. But the seeker is still separate; the loneliness continues under the cover of relationship.",
+      "hint": "The speaker is pointing to how we use others..."
     },
     "writingPrompt": "Reflect on: \"Face the Fact and See What Happens\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -6487,15 +6556,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Attachment Is Escape</em>, what is the speaker asking us to observe?",
+      "prompt": "What is true relationship?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Mutual respect and understanding",
+        "Relationship without image - seeing each other directly",
+        "A relationship without conflict or demands",
+        "A spiritual connection between souls"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "I look at you through my image of you - my memories, my expectations. This is not relationship; it is relationship with an image. True relationship is to see without image, to meet directly.",
+      "hint": "Look for what the passage says about image and reality in connection..."
     },
     "writingPrompt": "Think of a moment when \"Attachment Is Escape\" was real for you. Describe what you noticed.",
     "fill": {
@@ -6583,15 +6653,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"extraordinary\"</em> play in this teaching?",
+      "prompt": "Why is relationship the mirror of the self?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because relationship shows how others see us",
+        "Because our reactions in relationship reveal our conditioning",
+        "Because we need others to know ourselves",
+        "Because relationship is about mutual understanding"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"extraordinary\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "In relationship, reactions arise: attachment, jealousy, irritation, dependence. These reactions are not 'about the other' - they reveal the self. The other is the occasion; the mirror shows you.",
+      "hint": "The quote speaks of something that reveals what we are..."
     },
     "writingPrompt": "If you could explain \"To Be Alone\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -6678,15 +6749,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the difference between love and attachment?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Attachment is immature love",
+        "Love is freedom; attachment is possessiveness and fear",
+        "Attachment is necessary until love develops",
+        "They are stages of the same thing"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Love says 'be free'. Attachment says 'be mine'. Love has no fear; attachment is fear - fear of losing, fear of being alone. They are not the same; they are opposites.",
+      "hint": "Notice how the passage describes relationship as a mirror..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Craving Is Always Craving\"? Observe without judging.",
     "fill": {
@@ -6775,15 +6847,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Intensity Free of All Attachment</em>, what is the speaker asking us to observe?",
+      "prompt": "Why do relationships breed conflict?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Because people have different needs and expectations",
+        "Because each person is seeking security through the other",
+        "Because communication is difficult",
+        "Because relationships require compromise"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "I want you to make me secure; you want me to make you secure. Each is using the other. When the other fails to fulfill my need, conflict arises. Relationship as mutual dependency is conflict.",
+      "hint": "What does the quote reveal about the nature of intimacy?"
     },
     "writingPrompt": "Reflect on: \"Intensity Free of All Attachment\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -6856,15 +6929,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "Can relationship end loneliness?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, that is the purpose of relationship",
+        "No - loneliness is the sense of being separate; relationship cannot end it",
+        "Yes, if the relationship is deep enough",
+        "No, loneliness is a natural human condition"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Loneliness is the sense of being isolated, separate. We seek relationship to escape it. But the seeker is still separate; the loneliness continues under the cover of relationship.",
+      "hint": "The speaker is pointing to how we use others..."
     },
     "writingPrompt": "Think of a moment when \"Relationship Is a Mirror\" was real for you. Describe what you noticed.",
     "fill": {
@@ -6953,15 +7027,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is true relationship?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Mutual respect and understanding",
+        "Relationship without image - seeing each other directly",
+        "A relationship without conflict or demands",
+        "A spiritual connection between souls"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "I look at you through my image of you - my memories, my expectations. This is not relationship; it is relationship with an image. True relationship is to see without image, to meet directly.",
+      "hint": "Look for what the passage says about image and reality in connection..."
     },
     "writingPrompt": "If you could explain \"The Function of Relationship\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -7048,15 +7123,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>How Can There Be Real Love?</em>, what is the speaker asking us to observe?",
+      "prompt": "Can love be defined?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, as deep caring and commitment",
+        "No - love is not a concept; it is beyond definition",
+        "Yes, as selfless giving",
+        "No, because love means different things to different people"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The moment you define love, you have captured it in words - and it is no longer love. Love is not a concept to be defined; it is a reality to be lived. The word is not the thing.",
+      "hint": "The quote speaks of something that is not a feeling..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"How Can There Be Real Love?\"? Observe without judging.",
     "fill": {
@@ -7141,15 +7217,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "What is the difference between love and attachment?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Attachment is immature love",
+        "Love is freedom; attachment is possessiveness and fear",
+        "Attachment is necessary until love develops",
+        "They are stages of the same thing"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Love says 'be free'. Attachment says 'be mine'. Love has no fear; attachment is fear - fear of losing, fear of being alone. They are not the same; they are opposites.",
+      "hint": "Notice how the passage describes relationship as a mirror..."
     },
     "writingPrompt": "Reflect on: \"We Are That Which We Possess\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -7240,15 +7317,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why do relationships breed conflict?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because people have different needs and expectations",
+        "Because each person is seeking security through the other",
+        "Because communication is difficult",
+        "Because relationships require compromise"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "I want you to make me secure; you want me to make you secure. Each is using the other. When the other fails to fulfill my need, conflict arises. Relationship as mutual dependency is conflict.",
+      "hint": "What does the quote reveal about the nature of intimacy?"
     },
     "writingPrompt": "Think of a moment when \"Being Related\" was real for you. Describe what you noticed.",
     "fill": {
@@ -7332,15 +7410,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>You and I Are the Problem, Not the World</em>, what is the speaker asking us to observe?",
+      "prompt": "Can relationship end loneliness?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, that is the purpose of relationship",
+        "No - loneliness is the sense of being separate; relationship cannot end it",
+        "Yes, if the relationship is deep enough",
+        "No, loneliness is a natural human condition"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Loneliness is the sense of being isolated, separate. We seek relationship to escape it. But the seeker is still separate; the loneliness continues under the cover of relationship.",
+      "hint": "The speaker is pointing to how we use others..."
     },
     "writingPrompt": "If you could explain \"You and I Are the Problem, Not the World\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -7413,15 +7492,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "What is true relationship?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Mutual respect and understanding",
+        "Relationship without image - seeing each other directly",
+        "A relationship without conflict or demands",
+        "A spiritual connection between souls"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "I look at you through my image of you - my memories, my expectations. This is not relationship; it is relationship with an image. True relationship is to see without image, to meet directly.",
+      "hint": "Look for what the passage says about image and reality in connection..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"There Is No Such Thing as Living Alone\"? Observe without judging.",
     "fill": {
@@ -7492,15 +7572,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the root of fear?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Traumatic experiences in childhood",
+        "The desire for security and the unknown future",
+        "Biological survival instincts",
+        "Lack of faith or belief"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Fear arises from wanting to be secure in an uncertain world. The mind projects the future - 'what might happen' - and wants to be safe. This very movement is fear.",
+      "hint": "The quote speaks of something that looks to the future..."
     },
     "writingPrompt": "Reflect on: \"Freedom from Fear\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -7585,15 +7666,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Dealing with Fear</em>, what is the speaker asking us to observe?",
+      "prompt": "Is fear related to time?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "No, fear is an immediate reaction",
+        "Yes - fear is always of what might happen, which is time",
+        "Only psychological fear involves time",
+        "Time helps us overcome fear"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "I am not afraid of what is happening now; I am afraid of what might happen. Fear is projection - the mind moving into the future. No future, no fear. Time is the ground of fear.",
+      "hint": "Notice what the passage says about the root of fear..."
     },
     "writingPrompt": "Think of a moment when \"Dealing with Fear\" was real for you. Describe what you noticed.",
     "fill": {
@@ -7662,15 +7744,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "Can fear be overcome by courage?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, courage is the antidote to fear",
+        "No - courage is resistance; fear ends when looked at directly",
+        "Yes, through practice and exposure",
+        "No, fear is permanent; we can only manage it"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Courage is 'I will face my fear' - but the 'I' who faces is the same 'I' who fears. The division continues. When you look at fear without the looker, without resistance, fear reveals itself.",
+      "hint": "What does the quote reveal about the relationship between fear and time?"
     },
     "writingPrompt": "If you could explain \"The Door to Understanding\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -7759,15 +7842,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What happens when fear is observed without the observer?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "The fear is understood and accepted",
+        "The fear disappears because the division ends",
+        "The fear becomes manageable",
+        "The observer learns to control fear"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The observer says 'I am afraid' - creating division. When there is only fear, not 'I' and 'fear', the energy is not divided. Fear is seen, and in that seeing, it ends.",
+      "hint": "The speaker is pointing to a quality that is always seeking..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Fear Makes Us Obey\"? Observe without judging.",
     "fill": {
@@ -7853,15 +7937,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Face-to-Face with the Fact</em>, what is the speaker asking us to observe?",
+      "prompt": "Why do we escape from fear?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Because fear is unpleasant and we seek comfort",
+        "Because escape is the only way to deal with fear",
+        "Because we don't know how to face fear",
+        "Because fear can be overwhelming"
       ],
       "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "observation": "Fear is uncomfortable. We want to be comfortable. So we escape - into entertainment, belief, activity, relationship. But fear doesn't end; it goes underground, waiting.",
+      "hint": "Look for what the passage says about escape and facing..."
     },
     "writingPrompt": "Reflect on: \"Face-to-Face with the Fact\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -7952,15 +8037,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"psychological\"</em> play in this teaching?",
+      "prompt": "What is the root of fear?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Traumatic experiences in childhood",
+        "The desire for security and the unknown future",
+        "Biological survival instincts",
+        "Lack of faith or belief"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"psychological\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Fear arises from wanting to be secure in an uncertain world. The mind projects the future - 'what might happen' - and wants to be safe. This very movement is fear.",
+      "hint": "The quote speaks of something that looks to the future..."
     },
     "writingPrompt": "Think of a moment when \"Contacting Fear\" was real for you. Describe what you noticed.",
     "fill": {
@@ -8047,15 +8133,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Is fear related to time?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "No, fear is an immediate reaction",
+        "Yes - fear is always of what might happen, which is time",
+        "Only psychological fear involves time",
+        "Time helps us overcome fear"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "I am not afraid of what is happening now; I am afraid of what might happen. Fear is projection - the mind moving into the future. No future, no fear. Time is the ground of fear.",
+      "hint": "Notice what the passage says about the root of fear..."
     },
     "writingPrompt": "If you could explain \"Fear Is Nonacceptance of What Is\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -8141,15 +8228,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Disorder That Time Creates</em>, what is the speaker asking us to observe?",
+      "prompt": "Can fear be overcome by courage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, courage is the antidote to fear",
+        "No - courage is resistance; fear ends when looked at directly",
+        "Yes, through practice and exposure",
+        "No, fear is permanent; we can only manage it"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Courage is 'I will face my fear' - but the 'I' who faces is the same 'I' who fears. The division continues. When you look at fear without the looker, without resistance, fear reveals itself.",
+      "hint": "What does the quote reveal about the relationship between fear and time?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"The Disorder That Time Creates\"? Observe without judging.",
     "fill": {
@@ -8237,15 +8325,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"extraordinary\"</em> play in this teaching?",
+      "prompt": "What happens when fear is observed without the observer?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "The fear is understood and accepted",
+        "The fear disappears because the division ends",
+        "The fear becomes manageable",
+        "The observer learns to control fear"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"extraordinary\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The observer says 'I am afraid' - creating division. When there is only fear, not 'I' and 'fear', the energy is not divided. Fear is seen, and in that seeing, it ends.",
+      "hint": "The speaker is pointing to a quality that is always seeking..."
     },
     "writingPrompt": "Reflect on: \"How Do I Look at Anger?\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -8332,15 +8421,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Is freedom from desire possible?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, by fulfilling all desires",
+        "Yes - when desire is understood, not suppressed",
+        "No, desire is part of being human",
+        "Yes, through renunciation and discipline"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "To suppress desire is to create conflict. But to understand desire - to see how thought creates it, how it creates the 'me' who desires - in this seeing, desire loses its hold.",
+      "hint": "Look for what the passage says about desire and the self..."
     },
     "writingPrompt": "Think of a moment when \"The Root of All Fear\" was real for you. Describe what you noticed.",
     "fill": {
@@ -8413,15 +8503,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>There Is Only Craving</em>, what is the speaker asking us to observe?",
+      "prompt": "What is desire essentially?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A natural drive toward fulfillment",
+        "The movement of the mind seeking sensation and continuity",
+        "A biological need for survival",
+        "Energy that can be channeled positively"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Desire is not for the object; it is for the sensation the object gives. The desire for food, for sex, for power - these are the mind seeking stimulation, seeking to continue as 'me'.",
+      "hint": "The quote speaks of something that can never be satisfied..."
     },
     "writingPrompt": "If you could explain \"There Is Only Craving\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -8503,15 +8594,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understand\"</em> play in this teaching?",
+      "prompt": "Can desire ever be satisfied?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, when the object of desire is obtained",
+        "No - satisfaction is momentary; desire returns for more",
+        "Yes, through spiritual practice",
+        "No, desire is inherently frustrating"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understand\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "You get what you want - and for a moment, there is quiet. Then desire arises again, for something else. Desire is not a fire that can be quenched; it is a fire that burns for fuel.",
+      "hint": "Notice what the passage says about the object of wanting..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Understanding Desire\"? Observe without judging.",
     "fill": {
@@ -8601,15 +8693,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why does desire create conflict?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because desires contradict each other",
+        "Because desire creates the gap between 'what is' and 'what should be'",
+        "Because society restricts our desires",
+        "Because desire prevents spiritual progress"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Desire says 'I want' - which means 'what is, is not enough'. This very movement is conflict: the war between reality and desire. The more desire, the more conflict.",
+      "hint": "What does the quote reveal about the nature of longing?"
     },
     "writingPrompt": "Reflect on: \"Desire Has to Be Understood\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -8695,15 +8788,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Quality of Desire</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the central insight of this passage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A new technique or method to practice",
+        "A direct seeing that transforms understanding",
+        "An intellectual concept to remember",
+        "A moral lesson to follow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The teaching points not to a method but to a seeing - direct perception that transforms. It is not 'do this' but 'look'. The looking itself is the transformation.",
+      "hint": "The speaker is pointing to the difference between pleasure and joy..."
     },
     "writingPrompt": "Think of a moment when \"The Quality of Desire\" was real for you. Describe what you noticed.",
     "fill": {
@@ -8792,15 +8886,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"intellectual\"</em> play in this teaching?",
+      "prompt": "How does this passage challenge our usual way of thinking?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "By offering a better philosophy",
+        "By showing that the thinker is the thought",
+        "By providing new information",
+        "By contradicting common beliefs"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"intellectual\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The challenge is not to accept a new belief but to see the nature of thought itself - that the thinker who seeks truth IS thought, IS the problem. This seeing dissolves the seeker.",
+      "hint": "Look for what the passage says about yesterday and today..."
     },
     "writingPrompt": "If you could explain \"Why Shouldn't One Have Pleasure?\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -8873,15 +8968,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the difference between awareness and concentration?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Concentration is narrow, awareness is all-inclusive",
+        "Awareness is harder to maintain than concentration",
+        "Concentration is physical, awareness is mental",
+        "They are the same thing with different names"
       ],
-      "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "answer": 0,
+      "observation": "Concentration narrows the mind to a point - it excludes. Awareness is a field that includes everything without choosing. One is limitation, the other is freedom.",
+      "hint": "Look at what the quote says about observation itself..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"A Healthy, Normal Reaction\"? Observe without judging.",
     "fill": {
@@ -8965,15 +9061,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Dying to Little Things</em>, what is the speaker asking us to observe?",
+      "prompt": "Why is sex a problem?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Because of moral and social restrictions",
+        "Because pleasure creates attachment and the demand for more",
+        "Because sex distracts from spiritual life",
+        "It is not a problem; society makes it one"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Sex is not the problem; pleasure is. The demand for pleasure, the memory of pleasure, the seeking of pleasure - this builds attachment, jealousy, frustration. Sex becomes a problem when it is about the 'me'.",
+      "hint": "Notice what the passage says about pleasure and attachment..."
     },
     "writingPrompt": "Reflect on: \"Dying to Little Things\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -9064,15 +9161,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"consciousness\"</em> play in this teaching?",
+      "prompt": "Why is sex a problem?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because of moral and social restrictions",
+        "Because pleasure creates attachment and the demand for more",
+        "Because sex distracts from spiritual life",
+        "It is not a problem; society makes it one"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"consciousness\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Sex is not the problem; pleasure is. The demand for pleasure, the memory of pleasure, the seeking of pleasure - this builds attachment, jealousy, frustration. Sex becomes a problem when it is about the 'me'.",
+      "hint": "What does the quote reveal about the nature of desire?"
     },
     "writingPrompt": "Think of a moment when \"Sex\" was real for you. Describe what you noticed.",
     "fill": {
@@ -9162,15 +9260,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why is sex a problem?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because of moral and social restrictions",
+        "Because pleasure creates attachment and the demand for more",
+        "Because sex distracts from spiritual life",
+        "It is not a problem; society makes it one"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Sex is not the problem; pleasure is. The demand for pleasure, the memory of pleasure, the seeking of pleasure - this builds attachment, jealousy, frustration. Sex becomes a problem when it is about the 'me'.",
+      "hint": "The speaker is pointing to something that is not the issue itself..."
     },
     "writingPrompt": "If you could explain \"The Ultimate Escape\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -9257,15 +9356,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>We Have Made Sex a Problem</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the relationship between love and sorrow?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Sorrow is the price of love",
+        "Love and sorrow are inseparable because attachment creates both",
+        "Sorrow tests and deepens love",
+        "Love heals sorrow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "I love you; you die; I suffer. Why? Because I was attached. Attachment brings sorrow when the object is lost. Love without attachment has no shadow of sorrow.",
+      "hint": "Look for what the passage says about love and the absence of fear..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"We Have Made Sex a Problem\"? Observe without judging.",
     "fill": {
@@ -9352,15 +9452,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"compassion\"</em> play in this teaching?",
+      "prompt": "Can love be defined?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, as deep caring and commitment",
+        "No - love is not a concept; it is beyond definition",
+        "Yes, as selfless giving",
+        "No, because love means different things to different people"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"compassion\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The moment you define love, you have captured it in words - and it is no longer love. Love is not a concept to be defined; it is a reality to be lived. The word is not the thing.",
+      "hint": "The quote speaks of something that is not a feeling..."
     },
     "writingPrompt": "Reflect on: \"What Do You Mean by Love?\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -9451,15 +9552,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Is love an emotion?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, a deep and positive emotion",
+        "No - emotions fluctuate; love is not a movement of like and dislike",
+        "Yes, but the highest emotion",
+        "No, love is a choice or commitment"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Emotion is reaction: I like, I dislike, I feel. Love is not reaction; it is not 'I love you because...'. Love is not a movement of the 'me' at all. It is not emotion; it is something else.",
+      "hint": "Notice what the passage says about possession and freedom..."
     },
     "writingPrompt": "Think of a moment when \"As Long As We Possess, We Shall Never Love\" was real for you. Describe what you noticed.",
     "fill": {
@@ -9548,15 +9650,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Love Is Not a Duty</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the relationship between love and attachment?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Attachment is a form of love",
+        "They are opposites - love frees, attachment binds",
+        "Attachment naturally grows into love",
+        "They are different stages of relationship"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "'I love you' - but do I? Or do I need you, possess you, fear losing you? This is attachment, not love. Love says 'be free'; attachment says 'be mine'. They cannot coexist.",
+      "hint": "What does the quote reveal about the nature of love?"
     },
     "writingPrompt": "If you could explain \"Love Is Not a Duty\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -9641,15 +9744,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"entirely\"</em> play in this teaching?",
+      "prompt": "Can love exist with fear?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, fear is natural in love",
+        "No - where there is love, there is no fear",
+        "Fear shows the love is real and important",
+        "Only immature love has fear"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"entirely\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "If I love you and fear losing you - is it love? Or is it attachment disguised as love? Love has no fear because it holds nothing, possesses nothing, loses nothing.",
+      "hint": "The speaker is pointing to something that is not memory or desire..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"A Thing of the Mind\"? Observe without judging.",
     "fill": {
@@ -9737,15 +9841,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the relationship between love and sorrow?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Sorrow is the price of love",
+        "Love and sorrow are inseparable because attachment creates both",
+        "Sorrow tests and deepens love",
+        "Love heals sorrow"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "I love you; you die; I suffer. Why? Because I was attached. Attachment brings sorrow when the object is lost. Love without attachment has no shadow of sorrow.",
+      "hint": "Look for what the passage says about love and the absence of fear..."
     },
     "writingPrompt": "Reflect on: \"In Considering Marriage\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -9831,15 +9936,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Love Is Incapable of Adjustment</em>, what is the speaker asking us to observe?",
+      "prompt": "Can love be defined?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, as deep caring and commitment",
+        "No - love is not a concept; it is beyond definition",
+        "Yes, as selfless giving",
+        "No, because love means different things to different people"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The moment you define love, you have captured it in words - and it is no longer love. Love is not a concept to be defined; it is a reality to be lived. The word is not the thing.",
+      "hint": "The quote speaks of something that is not a feeling..."
     },
     "writingPrompt": "Think of a moment when \"Love Is Incapable of Adjustment\" was real for you. Describe what you noticed.",
     "fill": {
@@ -9921,15 +10027,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "Can the mind know itself?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, through introspection",
+        "The mind can observe its content, but the observer is part of it",
+        "Yes, through meditation",
+        "No, the mind cannot know itself"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The mind observing itself seems to create a division: observer and observed. But the observer IS the observed - both are the mind. This seeing is self-knowledge.",
+      "hint": "Notice what the passage says about the whole field..."
     },
     "writingPrompt": "If you could explain \"To Love Is to Be Chaste\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -10013,15 +10120,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the relationship between love and attachment?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Attachment is a form of love",
+        "They are opposites - love frees, attachment binds",
+        "Attachment naturally grows into love",
+        "They are different stages of relationship"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "'I love you' - but do I? Or do I need you, possess you, fear losing you? This is attachment, not love. Love says 'be free'; attachment says 'be mine'. They cannot coexist.",
+      "hint": "What does the quote reveal about the nature of love?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"Constant Thought Is a Waste of Energy\"? Observe without judging.",
     "fill": {
@@ -10105,15 +10213,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Idealist Cannot Know Love</em>, what is the speaker asking us to observe?",
+      "prompt": "What is true passion?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Intense enthusiasm for something",
+        "Energy that is not dissipated by desire or conflict",
+        "Strong emotion driving action",
+        "Dedication to a cause"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Passion is not desire - desire is fragmentary, seeking this or that. True passion is total energy, not divided by the 'me' and its wants. It is intensity without direction or motive.",
+      "hint": "The speaker is pointing to a quality that is whole, not fragmented..."
     },
     "writingPrompt": "Reflect on: \"The Idealist Cannot Know Love\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -10203,15 +10312,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "How does desire relate to passion?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Desire is a form of passion",
+        "Desire dissipates passion; passion is energy without desire",
+        "Passion grows from desire",
+        "They are different words for the same energy"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Desire says 'I want this' - energy is narrowed, fragmented. Passion is energy that is not narrowed, not seeking, not divided. Desire is leakage; passion is intensity.",
+      "hint": "Look for what the passage says about desire versus passion..."
     },
     "writingPrompt": "Think of a moment when \"Understanding Passion\" was real for you. Describe what you noticed.",
     "fill": {
@@ -10298,15 +10408,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can passion exist without an object?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "No, passion needs something to be passionate about",
+        "Yes - passion is intensity of being, not passion for something",
+        "No, that would be mere excitement",
+        "Yes, but only in meditation"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "'Passion for music, for art, for justice' - this is desire disguised. True passion is not for something; it is the intensity of the mind that is awake, alive, without motive.",
+      "hint": "The quote speaks of energy that is not seeking..."
     },
     "writingPrompt": "If you could explain \"Means and End Are One\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -10387,15 +10498,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Total Abandonment</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the relationship between passion and love?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Passion is romantic love",
+        "Love is passion - intensity without direction or possession",
+        "Passion leads to love",
+        "They are separate qualities"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Love is not mild, not tepid. Love is intense - but the intensity is not 'for someone'. Love is passion: the burning intensity of a mind that is free, that has no center.",
+      "hint": "Notice what the passage says about intensity without direction..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Total Abandonment\"? Observe without judging.",
     "fill": {
@@ -10477,15 +10589,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"contradiction\"</em> play in this teaching?",
+      "prompt": "What is true passion?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Intense enthusiasm for something",
+        "Energy that is not dissipated by desire or conflict",
+        "Strong emotion driving action",
+        "Dedication to a cause"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"contradiction\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Passion is not desire - desire is fragmentary, seeking this or that. True passion is total energy, not divided by the 'me' and its wants. It is intensity without direction or motive.",
+      "hint": "What does the quote reveal about the nature of true passion?"
     },
     "writingPrompt": "Reflect on: \"This Pure Flame of Passion\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -10574,15 +10687,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "How does desire relate to passion?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Desire is a form of passion",
+        "Desire dissipates passion; passion is energy without desire",
+        "Passion grows from desire",
+        "They are different words for the same energy"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Desire says 'I want this' - energy is narrowed, fragmented. Passion is energy that is not narrowed, not seeking, not divided. Desire is leakage; passion is intensity.",
+      "hint": "The speaker is pointing to a quality that is whole, not fragmented..."
     },
     "writingPrompt": "Think of a moment when \"Beauty Beyond Feeling\" was real for you. Describe what you noticed.",
     "fill": {
@@ -10664,15 +10778,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>A Passion for Everything</em>, what is the speaker asking us to observe?",
+      "prompt": "Can passion exist without an object?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "No, passion needs something to be passionate about",
+        "Yes - passion is intensity of being, not passion for something",
+        "No, that would be mere excitement",
+        "Yes, but only in meditation"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "'Passion for music, for art, for justice' - this is desire disguised. True passion is not for something; it is the intensity of the mind that is awake, alive, without motive.",
+      "hint": "Look for what the passage says about desire versus passion..."
     },
     "writingPrompt": "If you could explain \"A Passion for Everything\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -10756,15 +10871,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"contradiction\"</em> play in this teaching?",
+      "prompt": "What is the relationship between passion and love?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Passion is romantic love",
+        "Love is passion - intensity without direction or possession",
+        "Passion leads to love",
+        "They are separate qualities"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"contradiction\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Love is not mild, not tepid. Love is intense - but the intensity is not 'for someone'. Love is passion: the burning intensity of a mind that is free, that has no center.",
+      "hint": "The quote speaks of energy that is not seeking..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Love, I Assure You, Is Passion\"? Observe without judging.",
     "fill": {
@@ -10848,15 +10964,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is true passion?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Intense enthusiasm for something",
+        "Energy that is not dissipated by desire or conflict",
+        "Strong emotion driving action",
+        "Dedication to a cause"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Passion is not desire - desire is fragmentary, seeking this or that. True passion is total energy, not divided by the 'me' and its wants. It is intensity without direction or motive.",
+      "hint": "Notice what the passage says about intensity without direction..."
     },
     "writingPrompt": "Reflect on: \"A Passionate Mind Is Inquiring\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -10941,15 +11058,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Petty Mind</em>, what is the speaker asking us to observe?",
+      "prompt": "How does desire relate to passion?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Desire is a form of passion",
+        "Desire dissipates passion; passion is energy without desire",
+        "Passion grows from desire",
+        "They are different words for the same energy"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Desire says 'I want this' - energy is narrowed, fragmented. Passion is energy that is not narrowed, not seeking, not divided. Desire is leakage; passion is intensity.",
+      "hint": "What does the quote reveal about the nature of true passion?"
     },
     "writingPrompt": "Think of a moment when \"Petty Mind\" was real for you. Describe what you noticed.",
     "fill": {
@@ -11032,15 +11150,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"respectable\"</em> play in this teaching?",
+      "prompt": "Can passion exist without an object?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "No, passion needs something to be passionate about",
+        "Yes - passion is intensity of being, not passion for something",
+        "No, that would be mere excitement",
+        "Yes, but only in meditation"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"respectable\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "'Passion for music, for art, for justice' - this is desire disguised. True passion is not for something; it is the intensity of the mind that is awake, alive, without motive.",
+      "hint": "The speaker is pointing to a quality that is whole, not fragmented..."
     },
     "writingPrompt": "If you could explain \"Lost Passion\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -11122,15 +11241,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why is innocence necessary for discovery?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because innocence is a virtue",
+        "Because the past cannot discover the new",
+        "Because discovery requires openness",
+        "Because innocence prevents bias"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The past knows; it says 'I know this'. And so it cannot discover. Only a mind that says 'I don't know' - not from ignorance but from freshness - can discover, can meet the new.",
+      "hint": "Look for what the passage says about knowing and not knowing..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Passion Without a Cause\"? Observe without judging.",
     "fill": {
@@ -11213,15 +11333,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>A Mind Rich with Innocence</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the central insight of this passage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A new technique or method to practice",
+        "A direct seeing that transforms understanding",
+        "An intellectual concept to remember",
+        "A moral lesson to follow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The teaching points not to a method but to a seeing - direct perception that transforms. It is not 'do this' but 'look'. The looking itself is the transformation.",
+      "hint": "The quote speaks of something that is not feeling..."
     },
     "writingPrompt": "Reflect on: \"A Mind Rich with Innocence\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -11305,15 +11426,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"environment\"</em> play in this teaching?",
+      "prompt": "How is intelligence different from thought?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Thought is slow; intelligence is quick",
+        "Thought is mechanical; intelligence is creative perception",
+        "Thought is useful; intelligence is spiritual",
+        "They are different levels of the same thing"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"environment\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Thought is the response of memory - mechanical, repetitive. Intelligence is not memory; it is fresh perception. Thought can be intelligent, but intelligence is not thought.",
+      "hint": "Notice what the passage says about seeing and acting..."
     },
     "writingPrompt": "Think of a moment when \"What Role Has Emotion in Life?\" was real for you. Describe what you noticed.",
     "fill": {
@@ -11399,15 +11521,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can intelligence be cultivated?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, through education and practice",
+        "No - intelligence awakens when the mind is free",
+        "Yes, by accumulating knowledge and experience",
+        "No, intelligence is innate"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "You cannot cultivate intelligence any more than you can cultivate light. But you can remove the obstacles - the conditioning, the beliefs, the fears. When these are not, intelligence is.",
+      "hint": "What does the quote reveal about the nature of insight?"
     },
     "writingPrompt": "If you could explain \"Freeing Intelligence\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -11494,15 +11617,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Intellect vs. Intelligence</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the central insight of this passage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A new technique or method to practice",
+        "A direct seeing that transforms understanding",
+        "An intellectual concept to remember",
+        "A moral lesson to follow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The teaching points not to a method but to a seeing - direct perception that transforms. It is not 'do this' but 'look'. The looking itself is the transformation.",
+      "hint": "The speaker is pointing to a quality that is not movement..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Intellect vs. Intelligence\"? Observe without judging.",
     "fill": {
@@ -11589,15 +11713,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"emotional\"</em> play in this teaching?",
+      "prompt": "How does this passage challenge our usual way of thinking?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "By offering a better philosophy",
+        "By showing that the thinker is the thought",
+        "By providing new information",
+        "By contradicting common beliefs"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"emotional\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The challenge is not to accept a new belief but to see the nature of thought itself - that the thinker who seeks truth IS thought, IS the problem. This seeing dissolves the seeker.",
+      "hint": "Look for what the passage says about feeling and the feeler..."
     },
     "writingPrompt": "Reflect on: \"Sentiment and Emotion Breed Cruelty\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -11687,15 +11812,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the relationship between seeing and being?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Seeing leads to a new state of being",
+        "Seeing IS being - there is no gap",
+        "Being must change before we can see",
+        "They are separate dimensions"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "We think: first I see, then I become. But there is no 'then'. The seeing is the being. To see anger is to be that anger - not as observer but as the fact. In this, transformation is.",
+      "hint": "The quote speaks of something that is not sensation..."
     },
     "writingPrompt": "Think of a moment when \"We Must Die to All Our Emotions\" was real for you. Describe what you noticed.",
     "fill": {
@@ -11783,15 +11909,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>One Must Have Great Feelings</em>, what is the speaker asking us to observe?",
+      "prompt": "What prevents direct perception?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Lack of attention",
+        "The screen of words, concepts, past experience",
+        "Emotional disturbance",
+        "Physical limitations"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "You see a tree; you say 'that is an oak'. The word has intervened. You have not seen; you have recognized. Direct perception is without the word, without the past, without the screen.",
+      "hint": "Notice what the passage says about the word and the thing..."
     },
     "writingPrompt": "If you could explain \"One Must Have Great Feelings\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -11875,15 +12002,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"observation\"</em> play in this teaching?",
+      "prompt": "How does this passage challenge our usual way of thinking?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "By offering a better philosophy",
+        "By showing that the thinker is the thought",
+        "By providing new information",
+        "By contradicting common beliefs"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"observation\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The challenge is not to accept a new belief but to see the nature of thought itself - that the thinker who seeks truth IS thought, IS the problem. This seeing dissolves the seeker.",
+      "hint": "What does the quote reveal about the nature of feeling?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"Observation Without Thought\"? Observe without judging.",
     "fill": {
@@ -11971,15 +12099,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the relationship between seeing and being?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Seeing leads to a new state of being",
+        "Seeing IS being - there is no gap",
+        "Being must change before we can see",
+        "They are separate dimensions"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "We think: first I see, then I become. But there is no 'then'. The seeing is the being. To see anger is to be that anger - not as observer but as the fact. In this, transformation is.",
+      "hint": "The speaker is pointing to a quality that is immediate..."
     },
     "writingPrompt": "Reflect on: \"The Totality of Feeling\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -12066,15 +12195,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>If You Do Not Name That Feeling</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the central insight of this passage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A new technique or method to practice",
+        "A direct seeing that transforms understanding",
+        "An intellectual concept to remember",
+        "A moral lesson to follow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The teaching points not to a method but to a seeing - direct perception that transforms. It is not 'do this' but 'look'. The looking itself is the transformation.",
+      "hint": "Look for what the passage says about the body and the mind..."
     },
     "writingPrompt": "Think of a moment when \"If You Do Not Name That Feeling\" was real for you. Describe what you noticed.",
     "fill": {
@@ -12155,15 +12285,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"compassion\"</em> play in this teaching?",
+      "prompt": "What is psychological memory?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Memory of facts and information",
+        "Memory that builds the self - hurts, pleasures, conclusions",
+        "Unconscious memories",
+        "Emotional memories"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"compassion\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Psychological memory is not 'I remember my phone number'. It is 'I remember how you hurt me' - the residue that builds the self. This memory is the self; without it, who are you?",
+      "hint": "The quote speaks of something that builds the self..."
     },
     "writingPrompt": "If you could explain \"Emotions Lead Nowhere\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -12252,15 +12383,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the relationship between seeing and being?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Seeing leads to a new state of being",
+        "Seeing IS being - there is no gap",
+        "Being must change before we can see",
+        "They are separate dimensions"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "We think: first I see, then I become. But there is no 'then'. The seeing is the being. To see anger is to be that anger - not as observer but as the fact. In this, transformation is.",
+      "hint": "Notice what the passage says about reaction and observation..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Memory Negates Love\"? Observe without judging.",
     "fill": {
@@ -12346,15 +12478,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Do Not Name a Feeling</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the central insight of this passage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A new technique or method to practice",
+        "A direct seeing that transforms understanding",
+        "An intellectual concept to remember",
+        "A moral lesson to follow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The teaching points not to a method but to a seeing - direct perception that transforms. It is not 'do this' but 'look'. The looking itself is the transformation.",
+      "hint": "What does the quote reveal about the nature of feeling?"
     },
     "writingPrompt": "Reflect on: \"Do Not Name a Feeling\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -12438,15 +12571,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"extraordinary\"</em> play in this teaching?",
+      "prompt": "Can we see without the word?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "No, language shapes all perception",
+        "Yes - the word is not the thing; seeing can be direct",
+        "No, but we can see more clearly",
+        "Yes, in wordless meditation"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"extraordinary\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The word 'tree' is not the tree. To see the tree without the word is not to be confused; it is to see directly, without the mediation of language. This is true perception.",
+      "hint": "The speaker is pointing to the screen that we call knowledge..."
     },
     "writingPrompt": "Think of a moment when \"Remain with a Feeling and See What Happens\" was real for you. Describe what you noticed.",
     "fill": {
@@ -12531,15 +12665,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What prevents direct perception?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Lack of attention",
+        "The screen of words, concepts, past experience",
+        "Emotional disturbance",
+        "Physical limitations"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "You see a tree; you say 'that is an oak'. The word has intervened. You have not seen; you have recognized. Direct perception is without the word, without the past, without the screen.",
+      "hint": "Look for what the passage says about naming and recognition..."
     },
     "writingPrompt": "If you could explain \"Understanding Words\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -12622,15 +12757,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Memory Clouds Perception</em>, what is the speaker asking us to observe?",
+      "prompt": "Can we see without the word?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "No, language shapes all perception",
+        "Yes - the word is not the thing; seeing can be direct",
+        "No, but we can see more clearly",
+        "Yes, in wordless meditation"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The word 'tree' is not the tree. To see the tree without the word is not to be confused; it is to see directly, without the mediation of language. This is true perception.",
+      "hint": "The quote speaks of something that intervenes between us and reality..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Memory Clouds Perception\"? Observe without judging.",
     "fill": {
@@ -12714,15 +12850,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"limitation\"</em> play in this teaching?",
+      "prompt": "What prevents direct perception?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Lack of attention",
+        "The screen of words, concepts, past experience",
+        "Emotional disturbance",
+        "Physical limitations"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"limitation\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "You see a tree; you say 'that is an oak'. The word has intervened. You have not seen; you have recognized. Direct perception is without the word, without the past, without the screen.",
+      "hint": "Notice what the passage says about the word and the thing..."
     },
     "writingPrompt": "Reflect on: \"Words Create Limitations\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -12806,15 +12943,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can we see without the word?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "No, language shapes all perception",
+        "Yes - the word is not the thing; seeing can be direct",
+        "No, but we can see more clearly",
+        "Yes, in wordless meditation"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The word 'tree' is not the tree. To see the tree without the word is not to be confused; it is to see directly, without the mediation of language. This is true perception.",
+      "hint": "What does the quote reveal about the nature of seeing?"
     },
     "writingPrompt": "Think of a moment when \"Going Beyond Words\" was real for you. Describe what you noticed.",
     "fill": {
@@ -12901,15 +13039,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Extraordinary Seeing</em>, what is the speaker asking us to observe?",
+      "prompt": "What prevents direct perception?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Lack of attention",
+        "The screen of words, concepts, past experience",
+        "Emotional disturbance",
+        "Physical limitations"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "You see a tree; you say 'that is an oak'. The word has intervened. You have not seen; you have recognized. Direct perception is without the word, without the past, without the screen.",
+      "hint": "The speaker is pointing to the screen that we call knowledge..."
     },
     "writingPrompt": "If you could explain \"Extraordinary Seeing\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -12994,15 +13133,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"relationship\"</em> play in this teaching?",
+      "prompt": "Can we see without the word?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "No, language shapes all perception",
+        "Yes - the word is not the thing; seeing can be direct",
+        "No, but we can see more clearly",
+        "Yes, in wordless meditation"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"relationship\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The word 'tree' is not the tree. To see the tree without the word is not to be confused; it is to see directly, without the mediation of language. This is true perception.",
+      "hint": "Look for what the passage says about naming and recognition..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Perception of Truth Is Immediate\"? Observe without judging.",
     "fill": {
@@ -13089,15 +13229,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is thought essentially?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "The process of reasoning and analysis",
+        "The response of memory, always rooted in the past",
+        "The movement of intelligence",
+        "A tool for understanding reality"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Thought is not original; it is the response of what has been stored - memory, knowledge, experience. It can rearrange the old, but it cannot create the new. It is always of the past.",
+      "hint": "The quote speaks of something that is always in the past..."
     },
     "writingPrompt": "Reflect on: \"Subtle Truth\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -13186,15 +13327,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>All Thought Is Partial</em>, what is the speaker asking us to observe?",
+      "prompt": "Can thought ever be free?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, when thinking creatively",
+        "No - thought is always bound by its content, by memory",
+        "Yes, through understanding its limitations",
+        "No, but we can transcend thought"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Thought is memory responding. Memory is the past. The past is limitation. Thought can never be free; it can only be more or less efficient within its prison.",
+      "hint": "Notice what the passage says about memory and response..."
     },
     "writingPrompt": "Think of a moment when \"All Thought Is Partial\" was real for you. Describe what you noticed.",
     "fill": {
@@ -13281,15 +13423,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"conditioning\"</em> play in this teaching?",
+      "prompt": "Can conditioning be undone?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, through therapy and self-improvement",
+        "No - but it can be seen, and in seeing, it loses its power",
+        "Yes, with effort and awareness",
+        "No, conditioning is permanent"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"conditioning\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "To try to undo conditioning is more conditioning - the 'me' trying to change itself. But to see conditioning - to see it operating - is not to change it but to step out of it.",
+      "hint": "What does the quote reveal about the nature of influence?"
     },
     "writingPrompt": "If you could explain \"Freedom from the Self\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -13378,15 +13521,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why are we not aware of our conditioning?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because it is unconscious",
+        "Because we ARE the conditioning; we don't see from outside",
+        "Because it is too complex",
+        "Because we don't examine ourselves"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The fish doesn't see water. We don't see conditioning because we ARE it - our values, our beliefs, our fears are not 'ours'; they are the conditioning. To see this is the beginning of freedom.",
+      "hint": "The speaker is pointing to a prison we build ourselves..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Awareness May Burn Away the Problems\"? Observe without judging.",
     "fill": {
@@ -13476,15 +13620,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>There Is No Noble or Better Conditioning</em>, what is the speaker asking us to observe?",
+      "prompt": "What is conditioning?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Learned behaviors and beliefs",
+        "The accumulated influence of culture, society, family on the mind",
+        "Habits that can be changed",
+        "Education and socialization"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "From childhood, the mind is shaped: this is good, that is bad; be this, don't be that. This shaping is invisible - we think it is 'me'. But it is conditioning, not self.",
+      "hint": "Look for what the passage says about the observer and the observed..."
     },
     "writingPrompt": "Reflect on: \"There Is No Noble or Better Conditioning\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -13571,15 +13716,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "Can conditioning be undone?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, through therapy and self-improvement",
+        "No - but it can be seen, and in seeing, it loses its power",
+        "Yes, with effort and awareness",
+        "No, conditioning is permanent"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "To try to undo conditioning is more conditioning - the 'me' trying to change itself. But to see conditioning - to see it operating - is not to change it but to step out of it.",
+      "hint": "The quote speaks of something we are but cannot see..."
     },
     "writingPrompt": "Think of a moment when \"Freedom from Conditioning\" was real for you. Describe what you noticed.",
     "fill": {
@@ -13666,15 +13812,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why are we not aware of our conditioning?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because it is unconscious",
+        "Because we ARE the conditioning; we don't see from outside",
+        "Because it is too complex",
+        "Because we don't examine ourselves"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The fish doesn't see water. We don't see conditioning because we ARE it - our values, our beliefs, our fears are not 'ours'; they are the conditioning. To see this is the beginning of freedom.",
+      "hint": "Notice what the passage says about the fish and the water..."
     },
     "writingPrompt": "If you could explain \"Simple Awareness\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -13743,15 +13890,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>No Part of the Mind Is Unconditioned</em>, what is the speaker asking us to observe?",
+      "prompt": "What is conditioning?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Learned behaviors and beliefs",
+        "The accumulated influence of culture, society, family on the mind",
+        "Habits that can be changed",
+        "Education and socialization"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "From childhood, the mind is shaped: this is good, that is bad; be this, don't be that. This shaping is invisible - we think it is 'me'. But it is conditioning, not self.",
+      "hint": "What does the quote reveal about the nature of influence?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"No Part of the Mind Is Unconditioned\"? Observe without judging.",
     "fill": {
@@ -13839,15 +13987,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"unconscious\"</em> play in this teaching?",
+      "prompt": "What is thought essentially?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "The process of reasoning and analysis",
+        "The response of memory, always rooted in the past",
+        "The movement of intelligence",
+        "A tool for understanding reality"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"unconscious\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Thought is not original; it is the response of what has been stored - memory, knowledge, experience. It can rearrange the old, but it cannot create the new. It is always of the past.",
+      "hint": "The speaker is pointing to the mechanical nature of the mind..."
     },
     "writingPrompt": "Reflect on: \"The Burden of the Unconscious\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -13933,15 +14082,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Why are we not aware of our conditioning?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Because it is unconscious",
+        "Because we ARE the conditioning; we don't see from outside",
+        "Because it is too complex",
+        "Because we don't examine ourselves"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The fish doesn't see water. We don't see conditioning because we ARE it - our values, our beliefs, our fears are not 'ours'; they are the conditioning. To see this is the beginning of freedom.",
+      "hint": "Look for what the passage says about the observer and the observed..."
     },
     "writingPrompt": "Think of a moment when \"The Interval Between Thoughts\" was real for you. Describe what you noticed.",
     "fill": {
@@ -14012,15 +14162,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Observe How Habits Are Formed</em>, what is the speaker asking us to observe?",
+      "prompt": "Why is energy said to be wasted in conflict?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Conflict is exhausting",
+        "Conflict divides energy against itself - friction dissipates it",
+        "Conflict prevents focus",
+        "Conflict is negative and draining"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Energy is not lost in conflict; it is divided. Part fights part. The friction consumes the energy, turns it into heat, into noise. When there is no conflict, energy is whole.",
+      "hint": "The quote speaks of something that is wasted in conflict..."
     },
     "writingPrompt": "If you could explain \"Observe How Habits Are Formed\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -14111,15 +14262,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"fundamental\"</em> play in this teaching?",
+      "prompt": "How does this passage challenge our usual way of thinking?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "By offering a better philosophy",
+        "By showing that the thinker is the thought",
+        "By providing new information",
+        "By contradicting common beliefs"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"fundamental\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "The challenge is not to accept a new belief but to see the nature of thought itself - that the thinker who seeks truth IS thought, IS the problem. This seeing dissolves the seeker.",
+      "hint": "Notice what the passage says about division and war..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Energy Creates Its Own Discipline\"? Observe without judging.",
     "fill": {
@@ -14204,15 +14356,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is thought essentially?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "The process of reasoning and analysis",
+        "The response of memory, always rooted in the past",
+        "The movement of intelligence",
+        "A tool for understanding reality"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Thought is not original; it is the response of what has been stored - memory, knowledge, experience. It can rearrange the old, but it cannot create the new. It is always of the past.",
+      "hint": "What does the quote reveal about the nature of thinking?"
     },
     "writingPrompt": "Reflect on: \"Duality Creates Conflict\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -14297,15 +14450,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Pattern of an Idea</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the central insight of this passage?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "A new technique or method to practice",
+        "A direct seeing that transforms understanding",
+        "An intellectual concept to remember",
+        "A moral lesson to follow"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "The teaching points not to a method but to a seeing - direct perception that transforms. It is not 'do this' but 'look'. The looking itself is the transformation.",
+      "hint": "The speaker is pointing to a quality that we all carry..."
     },
     "writingPrompt": "Think of a moment when \"The Pattern of an Idea\" was real for you. Describe what you noticed.",
     "fill": {
@@ -14378,15 +14532,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"contradiction\"</em> play in this teaching?",
+      "prompt": "What is the source of psychological energy?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Food and rest",
+        "The mind itself - energy is abundant when not wasted",
+        "Passion and motivation",
+        "Spiritual practice"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"contradiction\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Energy is not generated; it is freed. The mind has immense energy, but it is wasted in conflict, in desire, in the movement of the 'me'. When these cease, energy is abundant.",
+      "hint": "Look for what the passage says about conflict and resolution..."
     },
     "writingPrompt": "If you could explain \"Where There Is Contradiction There Is Conflict\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -14474,15 +14629,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Can energy be accumulated?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, through conservation and discipline",
+        "No - energy is a movement; it is wasted or available, not stored",
+        "Yes, for future use",
+        "No, energy must flow"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Energy is not a battery to be charged. It is a river. You don't store it; you stop damming it. The dams are conflict, desire, the 'me'. Remove these, and energy flows.",
+      "hint": "The quote speaks of something that is wasted in conflict..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Creative Energy\"? Observe without judging.",
     "fill": {
@@ -14553,15 +14709,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Highest Form of Energy</em>, what is the speaker asking us to observe?",
+      "prompt": "Why does the speaker say that effort prevents listening?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Effort creates noise and distraction in the mind",
+        "Effort is needed for everything worthwhile",
+        "Only lazy people can truly listen",
+        "Effort should be directed outward, not inward"
       ],
       "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "observation": "When you make an effort to listen, the very effort becomes the center of your attention - not the sound, not the meaning. The listener disappears when effort arises.",
+      "hint": "Notice what the quote says about effort and trying..."
     },
     "writingPrompt": "Reflect on: \"The Highest Form of Energy\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -14649,15 +14806,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"extraordinary\"</em> play in this teaching?",
+      "prompt": "Can attention be practiced?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, through meditation and mindfulness",
+        "No - practice makes attention mechanical; attention happens when the mind is free",
+        "Yes, with discipline and consistency",
+        "No, attention is a natural gift"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"extraordinary\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "To practice attention is to say 'I will be attentive tomorrow' - which is inattention now. Attention is not a habit; it is the awakening of the mind that sees the truth of inattention.",
+      "hint": "What does the quote reveal about the difference between attention and focus?"
     },
     "writingPrompt": "Think of a moment when \"The Art of Listening Is the Art of Release\" was real for you. Describe what you noticed.",
     "fill": {
@@ -14742,15 +14900,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What happens when there is complete attention?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "The mind becomes very focused and efficient",
+        "There is no 'me' attending - only attention",
+        "Problems are solved quickly",
+        "A state of peace and clarity arises"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Who is attentive? The 'me'? When there is complete attention, there is no center, no 'me' who is attentive. There is only attention - and in this, the self is not.",
+      "hint": "The speaker is pointing to a state that is not effort..."
     },
     "writingPrompt": "If you could explain \"Attention Without Resistance\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -14843,15 +15002,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Attention Free of Effort</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the difference between attention and concentration?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Concentration is effort; attention is effortless awareness",
+        "Concentration is narrow; attention includes everything",
+        "Concentration is mental; attention is spiritual",
+        "They are degrees of the same thing"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Concentration is exclusion - focusing on one thing, excluding the rest. Attention is inclusion - the mind takes in everything without narrowing. One is limitation; the other is freedom.",
+      "hint": "Look for what the passage says about concentration and awareness..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Attention Free of Effort\"? Observe without judging.",
     "fill": {
@@ -14939,15 +15099,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"extraordinary\"</em> play in this teaching?",
+      "prompt": "Can attention be practiced?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, through meditation and mindfulness",
+        "No - practice makes attention mechanical; attention happens when the mind is free",
+        "Yes, with discipline and consistency",
+        "No, attention is a natural gift"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"extraordinary\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "To practice attention is to say 'I will be attentive tomorrow' - which is inattention now. Attention is not a habit; it is the awakening of the mind that sees the truth of inattention.",
+      "hint": "The quote speaks of a quality that includes everything..."
     },
     "writingPrompt": "Reflect on: \"An Attention That Is Not Exclusive\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -15035,15 +15196,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What happens when there is complete attention?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "The mind becomes very focused and efficient",
+        "There is no 'me' attending - only attention",
+        "Problems are solved quickly",
+        "A state of peace and clarity arises"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Who is attentive? The 'me'? When there is complete attention, there is no center, no 'me' who is attentive. There is only attention - and in this, the self is not.",
+      "hint": "Notice what the passage says about narrowing and widening..."
     },
     "writingPrompt": "Think of a moment when \"Attention Is Limitless, Without Frontiers\" was real for you. Describe what you noticed.",
     "fill": {
@@ -15126,15 +15288,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Complete Attention</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the difference between attention and concentration?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Concentration is effort; attention is effortless awareness",
+        "Concentration is narrow; attention includes everything",
+        "Concentration is mental; attention is spiritual",
+        "They are degrees of the same thing"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Concentration is exclusion - focusing on one thing, excluding the rest. Attention is inclusion - the mind takes in everything without narrowing. One is limitation; the other is freedom.",
+      "hint": "What does the quote reveal about the difference between attention and focus?"
     },
     "writingPrompt": "If you could explain \"Complete Attention\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -15221,15 +15384,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "How does awareness relate to thought?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Awareness stops thought completely",
+        "Awareness sees thought arising without being caught in it",
+        "Thought must be controlled before awareness can happen",
+        "They are opposing forces that cannot coexist"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Awareness doesn't fight thought. It sees thought moving, sees its origin, sees its ending. In that seeing, thought loses its binding power - not through resistance, but through understanding.",
+      "hint": "What does the quote reveal about the nature of watching?"
     },
     "writingPrompt": "What happens inside you when you contemplate \"Elimination of Fear Is the Beginning of Attention\"? Observe without judging.",
     "fill": {
@@ -15315,15 +15479,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What happens when awareness is continuous?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "The mind becomes exhausted",
+        "There is no accumulation of psychological memory",
+        "You become hyper-vigilant and anxious",
+        "You achieve a special state of consciousness"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "Continuous awareness means each moment is met fresh - not through the screen of yesterday's memory. The past doesn't accumulate; it doesn't build the 'me'. Life becomes a movement, not a record.",
+      "hint": "The passage speaks of something that cannot be cultivated or achieved..."
     },
     "writingPrompt": "Reflect on: \"There Is No Place at Which to Arrive\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -15411,15 +15576,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Knowledge Is Not Awareness</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the difference between awareness and concentration?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Concentration is narrow, awareness is all-inclusive",
+        "Awareness is harder to maintain than concentration",
+        "Concentration is physical, awareness is mental",
+        "They are the same thing with different names"
       ],
       "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "observation": "Concentration narrows the mind to a point - it excludes. Awareness is a field that includes everything without choosing. One is limitation, the other is freedom.",
+      "hint": "Look at what the quote says about observation itself..."
     },
     "writingPrompt": "Think of a moment when \"Knowledge Is Not Awareness\" was real for you. Describe what you noticed.",
     "fill": {
@@ -15507,15 +15673,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"experience\"</em> play in this teaching?",
+      "prompt": "Why can't awareness be practiced?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Because practice implies a goal in the future",
+        "Because awareness is too difficult for most people",
+        "Because it requires natural talent",
+        "Because practice makes it mechanical"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"experience\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 0,
+      "observation": "Practice means: 'I am not aware now, but if I practice, I will be aware tomorrow.' This very movement creates time, creates the practitioner - and awareness disappears.",
+      "hint": "The quote hints at a quality that observes without the observer..."
     },
     "writingPrompt": "If you could explain \"Introspection Is Incomplete\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -15600,15 +15767,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What does it mean to be aware without the observer?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "To watch yourself as if from outside",
+        "To observe without judgment, naming, or the 'me' looking",
+        "To dissociate from your emotions",
+        "To become like a camera recording events"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "The observer is the past - memory, judgment, the 'me'. When you observe without this observer, there is only observation. The division between seer and seen dissolves.",
+      "hint": "Notice how awareness is described in relation to time and practice..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Seeing the Whole\"? Observe without judging.",
     "fill": {
@@ -15681,15 +15849,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>Awareness Cannot Be Disciplined</em>, what is the speaker asking us to observe?",
+      "prompt": "How does awareness relate to thought?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Awareness stops thought completely",
+        "Awareness sees thought arising without being caught in it",
+        "Thought must be controlled before awareness can happen",
+        "They are opposing forces that cannot coexist"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "Awareness doesn't fight thought. It sees thought moving, sees its origin, sees its ending. In that seeing, thought loses its binding power - not through resistance, but through understanding.",
+      "hint": "What does the quote reveal about the nature of watching?"
     },
     "writingPrompt": "Reflect on: \"Awareness Cannot Be Disciplined\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -15780,15 +15949,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"experience\"</em> play in this teaching?",
+      "prompt": "What happens when awareness is continuous?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "The mind becomes exhausted",
+        "There is no accumulation of psychological memory",
+        "You become hyper-vigilant and anxious",
+        "You achieve a special state of consciousness"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"experience\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Continuous awareness means each moment is met fresh - not through the screen of yesterday's memory. The past doesn't accumulate; it doesn't build the 'me'. Life becomes a movement, not a record.",
+      "hint": "The passage speaks of something that cannot be cultivated or achieved..."
     },
     "writingPrompt": "Think of a moment when \"Let a Thought Flower\" was real for you. Describe what you noticed.",
     "fill": {
@@ -15871,15 +16041,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the difference between awareness and concentration?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Concentration is narrow, awareness is all-inclusive",
+        "Awareness is harder to maintain than concentration",
+        "Concentration is physical, awareness is mental",
+        "They are the same thing with different names"
       ],
-      "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "answer": 0,
+      "observation": "Concentration narrows the mind to a point - it excludes. Awareness is a field that includes everything without choosing. One is limitation, the other is freedom.",
+      "hint": "Look at what the quote says about observation itself..."
     },
     "writingPrompt": "If you could explain \"Passive Awareness\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -15969,15 +16140,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>What Is Thoroughly Understood Will Not Repeat Itself</em>, what is the speaker asking us to observe?",
+      "prompt": "Is comparison a form of violence?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "No, comparison is natural and useful",
+        "Yes - comparison divides, judges, creates superior and inferior",
+        "Only negative comparison is violent",
+        "Comparison becomes violence only when extreme"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "To compare is to say 'you are better, I am worse' or vice versa. This very division is violence - the violence of the 'me' measuring itself against another. Comparison IS violence.",
+      "hint": "Notice what the passage says about the root of conflict..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"What Is Thoroughly Understood Will Not Repeat Itself\"? Observe without judging.",
     "fill": {
@@ -16066,15 +16238,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"conditioning\"</em> play in this teaching?",
+      "prompt": "Can violence be ended through non-violence?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Yes, by practicing non-violence",
+        "No - the ideal of non-violence is still violence; violence ends when its cause is seen",
+        "Yes, through education and culture",
+        "No, violence is inherent in nature"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"conditioning\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "'I must be non-violent' is violence - the 'I' forcing itself to be something. The ideal creates conflict. Violence ends not through ideal but through understanding its root.",
+      "hint": "What does the quote reveal about the nature of the self?"
     },
     "writingPrompt": "Reflect on: \"Violence\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -16158,15 +16331,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "What is the relationship between violence and authority?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Authority prevents violence through order",
+        "Authority IS violence - the imposition of one will on another",
+        "Authority can be violent or benevolent",
+        "They are separate phenomena"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "To follow authority is to submit your intelligence to another. This submission is violence against yourself. To impose authority is violence against another. Authority is violence.",
+      "hint": "The speaker is pointing to a division that we all carry..."
     },
     "writingPrompt": "Think of a moment when \"Is It Possible to End Violence?\" was real for you. Describe what you noticed.",
     "fill": {
@@ -16250,15 +16424,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Central Cause of Conflict</em>, what is the speaker asking us to observe?",
+      "prompt": "Is peace merely the absence of violence?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, peace is the state without conflict",
+        "No - peace is positive, not negative; it is understanding, not absence",
+        "Yes, but absence of violence is rare and valuable",
+        "No, peace requires active cultivation"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "If peace is merely absence, it can return to violence. True peace is not absence but understanding - seeing the root of violence so that violence cannot arise. It is positive intelligence.",
+      "hint": "Look for what the passage says about the self that competes and compares..."
     },
     "writingPrompt": "If you could explain \"The Central Cause of Conflict\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -16331,15 +16506,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"discipline\"</em> play in this teaching?",
+      "prompt": "What is the root of violence?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Anger and aggression",
+        "The division between 'me' and 'you' - the separate self",
+        "Biological survival instincts",
+        "Social and economic conditions"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"discipline\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "Violence is not just physical harm. It is the sense of being separate - 'my' country, 'my' belief, 'my' group. This division IS violence; physical violence is its expression.",
+      "hint": "The quote speaks of something that begins with comparison..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"Realize You Are Violent\"? Observe without judging.",
     "fill": {
@@ -16430,15 +16606,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Is comparison a form of violence?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "No, comparison is natural and useful",
+        "Yes - comparison divides, judges, creates superior and inferior",
+        "Only negative comparison is violent",
+        "Comparison becomes violence only when extreme"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "To compare is to say 'you are better, I am worse' or vice versa. This very division is violence - the violence of the 'me' measuring itself against another. Comparison IS violence.",
+      "hint": "Notice what the passage says about the root of conflict..."
     },
     "writingPrompt": "Reflect on: \"Freedom from Violence\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {
@@ -16525,15 +16702,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>The Major Cause of Violence</em>, what is the speaker asking us to observe?",
+      "prompt": "Can violence be ended through non-violence?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Yes, by practicing non-violence",
+        "No - the ideal of non-violence is still violence; violence ends when its cause is seen",
+        "Yes, through education and culture",
+        "No, violence is inherent in nature"
       ],
-      "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "answer": 1,
+      "observation": "'I must be non-violent' is violence - the 'I' forcing itself to be something. The ideal creates conflict. Violence ends not through ideal but through understanding its root.",
+      "hint": "What does the quote reveal about the nature of the self?"
     },
     "writingPrompt": "Think of a moment when \"The Major Cause of Violence\" was real for you. Describe what you noticed.",
     "fill": {
@@ -16620,15 +16798,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "What role does <em>\"understanding\"</em> play in this teaching?",
+      "prompt": "What is the relationship between violence and authority?",
       "options": [
-        "It is something to cultivate through practice",
-        "It is a goal to achieve in the future",
-        "It reveals something when observed without judgment",
-        "It should be analyzed intellectually"
+        "Authority prevents violence through order",
+        "Authority IS violence - the imposition of one will on another",
+        "Authority can be violent or benevolent",
+        "They are separate phenomena"
       ],
-      "answer": 2,
-      "observation": "You sensed the core of Krishnamurti's approach: observation without judgment. He does not ask us to change \"understanding\" - he asks us to see it clearly. The seeing itself is the transformation."
+      "answer": 1,
+      "observation": "To follow authority is to submit your intelligence to another. This submission is violence against yourself. To impose authority is violence against another. Authority is violence.",
+      "hint": "The speaker is pointing to a division that we all carry..."
     },
     "writingPrompt": "If you could explain \"The Fact Is We Are Violent\" to a friend, what would you say? Write in English.",
     "fill": {
@@ -16719,15 +16898,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "According to this passage, what prevents true understanding?",
+      "prompt": "Is peace merely the absence of violence?",
       "options": [
-        "Lack of education or knowledge",
-        "The constant activity of thought and desire",
-        "Not spending enough time studying",
-        "External circumstances and other people"
+        "Yes, peace is the state without conflict",
+        "No - peace is positive, not negative; it is understanding, not absence",
+        "Yes, but absence of violence is rare and valuable",
+        "No, peace requires active cultivation"
       ],
       "answer": 1,
-      "observation": "A key insight: Krishnamurti consistently points to the mind's own movement - thought, desire, projection - as the barrier, not something external. Understanding begins when this movement is seen."
+      "observation": "If peace is merely absence, it can return to violence. True peace is not absence but understanding - seeing the root of violence so that violence cannot arise. It is positive intelligence.",
+      "hint": "Look for what the passage says about the self that competes and compares..."
     },
     "writingPrompt": "What happens inside you when you contemplate \"To Destroy Hate\"? Observe without judging.",
     "fill": {
@@ -16814,15 +16994,16 @@ window.__LESSONS_DATA__ = [
       }
     },
     "quiz": {
-      "prompt": "In this passage about <em>That Thing Which You Fight You Become</em>, what is the speaker asking us to observe?",
+      "prompt": "What is the difference between awareness and concentration?",
       "options": [
-        "Our habitual reactions and inner patterns",
-        "The external world more carefully",
-        "Other people and their behavior",
-        "Our achievements and successes"
+        "Concentration is narrow, awareness is all-inclusive",
+        "Awareness is harder to maintain than concentration",
+        "Concentration is physical, awareness is mental",
+        "They are the same thing with different names"
       ],
       "answer": 0,
-      "observation": "You noticed the inward direction of this passage. Krishnamurti consistently turns our attention back to ourselves - not to judge, but to simply observe what is happening inside."
+      "observation": "Concentration narrows the mind to a point - it excludes. Awareness is a field that includes everything without choosing. One is limitation, the other is freedom.",
+      "hint": "Look at what the quote says about observation itself..."
     },
     "writingPrompt": "Reflect on: \"That Thing Which You Fight You Become\". What does this mean in your own life? Write 1-3 sentences.",
     "fill": {

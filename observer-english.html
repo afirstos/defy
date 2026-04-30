@@ -48,6 +48,12 @@
   @keyframes breathe { 0%,100% { transform:scale(1); opacity:0.6; } 50% { transform:scale(1.1); opacity:1; } }
   @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
   @keyframes gentlePulse { 0%,100% { box-shadow: 0 0 0 0 var(--accent-glow); } 50% { box-shadow: 0 0 30px 8px var(--accent-glow); } }
+  @keyframes float { 0%,100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(1deg); } }
+  @keyframes glow { 0%,100% { opacity: 0.3; } 50% { opacity: 0.7; } }
+  @keyframes typewriter { from { width: 0; } to { width: 100%; } }
+  @keyframes blink { 0%,100% { border-color: transparent; } 50% { border-color: var(--gold); } }
+  @keyframes ripple { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(4); opacity: 0; } }
+  @keyframes fadeInSlow { 0% { opacity: 0; transform: translateY(10px); } 50% { opacity: 0.5; } 100% { opacity: 1; transform: translateY(0); } }
 
   .splash-breath {
     width: 80px; height: 80px;
@@ -55,6 +61,23 @@
     border: 2px solid var(--accent);
     animation: breathe 4s ease-in-out infinite;
     margin-bottom: 2rem;
+    position: relative;
+  }
+  .splash-breath::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    border-radius: 50%;
+    border: 1px solid rgba(140,192,168,0.2);
+    animation: breathe 4s ease-in-out infinite 0.5s;
+  }
+  .splash-breath::after {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    border-radius: 50%;
+    border: 1px solid rgba(140,192,168,0.1);
+    animation: breathe 4s ease-in-out infinite 1s;
   }
 
   .splash-title {
@@ -73,6 +96,17 @@
     line-height: 1.8; color: var(--text);
     margin-bottom: 2rem;
     font-style: italic;
+    position: relative;
+  }
+  .splash-question::before {
+    content: '"';
+    position: absolute;
+    left: -1.5rem;
+    top: -0.5rem;
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.3;
+    font-style: normal;
   }
 
   .splash-options { display: flex; flex-direction: column; gap: 0.7rem; width: 100%; max-width: 320px; }
@@ -120,6 +154,17 @@
     margin: 1rem 0 1.5rem;
     background: linear-gradient(135deg, var(--bg-card), var(--bg));
     border-radius: 16px; border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .daily-question::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(196,168,77,0.03) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+    pointer-events: none;
   }
   .daily-question .label {
     font-size: 0.7rem; color: var(--text-muted);
@@ -143,7 +188,29 @@
     border-radius: 16px;
     padding: 2rem 1.5rem;
     margin-bottom: 1.5rem;
+    overflow: hidden;
   }
+  .quote-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, transparent 0%, rgba(140,192,168,0.02) 50%, transparent 100%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .quote-card:hover::before { opacity: 1; }
+  .quote-decoration {
+    position: absolute;
+    font-size: 8rem;
+    color: var(--accent);
+    opacity: 0.03;
+    font-family: Georgia, serif;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .quote-decoration.open { top: -1rem; left: 0.5rem; }
+  .quote-decoration.close { bottom: -2rem; right: 0.5rem; }
   .quote-card .theme-tag {
     display: inline-block;
     font-size: 0.65rem; color: var(--accent);
@@ -154,6 +221,13 @@
   .quote-text {
     font-size: 1.05rem; line-height: 2;
     color: var(--text); margin-bottom: 1rem;
+    position: relative;
+  }
+  /* 哲思高亮效果 */
+  .quote-text .philosophy-highlight {
+    background: linear-gradient(180deg, transparent 60%, rgba(196,168,77,0.2) 60%);
+    padding: 0 4px;
+    border-radius: 2px;
   }
   .quote-text .touchable {
     color: var(--accent);
@@ -262,6 +336,17 @@
     border-radius: 14px;
     padding: 1.5rem;
   }
+  .quiz-hint {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 1rem;
+    padding: 0.6rem 0.8rem;
+    border-left: 2px solid var(--gold);
+    background: var(--gold-dim);
+    border-radius: 0 8px 8px 0;
+    line-height: 1.6;
+  }
   .quiz-prompt {
     font-size: 0.95rem; color: var(--text);
     line-height: 1.7; margin-bottom: 1.2rem;
@@ -290,8 +375,18 @@
     line-height: 1.8;
     color: var(--text-dim);
     display: none;
+    position: relative;
+    overflow: hidden;
   }
-  .observation.show { display: block; animation: slideUp 0.5s ease; }
+  .observation::before {
+    content: '✧';
+    position: absolute;
+    top: 1rem; left: 0.8rem;
+    color: var(--gold);
+    opacity: 0.3;
+    font-size: 1.2rem;
+  }
+  .observation.show { display: block; animation: fadeInSlow 0.8s ease; }
   .observation .obs-label {
     font-size: 0.7rem; color: var(--accent);
     text-transform: uppercase; letter-spacing: 0.15em;
@@ -346,6 +441,51 @@
   .fill-btn.correct { background: rgba(92,184,122,0.15); border-color: #5cb87a; color: #5cb87a; }
   .fill-btn.wrong-fill { background: rgba(196,122,106,0.15); border-color: var(--soft-red); color: var(--soft-red); }
 
+  /* --- DICTATION GAME (听写填空) --- */
+  .dictate-play-btn {
+    background: var(--accent-glow); border: 2px solid var(--accent);
+    color: var(--accent); padding: 1rem 2rem;
+    border-radius: 50px; cursor: pointer; font-family: inherit;
+    font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: all 0.3s;
+  }
+  .dictate-play-btn:hover { background: var(--accent); color: var(--bg-deep); }
+  .dictate-play-btn.playing { animation: gentlePulse 1s ease-in-out infinite; border-color: var(--gold); color: var(--gold); }
+  .dictate-play-btn .play-icon { font-size: 1.2rem; }
+  .speed-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-muted); padding: 0.3rem 0.7rem;
+    border-radius: 15px; cursor: pointer; font-family: inherit;
+    font-size: 0.75rem; margin: 0 0.2rem; transition: all 0.2s;
+  }
+  .speed-btn:hover { border-color: var(--accent); color: var(--text); }
+  .speed-btn.active { background: var(--accent-glow); border-color: var(--accent); color: var(--accent); }
+  .dictate-input-wrap { margin: 1rem 0; }
+  .dictate-input {
+    width: 100%; min-height: 80px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem;
+    color: var(--text); font-family: inherit;
+    font-size: 1rem; line-height: 1.8;
+    resize: vertical; transition: border-color 0.3s;
+  }
+  .dictate-input:focus { outline: none; border-color: var(--accent); }
+  .dictate-input::placeholder { color: var(--text-muted); font-style: italic; }
+  .dictate-counter { text-align: right; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem; }
+  .dictate-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .dictate-comparison {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem;
+    margin-top: 0.8rem; display: none;
+  }
+  .dictate-comparison.show { display: block; animation: slideUp 0.3s ease; }
+  .dictate-comparison .label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.5rem; }
+  .dictate-comparison .answer-text { font-size: 0.95rem; color: var(--accent); line-height: 1.8; }
+  .dictate-comparison .diff-text { font-size: 0.9rem; line-height: 1.8; }
+  .dictate-comparison .diff-correct { color: #5cb87a; }
+  .dictate-comparison .diff-wrong { color: var(--soft-red); text-decoration: line-through; }
+  .dictate-comparison .diff-missing { color: var(--gold); border-bottom: 1px dashed var(--gold); }
+
   /* --- SENTENCE ORDER GAME --- */
   .order-answer {
     min-height: 50px; padding: 10px; border: 1px solid var(--border);
@@ -396,6 +536,19 @@
     border: 1px solid var(--border);
     border-radius: 14px;
     padding: 1.3rem 1.5rem;
+    position: relative;
+  }
+  .writing-area::before {
+    content: 'Write your truth...';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    opacity: 0.1;
+    font-style: italic;
+    pointer-events: none;
+    white-space: nowrap;
   }
   .writing-prompt {
     font-size: 0.88rem; color: var(--gold);
@@ -446,6 +599,63 @@
     transition: all 0.3s;
   }
   .writing-save:hover { opacity: 0.85; }
+
+  /* --- MEDITATION MOMENT --- */
+  .meditation-pause {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,15,13,0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 200;
+    animation: fadeIn 0.5s ease;
+  }
+  .meditation-pause.active { display: flex; }
+  .meditation-text {
+    font-size: 1.3rem;
+    color: var(--gold);
+    font-style: italic;
+    text-align: center;
+    max-width: 400px;
+    line-height: 2;
+    animation: fadeInSlow 1s ease;
+  }
+  .meditation-breath {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    margin: 2rem 0;
+    animation: breathe 5s ease-in-out infinite;
+    opacity: 0.6;
+  }
+  .meditation-close {
+    margin-top: 2rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+  }
+  .meditation-close:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* --- RIPPLE EFFECT --- */
+  .ripple-container {
+    position: relative;
+    overflow: hidden;
+  }
+  .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(140,192,168,0.3);
+    animation: ripple 0.6s linear;
+    pointer-events: none;
+  }
 
   /* --- MARKS SECTION --- */
   .marks-row {
@@ -667,7 +877,10 @@
     <div class="quote-card">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
         <span class="theme-tag" id="themeTag">Fear</span>
-        <button class="speak-btn" id="speakQuoteBtn" onclick="speakQuote()" title="Read quote aloud">🔊</button>
+        <div style="display:flex;gap:0.5rem">
+          <button class="speak-btn" onclick="showMeditation()" title="Pause for contemplation">✧</button>
+          <button class="speak-btn" id="speakQuoteBtn" onclick="speakQuote()" title="Read quote aloud">🔊</button>
+        </div>
       </div>
       <div class="quote-text" id="quoteText"></div>
       <div class="quote-source">— Jiddu Krishnamurti, <em>The Book of Life</em></div>
@@ -688,8 +901,8 @@
       <button class="game-tab active" onclick="switchGame('vocab')">Match</button>
       <button class="game-tab" onclick="switchGame('fill')">Fill</button>
       <button class="game-tab" onclick="switchGame('order')">Order</button>
+      <button class="game-tab" onclick="switchGame('dictate')">Dictate</button>
       <button class="game-tab" onclick="switchGame('quiz')">Quiz</button>
-      <button class="game-tab" onclick="switchGame('write')">Write</button>
     </div>
 
     <!-- VOCAB MATCH -->
@@ -723,9 +936,37 @@
       </div>
     </div>
 
+    <!-- DICTATION (听写填空) -->
+    <div class="game-panel" id="panel-dictate">
+      <div class="dictate-audio" style="text-align:center;padding:1rem 0">
+        <button class="dictate-play-btn" id="dictatePlayBtn" onclick="playDictation()" title="Play audio">
+          <span class="play-icon">▶</span>
+          <span class="play-text">Play Sentence</span>
+        </button>
+        <div class="dictate-speed" style="margin-top:0.6rem">
+          <button class="speed-btn" onclick="setDictationSpeed(0.7)" data-speed="0.7">0.7x</button>
+          <button class="speed-btn active" onclick="setDictationSpeed(1)" data-speed="1">1x</button>
+          <button class="speed-btn" onclick="setDictationSpeed(0.85)" data-speed="0.85">0.85x</button>
+        </div>
+        <div class="dictate-hint" id="dictateHint" style="margin-top:0.5rem;font-size:0.75rem;color:var(--text-muted)">Click play, then write what you hear</div>
+      </div>
+      <div class="dictate-input-wrap">
+        <textarea class="dictate-input" id="dictateInput" placeholder="Write the sentence you hear..." oninput="onDictationInput()"></textarea>
+        <div class="dictate-counter"><span id="dictateCharCount">0</span> chars</div>
+      </div>
+      <div class="dictate-actions">
+        <button class="game-btn game-btn-ghost" onclick="showDictationHint()">💡 Hint</button>
+        <button class="game-btn game-btn-ghost" onclick="revealDictationAnswer()">👁 Reveal</button>
+        <button class="game-btn game-btn-primary" onclick="checkDictation()">✓ Check</button>
+      </div>
+      <div class="game-feedback" id="dictateFb"></div>
+      <div class="dictate-comparison" id="dictateComparison"></div>
+    </div>
+
     <!-- QUIZ -->
     <div class="game-panel" id="panel-quiz">
       <div class="quiz-card">
+        <div class="quiz-hint" id="quizHint"></div>
         <div class="quiz-prompt" id="quizPrompt"></div>
         <div class="quiz-options" id="quizOptions"></div>
         <div class="observation" id="observation"></div>
@@ -734,16 +975,6 @@
 
     <!-- WRITE -->
     <div class="game-panel" id="panel-write">
-      <div class="writing-area">
-        <div class="writing-prompt" id="writingPrompt"></div>
-        <div class="writing-keywords" id="writingKeywords"></div>
-        <textarea class="writing-box" id="writingBox" placeholder="Write your observation in English... even one sentence is enough."></textarea>
-        <div class="writing-tools">
-          <button class="writing-tool" onclick="suggestWord()">💡 Suggest a word</button>
-          <button class="writing-tool" onclick="showHint()">🔍 Grammar hint</button>
-        </div>
-        <button class="writing-save" onclick="saveWriting()">Save Reflection</button>
-      </div>
     </div>
   </div>
 
@@ -762,6 +993,16 @@
   <!-- ===== PAGE: JOURNAL ===== -->
   <div class="page" id="page-journal">
     <div style="font-size:1.1rem;color:var(--accent);font-weight:300;letter-spacing:0.15em;margin-bottom:1.5rem;text-align:center">Journal</div>
+    <div class="writing-area">
+      <div class="writing-prompt" id="writingPrompt"></div>
+      <div class="writing-keywords" id="writingKeywords"></div>
+      <textarea class="writing-box" id="writingBox" placeholder="Write your observation in English... even one sentence is enough."></textarea>
+      <div class="writing-tools">
+        <button class="writing-tool" onclick="suggestWord()">💡 Suggest a word</button>
+        <button class="writing-tool" onclick="showHint()">🔍 Grammar hint</button>
+      </div>
+      <button class="writing-save" id="writingSaveBtn" onclick="saveWriting()">Save Reflection</button>
+    </div>
     <div class="diary-entries" id="diaryEntries"></div>
   </div>
 
@@ -811,6 +1052,13 @@
   <button class="bnav-item" onclick="navTo('observe', event)">
     <span class="bnav-icon">👁</span>Observe
   </button>
+</div>
+
+<!-- MEDITATION PAUSE (哲思暂停) -->
+<div class="meditation-pause" id="meditationPause">
+  <div class="meditation-breath"></div>
+  <div class="meditation-text" id="meditationText"></div>
+  <button class="meditation-close" onclick="closeMeditation()">Return to observation</button>
 </div>
 
 <script>
@@ -984,6 +1232,7 @@ function loadDay(dayIndex) {
   document.getElementById('quoteText').innerHTML = html;
 
   // Quiz — shuffle options so answer position varies each time
+  document.getElementById('quizHint').textContent = lesson.quiz.hint || '';
   document.getElementById('quizPrompt').innerHTML = lesson.quiz.prompt;
   const quizDiv = document.getElementById('quizOptions');
   quizDiv.innerHTML = '';
@@ -1124,6 +1373,7 @@ function initGames() {
   renderVocab();
   renderFill();
   renderOrder();
+  initDictation();
 }
 
 function showGameFb(id, msg, ok) {
@@ -1406,6 +1656,239 @@ function checkOrder() {
 
 function resetOrder() { renderOrder(); }
 
+// ===== DICTATION (听写填空) =====
+let _dictationState = {
+  sentence: null,
+  speed: 1,
+  playing: false,
+  attempts: 0,
+  hintsUsed: 0,
+  revealed: false
+};
+
+function initDictation() {
+  const lesson = LESSONS[state.currentDay];
+  // Use order.sentence if available, otherwise derive from quote
+  let sentence = null;
+  if (lesson.order && lesson.order.sentence) {
+    sentence = lesson.order.sentence.join(' ');
+  } else if (lesson.quote) {
+    // Extract first sentence from quote (strip {word} markers)
+    const cleanQuote = lesson.quote.replace(/\{[^}]+\}/g, '').replace(/<[^>]+>/g, '');
+    const sentences = cleanQuote.match(/[^.!?]+[.!?]+/g);
+    if (sentences && sentences.length > 0) {
+      sentence = sentences[0].trim();
+    }
+  }
+  
+  _dictationState = {
+    sentence: sentence,
+    speed: 1,
+    playing: false,
+    attempts: 0,
+    hintsUsed: 0,
+    revealed: false
+  };
+  
+  const input = document.getElementById('dictateInput');
+  if (input) input.value = '';
+  const counter = document.getElementById('dictateCharCount');
+  if (counter) counter.textContent = '0';
+  const comparison = document.getElementById('dictateComparison');
+  if (comparison) comparison.classList.remove('show');
+  const hint = document.getElementById('dictateHint');
+  if (hint) hint.textContent = 'Click play, then write what you hear';
+  hideGameFb('dictateFb');
+  
+  // Update speed buttons
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.classList.toggle('active', parseFloat(btn.dataset.speed) === _dictationState.speed);
+  });
+}
+
+function setDictationSpeed(speed) {
+  _dictationState.speed = speed;
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.classList.toggle('active', parseFloat(btn.dataset.speed) === speed);
+  });
+}
+
+function playDictation() {
+  if (!_dictationState.sentence) {
+    showGameFb('dictateFb', 'No sentence available for this lesson.', false);
+    return;
+  }
+  
+  const btn = document.getElementById('dictatePlayBtn');
+  if (_dictationState.playing) {
+    speechSynthesis.cancel();
+    return;
+  }
+  
+  _dictationState.playing = true;
+  btn.classList.add('playing');
+  btn.querySelector('.play-icon').textContent = '⏸';
+  btn.querySelector('.play-text').textContent = 'Playing...';
+  
+  const utterance = new SpeechSynthesisUtterance(_dictationState.sentence);
+  utterance.lang = 'en-US';
+  utterance.rate = _dictationState.speed;
+  utterance.pitch = 1;
+  
+  const voices = speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang.startsWith('en') && v.name.includes('Female'))
+              || voices.find(v => v.lang.startsWith('en-'))
+              || voices[0];
+  if (enVoice) utterance.voice = enVoice;
+  
+  utterance.onend = () => {
+    _dictationState.playing = false;
+    btn.classList.remove('playing');
+    btn.querySelector('.play-icon').textContent = '▶';
+    btn.querySelector('.play-text').textContent = 'Play Again';
+  };
+  utterance.onerror = () => {
+    _dictationState.playing = false;
+    btn.classList.remove('playing');
+    btn.querySelector('.play-icon').textContent = '▶';
+    btn.querySelector('.play-text').textContent = 'Play Sentence';
+  };
+  
+  speechSynthesis.speak(utterance);
+}
+
+function onDictationInput() {
+  const input = document.getElementById('dictateInput');
+  const counter = document.getElementById('dictateCharCount');
+  if (input && counter) {
+    counter.textContent = input.value.length;
+  }
+}
+
+function showDictationHint() {
+  if (!_dictationState.sentence) return;
+  
+  _dictationState.hintsUsed++;
+  const words = _dictationState.sentence.split(' ');
+  const hintLevel = Math.min(_dictationState.hintsUsed, 3);
+  
+  let hint = '';
+  if (hintLevel === 1) {
+    // Show first word
+    hint = `Starts with: "${words[0]}"`;
+  } else if (hintLevel === 2) {
+    // Show word count
+    hint = `${words.length} words. First: "${words[0]}", Last: "${words[words.length-1]}"`;
+  } else {
+    // Show first 3 words
+    hint = `First words: "${words.slice(0, 3).join(' ')}..."`;
+  }
+  
+  const hintEl = document.getElementById('dictateHint');
+  if (hintEl) hintEl.textContent = hint;
+}
+
+function checkDictation() {
+  if (!_dictationState.sentence) {
+    showGameFb('dictateFb', 'No sentence to check.', false);
+    return;
+  }
+  
+  const input = document.getElementById('dictateInput');
+  if (!input) return;
+  
+  const userAnswer = input.value.trim();
+  if (!userAnswer) {
+    showGameFb('dictateFb', 'Please write what you heard first.', false);
+    return;
+  }
+  
+  _dictationState.attempts++;
+  
+  // Normalize for comparison (ignore case, punctuation)
+  const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, ' ').trim();
+  const normalizedUser = normalize(userAnswer);
+  const normalizedCorrect = normalize(_dictationState.sentence);
+  
+  const isCorrect = normalizedUser === normalizedCorrect;
+  
+  if (isCorrect) {
+    showGameFb('dictateFb', 'Perfect! Your listening is excellent! 🎧', true);
+    completeGame('dictate');
+    showDictationComparison(userAnswer, _dictationState.sentence, true);
+  } else {
+    // Calculate similarity
+    const similarity = calculateSimilarity(normalizedUser, normalizedCorrect);
+    if (similarity > 0.8) {
+      showGameFb('dictateFb', `Very close! (${Math.round(similarity * 100)}% match) Check the details:`, false);
+    } else if (similarity > 0.5) {
+      showGameFb('dictateFb', `Good effort! (${Math.round(similarity * 100)}% match) Try again or use hints.`, false);
+    } else {
+      showGameFb('dictateFb', 'Keep practicing! Listen again and try to catch more words.', false);
+    }
+    showDictationComparison(userAnswer, _dictationState.sentence, false);
+  }
+}
+
+function calculateSimilarity(s1, s2) {
+  const words1 = s1.split(' ');
+  const words2 = s2.split(' ');
+  const set2 = new Set(words2);
+  let matches = 0;
+  words1.forEach(w => { if (set2.has(w)) matches++; });
+  return matches / Math.max(words1.length, words2.length);
+}
+
+function showDictationComparison(userAnswer, correctAnswer, isCorrect) {
+  const comparison = document.getElementById('dictateComparison');
+  if (!comparison) return;
+  
+  // Create word-by-word diff
+  const userWords = userAnswer.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/);
+  const correctWords = correctAnswer.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/);
+  
+  let diffHtml = '';
+  const maxLen = Math.max(userWords.length, correctWords.length);
+  
+  for (let i = 0; i < maxLen; i++) {
+    const userW = userWords[i] || '';
+    const correctW = correctWords[i] || '';
+    
+    if (i < userWords.length && i < correctWords.length) {
+      if (userW === correctW) {
+        diffHtml += `<span class="diff-correct">${userW}</span> `;
+      } else {
+        diffHtml += `<span class="diff-wrong">${userW}</span> → <span class="diff-correct">${correctW}</span> `;
+      }
+    } else if (i >= userWords.length) {
+      diffHtml += `<span class="diff-missing">[${correctW}]</span> `;
+    }
+  }
+  
+  comparison.innerHTML = `
+    <div class="label">${isCorrect ? 'Correct Answer' : 'Comparison'}</div>
+    <div class="answer-text" style="margin-bottom:0.5rem">${correctAnswer}</div>
+    ${!isCorrect ? `<div class="diff-text">${diffHtml}</div>` : ''}
+  `;
+  comparison.classList.add('show');
+}
+
+function revealDictationAnswer() {
+  if (!_dictationState.sentence) return;
+  
+  _dictationState.revealed = true;
+  const comparison = document.getElementById('dictateComparison');
+  if (!comparison) return;
+  
+  comparison.innerHTML = `
+    <div class="label">Answer</div>
+    <div class="answer-text">${_dictationState.sentence}</div>
+  `;
+  comparison.classList.add('show');
+  
+  showGameFb('dictateFb', 'Answer revealed. Try to remember it for next time!', false);
+}
+
 // ===== QUIZ =====
 function answerQuiz(idx) {
   if (state.quizAnswered) return;
@@ -1602,9 +2085,40 @@ function renderMapPage() {
 }
 
 function renderJournalPage() {
+  // Populate writing area
+  const lesson = LESSONS[state.currentDay];
+  if (lesson) {
+    document.getElementById('writingPrompt').textContent = lesson.writingPrompt;
+    const kwWrap = document.getElementById('writingKeywords');
+    const kws = Object.keys(lesson.words).slice(0, 5);
+    kwWrap.innerHTML = kws.map(w => {
+      const m = lesson.words[w].shortMeaning||lesson.words[w].meaning.split(';')[0].split('.')[0].trim();
+      return `<span class="writing-keyword" onclick="insertKeyword('${w}')" title="${m}">${w}</span>`;
+    }).join('');
+    // Restore saved text if any
+    if (state.writingSaved) {
+      const entry = state.diary.find(e => e.day === state.currentDay + 1);
+      if (entry) document.getElementById('writingBox').value = entry.text;
+    } else {
+      document.getElementById('writingBox').value = '';
+    }
+    // Reset save button
+    const saveBtn = document.getElementById('writingSaveBtn');
+    if (state.writingSaved) {
+      saveBtn.textContent = '✓ Saved';
+      saveBtn.style.opacity = '0.6';
+      saveBtn.style.pointerEvents = 'none';
+    } else {
+      saveBtn.textContent = 'Save Reflection';
+      saveBtn.style.opacity = '';
+      saveBtn.style.pointerEvents = '';
+    }
+  }
+
+  // Diary entries
   const entriesDiv = document.getElementById('diaryEntries');
   if (state.diary.length === 0) {
-    entriesDiv.innerHTML = '<div class="diary-empty">Your journal is empty.<br>Begin by writing your first reflection today.</div>';
+    entriesDiv.innerHTML = '<div class="diary-empty">Your journal is empty.<br>Scroll up to write your reflection for today.</div>';
   } else {
     entriesDiv.innerHTML = '';
     state.diary.slice(0, 20).forEach(e => {
@@ -1672,6 +2186,105 @@ function goNextDay() {
 
 // ===== INIT =====
 // (boot deferred until game_lessons.json is fetched)
+
+// ===== MEDITATION MOMENTS (哲思暂停) =====
+const MEDITATION_QUOTES = [
+  "In the space between thoughts, something else is waiting.",
+  "What you are looking for is what is looking.",
+  "The observer is the observed.",
+  "Silence is not the absence of sound, but the presence of attention.",
+  "To understand, the mind must be quiet.",
+  "You are the world, and the world is you.",
+  "Freedom is not at the end, but at the beginning.",
+  "The truth is not in the word, but in the seeing.",
+  "When you look without the looker, what do you see?",
+  "Learning is never accumulative; it is always fresh.",
+  "In attention, there is no border, no center.",
+  "Love is not memory; love is not desire.",
+  "To die to the past is to be born anew each moment.",
+  "The river is not the water, nor the banks, nor the flow—it is all of it.",
+  "Can you listen without the listener?"
+];
+
+let _meditationTimer = null;
+
+function showMeditation() {
+  const quote = MEDITATION_QUOTES[Math.floor(Math.random() * MEDITATION_QUOTES.length)];
+  document.getElementById('meditationText').textContent = quote;
+  document.getElementById('meditationPause').classList.add('active');
+  
+  // Auto-close after 15 seconds of contemplation
+  _meditationTimer = setTimeout(() => {
+    closeMeditation();
+  }, 15000);
+}
+
+function closeMeditation() {
+  if (_meditationTimer) {
+    clearTimeout(_meditationTimer);
+    _meditationTimer = null;
+  }
+  document.getElementById('meditationPause').classList.remove('active');
+}
+
+// Show meditation moment periodically (every ~3 minutes of activity)
+let _lastMeditationTime = Date.now();
+let _activityCount = 0;
+
+function checkMeditationMoment() {
+  _activityCount++;
+  const now = Date.now();
+  const timeSinceLast = now - _lastMeditationTime;
+  
+  // Show meditation after 3 minutes OR 20 interactions
+  if (timeSinceLast > 180000 || _activityCount >= 20) {
+    _lastMeditationTime = now;
+    _activityCount = 0;
+    showMeditation();
+  }
+}
+
+// Hook meditation check into user interactions
+document.addEventListener('click', checkMeditationMoment);
+document.addEventListener('keydown', checkMeditationMoment);
+
+// ===== RIPPLE EFFECT =====
+function addRipple(element, event) {
+  const rect = element.getBoundingClientRect();
+  const ripple = document.createElement('span');
+  ripple.className = 'ripple';
+  ripple.style.left = (event.clientX - rect.left) + 'px';
+  ripple.style.top = (event.clientY - rect.top) + 'px';
+  element.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+}
+
+// ===== QUOTE DECORATION =====
+function addQuoteDecoration() {
+  const quoteCard = document.querySelector('.quote-card');
+  if (!quoteCard) return;
+  
+  // Remove existing decorations
+  quoteCard.querySelectorAll('.quote-decoration').forEach(el => el.remove());
+  
+  // Add decorative quotes
+  const openQuote = document.createElement('span');
+  openQuote.className = 'quote-decoration open';
+  openQuote.textContent = '"';
+  quoteCard.appendChild(openQuote);
+  
+  const closeQuote = document.createElement('span');
+  closeQuote.className = 'quote-decoration close';
+  closeQuote.textContent = '"';
+  quoteCard.appendChild(closeQuote);
+}
+
+// Call after loadDay
+const _originalLoadDay = loadDay;
+loadDay = function(dayIndex) {
+  _originalLoadDay(dayIndex);
+  setTimeout(addQuoteDecoration, 100);
+};
 </script>
 </body>
 </html>
