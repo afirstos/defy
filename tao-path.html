@@ -1,0 +1,3025 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>道路 Tao Te Ching</title>
+<style>
+  /* ===== THEMES ===== */
+  body.theme-forest {
+    --bg-deep: #0a0f0d; --bg: #111a16; --bg-card: #182420; --bg-hover: #1f302a;
+    --text: #e0e8e4; --text-dim: #7a9a8c; --text-muted: #4a6a5c;
+    --accent: #8cc0a8; --accent-glow: rgba(140,192,168,0.15);
+    --gold: #c4a84d; --gold-dim: rgba(196,168,77,0.2);
+    --warm: #d4a574; --soft-red: #c47a6a;
+    --border: rgba(140,192,168,0.12); --shadow: 0 4px 24px rgba(0,0,0,0.4);
+  }
+  body.theme-ink {
+    --bg-deep: #1a1614; --bg: #24201c; --bg-card: #2d2822; --bg-hover: #38322b;
+    --text: #e8e0d4; --text-dim: #9a8c7a; --text-muted: #5a5044;
+    --accent: #7a9aaa; --accent-glow: rgba(122,154,170,0.15);
+    --gold: #c4a05d; --gold-dim: rgba(196,160,93,0.2);
+    --warm: #c49a74; --soft-red: #b47060;
+    --border: rgba(122,154,170,0.12); --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  body.theme-bamboo {
+    --bg-deep: #3d3126; --bg: #4a3d30; --bg-card: #554839; --bg-hover: #645646;
+    --text: #f0e6d8; --text-dim: #b0a090; --text-muted: #706050;
+    --accent: #8aaa6a; --accent-glow: rgba(138,170,106,0.15);
+    --gold: #c9a96e; --gold-dim: rgba(201,169,110,0.2);
+    --warm: #c49a74; --soft-red: #c47a6a;
+    --border: rgba(138,170,106,0.15); --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  body.theme-rice {
+    --bg-deep: #f5f0e8; --bg: #faf7f0; --bg-card: #fffef9; --bg-hover: #f0ebe0;
+    --text: #2c2416; --text-dim: #6a5c44; --text-muted: #9a8a6a;
+    --accent: #c44e3d; --accent-glow: rgba(196,78,61,0.08);
+    --gold: #8b6914; --gold-dim: rgba(139,105,20,0.12);
+    --warm: #a07040; --soft-red: #c44e3d;
+    --border: rgba(44,36,22,0.08); --shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  body.theme-moon {
+    --bg-deep: #0f111a; --bg: #181c2a; --bg-card: #222838; --bg-hover: #2c3244;
+    --text: #d8dce8; --text-dim: #8899bb; --text-muted: #4a5570;
+    --accent: #8899bb; --accent-glow: rgba(136,153,187,0.12);
+    --gold: #c4b898; --gold-dim: rgba(196,184,152,0.18);
+    --warm: #b09880; --soft-red: #9a6a6a;
+    --border: rgba(136,153,187,0.10); --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+    background: var(--bg-deep);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ===== SPLASH ===== */
+  #splash {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    min-height: 100vh; text-align: center;
+    padding: 2rem;
+    background: radial-gradient(ellipse at 50% 30%, var(--bg-card) 0%, var(--bg-deep) 70%);
+    animation: fadeIn 1.5s ease;
+  }
+  #splash.hidden { display: none; }
+
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1 } }
+  @keyframes breathe { 0%,100% { transform:scale(1); opacity:0.6 } 50% { transform:scale(1.1); opacity:1 } }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:translateY(0) } }
+  @keyframes gentlePulse { 0%,100% { box-shadow: 0 0 0 0 var(--accent-glow) } 50% { box-shadow: 0 0 30px 8px var(--accent-glow) } }
+  @keyframes flowPath { 0% { stroke-dashoffset: 1000 } 100% { stroke-dashoffset: 0 } }
+  @keyframes nodeGlow { 0%,100% { box-shadow: 0 0 8px var(--accent-glow) } 50% { box-shadow: 0 0 20px var(--accent) } }
+
+  .splash-symbol {
+    width: 80px; height: 80px;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .yin-yang {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(var(--text) 0deg 180deg, transparent 180deg 360deg);
+    position: relative;
+    animation: breathe 4s ease-in-out infinite;
+  }
+  .yin-yang::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 50%; height: 50%;
+    border-radius: 50%;
+    background: var(--bg-deep);
+  }
+  .yin-yang::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 50%; height: 50%;
+    border-radius: 50%;
+    background: var(--text);
+  }
+
+  .splash-title {
+    font-size: 2.5rem; font-weight: 300;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .splash-sub {
+    font-size: 0.9rem; color: var(--text-dim);
+    letter-spacing: 0.2em; margin-bottom: 3rem;
+  }
+
+  .splash-question {
+    max-width: 420px; font-size: 1rem;
+    line-height: 1.8; color: var(--text);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  .splash-options { display: flex; flex-direction: column; gap: 0.7rem; width: 100%; max-width: 340px; }
+  .splash-opt {
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.85rem 1.2rem;
+    border-radius: 10px; cursor: pointer;
+    font-family: inherit; font-size: 0.9rem;
+    transition: all 0.3s;
+  }
+  .splash-opt:hover { background: var(--bg-hover); color: var(--text); border-color: var(--accent); }
+
+  .splash-hint {
+    margin-top: 2rem; font-size: 0.75rem; color: var(--text-muted);
+    font-style: italic;
+  }
+
+  /* ===== MAIN APP ===== */
+  #app { display:none; flex-direction:column; height:100vh; max-width:520px; margin:0 auto; }
+  #app.active { display:flex; animation: fadeIn 0.6s ease; }
+  .page { display:none; flex:1; min-height:0; overflow-y:auto; padding:1rem 1rem 5rem 1rem; -webkit-overflow-scrolling:touch; }
+  .page.active { display:flex; flex-direction:column; animation: fadeIn 0.3s ease; }
+  .page::-webkit-scrollbar { display: none; }
+  * { scrollbar-width: none; -ms-overflow-style: none; }
+
+  /* --- NAV --- */
+  .top-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0.8rem 1rem; margin-bottom: 0;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .nav-day { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.1em; cursor: pointer; }
+  .nav-tree { font-size: 1.2rem; }
+  .nav-back { background: none; border: none; color: var(--text-dim); font-size: 1.2rem; cursor: pointer; }
+  .nav-theme { background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--text-dim); font-size: 0.9rem; cursor: pointer; padding: 2px 6px; transition: all 0.2s; }
+  .nav-theme:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* --- CHAPTER MAP --- */
+  .chapter-map {
+    padding: 1rem 0;
+  }
+  .map-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .map-title {
+    font-size: 1.3rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+  .map-subtitle {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+  .map-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .map-progress-bar {
+    width: 120px;
+    height: 4px;
+    background: var(--bg-card);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .map-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.5s ease;
+  }
+  .map-progress-text {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+  }
+
+  .map-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0 0.5rem 1rem;
+  }
+  .map-page-btn {
+    padding: 0.35rem 0.7rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-dim);
+    font-size: 0.72rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-family: inherit;
+  }
+  .map-page-btn:hover {
+    background: var(--bg-hover);
+    color: var(--text);
+  }
+  .map-page-btn.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+  }
+  .chapter-path {
+    position: relative;
+    padding: 1.5rem 1rem;
+  }
+  .path-line {
+    display: none;
+  }
+  .path-nodes {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+  }
+  .chapter-node {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  .node-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    z-index: 1;
+  }
+  .chapter-node.unlocked .node-dot {
+    border-color: var(--accent);
+    animation: nodeGlow 3s infinite;
+  }
+  .chapter-node.unlocked:hover .node-dot {
+    transform: scale(1.15);
+    background: var(--accent-glow);
+  }
+  .chapter-node.current .node-dot {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 0 20px var(--accent-glow);
+  }
+  .chapter-node.completed .node-dot {
+    background: #5cb87a;
+    border-color: #5cb87a;
+  }
+  .chapter-node.locked .node-dot {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .node-content {
+    flex: 1;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    transition: all 0.3s;
+  }
+  .chapter-node:hover:not(.locked) .node-content {
+    border-color: var(--accent);
+    background: var(--bg-hover);
+  }
+  .chapter-node.current .node-content {
+    border-color: var(--gold);
+    background: rgba(196,168,77,0.08);
+  }
+  .node-chapter {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.15rem;
+  }
+  .node-theme {
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .node-quote {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    font-style: italic;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .node-marks {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+  }
+  .node-mark {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text-muted);
+  }
+  .node-mark.earned {
+    background: var(--accent-glow);
+    color: var(--accent);
+  }
+
+  .chapter-group {
+    margin-bottom: 0.3rem;
+  }
+  .chapter-group-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .chapter-group-header:hover {
+    background: var(--bg-hover);
+  }
+  .chapter-group-num {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    min-width: 2.2rem;
+  }
+  .chapter-group-theme {
+    font-size: 0.78rem;
+    color: var(--text);
+    flex: 1;
+  }
+  .chapter-group-lessons {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+  .lesson-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    transition: all 0.2s;
+  }
+  .lesson-dot.completed {
+    background: var(--accent);
+  }
+  .lesson-dot.current {
+    background: var(--gold);
+    box-shadow: 0 0 6px var(--gold);
+    width: 10px;
+    height: 10px;
+  }
+  .lesson-dot.unlocked {
+    background: var(--text-muted);
+    cursor: pointer;
+  }
+  .chapter-group-status {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+  }
+  .chapter-group.quote-preview {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    font-style: italic;
+    padding: 0 0.6rem 0.3rem 2.7rem;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .map-legend {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin-top: 0.8rem;
+  }
+  .map-legend-item {
+    font-size: 0.6rem;
+    color: var(--text-muted);
+  }
+
+  /* --- DAILY QUESTION --- */
+  .daily-question {
+    text-align: center; padding: 1rem;
+    margin: 0.5rem 0 0.5rem;
+    background: linear-gradient(135deg, var(--bg-card), var(--bg));
+    border-radius: 16px; border: 1px solid var(--border);
+    position: relative;
+  }
+  .daily-question .label {
+    font-size: 0.65rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.2em;
+    margin-bottom: 0.8rem;
+  }
+  .daily-question .question {
+    font-size: 0.95rem; line-height: 1.7;
+    color: var(--gold); font-style: italic;
+  }
+  .daily-question .note {
+    font-size: 0.7rem; color: var(--text-muted);
+    margin-top: 0.8rem;
+  }
+
+  /* --- QUOTE CARD --- */
+  .quote-card {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.2rem 1.2rem;
+    margin-bottom: 0.75rem;
+  }
+  .quote-decoration {
+    position: absolute;
+    font-size: 8rem;
+    color: var(--accent);
+    opacity: 0.03;
+    font-family: Georgia, serif;
+    pointer-events: none;
+    line-height: 1;
+  }
+  .quote-decoration.open { top: -1rem; left: 0.5rem; }
+  .quote-decoration.close { bottom: -2rem; right: 0.5rem; transform: rotate(180deg); }
+
+  .quote-lang {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .quote-lang-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-muted); padding: 0.3rem 0.8rem;
+    border-radius: 20px; cursor: pointer;
+    font-family: inherit; font-size: 0.7rem;
+    transition: all 0.3s;
+  }
+  .quote-lang-btn:hover, .quote-lang-btn.active {
+    border-color: var(--accent); color: var(--accent);
+    background: var(--accent-glow);
+  }
+  .quote-read-btn {
+    background: var(--gold-dim); border: 1px solid rgba(196,168,77,0.3);
+    color: var(--gold); padding: 0.3rem 0.8rem;
+    border-radius: 20px; cursor: pointer;
+    font-family: inherit; font-size: 0.7rem;
+    transition: all 0.3s; margin-left: 0.5rem;
+  }
+  .quote-read-btn:hover { background: rgba(196,168,77,0.3); border-color: var(--gold); }
+  .quote-read-btn.reading { animation: gentlePulse 1s ease-in-out infinite; border-color: var(--accent); color: var(--accent); }
+
+  .quote-text {
+    font-size: 1rem; line-height: 2;
+    color: var(--text); margin-bottom: 1rem;
+    position: relative;
+  }
+  .quote-text .touchable {
+    color: var(--accent);
+    cursor: pointer;
+    border-bottom: 1px dashed var(--accent);
+    transition: all 0.2s;
+    padding: 0 2px;
+    border-radius: 3px;
+  }
+  .quote-text .touchable:hover {
+    background: var(--accent-glow);
+  }
+  .quote-text .touchable.active {
+    background: var(--accent-glow);
+    border-bottom-style: solid;
+  }
+  .quote-source {
+    font-size: 0.75rem; color: var(--text-muted);
+    text-align: right;
+    margin-top: 1rem;
+  }
+
+  /* --- TOUCH MARKS --- */
+  .marks-row {
+    display: flex; gap: 0.8rem; justify-content: center;
+    margin-bottom: 1rem; padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .mark {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.3rem;
+    font-size: 0.65rem; color: var(--text-muted);
+    transition: all 0.3s;
+  }
+  .mark.earned { color: var(--accent); }
+  .mark-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.5s;
+  }
+  .mark.earned .mark-icon {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--accent-glow);
+    animation: gentlePulse 3s infinite;
+  }
+
+  /* --- WORD PANEL --- */
+  .word-panel-backdrop {
+    position: fixed; top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.4); z-index: 99;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .word-panel-backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .word-panel {
+    position: fixed; bottom:0; left:0; right:0;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    border-radius: 20px 20px 0 0;
+    padding: 1.2rem 1.5rem 2rem;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    z-index: 100;
+    max-width: 520px; margin: 0 auto;
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.5);
+  }
+  .word-panel.open { transform: translateY(0); }
+  .word-panel-handle {
+    width: 36px; height: 4px;
+    background: var(--text-muted); border-radius: 2px;
+    margin: 0 auto 1rem; cursor: pointer;
+  }
+  .word-panel .word-head {
+    display: flex; align-items: baseline; gap: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+  .word-panel .word-cn {
+    font-size: 1.8rem; color: var(--gold);
+    font-weight: 300;
+  }
+  .word-panel .word-en {
+    font-size: 1.3rem; color: var(--accent);
+    font-weight: 300; letter-spacing: 0.05em;
+  }
+  .word-panel .word-pos {
+    font-size: 0.65rem; color: var(--text-muted);
+    font-style: italic;
+  }
+  .word-panel .word-phonetic {
+    font-size: 0.75rem; color: var(--text-dim);
+    margin-bottom: 0.8rem;
+  }
+  .word-panel .word-meaning {
+    font-size: 0.9rem; color: var(--text);
+    line-height: 1.7; margin-bottom: 0.6rem;
+  }
+  .word-panel .word-context {
+    font-size: 0.78rem; color: var(--gold);
+    font-style: italic; line-height: 1.7;
+    margin-bottom: 1rem; padding: 0.8rem;
+    background: var(--gold-dim); border-radius: 10px;
+  }
+  .word-panel .word-reflect {
+    font-size: 0.8rem; color: var(--text-dim);
+    line-height: 1.6; font-style: italic;
+  }
+  .speak-btn {
+    background: var(--accent-glow); border: 1px solid var(--border);
+    color: var(--accent); width: 30px; height: 30px;
+    border-radius: 50%; cursor: pointer; font-size: 0.8rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  .speak-btn:hover { border-color: var(--accent); background: var(--bg-hover); }
+  .speak-btn.speaking { animation: gentlePulse 1s ease-in-out infinite; border-color: var(--gold); color: var(--gold); }
+
+  /* --- GAME SECTION --- */
+  .game-section {
+    margin-bottom: 1.5rem;
+  }
+  .game-tabs { display: flex; gap: 6px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .game-tab {
+    padding: 5px 14px; border-radius: 20px; border: 1px solid var(--border);
+    font-size: 0.75rem; cursor: pointer; background: transparent;
+    color: var(--text-dim); transition: all 0.2s; font-family: inherit;
+  }
+  .game-tab:hover { border-color: var(--accent); color: var(--text); }
+  .game-tab.active { background: var(--accent-glow); color: var(--accent); border-color: var(--accent); }
+
+  .game-panel { display: none; animation: slideUp 0.3s ease; }
+  .game-panel.active { display: block; }
+  .game-hint {
+    font-size: 0.78rem; color: var(--text-muted);
+    margin-bottom: 1rem; font-style: italic;
+  }
+
+  /* --- VOCAB MATCH --- */
+  .vocab-match-cols { display: flex; gap: 8px; margin-bottom: 0.8rem; }
+  .vocab-col { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+  .vocab-col-label { font-size: 0.65rem; color: var(--text-muted); text-align: center; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.1em; }
+  .vocab-card {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 12px; cursor: pointer; font-size: 0.85rem; color: var(--text);
+    text-align: center; transition: all 0.2s; min-height: 44px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .vocab-card:hover { border-color: var(--accent); background: var(--bg-hover); }
+  .vocab-card.selected { border-color: var(--accent); background: var(--accent-glow); color: var(--accent); }
+  .vocab-card.matched { border-color: #5cb87a; background: rgba(92,184,122,0.12); color: #5cb87a; pointer-events: none; }
+  .vocab-card.wrong { border-color: var(--soft-red); background: rgba(196,122,106,0.12); color: var(--soft-red); }
+  .vocab-cn { border-left: 3px solid rgba(196,168,77,0.6); font-weight: 600; }
+  .vocab-en { border-left: 3px solid rgba(100,160,220,0.6); font-style: italic; font-size: 0.8rem; }
+
+  /* --- FILL BLANK --- */
+  .fill-sentence {
+    font-size: 0.95rem; line-height: 2.2; color: var(--text);
+    margin-bottom: 1rem; padding: 1rem;
+    background: var(--bg-card); border-radius: 12px;
+  }
+  .fill-blank {
+    display: inline-block; border-bottom: 2px solid var(--accent);
+    min-width: 60px; margin: 0 3px; padding: 0 6px;
+    color: var(--accent); font-weight: 500;
+    text-align: center; cursor: pointer;
+    transition: all 0.15s;
+  }
+  .fill-blank:hover { background: var(--accent-glow); }
+  .fill-blank.filled { color: var(--gold); border-color: var(--gold); }
+  .fill-blank.wrong { color: var(--soft-red); border-color: var(--soft-red); }
+  .fill-blank.active { background: var(--accent-glow); }
+  .fill-choices {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-bottom: 0.8rem;
+  }
+  .fill-btn {
+    padding: 6px 14px; border: 1px solid var(--border); border-radius: 20px;
+    font-size: 0.82rem; cursor: pointer; background: transparent;
+    color: var(--text); transition: all 0.15s; font-family: inherit;
+  }
+  .fill-btn:hover { background: var(--bg-hover); border-color: var(--accent); }
+  .fill-btn.used { opacity: 0.3; pointer-events: none; }
+  .fill-btn.correct { background: rgba(92,184,122,0.15); border-color: #5cb87a; color: #5cb87a; }
+  .fill-btn.wrong { background: rgba(196,122,106,0.15); border-color: var(--soft-red); color: var(--soft-red); }
+
+  /* --- SENTENCE ORDER --- */
+  .order-hint {
+    font-size: 0.78rem; color: var(--text-muted);
+    margin-bottom: 0.8rem; font-style: italic;
+  }
+  .order-answer {
+    min-height: 50px; padding: 10px; border: 1px solid var(--border);
+    border-radius: 10px; background: var(--bg);
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    margin-bottom: 0.8rem;
+  }
+  .order-answer:empty::after {
+    content: 'Tap words below to build the sentence...'; color: var(--text-muted); font-size: 0.8rem;
+  }
+  .placed-token {
+    padding: 5px 12px; border: 1px solid var(--accent); border-radius: 8px;
+    font-size: 0.85rem; cursor: pointer; background: var(--accent-glow); color: var(--accent);
+    transition: all 0.15s;
+  }
+  .placed-token:hover { background: rgba(140,192,168,0.3); }
+  .order-tokens {
+    display: flex; flex-wrap: wrap; gap: 8px; min-height: 44px; padding: 10px;
+    border: 1px dashed var(--border); border-radius: 10px; background: var(--bg-hover);
+  }
+  .order-token {
+    padding: 5px 12px; border: 1px solid var(--border); border-radius: 8px;
+    font-size: 0.85rem; cursor: pointer; background: var(--bg-card); color: var(--text);
+    transition: all 0.15s; user-select: none;
+  }
+  .order-token:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* --- DICTATION --- */
+  .dictate-audio {
+    text-align: center; padding: 1rem 0;
+  }
+  .dictate-play-btn {
+    background: var(--accent-glow); border: 2px solid var(--accent);
+    color: var(--accent); padding: 0.8rem 1.5rem;
+    border-radius: 50px; cursor: pointer; font-family: inherit;
+    font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem;
+    transition: all 0.3s;
+  }
+  .dictate-play-btn:hover { background: var(--accent); color: var(--bg-deep); }
+  .dictate-play-btn.playing { animation: gentlePulse 1s ease-in-out infinite; border-color: var(--gold); color: var(--gold); }
+  .speed-btns { margin-top: 0.6rem; }
+  .speed-btn {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--text-muted); padding: 0.3rem 0.6rem;
+    border-radius: 15px; cursor: pointer; font-family: inherit;
+    font-size: 0.7rem; margin: 0 0.15rem; transition: all 0.2s;
+  }
+  .speed-btn:hover { border-color: var(--accent); color: var(--text); }
+  .speed-btn.active { background: var(--accent-glow); border-color: var(--accent); color: var(--accent); }
+  .dictate-hint-text {
+    margin-top: 0.5rem; font-size: 0.72rem; color: var(--text-muted);
+  }
+  .dictate-input-wrap { margin: 1rem 0; }
+  .dictate-input {
+    width: 100%; min-height: 80px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 0.9rem;
+    color: var(--text); font-family: inherit;
+    font-size: 0.9rem; line-height: 1.7;
+    resize: vertical; transition: border-color 0.3s;
+  }
+  .dictate-input:focus { outline: none; border-color: var(--accent); }
+  .dictate-input::placeholder { color: var(--text-muted); font-style: italic; }
+  .dictate-counter {
+    text-align: right; font-size: 0.72rem; color: var(--text-muted); margin-top: 0.4rem;
+  }
+  .dictate-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 0.8rem; }
+  .dictate-comparison {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem;
+    margin-top: 0.8rem; display: none;
+  }
+  .dictate-comparison.show { display: block; animation: slideUp 0.3s ease; }
+  .dictate-comparison .label {
+    font-size: 0.68rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 0.5rem;
+  }
+  .dictate-comparison .answer-text {
+    font-size: 0.9rem; color: var(--accent); line-height: 1.7;
+  }
+  .dictate-comparison .diff-text { font-size: 0.88rem; line-height: 1.7; }
+  .dictate-comparison .diff-correct { color: #5cb87a; }
+  .dictate-comparison .diff-wrong { color: var(--soft-red); text-decoration: line-through; }
+  .dictate-comparison .diff-missing { color: var(--gold); }
+
+  /* --- GAME FEEDBACK --- */
+  .game-feedback {
+    font-size: 0.8rem; padding: 8px 14px; border-radius: 10px;
+    margin-top: 0.6rem; display: none; line-height: 1.6;
+  }
+  .game-feedback.show { display: block; animation: slideUp 0.3s ease; }
+  .game-feedback.ok { background: rgba(92,184,122,0.12); color: #5cb87a; border: 1px solid rgba(92,184,122,0.3); }
+  .game-feedback.err { background: rgba(196,122,106,0.12); color: var(--soft-red); border: 1px solid rgba(196,122,106,0.3); }
+
+  /* --- PROGRESS CARD --- */
+  .progress-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 0.8rem 1rem;
+    margin-top: 0.5rem;
+  }
+  .progress-card-title {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.8rem;
+  }
+  .progress-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .progress-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    transition: all 0.3s;
+    cursor: pointer;
+    padding: 0.35rem 0.5rem;
+    border-radius: 8px;
+    margin: 0 -0.5rem;
+  }
+  .progress-item:hover {
+    background: var(--bg-hover);
+    color: var(--text);
+  }
+  .progress-item.done {
+    color: #5cb87a;
+  }
+  .progress-check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-muted);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    flex-shrink: 0;
+    transition: all 0.3s;
+  }
+  .progress-item.done .progress-check {
+    background: rgba(92,184,122,0.2);
+    border-color: #5cb87a;
+    color: #5cb87a;
+  }
+  .progress-item-label {
+    flex: 1;
+  }
+  .progress-item-hint {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+  }
+  .progress-unlock {
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.72rem;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .progress-unlock.locked {
+    color: var(--text-muted);
+  }
+  .progress-unlock.unlocked {
+    color: #5cb87a;
+  }
+
+  .game-controls { display: flex; gap: 8px; margin-top: 0.8rem; }
+  .game-btn {
+    padding: 6px 14px; border: none; border-radius: 10px;
+    font-size: 0.8rem; cursor: pointer; font-family: inherit; transition: all 0.2s;
+  }
+  .game-btn-primary { background: var(--accent); color: var(--bg-deep); }
+  .game-btn-primary:hover { opacity: 0.85; }
+  .game-btn-ghost { background: transparent; color: var(--text-dim); border: 1px solid var(--border); }
+  .game-btn-ghost:hover { background: var(--bg-hover); }
+
+  /* --- MEDITATION PAUSE --- */
+  .meditation-pause {
+    position: fixed;
+    inset: 0;
+    background: rgba(10,15,13,0.95);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 200;
+    animation: fadeIn 0.5s ease;
+  }
+  .meditation-pause.active { display: flex; }
+  .meditation-breath {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    border: 2px solid var(--gold);
+    margin: 2rem 0;
+    animation: breathe 5s ease-in-out infinite;
+    opacity: 0.6;
+  }
+  .meditation-text {
+    font-size: 1.2rem;
+    color: var(--gold);
+    font-style: italic;
+    text-align: center;
+    max-width: 400px;
+    line-height: 2;
+    animation: fadeIn 1s ease;
+  }
+  .meditation-source {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+  }
+  .meditation-close {
+    margin-top: 2rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 0.6rem 1.5rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+  }
+  .meditation-close:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* --- ENLIGHTENMENT MODAL --- */
+  .enlightenment-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5,8,6,0.97);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 300;
+    animation: fadeIn 0.6s ease;
+  }
+  .enlightenment-overlay.active { display: flex; }
+  .enlightenment-glow {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,168,83,0.35) 0%, transparent 70%);
+    position: absolute;
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  @keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+  }
+  .enlightenment-icon {
+    font-size: 3rem;
+    z-index: 1;
+    animation: float-up 1s ease-out;
+  }
+  @keyframes float-up {
+    0% { transform: translateY(30px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  .enlightenment-title {
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-top: 1.5rem;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    animation: fadeIn 0.8s ease 0.3s both;
+  }
+  .enlightenment-chapter {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+    animation: fadeIn 0.8s ease 0.5s both;
+  }
+  .enlightenment-quote {
+    font-size: 1.3rem;
+    color: var(--gold);
+    font-style: italic;
+    text-align: center;
+    max-width: 360px;
+    line-height: 2;
+    margin-top: 1.5rem;
+    animation: fadeIn 1s ease 0.7s both;
+  }
+  .enlightenment-insight {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-align: center;
+    max-width: 340px;
+    line-height: 1.8;
+    margin-top: 1.2rem;
+    animation: fadeIn 1s ease 1s both;
+  }
+  .enlightenment-reward {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--gold-dim);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    margin-top: 1.2rem;
+    animation: fadeIn 1s ease 1.3s both;
+  }
+  .enlightenment-continue {
+    margin-top: 2rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 0.7rem 2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+    animation: fadeIn 1s ease 1.6s both;
+  }
+  .enlightenment-continue:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* --- CONTEMPLATION BTN --- */
+  .contemplate-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    background: var(--gold-dim); border: 1px solid rgba(196,168,77,0.3);
+    color: var(--gold); padding: 0.6rem 1.2rem;
+    border-radius: 20px; cursor: pointer;
+    font-family: inherit; font-size: 0.8rem;
+    transition: all 0.3s; margin: 0.5rem auto 0;
+  }
+  .contemplate-btn:hover { background: rgba(196,168,77,0.2); }
+
+  /* --- WRITING SECTION --- */
+  .writing-area {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.3rem 1.5rem;
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  .writing-prompt {
+    font-size: 0.85rem; color: var(--gold);
+    font-style: italic; margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+  .writing-keywords {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 0.8rem;
+  }
+  .writing-keyword {
+    padding: 3px 10px; border-radius: 12px;
+    border: 1px solid var(--border);
+    font-size: 0.72rem; color: var(--accent);
+    background: var(--accent-glow); cursor: pointer;
+    transition: all 0.15s; font-family: inherit;
+  }
+  .writing-keyword:hover { border-color: var(--accent); background: var(--bg-hover); }
+  .writing-box {
+    width: 100%; min-height: 100px;
+    background: var(--bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.9rem;
+    color: var(--text); font-family: inherit;
+    font-size: 0.88rem; line-height: 1.8;
+    resize: vertical;
+    transition: border-color 0.3s;
+  }
+  .writing-box:focus { outline:none; border-color: var(--accent); }
+  .writing-box::placeholder { color: var(--text-muted); font-style: italic; }
+  .writing-tools {
+    display: flex; gap: 0.6rem; margin-top: 0.8rem; flex-wrap: wrap;
+  }
+  .writing-tool {
+    background: var(--bg); border: 1px solid var(--border);
+    color: var(--text-dim); padding: 0.35rem 0.8rem;
+    border-radius: 20px; cursor: pointer;
+    font-family: inherit; font-size: 0.72rem;
+    transition: all 0.3s;
+  }
+  .writing-tool:hover { border-color: var(--accent); color: var(--accent); }
+  .writing-save {
+    margin-top: 0.8rem;
+    background: var(--accent); color: var(--bg-deep);
+    border: none; padding: 0.6rem 1.5rem;
+    border-radius: 10px; cursor: pointer;
+    font-family: inherit; font-size: 0.85rem;
+    font-weight: 600; letter-spacing: 0.05em;
+    transition: all 0.3s;
+  }
+  .writing-save:hover { opacity: 0.85; }
+
+  /* --- DIARY LIST --- */
+  .diary-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .diary-entry {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+  }
+  .diary-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  .diary-chapter {
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .diary-date {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+  }
+  .diary-text {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* --- BOTTOM NAV --- */
+  .bottom-nav {
+    position: fixed; bottom:0; left:0; right:0;
+    background: var(--bg-deep);
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-around;
+    padding: 0.6rem 0 0.8rem;
+    max-width: 520px; margin: 0 auto;
+    z-index: 90;
+  }
+  .bnav-item {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.2rem;
+    cursor: pointer; background: none; border: none;
+    color: var(--text-muted); font-family: inherit;
+    font-size: 0.6rem; letter-spacing: 0.05em;
+    transition: color 0.3s;
+    padding: 0.3rem;
+  }
+  .bnav-item:hover, .bnav-item.active { color: var(--accent); }
+  .bnav-icon { font-size: 1.2rem; }
+</style>
+</head>
+<body class="theme-forest">
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-symbol">
+    <div class="yin-yang"></div>
+  </div>
+  <div class="splash-title">道</div>
+  <div class="splash-sub">T A O &nbsp; T E &nbsp; C H I N G</div>
+  <div class="splash-question">
+    When you encounter something you don't understand,<br>
+    what is your first reaction?
+  </div>
+  <div class="splash-options">
+    <button class="splash-opt" onclick="startGame('seek')">Search for an answer immediately</button>
+    <button class="splash-opt" onclick="startGame('observe')">Observe quietly, let it unfold</button>
+    <button class="splash-opt" onclick="startGame('accept')">Accept that some things remain unknown</button>
+    <button class="splash-opt" onclick="startGame('feel')">Feel your way through first</button>
+  </div>
+  <div class="splash-hint">There is no wrong answer - only observation.</div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <!-- NAV -->
+  <div class="top-nav">
+    <button class="nav-back" onclick="navTo('map')" id="navBackBtn" style="display:none">←</button>
+    <span class="nav-day" onclick="navTo('map')" id="navDay">第1章 · 道</span>
+    <span class="nav-tree" id="navTree">🌱</span>
+    <button class="nav-theme" onclick="cycleTheme()" title="切换风格">🎨</button>
+  </div>
+
+  <!-- PAGE: CHAPTER MAP -->
+  <div class="page" id="page-map">
+    <div class="chapter-map">
+      <div class="map-header">
+        <div class="map-title">道之路</div>
+        <div class="map-subtitle">The Path of Tao</div>
+        <div class="map-progress">
+          <div class="map-progress-bar">
+            <div class="map-progress-fill" id="mapProgressFill" style="width:0%"></div>
+          </div>
+          <span class="map-progress-text" id="mapProgressText">0/81</span>
+        </div>
+        <div class="map-legend">
+          <span class="map-legend-item">✓ 完成</span>
+          <span class="map-legend-item">→ 当前位置</span>
+          <span class="map-legend-item">● 可进入</span>
+          <span class="map-legend-item">· 未解锁</span>
+        </div>
+      </div>
+      <div class="map-pagination" id="mapPagination"></div>
+      <div class="chapter-path" id="chapterPath"></div>
+    </div>
+  </div>
+
+  <!-- PAGE: TODAY -->
+  <div class="page" id="page-today">
+    <div class="daily-question">
+      <div class="label">Today's Question</div>
+      <div class="question" id="todayQuestion"></div>
+      <div class="note">You don't need to answer now. Just carry it with you.</div>
+    </div>
+
+    <div class="quote-card">
+      <span class="quote-decoration open">"</span>
+      <span class="quote-decoration close">"</span>
+      <div class="quote-lang">
+        <button class="quote-lang-btn active" onclick="showLang('en')">English</button>
+        <button class="quote-lang-btn" onclick="showLang('cn')">中文</button>
+      <button class="quote-read-btn" onclick="readQuote()" id="quoteReadBtn">🔊 Read</button>
+      </div>
+      <div class="quote-text" id="quoteText"></div>
+      <div class="quote-source" id="quoteSource">- Tao Te Ching, Chapter 1</div>
+    </div>
+
+    <div class="progress-card" id="progressCard">
+      <div class="progress-checklist" id="progressChecklist"></div>
+      <div class="progress-unlock" id="progressUnlock"></div>
+    </div>
+
+    <button class="contemplate-btn" onclick="showMeditation()">
+      ⏸ Pause for Contemplation
+    </button>
+  </div>
+
+  <!-- PAGE: OBSERVE -->
+  <div class="page" id="page-observe">
+    <div class="game-tabs">
+      <button class="game-tab active" onclick="switchGame('match')">Match</button>
+      <button class="game-tab" onclick="switchGame('fill')">Fill</button>
+      <button class="game-tab" onclick="switchGame('order')">Order</button>
+      <button class="game-tab" onclick="switchGame('dictate')">Dictate</button>
+    </div>
+
+    <!-- MATCH -->
+    <div class="game-panel active" id="panel-match">
+      <div class="game-hint">Connect the Chinese concept with its English meaning</div>
+      <div class="vocab-match-cols">
+        <div class="vocab-col" id="vocabColCN"></div>
+        <div class="vocab-col" id="vocabColEN"></div>
+      </div>
+      <div class="game-feedback" id="matchFb"></div>
+      <div class="game-controls">
+        <button class="game-btn game-btn-ghost" onclick="resetMatch()">Reset</button>
+      </div>
+    </div>
+
+    <!-- FILL -->
+    <div class="game-panel" id="panel-fill">
+      <div class="game-hint">Complete the passage by selecting the right words</div>
+      <div class="fill-sentence" id="fillSentence"></div>
+      <div class="fill-choices" id="fillChoices"></div>
+      <div class="game-feedback" id="fillFb"></div>
+      <div class="game-controls">
+        <button class="game-btn game-btn-primary" onclick="checkFill()">Check</button>
+        <button class="game-btn game-btn-ghost" onclick="resetFill()">Reset</button>
+      </div>
+    </div>
+
+    <!-- ORDER -->
+    <div class="game-panel" id="panel-order">
+      <div class="order-hint" id="orderHint"></div>
+      <div class="order-answer" id="orderAnswer" onclick="orderAnswerClick()"></div>
+      <div class="order-tokens" id="orderTokens"></div>
+      <div class="game-feedback" id="orderFb"></div>
+      <div class="game-controls">
+        <button class="game-btn game-btn-primary" onclick="checkOrder()">Check</button>
+        <button class="game-btn game-btn-ghost" onclick="resetOrder()">Reset</button>
+      </div>
+    </div>
+
+    <!-- DICTATE -->
+    <div class="game-panel" id="panel-dictate">
+      <div class="dictate-audio">
+        <button class="dictate-play-btn" id="dictatePlayBtn" onclick="playDictate()">
+        🔊 Listen & Write
+        </button>
+        <div class="speed-btns">
+          <button class="speed-btn active" onclick="setSpeed(0.8)">0.8x</button>
+          <button class="speed-btn" onclick="setSpeed(0.6)">0.6x</button>
+          <button class="speed-btn" onclick="setSpeed(0.5)">0.5x</button>
+        </div>
+        <div class="dictate-hint-text" id="dictateHint"></div>
+      </div>
+      <div class="dictate-input-wrap">
+        <textarea class="dictate-input" id="dictateInput" placeholder="Type what you hear..." maxlength="300"></textarea>
+        <div class="dictate-counter"><span id="dictateLen">0</span>/300</div>
+      </div>
+      <div class="dictate-actions">
+        <button class="game-btn game-btn-primary" onclick="checkDictate()">Check</button>
+        <button class="game-btn game-btn-ghost" onclick="resetDictate()">Reset</button>
+      </div>
+      <div class="game-feedback" id="dictateFb"></div>
+      <div class="dictate-comparison" id="dictateComparison">
+        <div class="label">Result</div>
+        <div class="diff-text" id="dictateDiff"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE: JOURNAL -->
+  <div class="page" id="page-journal">
+    <div class="writing-area">
+      <div class="writing-prompt" id="writingPrompt">Today's reflection question awaits your thoughts...</div>
+      <div class="writing-keywords" id="writingKeywords"></div>
+      <textarea class="writing-box" id="writingBox" placeholder="Let your thoughts flow freely..." maxlength="1000"></textarea>
+      <div class="writing-tools">
+        <button class="writing-tool" onclick="insertKeyword('')">🎲 Random Word</button>
+        <button class="writing-tool" onclick="clearWriting()">🗑 Clear</button>
+      </div>
+      <button class="writing-save" id="writingSaveBtn" onclick="saveWriting()">Save Reflection</button>
+    </div>
+
+    <div class="diary-list" id="diaryList"></div>
+  </div>
+</div>
+
+<!-- WORD PANEL -->
+<div class="word-panel-backdrop" id="wordPanelBackdrop" onclick="closeWordPanel()"></div>
+<div class="word-panel" id="wordPanel">
+  <div class="word-panel-handle" onclick="closeWordPanel()"></div>
+  <div class="word-head">
+    <span class="word-cn" id="wpCn">道</span>
+    <span class="word-en" id="wpEn">Tao</span>
+        <button class="speak-btn" onclick="speakWord()">🔊</button>
+  </div>
+  <div class="word-pos" id="wpPos">noun</div>
+  <div class="word-phonetic" id="wpPhonetic">/dao/</div>
+  <div class="word-meaning" id="wpMeaning"></div>
+  <div class="word-context" id="wpContext"></div>
+  <div class="word-reflect" id="wpReflect"></div>
+</div>
+
+<!-- MEDITATION -->
+<div class="enlightenment-overlay" id="enlightenmentModal">
+  <div class="enlightenment-glow"></div>
+  <div class="enlightenment-icon" id="enlightenmentIcon">🌅</div>
+  <div class="enlightenment-title" id="enlightenmentTitle">悟道时刻</div>
+  <div class="enlightenment-chapter" id="enlightenmentChapter"></div>
+  <div class="enlightenment-quote" id="enlightenmentQuote"></div>
+  <div class="enlightenment-insight" id="enlightenmentInsight"></div>
+  <div class="enlightenment-reward" id="enlightenmentReward"></div>
+  <button class="enlightenment-continue" onclick="closeEnlightenment()">继续修行 Continue</button>
+</div>
+
+<div class="meditation-pause" id="meditationPause">
+  <div class="meditation-breath"></div>
+  <div class="meditation-text" id="meditationText"></div>
+  <div class="meditation-source">- Tao Te Ching</div>
+  <button class="meditation-close" onclick="closeMeditation()">Continue Learning</button>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav" id="bottomNav" style="display:none">
+  <button class="bnav-item" onclick="navTo('map')">
+    <span class="bnav-icon">🗺</span>Map
+  </button>
+  <button class="bnav-item active" onclick="navTo('today')">
+    <span class="bnav-icon">📜</span>Today
+  </button>
+  <button class="bnav-item" onclick="navTo('observe')">
+    <span class="bnav-icon">👁</span>Observe
+  </button>
+  <button class="bnav-item" onclick="navTo('journal')">
+    <span class="bnav-icon">📓</span>Journal
+  </button>
+</div>
+
+<script>
+// ===== 81 CHAPTERS METADATA =====
+const CHAPTERS_META = [
+  { num:1, theme:"The Way", cn:"道", quote:"道可道，非常道", lessons:1 },
+  { num:2, theme:"Comparison", cn:"相对", quote:"天下皆知美之为美", lessons:1 },
+  { num:3, theme:"Non-Competition", cn:"不争", quote:"不尚贤，使民不争", lessons:1 },
+  { num:4, theme:"The Empty Center", cn:"虚中", quote:"道冲，而用之或不盈", lessons:1 },
+  { num:5, theme:"The Bellows", cn:"橐龠", quote:"天地不仁，以万物为刍狗", lessons:1 },
+  { num:6, theme:"Valley Spirit", cn:"谷神", quote:"谷神不死，是谓玄牝", lessons:1 },
+  { num:7, theme:"Selflessness", cn:"无私", quote:"天长地久", lessons:1 },
+  { num:8, theme:"Highest Good", cn:"上善", quote:"上善若水", lessons:1 },
+  { num:9, theme:"Knowing When to Stop", cn:"知止", quote:"功遂身退，天之道", lessons:1 },
+  { num:10, theme:"Naturalness", cn:"玄德", quote:"生而不有，为而不恃", lessons:1 },
+  { num:11, theme:"Use of the Useless", cn:"无之用", quote:"三十辐共一毂", lessons:1 },
+  { num:12, theme:"Five Colors", cn:"五色", quote:"五色令人目盲", lessons:1 },
+  { num:13, theme:"Favor and Disgrace", cn:"宠辱", quote:"宠辱若惊", lessons:1 },
+  { num:14, theme:"The Formless", cn:"无形", quote:"视之不见名曰夷", lessons:1 },
+  { num:15, theme:"Ancient Masters", cn:"善士", quote:"古之善为士者", lessons:1 },
+  { num:16, theme:"Returning to Root", cn:"复归", quote:"万物并作，吾以观复", lessons:1 },
+  { num:17, theme:"The Best Leader", cn:"太上", quote:"太上，不知有之", lessons:1 },
+  { num:18, theme:"Great Tao Declines", cn:"大道废", quote:"大道废，有仁义", lessons:1 },
+  { num:19, theme:"Simplicity", cn:"抱朴", quote:"见素抱朴，少私寡欲", lessons:1 },
+  { num:20, theme:"The Crowd and I", cn:"独醒", quote:"众人熙熙，如享太牢", lessons:1 },
+  { num:21, theme:"Appearance of Great Virtue", cn:"孔德", quote:"孔德之容，惟道是从", lessons:1 },
+  { num:22, theme:"To Yield is Whole", cn:"曲全", quote:"曲则全，枉则直", lessons:1 },
+  { num:23, theme:"Trust in Nature", cn:"希言", quote:"希言自然", lessons:1 },
+  { num:24, theme:"Standing on Tiptoe", cn:"企立", quote:"企者不立，跨者不行", lessons:1 },
+  { num:25, theme:"The Great Beginning", cn:"混成", quote:"有物混成，先天地生", lessons:1 },
+  { num:26, theme:"Heavy and Light", cn:"重轻", quote:"重为轻根，静为躁君", lessons:1 },
+  { num:27, theme:"Perfect Traveler", cn:"善行", quote:"善行无辙迹", lessons:1 },
+  { num:28, theme:"Know Male, Keep Female", cn:"守雌", quote:"知其雄，守其雌", lessons:1 },
+  { num:29, theme:"Sacred Vessel", cn:"神器", quote:"将欲取天下而为之", lessons:1 },
+  { num:30, theme:"Strong Armies", cn:"不武", quote:"以道佐人主者", lessons:1 },
+  { num:31, theme:"Weapons of Evil", cn:"不祥", quote:"兵者不祥之器", lessons:1 },
+  { num:32, theme:"The Nameless Tao", cn:"无名", quote:"道常无名，朴", lessons:1 },
+  { num:33, theme:"Knowing Others", cn:"知人", quote:"知人者智，自知者明", lessons:1 },
+  { num:34, theme:"Great Tao Flows", cn:"泛左", quote:"大道泛左", lessons:1 },
+  { num:35, theme:"The Gentle Way", cn:"大象", quote:"执大象，天下往", lessons:1 },
+  { num:36, theme:"Soft Overcomes Hard", cn:"柔弱", quote:"将欲歙之，必固张之", lessons:1 },
+  { num:37, theme:"Without Doing", cn:"无为", quote:"道常无为而无不为", lessons:1 },
+  { num:38, theme:"Highest Virtue", cn:"上德", quote:"上德不德，是以有德", lessons:1 },
+  { num:39, theme:"One and Whole", cn:"得一", quote:"昔之得一者", lessons:1 },
+  { num:40, theme:"Returning", cn:"反动", quote:"反者道之动", lessons:1 },
+  { num:41, theme:"Scholar's Tao", cn:"闻道", quote:"上士闻道，勤而行之", lessons:1 },
+  { num:42, theme:"One Begets Two", cn:"一生二", quote:"道生一，一生二", lessons:1 },
+  { num:43, theme:"The Softest", cn:"至柔", quote:"天下之至柔", lessons:1 },
+  { num:44, theme:"Fame and Life", cn:"亲疏", quote:"名与身孰亲", lessons:1 },
+  { num:45, theme:"Perfection", cn:"大成", quote:"大成若缺", lessons:1 },
+  { num:46, theme:"Contentment", cn:"知足", quote:"天下有道，却走马以粪", lessons:1 },
+  { num:47, theme:"Without Going Out", cn:"不出户", quote:"不出户，知天下", lessons:1 },
+  { num:48, theme:"Daily Reduction", cn:"日损", quote:"为学日益，为道日损", lessons:1 },
+  { num:49, theme:"Sage's Heart", cn:"无心", quote:"圣人无常心", lessons:1 },
+  { num:50, theme:"Birth and Death", cn:"生死", quote:"出生入死", lessons:1 },
+  { num:51, theme:"Virtue of Tao", cn:"尊德", quote:"道生之，德畜之", lessons:1 },
+  { num:52, theme:"Understanding Beginning", cn:"有始", quote:"天下有始，以为天下母", lessons:1 },
+  { num:53, theme:"The Great Way", cn:"大道", quote:"使我介然有知", lessons:1 },
+  { num:54, theme:"Cultivating the Way", cn:"善建", quote:"善建者不拔", lessons:1 },
+  { num:55, theme:"Inner Power", cn:"赤子", quote:"含德之厚，比于赤子", lessons:1 },
+  { num:56, theme:"Mysterious Sameness", cn:"玄同", quote:"知者不言，言者不知", lessons:1 },
+  { num:57, theme:"Simplicity in Rule", cn:"正治", quote:"以正治国，以奇用兵", lessons:1 },
+  { num:58, theme:"Transformation", cn:"闷闷", quote:"其政闷闷，其民淳淳", lessons:1 },
+  { num:59, theme:"Accumulating Virtue", cn:"啬", quote:"治人事天，莫若啬", lessons:1 },
+  { num:60, theme:"Cooking Small Fish", cn:"小鲜", quote:"治大国若烹小鲜", lessons:1 },
+  { num:61, theme:"Female Principle", cn:"下流", quote:"大邦者下流", lessons:1 },
+  { num:62, theme:"Treasure of Tao", cn:"万物奥", quote:"道者万物之奥", lessons:1 },
+  { num:63, theme:"Consider the Difficult", cn:"为难", quote:"图难于其易", lessons:1 },
+  { num:64, theme:"Peaceful Ease", cn:"易持", quote:"其安易持", lessons:1 },
+  { num:65, theme:"Ancient Way", cn:"愚民", quote:"古之善为道者", lessons:1 },
+  { num:66, theme:"Rivers and Seas", cn:"百谷王", quote:"江海能为百谷王者", lessons:1 },
+  { num:67, theme:"Three Treasures", cn:"三宝", quote:"我有三宝", lessons:1 },
+  { num:68, theme:"Not Contending", cn:"不武", quote:"善为士者不武", lessons:1 },
+  { num:69, theme:"Using Arms", cn:"客主", quote:"吾不敢为主而为客", lessons:1 },
+  { num:70, theme:"Hard to Understand", cn:"易知", quote:"吾言甚易知", lessons:1 },
+  { num:71, theme:"Knowing Ignorance", cn:"不知", quote:"知不知上", lessons:1 },
+  { num:72, theme:"People's Hunger", cn:"畏威", quote:"民不畏威", lessons:1 },
+  { num:73, theme:"Courage", cn:"勇敢", quote:"勇于敢则杀", lessons:1 },
+  { num:74, theme:"The Executioner", cn:"畏死", quote:"民常不畏死", lessons:1 },
+  { num:75, theme:"People's Starvation", cn:"民饥", quote:"民之饥", lessons:1 },
+  { num:76, theme:"Hard and Soft", cn:"柔弱", quote:"人之生也柔弱", lessons:1 },
+  { num:77, theme:"Way of Heaven", cn:"张弓", quote:"天之道，其犹张弓与", lessons:1 },
+  { num:78, theme:"Paradox of Water", cn:"至柔", quote:"天下莫柔弱于水", lessons:1 },
+  { num:79, theme:"Reconciliation", cn:"大怨", quote:"和大怨，必有余怨", lessons:1 },
+  { num:80, theme:"Small Country", cn:"寡民", quote:"小国寡民", lessons:1 },
+  { num:81, theme:"True Words", cn:"信言", quote:"信言不美，美言不信", lessons:1 }
+];
+
+// Build LESSON_PLAN from metadata
+const LESSON_PLAN = [];
+let _day = 1;
+CHAPTERS_META.forEach(cm => {
+  for (let i = 0; i < cm.lessons; i++) {
+    LESSON_PLAN.push({ id: _day, chapter: cm.num, day: _day, part: i + 1, total: cm.lessons });
+    _day++;
+  }
+});
+
+</script>
+<script src="chapters-data.js"></script>
+<script>
+
+// ===== THEME SWITCHER =====
+const THEMES = [
+  { id: 'forest', name: '山林', icon: '🌲' },
+  { id: 'ink',    name: '墨韵', icon: '🖌' },
+  { id: 'bamboo', name: '竹简', icon: '🎋' },
+  { id: 'rice',   name: '宣纸', icon: '📜' },
+  { id: 'moon',   name: '月下', icon: '🌙' }
+];
+
+function loadTheme() {
+  const saved = localStorage.getItem('tao-theme') || 'forest';
+  setTheme(saved);
+}
+
+function setTheme(id) {
+  document.body.className = 'theme-' + id;
+  const btn = document.querySelector('.nav-theme');
+  const t = THEMES.find(t => t.id === id);
+  if (btn) btn.textContent = t ? t.icon : '🎨';
+  localStorage.setItem('tao-theme', id);
+}
+
+function cycleTheme() {
+  const cur = localStorage.getItem('tao-theme') || 'forest';
+  const idx = THEMES.findIndex(t => t.id === cur);
+  const next = THEMES[(idx + 1) % THEMES.length];
+  setTheme(next.id);
+}
+
+document.addEventListener('DOMContentLoaded', loadTheme);
+
+let state = {
+  learnerProfile: null,
+  currentLesson: 1,
+  currentLang: 'en',
+  touchedWords: new Set(),
+  gamesCompleted: { match: false, fill: false, order: false, dictate: false },
+  writingSaved: false,
+  marks: { touch: false, deep: false, observe: false, express: false },
+  diary: [],
+  lessonProgress: {}  // keyed by lessonId: { completed, marks, gamesCompleted, touchedWords, writingSaved }
+};
+
+// ===== SPLASH =====
+function startGame(profile) {
+  state.learnerProfile = profile;
+  saveState();
+  document.getElementById('splash').classList.add('hidden');
+  document.getElementById('app').classList.add('active');
+  document.getElementById('bottomNav').style.display = 'flex';
+  navTo('today');
+}
+
+// ===== CHAPTER MANAGEMENT =====
+function getCurrentLesson() {
+  const entry = LESSON_PLAN.find(l => l.id === state.currentLesson);
+if (!entry) { state.currentLesson = 1; return LESSON_PLAN[0]; }
+return entry;
+}
+
+function getCurrentChapter() {
+  const lesson = getCurrentLesson();
+  const ch = CHAPTERS.find(c => c.id === lesson.chapter);
+  if (ch) return ch;
+  // No full data - return a placeholder from CHAPTERS_META
+  const meta = CHAPTERS_META.find(m => m.num === lesson.chapter);
+  return {
+    id: meta.num, chapter: meta.num, theme: meta.theme,
+    question: `What does Chapter ${meta.num} teach us?`,
+    quoteEN: meta.quote, quoteCN: meta.quote,
+    words: {}, vocabPairs: [], fill: null, order: null, dictate: null,
+    meditationQuotes: [], _placeholder: true
+  };
+}
+
+function hasChapterContent(chapterNum) {
+  return CHAPTERS.some(c => c.id === chapterNum && !c._placeholder);
+}
+
+function getLessonProgress(lessonId) {
+  const p = state.lessonProgress[lessonId];
+  if (!p) {
+    return {
+      completed: false,
+      marks: { touch: false, deep: false, observe: false, express: false },
+      touchedWords: [],
+      gamesCompleted: { match: false, fill: false, order: false, dictate: false },
+      writingSaved: false
+    };
+  }
+  return {
+    completed: p.completed || false,
+    marks: p.marks || { touch: false, deep: false, observe: false, express: false },
+    touchedWords: p.touchedWords || [],
+    gamesCompleted: p.gamesCompleted || { match: false, fill: false, order: false, dictate: false },
+    writingSaved: p.writingSaved || false
+  };
+}
+
+function getChapterProgress(chapterId) {
+  // Aggregate all lesson progress for this chapter
+  const lessons = LESSON_PLAN.filter(l => l.chapter === chapterId);
+  if (lessons.length === 0) return { completed: false, marks: { touch: false, deep: false, observe: false, express: false }, touchedWords: [], gamesCompleted: { match: false, fill: false, order: false, dictate: false }, writingSaved: false };
+  let allCompleted = true, anyMark = { touch: false, deep: false, observe: false, express: false };
+  let allGC = { match: false, fill: false, order: false, dictate: false };
+  let anyWriting = false;
+  lessons.forEach(l => {
+    const p = getLessonProgress(l.id);
+    if (!p.completed) allCompleted = false;
+    Object.keys(p.marks).forEach(k => { if (p.marks[k]) anyMark[k] = true; });
+    Object.keys(p.gamesCompleted).forEach(k => { if (p.gamesCompleted[k]) allGC[k] = true; });
+    if (p.writingSaved) anyWriting = true;
+  });
+  return { completed: allCompleted, marks: anyMark, touchedWords: [], gamesCompleted: allGC, writingSaved: anyWriting };
+}
+
+function updateLessonProgress(lessonId, updates) {
+  if (!state.lessonProgress[lessonId]) {
+    state.lessonProgress[lessonId] = {
+      completed: false,
+      marks: { touch: false, deep: false, observe: false, express: false },
+      touchedWords: [],
+      gamesCompleted: { match: false, fill: false, order: false, dictate: false },
+      writingSaved: false
+    };
+  }
+  Object.assign(state.lessonProgress[lessonId], updates);
+  saveState();
+  renderChapterMap();
+}
+
+function updateChapterProgress(chapterId, updates) {
+  // For backward compat - applies to ALL lessons of this chapter
+  const lessons = LESSON_PLAN.filter(l => l.chapter === chapterId);
+  lessons.forEach(l => updateLessonProgress(l.id, updates));
+}
+
+function isChapterUnlocked(chapterNum) {
+  if (chapterNum === 1) return true;
+  var curChapter = getCurrentLesson().chapter;
+  // Current chapter and all before it are unlocked
+  if (chapterNum <= curChapter) return true;
+  // Further ahead: need previous chapter progress
+  var prevProgress = getChapterProgress(chapterNum - 1);
+  var gamesDone = Object.values(prevProgress.gamesCompleted || {}).filter(Boolean).length;
+  return gamesDone >= 2 || prevProgress.completed;
+}
+
+function isLessonUnlocked(lessonId) {
+  if (lessonId === 1) return true;
+  const prevLesson = LESSON_PLAN.find(l => l.id === lessonId - 1);
+  if (!prevLesson) return true;
+  const prevProgress = getLessonProgress(prevLesson.id);
+  if (prevProgress.completed) return true;
+  // If same chapter, always unlocked (previous lesson in same chapter)
+  const curLesson = LESSON_PLAN.find(l => l.id === lessonId);
+  if (curLesson && prevLesson && curLesson.chapter === prevLesson.chapter) return true;
+  return isChapterUnlocked(curLesson.chapter);
+}
+
+function selectLesson(lessonId) {
+  if (!isLessonUnlocked(lessonId)) return;
+  const lesson = LESSON_PLAN.find(l => l.id === lessonId);
+  if (!lesson) return;
+  if (!hasChapterContent(lesson.chapter)) {
+    alert('Chapter ' + lesson.chapter + ' content is coming soon! 🌱');
+    return;
+  }
+
+  state.currentLesson = lessonId;
+
+  // Load lesson progress
+  const progress = getLessonProgress(lessonId);
+  state.touchedWords = new Set(progress.touchedWords || []);
+  state.marks = { ...progress.marks };
+  state.gamesCompleted = { ...progress.gamesCompleted };
+  state.writingSaved = progress.writingSaved || false;
+
+  // Reset current game states
+  matchState = { selected: null, selectedSide: null, matched: new Set() };
+  fillState = { answers: [], used: new Set(), checked: false, activeBlank: null };
+  orderState = { original: [], shuffled: [], placed: [], remaining: [] };
+  dictateState = { played: false };
+  // Clear visible game feedback from previous chapter
+  hideFeedback('matchFb');
+  hideFeedback('fillFb');
+  hideFeedback('orderFb');
+  hideFeedback('dictateFb');
+  var dc = document.getElementById('dictateComparison');
+  if (dc) dc.classList.remove('show');
+
+  saveState();
+  loadChapter();
+  navTo('today');
+}
+
+function selectChapter(chapterId) {
+  // Click a chapter on map ←go to its first unlocked lesson
+  const lessons = LESSON_PLAN.filter(l => l.chapter === chapterId);
+  if (lessons.length === 0) return;
+  // Find first incomplete lesson, or first lesson
+  const target = lessons.find(l => {
+    const p = getLessonProgress(l.id);
+    return !p.completed && isLessonUnlocked(l.id);
+  }) || lessons[0];
+  selectLesson(target.id);
+}
+
+function loadChapter() {
+  const lesson = getCurrentLesson();
+  const chapter = getCurrentChapter();
+  const progress = getLessonProgress(state.currentLesson);
+  const meta = CHAPTERS_META.find(m => m.num === lesson.chapter);
+
+  // Update nav — defensive: ensure lesson.day is valid
+  const safeDay = lesson && lesson.day ? lesson.day : 1;
+  const safeChapter = lesson && lesson.chapter ? lesson.chapter : 1;
+  const safeTheme = (meta && meta.theme) ? meta.theme : '';
+  const partLabel = lesson.total > 1 ? ` · 第${lesson.part}/${lesson.total}课` : '';
+  const navText = `第${safeChapter}章 · ${safeTheme}${partLabel}`;
+  document.getElementById('navDay').textContent = navText;
+  document.getElementById('todayQuestion').textContent = chapter.question;
+
+  // Update quote
+  updateQuote();
+
+  // Update writing section
+  document.getElementById('writingPrompt').textContent = chapter.question;
+
+  // Load diary for this lesson
+  renderDiary();
+
+  // Reset writing box
+  var saveBtn = document.getElementById('writingSaveBtn');
+  if (!state.writingSaved) {
+    var existingEntry = state.diary.find(function(d) { return d.lesson === state.currentLesson; });
+    document.getElementById('writingBox').value = existingEntry ? existingEntry.text : '';
+    if (existingEntry) {
+      saveBtn.textContent = '✓ Saved';
+      saveBtn.style.opacity = '0.6';
+      saveBtn.style.pointerEvents = 'none';
+    } else {
+      saveBtn.textContent = 'Save Reflection';
+      saveBtn.style.opacity = '1';
+      saveBtn.style.pointerEvents = 'auto';
+    }
+  } else {
+    saveBtn.textContent = '✓ Saved';
+    saveBtn.style.opacity = '0.6';
+    saveBtn.style.pointerEvents = 'none';
+  }
+
+  // Render game elements (only if chapter has content)
+  if (!chapter._placeholder) {
+    renderVocabMatch();
+    renderFill();
+    renderOrder();
+    initDictation();
+
+    // Update keywords
+    const kws = Object.keys(chapter.words);
+    document.getElementById('writingKeywords').innerHTML = kws.map(w =>
+      `<span class="writing-keyword" onclick="insertKeyword('${w}')">${w}</span>`
+    ).join('');
+  }
+
+  updateTree();
+  updateMarks();
+}
+
+// ===== ENLIGHTENMENT INSIGHTS =====
+const ENLIGHTENMENT_INSIGHTS = {
+  1: { icon:"🌅", insight:"The Way that can be spoken is not the eternal Way. True understanding begins where words end — yet words are the bridge that carries you there." },
+  2: { icon:"🌗", insight:"Beauty exists because ugliness defines it. Good exists because evil contrasts it. Opposites create each other — the sage sees both sides as one." },
+  3: { icon:"🌊", insight:"When you stop competing, no one can compete with you. The strongest force is not assertion — it is the quiet confidence that needs no proof." },
+  4: { icon:"🌀", insight:"The Tao is empty, yet inexhaustible. Like the hub of a wheel, it is the emptiness at the center that makes everything functional." },
+  5: { icon:"🌬️", insight:"Heaven and Earth treat all things as straw dogs — not from cruelty, but from perfect impartiality. Nature's wisdom is beyond human sentiment." },
+  6: { icon:"🏔️", insight:"The Valley Spirit never dies — it is the eternal feminine. The deepest power is receptive, patient, and ever-flowing." },
+  7: { icon:"∞", insight:"Heaven and Earth endure because they do not live for themselves. By putting others first, you naturally come first." },
+  8: { icon:"💧", insight:"The highest good is like water — it benefits all things without competing. Water seeks the low places that others disdain, yet nothing is softer or stronger." },
+  9: { icon:"⚖️", insight:"When the work is done, step back. To hold onto success is to invite decline. The Way of Heaven is to know when enough is enough." },
+  10: { icon:"🌱", insight:"Produce but do not possess. Act but do not claim credit. Raise but do not rule — this is the Mysterious Virtue." },
+  11: { icon:"⭕", insight:"Thirty spokes share one hub — it is the empty space that makes the wheel useful. We shape clay into a pot — it is the emptiness that holds. Usefulness comes from what is not there." },
+  12: { icon:"👁️", insight:"The five colors blind the eye. The five tones deafen the ear. The sage feeds the belly, not the eye — choosing inner fullness over outward display." },
+  13: { icon:"🎭", insight:"Favor and disgrace both cause fear. When you see your self as the world, you can be entrusted with the world." },
+  14: { icon:"🌫️", insight:"Look for it and it cannot be seen. Listen and it cannot be heard. Reach for it and it cannot be held. This is the formless form, the image of nothingness." },
+  15: { icon:"🏔️", insight:"The ancient masters were subtle, profound, and dark — like a river in flood, like a guest cautious in every move. Clarity emerges slowly from the cloudy depths." },
+  16: { icon:"🌳", insight:"All things flourish and return to their root. Returning to the root is stillness — this is the constant of the Tao. To know the constant is enlightenment." },
+  17: { icon:"👑", insight:"The best leader is one the people barely know exists. When the work is done, the people say: 'We did it ourselves!'" },
+  18: { icon:"🏚️", insight:"When the Great Tao declines, goodness and duty appear. When wisdom and cleverness arise, great hypocrisy follows. The deeper the loss, the more elaborate the substitute." },
+  19: { icon:"🪵", insight:"See the simple, embrace the primal. Reduce selfishness, diminish desires. Return to the uncarved block." },
+  20: { icon:"🧍", insight:"While others are busy and joyful, I alone am still and quiet — like an infant before it smiles. The crowd has plenty; I alone seem lost." },
+  21: { icon:"✨", insight:"The appearance of Great Virtue follows only the Tao. The Tao is vague and elusive, yet within it is the image, within it is the substance, within it is the essence." },
+  22: { icon:"↩️", insight:"Yield and remain whole. Bend and remain straight. Be empty and remain full. The sage embraces the one and becomes a model for the world." },
+  23: { icon:"🕊️", insight:"Nature does not have to speak — a whirlwind does not last all morning, a rainstorm does not last all day. What is unnatural cannot endure." },
+  24: { icon:"🦶", insight:"Standing on tiptoe, you cannot stand firm. Striding too fast, you cannot go far. Self-display does not shine; self-assertion does not impress." },
+  25: { icon:"🌍", insight:"There was something formless yet complete before heaven and earth. It stands alone and does not change. I do not know its name — I call it Tao." },
+  26: { icon:"⚓", insight:"Heaviness is the root of lightness. Stillness is the master of movement. The wise traveler does not lose sight of the root." },
+  27: { icon:"👣", insight:"Good walking leaves no track. Good speech has no flaw. Good counting needs no tally. The sage saves people and abandons no one." },
+  28: { icon:"☯️", insight:"Know the male, keep to the female — become the ravine of the world. Know the white, keep to the black — become the model of the world. Know glory, keep to humility — become the valley of the world." },
+  29: { icon:"🏺", insight:"The world is a sacred vessel — it cannot be improved by tampering. Those who try to control it ruin it; those who grasp it lose it." },
+  30: { icon:"⚔️", insight:"One who assists a leader with the Tao does not dominate with weapons. War breeds adversity — the wise use force only when there is no choice." },
+  31: { icon:"🕊️", insight:"Weapons are tools of ill omen. The wise detest them. When victory is won, treat it as a funeral — for every victory costs lives." },
+  32: { icon:"🫧", insight:"The Tao is eternally nameless. When the simple uncarved block is carved, names appear. When names multiply, know when to stop." },
+  33: { icon:"🪞", insight:"Knowing others is wisdom; knowing yourself is enlightenment. Conquering others is strength; conquering yourself is true power." },
+  34: { icon:"🌊", insight:"The Great Tao flows everywhere. All things depend on it, yet it does not claim them. It accomplishes its purpose without claim — it is truly great." },
+  35: { icon:"🐘", insight:"Hold to the Great Form, and all the world follows. The Tao is bland and flavorless — look for it and it cannot be seen, listen and it cannot be heard, yet use it and it cannot be exhausted." },
+  36: { icon:"🌊", insight:"What is to be shrunk must first be expanded. What is to be weakened must first be strengthened. The soft overcomes the hard — fish cannot leave the deep." },
+  37: { icon:"🍂", insight:"The Tao does nothing, yet nothing is left undone. When rulers grasp this, all things transform naturally. Desire quiets itself in the simplicity of the nameless." },
+  38: { icon:"🏅", insight:"The highest virtue does not try to be virtuous — and so it is. The lowest virtue never lets go of virtue — and so it is not. When the Tao is lost, virtue appears; when virtue is lost, kindness appears; when kindness is lost, justice appears; when justice is lost, ritual remains." },
+  39: { icon:"💎", insight:"Of old, those who attained the One: heaven became clear, earth became stable, valleys became full, all creatures lived and grew. Without the One, they would crumble." },
+  40: { icon:"🔄", insight:"Returning is the movement of the Tao. Yielding is the way of the Tao. All things are born of being; being is born of non-being." },
+  41: { icon:"🎓", insight:"When the highest scholars hear the Tao, they practice it diligently. When average scholars hear it, they seem to keep it and lose it. When lesser scholars hear it, they laugh out loud — if they did not laugh, it would not be the Tao." },
+  42: { icon:"🔢", insight:"The Tao produces One; One produces Two; Two produces Three; Three produces all things. All things carry Yin and embrace Yang, achieving harmony through their vital energy." },
+  43: { icon:"💨", insight:"The softest thing in the world overcomes the hardest. That which has no substance enters where there is no space. This shows the value of non-action." },
+  44: { icon:"❤️", insight:"Fame or your self — which is closer? Self or possessions — which means more? Gain or loss — which is worse? Knowing contentment avoids disgrace; knowing when to stop avoids danger." },
+  45: { icon:"🔲", insight:"Great perfection seems flawed, yet its use is inexhaustible. Great fullness seems empty, yet its use is endless. Movement overcomes cold; stillness overcomes heat." },
+  46: { icon:"🐎", insight:"When the world has the Tao, horses are used to fertilize fields. When the world lacks the Tao, war horses are bred in the suburbs. There is no greater curse than discontent." },
+  47: { icon:"🏠", insight:"Without going out the door, know the world. Without looking out the window, see the Way of Heaven. The farther you go, the less you know. The sage knows without going." },
+  48: { icon:"📉", insight:"In learning, add daily. In the Tao, subtract daily. Subtract and subtract again, until you reach non-action. Nothing is left undone through non-action." },
+  49: { icon:"❤️‍🩹", insight:"The sage has no fixed mind — they take the people's mind as their own. Good and bad alike are treated with goodness. Faithful and faithless alike are treated with faith." },
+  50: { icon:"🦋", insight:"Coming into life, entering death. Three in ten are followers of life; three in ten are followers of death. Why? Because they live too intensely. Those who know how to live walk safely." },
+  51: { icon:"🌿", insight:"The Tao gives birth, Virtue nourishes, matter gives form, environment shapes. All things honor the Tao and value Virtue — not by command, but naturally." },
+  52: { icon:"🔒", insight:"The world has a beginning — the mother of the world. Knowing the mother, you know the children. Knowing the children, hold to the mother. Close the openings, shut the doors — and you will suffer no harm all your life." },
+  53: { icon:"🛤️", insight:"If I had a little knowledge, I would walk the Great Way and fear only straying. The Great Way is smooth, yet people love the bypaths." },
+  54: { icon:"🏗️", insight:"What is well built cannot be pulled down. What is well grasped cannot be taken away. Cultivate virtue in yourself, and it becomes genuine. In the family, abundant. In the village, lasting. In the world, universal." },
+  55: { icon:"👶", insight:"One who holds abundant Virtue is like a newborn child — no venomous insects sting, wild beasts do not seize, birds of prey do not strike. The softest bone structure, yet the firmest grip." },
+  56: { icon:"🤐", insight:"Those who know do not speak. Those who speak do not know. Close the openings, shut the doors — this is the Mysterious Sameness that cannot be gained or lost." },
+  57: { icon:"🏛️", insight:"Rule a country with justice. Wage war with surprise tactics. Win the world with non-interference. The more prohibitions, the poorer the people." },
+  58: { icon:"🎭", insight:"When the government is dull, the people are genuine. When the government is sharp, the people are cunning. Misfortune rests upon fortune; fortune hides within misfortune." },
+  59: { icon:"🐿️", insight:"In governing people and serving Heaven, nothing beats moderation. Moderation means early preparation. Early preparation means accumulating virtue. Accumulated virtue overcomes everything." },
+  60: { icon:"🐟", insight:"Governing a large country is like cooking a small fish — too much handling spoils it. Approach the world with the Tao, and its ghosts lose their power." },
+  61: { icon:"🌊", insight:"A great nation is like the low ground toward which all water flows — the female of the world. The female overcomes the male through stillness. The low overcomes the high." },
+  62: { icon:"🏛️", insight:"The Tao is the sanctuary of all things — the treasure of the good and the refuge of the bad. Beautiful words win honor; good deeds gain respect. The Tao embraces all without rejection." },
+  63: { icon:"🔍", insight:"Do the difficult while it is easy. Do the great while it is small. All difficult things start as easy; all great things start as small. The sage never strives for greatness — and so achieves it." },
+  64: { icon:"🌳", insight:"What is at rest is easy to hold. What has not happened is easy to plan. A tree you can barely reach grows from a tiny sprout. A tower of nine stories rises from a heap of earth. A journey of a thousand miles begins with a single step." },
+  65: { icon:"🧓", insight:"Those of old who were good at following the Tao did not use it to enlighten the people, but to keep them simple. When people are too clever, the state suffers. Keep them simple and the state prospers." },
+  66: { icon:"🏞️", insight:"Why do rivers and seas rule over all valleys? Because they place themselves below. The sage who wishes to lead must place themselves below. The sage stands above and the people do not feel heavy." },
+  67: { icon:"💎", insight:"I have three treasures: compassion, frugality, and not daring to be first in the world. Compassion gives courage. Frugality allows generosity. Not daring to be first leads to leadership." },
+  68: { icon:"🤝", insight:"The best warrior is not aggressive. The best fighter does not show anger. The best victor does not confront. The best leader humbles themselves before others." },
+  69: { icon:"🎯", insight:"I dare not be the host but the guest. I dare not advance an inch but retreat a foot. To fight without fighting, to resist without weapons — this is the greatest skill." },
+  70: { icon:"📖", insight:"My words are easy to understand and easy to practice. Yet no one understands them; no one practices them. The wise wear coarse cloth and carry jade within." },
+  71: { icon:"💡", insight:"To know that you do not know is best. Not to know but think you know is a disease. The sage is free from this disease because they recognize it as disease." },
+  72: { icon:"⚡", insight:"When people no longer fear authority, a greater authority will arrive. Do not narrow their living space or oppress their lives. The sage knows themselves but does not display themselves." },
+  73: { icon:"🎲", insight:"Heaven's net is vast — its mesh is wide, yet nothing slips through. Courage in daring leads to death; courage in caution leads to life." },
+  74: { icon:"⚔️", insight:"When people no longer fear death, what use is threatening them with death? Leave the executioner to do the killing — to take the executioner's place is like carving in place of the master carpenter." },
+  75: { icon:"🍞", insight:"Why are the people starving? Because those above eat too much tax. Why are the people hard to rule? Because those above interfere too much. The people take death lightly because they seek life's abundance." },
+  76: { icon:"🌿", insight:"At birth, a person is soft and weak; at death, rigid and stiff. Plants are tender and supple in life; brittle and dry in death. The stiff and rigid are disciples of death. The soft and supple are disciples of life." },
+  77: { icon:"🏹", insight:"The Way of Heaven is like drawing a bow — what is high, bring down; what is low, raise up. The Way of Heaven reduces the excessive and supplements the deficient. The human way does the opposite." },
+  78: { icon:"💧", insight:"Nothing in the world is softer or weaker than water, yet nothing is better at overcoming the hard and rigid. This truth is known but not practiced. Only the one who bears the world's disgrace can be the lord of the world." },
+  79: { icon:"🤝", insight:"When great resentment is resolved, resentment remains. How can this be good? The sage keeps the left half of the tally but does not demand payment. Virtue attends to virtue; failure attends to failure." },
+  80: { icon:"🏘️", insight:"Let there be a small country with few people. Let them not risk their lives traveling far. Though they have boats and carriages, let there be no reason to use them. Though they have weapons, let there be no cause to display them." },
+  81: { icon:"🌟", insight:"True words are not beautiful; beautiful words are not true. The good do not argue; those who argue are not good. The wise do not amass knowledge; those who amass knowledge are not wise. The sage does not hoard — the more they do for others, the more they have." }
+};
+
+function showEnlightenment(chapterNum) {
+  const meta = CHAPTERS_META.find(m => m.num === chapterNum);
+  const data = ENLIGHTENMENT_INSIGHTS[chapterNum];
+  if (!meta || !data) return;
+
+  document.getElementById('enlightenmentIcon').textContent = data.icon;
+  document.getElementById('enlightenmentTitle').textContent = '悟道时刻';
+  document.getElementById('enlightenmentChapter').textContent =
+    `Chapter ${chapterNum} · ${meta.cn} · ${meta.theme}`;
+  document.getElementById('enlightenmentQuote').textContent = meta.quote;
+  document.getElementById('enlightenmentInsight').textContent = data.insight;
+
+  // Build reward tag
+  const marks = Object.values(state.marks).filter(Boolean).length;
+  const rewardIcon = marks >= 4 ? '🌳' : marks >= 2 ? '🌿' : '🌱';
+  document.getElementById('enlightenmentReward').innerHTML =
+    `${rewardIcon} +1 Mark · ${marks}/4 Marks Earned`;
+
+  document.getElementById('enlightenmentModal').classList.add('active');
+}
+
+function closeEnlightenment() {
+  document.getElementById('enlightenmentModal').classList.remove('active');
+}
+
+function completeLesson() {
+  state.marks.observe = true;
+  state.marks.express = true;
+
+  // Mark lesson as completed
+  state.lessonProgress[state.currentLesson] = {
+    completed: true,
+    marks: { ...state.marks },
+    touchedWords: [...state.touchedWords],
+    gamesCompleted: { ...state.gamesCompleted },
+    writingSaved: state.writingSaved
+  };
+
+  saveState();
+  updateTree();
+  updateMarks();
+
+  // Show enlightenment modal
+  const lesson = getCurrentLesson();
+  if (lesson) {
+    showEnlightenment(lesson.chapter);
+  }
+
+  console.log(`Lesson ${state.currentLesson} (Ch.${lesson ? lesson.chapter : '?'}) completed!`);
+}
+
+// ===== QUOTE =====
+function showLang(lang) {
+  state.currentLang = lang;
+  document.querySelectorAll('.quote-lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  updateQuote();
+}
+
+function updateQuote() {
+  const chapter = getCurrentChapter();
+  const qt = document.getElementById('quoteText');
+  const src = document.getElementById('quoteSource');
+
+  if (state.currentLang === 'cn') {
+    let html = chapter.quoteCN;
+    Object.keys(chapter.words).forEach(w => {
+      const word = chapter.words[w];
+      html = html.replace(new RegExp(word.cn, 'g'),
+        `<span class="touchable" onclick="touchWord('${w}')">${word.cn}</span>`);
+    });
+    qt.innerHTML = html;
+    src.textContent = `- 道德经 · 第${chapter.chapter}章`;
+  } else {
+    let html = chapter.quoteEN;
+    Object.keys(chapter.words).forEach(w => {
+      html = html.replace(new RegExp(`\\b${w}\\b`, 'gi'),
+        `<span class="touchable" onclick="touchWord('${w}')">${w}</span>`);
+    });
+    qt.innerHTML = html;
+    src.textContent = `- Tao Te Ching, Chapter ${chapter.chapter}`;
+  }
+}
+
+// ===== TOUCH WORD =====
+function touchWord(wordKey) {
+  const chapter = getCurrentChapter();
+  const w = chapter.words[wordKey];
+  if (!w) return;
+
+  state.touchedWords.add(wordKey);
+  state.marks.touch = true;
+  if (state.touchedWords.size >= 3) state.marks.deep = true;
+
+  // Update progress
+  updateLessonProgress(state.currentLesson, {
+    touchedWords: [...state.touchedWords],
+    marks: { ...state.marks }
+  });
+
+  updateMarks();
+
+  document.querySelectorAll('.touchable').forEach(el => {
+    if (el.textContent === wordKey || el.textContent === w.cn) {
+      el.classList.add('active');
+    }
+  });
+
+  document.getElementById('wpCn').textContent = w.cn;
+  document.getElementById('wpEn').textContent = w.en;
+  document.getElementById('wpPos').textContent = w.pos;
+  document.getElementById('wpPhonetic').textContent = w.phonetic;
+  document.getElementById('wpMeaning').textContent = w.meaning;
+  document.getElementById('wpContext').textContent = '"' + w.context + '"';
+    document.getElementById('wpReflect').textContent = '💭 ' + w.reflect;
+
+  document.getElementById('wordPanel').classList.add('open');
+  document.getElementById('wordPanelBackdrop').classList.add('open');
+}
+
+function closeWordPanel() {
+  document.getElementById('wordPanel').classList.remove('open');
+  document.getElementById('wordPanelBackdrop').classList.remove('open');
+}
+
+// ===== SPEECH =====
+function speakWord() {
+  if (!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const word = document.getElementById('wpEn').textContent;
+  const u = new SpeechSynthesisUtterance(word);
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  const btn = document.querySelector('.word-panel .speak-btn');
+  btn.classList.add('speaking');
+  u.onend = () => btn.classList.remove('speaking');
+  u.onerror = () => btn.classList.remove('speaking');
+  speechSynthesis.speak(u);
+}
+
+// ===== READ QUOTE =====
+function readQuote() {
+  if (!('speechSynthesis' in window)) {
+    alert('Speech synthesis not supported in this browser.');
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const chapter = getCurrentChapter();
+  const btn = document.getElementById('quoteReadBtn');
+  const isZh = state.currentLang === 'cn';
+  let text = isZh ? chapter.quoteCN : chapter.quoteEN;
+  text = text.replace(/<[^>]*>/g, '').replace(/\n/g, ' ');
+
+  const u = new SpeechSynthesisUtterance(text);
+
+  // Try to find a matching voice; fall back gracefully
+  const voices = speechSynthesis.getVoices();
+  const targetLang = isZh ? 'zh' : 'en';
+  const voice = voices.find(v => v.lang.startsWith(targetLang)) || null;
+  if (voice) u.voice = voice;
+  u.lang = isZh ? 'zh-CN' : 'en-US';
+  u.rate = 0.85;
+
+  btn.classList.add('reading');
+  btn.textContent = '🔊 Reading...';
+
+  u.onend = () => {
+    btn.classList.remove('reading');
+    btn.textContent = '🔊 Read';
+  };
+  u.onerror = (e) => {
+    btn.classList.remove('reading');
+    btn.textContent = '🔊 Read';
+    if (voice === null && isZh) {
+      console.warn('readQuote: no zh voice found', e);
+      alert('抱歉，您的系统没有中文语音，无法朗读。请在系统设置中安装中文语音包。');
+    }
+  };
+  speechSynthesis.speak(u);
+}
+
+// ===== VOCAB MATCH =====
+let matchState = { selected: null, selectedSide: null, matched: new Set() };
+
+function renderVocabMatch() {
+  hideFeedback('matchFb');
+  const colCN = document.getElementById('vocabColCN');
+  const colEN = document.getElementById('vocabColEN');
+  colCN.innerHTML = '';
+  colEN.innerHTML = '';
+
+  const chapter = getCurrentChapter();
+  const pairs = chapter.vocabPairs;
+
+  // Shuffle EN order separately
+  const enShuffled = pairs.map((p, i) => ({ pair: p, origIdx: i }));
+  enShuffled.sort(() => Math.random() - 0.5);
+
+  pairs.forEach((p, i) => {
+    const el = document.createElement('div');
+    el.className = 'vocab-card vocab-cn';
+    el.dataset.pairIdx = i;
+    el.textContent = p.cn;
+    el.onclick = () => matchSelect(el, i, 'cn');
+    colCN.appendChild(el);
+  });
+
+  enShuffled.forEach(({ pair, origIdx }) => {
+    const el = document.createElement('div');
+    el.className = 'vocab-card vocab-en';
+    el.dataset.pairIdx = origIdx;
+    el.textContent = pair.en;
+    el.onclick = () => matchSelect(el, origIdx, 'en');
+    colEN.appendChild(el);
+  });
+}
+
+function matchSelect(el, pairIdx, side) {
+  if (el.classList.contains('matched')) return;
+
+  if (matchState.selected === null) {
+    matchState.selected = { el, pairIdx, side };
+    matchState.selectedSide = side;
+    el.classList.add('selected');
+  } else if (matchState.selectedSide !== side) {
+    const prev = matchState.selected;
+    const correct = pairIdx === prev.pairIdx;
+
+    if (correct) {
+      el.classList.add('matched');
+      prev.el.classList.add('matched');
+      el.classList.remove('selected');
+      prev.el.classList.remove('selected');
+      matchState.matched.add(pairIdx);
+
+      const chapter = getCurrentChapter();
+      if (matchState.matched.size === chapter.vocabPairs.length) {
+        var matchPairs = chapter.vocabPairs;
+        var matchWordsHtml = matchPairs.map(function(p) {
+          return '<span style="display:inline-block;padding:0.15rem 0.5rem;margin:0.15rem;background:var(--accent-glow);border-radius:10px;font-size:0.75rem;color:var(--accent);">' + p.cn + ' ' + p.en + '</span>';
+        }).join('');
+        var matchInsight = pick(
+          '知道一个词的中文与英文。像知其名与知其形。',
+          'Knowing a word in two tongues. Like knowing its name and its shape.'
+        );
+        var matchMsg = '<div style="margin-bottom:0.5rem;color:var(--accent);font-size:0.85rem;">✓ ' + pick('全部连通', 'All Connected') + ' · ' + matchPairs.length + ' ' + pick('词', 'words') + '</div>' +
+          '<div style="margin-bottom:0.6rem;">' + matchWordsHtml + '</div>' +
+          '<div style="font-size:0.72rem;color:var(--text-dim);border-left:2px solid var(--gold);padding-left:0.5rem;">' + matchInsight + '</div>';
+        showFeedback('matchFb', matchMsg, true);
+        state.gamesCompleted.match = true;
+        state.marks.observe = true;
+        if (Object.values(state.gamesCompleted).every(v => v)) {
+          completeLesson();
+        }
+        updateLessonProgress(state.currentLesson, {
+          gamesCompleted: { ...state.gamesCompleted },
+          marks: { ...state.marks }
+        });
+      }
+    } else {
+      el.classList.add('wrong');
+      prev.el.classList.add('wrong');
+      setTimeout(() => {
+        el.classList.remove('wrong', 'selected');
+        prev.el.classList.remove('wrong', 'selected');
+      }, 700);
+    }
+
+    matchState.selected = null;
+    matchState.selectedSide = null;
+  } else {
+    matchState.selected.el.classList.remove('selected');
+    matchState.selected = { el, pairIdx, side };
+    matchState.selectedSide = side;
+    el.classList.add('selected');
+  }
+}
+
+function resetMatch() {
+  matchState = { selected: null, selectedSide: null, matched: new Set() };
+  renderVocabMatch();
+  hideFeedback('matchFb');
+}
+
+// ===== FILL BLANK =====
+let fillState = { answers: [], used: new Set(), checked: false, activeBlank: null };
+
+function renderFill() {
+  hideFeedback('fillFb');
+  const chapter = getCurrentChapter();
+  const fill = chapter.fill;
+  if (!fill) return;
+
+  fillState.answers = new Array(fill.blanks.length).fill(null);
+  fillState.used = new Set();
+  fillState.checked = false;
+  fillState.activeBlank = null;
+
+  const parts = fill.sentence.split(/\{answer\d+\}/);
+  let html = '';
+  parts.forEach((p, i) => {
+    html += p;
+    if (i < fill.blanks.length) {
+      html += `<span class="fill-blank" data-bi="${i}" onclick="selectBlank(${i})">____</span>`;
+    }
+  });
+  document.getElementById('fillSentence').innerHTML = html;
+
+  const wrap = document.getElementById('fillChoices');
+  wrap.innerHTML = '';
+  fill.choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'fill-btn';
+    btn.textContent = c;
+    btn.dataset.ci = i;
+    btn.onclick = function() { placeWord(i, c); };
+    wrap.appendChild(btn);
+  });
+
+  hideFeedback('fillFb');
+}
+
+function selectBlank(bi) {
+  if (fillState.checked) return;
+  fillState.activeBlank = bi;
+  document.querySelectorAll('.fill-blank').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.bi) === bi);
+  });
+}
+
+function placeWord(ci, word) {
+  if (fillState.used.has(ci) || fillState.checked) return;
+
+  let target = fillState.activeBlank;
+  if (target === null || fillState.answers[target] !== null) {
+    target = fillState.answers.findIndex(a => a === null);
+  }
+  if (target === -1) return;
+
+  const prevAnswer = fillState.answers[target];
+  if (prevAnswer) {
+    const prevCi = getCurrentChapter().fill.choices.indexOf(prevAnswer);
+    fillState.used.delete(prevCi);
+  }
+
+  fillState.answers[target] = word;
+  fillState.used.add(ci);
+  fillState.activeBlank = null;
+
+  document.querySelectorAll('.fill-blank').forEach(el => {
+    const bi = parseInt(el.dataset.bi);
+    const ans = fillState.answers[bi];
+    el.textContent = ans || '____';
+    el.classList.remove('active');
+    el.classList.toggle('filled', ans !== null);
+  });
+
+  document.querySelectorAll('.fill-btn').forEach(btn => {
+    btn.classList.toggle('used', fillState.used.has(parseInt(btn.dataset.ci)));
+  });
+}
+
+function checkFill() {
+  const chapter = getCurrentChapter();
+  const fill = chapter.fill;
+  if (fillState.answers.some(a => a === null)) {
+    showFeedback('fillFb', 'Please fill all blanks first.', false);
+    return;
+  }
+
+  fillState.checked = true;
+  const correct = fillState.answers.every((a, i) => a === fill.blanks[i]);
+
+  document.querySelectorAll('.fill-blank').forEach((el, i) => {
+    const isCorrect = fillState.answers[i] === fill.blanks[i];
+    el.classList.add(isCorrect ? 'filled' : 'wrong');
+    el.classList.remove('active');
+  });
+
+  document.querySelectorAll('.fill-btn').forEach(btn => {
+    const ci = parseInt(btn.dataset.ci);
+    if (fill.choices[ci] === fill.blanks[fillState.answers.indexOf(fill.choices[ci])]) {
+      btn.classList.add('correct');
+    }
+  });
+
+  if (correct) {
+    var fillSentence = chapter.fill.sentence;
+    var fillBlanks = chapter.fill.blanks;
+    var filledText = fillSentence.replace(/{answer(\d+)}/g, function(_, i) {
+      return '<strong style="color:var(--accent);">' + fillBlanks[+i-1] + '</strong>';
+    });
+    var fillWords = chapter.words;
+    var fillWordKeys = Object.keys(fillWords).filter(function(w) {
+      return fillBlanks.some(function(b) { return b.toLowerCase().includes(w.toLowerCase()); });
+    });
+    var fillVocabHtml = '';
+    if (fillWordKeys.length > 0) {
+      fillVocabHtml = '<div style="margin-top:0.5rem;display:flex;flex-wrap:wrap;gap:0.3rem;">' +
+        fillWordKeys.map(function(w) {
+          return '<span style="padding:0.15rem 0.5rem;background:var(--accent-glow);border-radius:10px;font-size:0.72rem;color:var(--accent);">' + w + ' ' + fillWords[w].cn + '</span>';
+        }).join('') + '</div>';
+    }
+    var fillInsight = pick(
+      '填空即是参禅。字归其位，道在其中。',
+      'Filling blanks is like meditation. Words return home, and the Tao is there.'
+    );
+    var fillMsg = '<div style="margin-bottom:0.5rem;color:var(--accent);font-size:0.85rem;">✓ ' + pick('句子完整了', 'Sentence Complete') + '</div>' +
+      '<div style="margin-bottom:0.5rem;font-size:0.85rem;line-height:1.7;padding:0.5rem;background:var(--bg);border-radius:8px;">' + filledText + '</div>' +
+      fillVocabHtml +
+      '<div style="margin-top:0.6rem;font-size:0.72rem;color:var(--text-dim);border-left:2px solid var(--gold);padding-left:0.5rem;">' + fillInsight + '</div>';
+    showFeedback('fillFb', fillMsg, true);
+    state.gamesCompleted.fill = true;
+    state.marks.deep = true;
+    if (Object.values(state.gamesCompleted).every(v => v)) {
+      completeLesson();
+    }
+    updateLessonProgress(state.currentLesson, {
+      gamesCompleted: { ...state.gamesCompleted },
+      marks: { ...state.marks }
+    });
+  } else {
+    showFeedback('fillFb', 'Not quite right. Click Reset to try again.', false);
+  }
+}
+
+function resetFill() {
+  renderFill();
+}
+
+// ===== SENTENCE ORDER =====
+let orderState = { original: [], shuffled: [], placed: [], remaining: [] };
+
+function renderOrder() {
+  hideFeedback('orderFb');
+  const chapter = getCurrentChapter();
+  const order = chapter.order;
+  if (!order) return;
+
+  const words = order.sentence.split(' ');
+  let shuffled = [...words];
+  while (shuffled.join(' ') === words.join(' ') && shuffled.length > 1) {
+    shuffled.sort(() => Math.random() - 0.5);
+  }
+
+  orderState = {
+    original: words,
+    shuffled: shuffled,
+    placed: [],
+    remaining: [...shuffled]
+  };
+
+  document.getElementById('orderHint').textContent = order.hint || '';
+  document.getElementById('orderAnswer').innerHTML = '';
+  renderOrderTokens();
+  hideFeedback('orderFb');
+}
+
+function renderOrderTokens() {
+  const answerEl = document.getElementById('orderAnswer');
+  answerEl.innerHTML = orderState.placed.map((w, i) =>
+    `<span class="placed-token" onclick="removeFromAnswer(${i})">${w}</span>`
+  ).join('');
+
+  const tokensEl = document.getElementById('orderTokens');
+  tokensEl.innerHTML = orderState.remaining.map((w, i) =>
+    `<span class="order-token" onclick="addToAnswer(${i})">${w}</span>`
+  ).join('');
+}
+
+function addToAnswer(idx) {
+  const word = orderState.remaining[idx];
+  orderState.placed.push(word);
+  orderState.remaining.splice(idx, 1);
+  renderOrderTokens();
+}
+
+function removeFromAnswer(idx) {
+  const word = orderState.placed[idx];
+  orderState.remaining.push(word);
+  orderState.placed.splice(idx, 1);
+  renderOrderTokens();
+}
+
+function orderAnswerClick() {
+  // Click on answer area - do nothing special
+}
+
+function checkOrder() {
+  var chapter = getCurrentChapter();
+  const answer = orderState.placed.join(' ');
+  const correct = answer === orderState.original.join(' ');
+
+  if (correct) {
+    var orderSentence = chapter.order.sentence;
+    var orderWords = chapter.words;
+    var orderWordKeys = Object.keys(orderWords).filter(function(w) {
+      return orderSentence.toLowerCase().includes(w.toLowerCase());
+    });
+    var orderVocabHtml = '';
+    if (orderWordKeys.length > 0) {
+      orderVocabHtml = '<div style="margin-top:0.5rem;display:flex;flex-wrap:wrap;gap:0.3rem;">' +
+        orderWordKeys.map(function(w) {
+          return '<span style="padding:0.15rem 0.5rem;background:var(--accent-glow);border-radius:10px;font-size:0.72rem;color:var(--accent);">' + w + ' ' + orderWords[w].cn + '</span>';
+        }).join('') + '</div>';
+    }
+    var orderInsight = pick(
+      '句子的顺序像呼吸。紊乱时觉知，理顺时安然。',
+      'A sentence breathes like the body. Disorder is felt. Order is peace.'
+    );
+    var orderMsg = '<div style="margin-bottom:0.5rem;color:var(--accent);font-size:0.85rem;">✓ ' + pick('顺序归位', 'Order Restored') + '</div>' +
+      '<div style="margin-bottom:0.5rem;font-size:0.85rem;line-height:1.7;padding:0.5rem;background:var(--bg);border-radius:8px;color:var(--accent);">' + orderSentence + '</div>' +
+      orderVocabHtml +
+      '<div style="margin-top:0.6rem;font-size:0.72rem;color:var(--text-dim);border-left:2px solid var(--gold);padding-left:0.5rem;">' + orderInsight + '</div>';
+    showFeedback('orderFb', orderMsg, true);
+    state.gamesCompleted.order = true;
+    state.marks.observe = true;
+    if (Object.values(state.gamesCompleted).every(v => v)) {
+      completeLesson();
+    }
+    updateLessonProgress(state.currentLesson, {
+      gamesCompleted: { ...state.gamesCompleted },
+      marks: { ...state.marks }
+    });
+  } else {
+    showFeedback('orderFb', pick('顺序不同。观察这个"不同"。', 'A different order. Observe this "difference."'), false);
+    document.getElementById('orderAnswer').innerHTML = orderState.original.map(w =>
+      `<span class="placed-token" style="border-color: #5cb87a; color: #5cb87a;">${w}</span>`
+    ).join('');
+  }
+}
+
+function resetOrder() {
+  renderOrder();
+}
+
+// ===== DICTATION =====
+let dictateState = { played: false, speed: 0.8 };
+
+function initDictation() {
+  hideFeedback('dictateFb');
+  const chapter = getCurrentChapter();
+  const dictate = chapter.dictate;
+  if (!dictate) return;
+
+  document.getElementById('dictateHint').textContent = dictate.hints ? dictate.hints[0] : '';
+  document.getElementById('dictateInput').value = '';
+  document.getElementById('dictateLen').textContent = '0';
+  document.getElementById('dictateComparison').classList.remove('show');
+  dictateState = { played: false, speed: 0.8 };
+
+  document.querySelectorAll('.speed-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', i === 0);
+  });
+}
+
+function playDictate() {
+  if (!('speechSynthesis' in window)) {
+    alert('Speech synthesis not supported in this browser.');
+    return;
+  }
+
+  const chapter = getCurrentChapter();
+  const sentence = chapter.dictate.sentence;
+
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(sentence);
+  u.lang = 'en-US';
+  u.rate = dictateState.speed;
+
+  const btn = document.getElementById('dictatePlayBtn');
+  btn.classList.add('playing');
+    btn.textContent = '🔊 Playing...';
+
+  u.onend = () => {
+    btn.classList.remove('playing');
+    btn.textContent = '🔊 Listen & Write';
+    dictateState.played = true;
+  };
+  u.onerror = () => {
+    btn.classList.remove('playing');
+    btn.textContent = '🔊 Listen & Write';
+  };
+
+  speechSynthesis.speak(u);
+}
+
+function setSpeed(speed) {
+  dictateState.speed = speed;
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.classList.toggle('active', parseFloat(btn.textContent) === speed);
+  });
+}
+
+function updateDictateHint() {
+  const chapter = getCurrentChapter();
+  const dictate = chapter.dictate;
+  if (!dictate || !dictate.hints) return;
+
+  const len = document.getElementById('dictateInput').value.length;
+  const hintIdx = Math.min(Math.floor(len / 10), dictate.hints.length - 1);
+  document.getElementById('dictateHint').textContent = dictate.hints[hintIdx] || '';
+  document.getElementById('dictateLen').textContent = len;
+}
+
+function checkDictate() {
+  const chapter = getCurrentChapter();
+  const dictate = chapter.dictate;
+  const input = document.getElementById('dictateInput').value.trim();
+  const target = dictate.sentence;
+
+  if (!input) {
+    showFeedback('dictateFb', 'Please write what you heard.', false);
+    return;
+  }
+
+  // Simple comparison (case-insensitive)
+  const normalizedInput = input.toLowerCase().replace(/[.,!?]/g, '');
+  const normalizedTarget = target.toLowerCase().replace(/[.,!?]/g, '');
+  const correct = normalizedInput === normalizedTarget;
+
+  const comparison = document.getElementById('dictateComparison');
+  const diffEl = document.getElementById('dictateDiff');
+
+  if (correct) {
+    // Calculate accuracy metrics
+    const wordCount = target.split(' ').length;
+    const charCount = target.length;
+
+    // Build rich feedback
+    let feedbackHtml = `
+      <div style="margin-bottom: 1rem;">
+      <div class="diff-correct" style="font-size: 1.1rem; display: block; margin-bottom: 0.5rem;">✓ ${input}</div>
+        <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">
+          ${wordCount} words 路 ${charCount} characters
+        </div>
+      </div>
+    `;
+
+    // Add Chinese translation if available
+    if (chapter.quoteCN) {
+      // Find the corresponding Chinese line
+      const enLines = chapter.quoteEN.split('\n');
+      const cnLines = chapter.quoteCN.split('\n');
+      const lineIdx = enLines.findIndex(line => line.includes(target));
+      if (lineIdx >= 0 && cnLines[lineIdx]) {
+        feedbackHtml += `
+          <div style="margin-top: 0.8rem; padding: 0.8rem; background: var(--bg); border-radius: 8px; border-left: 3px solid var(--gold);">
+            <div style="font-size: 0.65rem; color: var(--text-muted); margin-bottom: 0.3rem;">中英文对照</div>
+            <div style="color: var(--gold); font-size: 0.9rem;">${cnLines[lineIdx]}</div>
+          </div>
+        `;
+      }
+    }
+
+    // Add key vocabulary
+    const words = Object.keys(chapter.words);
+    const relevantWords = words.filter(w => target.toLowerCase().includes(w.toLowerCase()));
+    if (relevantWords.length > 0) {
+      feedbackHtml += `
+        <div style="margin-top: 0.8rem;">
+          <div style="font-size: 0.65rem; color: var(--text-muted); margin-bottom: 0.4rem;">关键词</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+      `;
+      relevantWords.slice(0, 3).forEach(w => {
+        const word = chapter.words[w];
+        feedbackHtml += `<span style="padding: 0.2rem 0.6rem; background: var(--accent-glow); border-radius: 12px; font-size: 0.75rem; color: var(--accent);">${w} ${word.cn}</span>`;
+      });
+      feedbackHtml += `</div></div>`;
+    }
+
+    // Add learning insight
+    const insights = [
+      "Listening is the art of receiving without grasping.",
+      "In hearing, we touch the invisible.",
+      "Each word is a gateway to understanding.",
+      "The ear that listens is closer to the Tao.",
+      "Sound fades, but meaning remains."
+    ];
+    const insight = insights[Math.floor(Math.random() * insights.length)];
+    feedbackHtml += `
+      <div style="margin-top: 1rem; padding: 0.6rem; background: var(--gold-dim); border-radius: 8px; font-size: 0.75rem; color: var(--gold); font-style: italic;">
+    💭 ${insight}
+      </div>
+    `;
+
+    diffEl.innerHTML = feedbackHtml;
+    showFeedback('dictateFb', pick('✓ 你听见了。这就够了。', '✓ You heard it. That is enough.'), true);
+    state.gamesCompleted.dictate = true;
+    state.marks.observe = true;
+    if (Object.values(state.gamesCompleted).every(v => v)) {
+      completeLesson();
+    }
+    updateLessonProgress(state.currentLesson, {
+      gamesCompleted: { ...state.gamesCompleted },
+      marks: { ...state.marks }
+    });
+  } else {
+    // Show detailed comparison
+    const inputWords = normalizedInput.split(' ');
+    const targetWords = normalizedTarget.split(' ');
+
+    // Calculate accuracy
+    let correctCount = 0;
+    let wrongCount = 0;
+    let missingCount = 0;
+
+    let html = '<div style="margin-bottom: 0.8rem;">';
+
+    for (let i = 0; i < targetWords.length; i++) {
+      if (inputWords[i] === targetWords[i]) {
+        correctCount++;
+        html += `<span class="diff-correct">${inputWords[i] || ''}</span> `;
+      } else if (inputWords[i]) {
+        wrongCount++;
+        html += `<span class="diff-wrong">${inputWords[i]}</span> `;
+      } else {
+        missingCount++;
+        html += `<span class="diff-missing">[${targetWords[i]}]</span> `;
+      }
+    }
+    html += '</div>';
+
+    // Add correct answer
+    html += `
+      <div style="margin-top: 0.8rem; padding: 0.6rem; background: var(--bg); border-radius: 8px;">
+        <div style="font-size: 0.65rem; color: var(--text-muted); margin-bottom: 0.3rem;">正确答案</div>
+        <div style="color: var(--accent); font-size: 0.9rem;">${target}</div>
+      </div>
+    `;
+
+    // Add statistics
+    const accuracy = Math.round((correctCount / targetWords.length) * 100);
+    html += `
+      <div style="margin-top: 0.8rem; display: flex; gap: 1rem; font-size: 0.75rem; color: var(--text-dim);">
+        <span>正确率 <strong style="color: ${accuracy >= 70 ? '#5cb87a' : 'var(--soft-red)'}">${accuracy}%</strong></span>
+        <span>正确: ${correctCount}</span>
+        <span>错误: ${wrongCount}</span>
+        <span>错过: ${missingCount}</span>
+      </div>
+    `;
+
+    // Add improvement tip
+    if (wrongCount > 0 || missingCount > 0) {
+      const tips = [];
+      if (missingCount > 0) tips.push("Try listening at a slower speed (0.5x or 0.6x)");
+      if (wrongCount > correctCount) tips.push(pick("先听每个词。合并会自己发生。", "Listen to each word. The merging happens on its own."));
+      if (wrongCount > 0 && wrongCount <= correctCount) tips.push(pick("有些词听起来相似。像万物同出一源。", "Some words sound alike. Like all things from one source."));
+
+      html += `
+        <div style="margin-top: 0.8rem; padding: 0.5rem; background: rgba(196,122,106,0.1); border-radius: 8px; font-size: 0.72rem; color: var(--soft-red);">
+    💡 ${tips[0] || pick("继续。不执着于对错。再听一次。", "Keep going. Not attached to right or wrong. Listen again.")}
+        </div>
+      `;
+    }
+
+    diffEl.innerHTML = html;
+    showFeedback('dictateFb', 'Not quite. Listen again and try once more.', false);
+  }
+
+  comparison.classList.add('show');
+}
+
+function resetDictate() {
+  document.getElementById('dictateInput').value = '';
+  document.getElementById('dictateLen').textContent = '0';
+  document.getElementById('dictateComparison').classList.remove('show');
+  dictateState.played = false;
+  hideFeedback('dictateFb');
+
+  const chapter = getCurrentChapter();
+  const dictate = chapter.dictate;
+  if (dictate && dictate.hints) {
+    document.getElementById('dictateHint').textContent = dictate.hints[0];
+  }
+}
+
+// ===== GAME HELPERS =====
+function pick(msgCN, msgEN) {
+  return Math.random() < 0.5 ? msgCN : msgEN;
+}
+function showFeedback(id, msg, ok) {
+  const el = document.getElementById(id);
+  el.innerHTML = msg;
+  el.className = 'game-feedback show ' + (ok ? 'ok' : 'err');
+}
+
+function hideFeedback(id) {
+  const el = document.getElementById(id);
+  el.className = 'game-feedback';
+}
+
+function completeGame(game) {
+  state.gamesCompleted[game] = true;
+  updateLessonProgress(state.currentLesson, { gamesCompleted: { ...state.gamesCompleted } });
+}
+
+// ===== MEDITATION =====
+function showMeditation() {
+  const chapter = getCurrentChapter();
+  const quotes = chapter.meditationQuotes || [];
+  const quote = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById('meditationText').textContent = '"' + quote + '"';
+  document.getElementById('meditationPause').classList.add('active');
+}
+
+function closeMeditation() {
+  document.getElementById('meditationPause').classList.remove('active');
+}
+
+// ===== MARKS =====
+function updateMarks() {
+  updateProgressCard();
+}
+
+function updateProgressCard() {
+  const checklist = document.getElementById('progressChecklist');
+  const unlockEl = document.getElementById('progressUnlock');
+  if (!checklist) return;
+  
+  const progress = getLessonProgress(state.currentLesson);
+  const gc = progress.gamesCompleted || {};
+  
+  const tasks = [
+    { key: 'match', label: 'Match', icon: '🃏', hint: 'Connect Chinese & English' },
+    { key: 'fill', label: 'Fill', icon: '✍️', hint: 'Complete the passage' },
+    { key: 'order', label: 'Order', icon: '📐', hint: 'Arrange words correctly' },
+    { key: 'dictate', label: 'Dictate', icon: '👂', hint: 'Listen & write' },
+    { key: 'writing', label: 'Journal', icon: '📝', hint: 'Write your reflection' }
+  ];
+  
+  let html = '';
+  tasks.forEach(t => {
+    const done = t.key === 'writing' ? progress.writingSaved : (gc[t.key] || false);
+    const clickAction = t.key === 'writing'
+      ? `loadChapter();navTo('journal')`
+      : `loadChapter();navTo('observe');switchGame('${t.key}')`;
+    html += `
+      <div class="progress-item ${done ? 'done' : ''}" onclick="${clickAction}" style="cursor:pointer">
+        <div class="progress-check">${done ? '✓' : ''}</div>
+        <span class="progress-item-label">${t.icon} ${t.label}</span>
+        <span class="progress-item-hint">${done ? 'Done' : t.hint}</span>
+      </div>
+    `;
+  });
+  checklist.innerHTML = html;
+  
+  // Next lesson info
+  const nextLesson = LESSON_PLAN.find(l => l.id === state.currentLesson + 1);
+  if (!nextLesson) {
+    unlockEl.className = 'progress-unlock unlocked';
+    unlockEl.innerHTML = '🏆 Congratulations! You have completed all lessons!';
+    return;
+  }
+  
+  const nextUnlocked = isLessonUnlocked(nextLesson.id);
+  const nextMeta = CHAPTERS_META.find(m => m.num === nextLesson.chapter);
+  if (nextUnlocked) {
+    unlockEl.className = 'progress-unlock unlocked';
+    unlockEl.innerHTML = `🔓 第${nextLesson.chapter}章 · ${nextMeta ? nextMeta.theme : ''} 已解锁！`;
+  } else {
+    const gamesDone = Object.values(gc).filter(Boolean).length;
+    const needs = [];
+    if (gamesDone < 2) needs.push(`${2 - gamesDone} more game(s)`);
+    if (!progress.writingSaved) needs.push('save journal');
+    unlockEl.className = 'progress-unlock locked';
+    unlockEl.innerHTML = '🔒 Next: ' + needs.join(' + ');
+  }
+}
+
+function updateTree() {
+  const earned = Object.values(state.marks).filter(Boolean).length;
+    const trees = ['🌱', '🌿', '🌿', '🌳'];
+    document.getElementById('navTree').textContent = trees[earned] || '🌱';
+}
+
+// ===== NAVIGATION =====
+function navTo(section) {
+  document.querySelectorAll('.bnav-item').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+
+  const pageMap = {
+    'map': 'page-map',
+    'today': 'page-today',
+    'observe': 'page-observe',
+    'journal': 'page-journal'
+  };
+
+  const navMap = {
+    'map': 0,
+    'today': 1,
+    'observe': 2,
+    'journal': 3
+  };
+
+  document.getElementById(pageMap[section]).classList.add('active');
+  document.querySelectorAll('.bnav-item')[navMap[section]].classList.add('active');
+
+  if (section === 'today') updateProgressCard();
+  if (section === 'map') { renderChapterMap(); _initMapPage(); }
+
+  // Show/hide back button
+  const backBtn = document.getElementById('navBackBtn');
+  backBtn.style.display = section !== 'map' ? 'block' : 'none';
+
+  if (section === 'map') {
+    renderChapterMap();
+  }
+
+  if (section === 'today') {
+    loadChapter();
+  }
+
+  if (section === 'journal') {
+    renderDiary();
+  }
+}
+
+function switchGame(name) {
+  document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.game-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.game-tab[onclick="switchGame('${name}')"]`).classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+// ===== CHAPTER MAP =====
+var _mapPage = 0;
+function renderChapterMap(page) {
+  if (page === undefined) page = _mapPage;
+  _mapPage = page;
+
+  loadState();
+
+  // Progress bar
+  const completedChapters = CHAPTERS_META.filter(cm => {
+    const cp = getChapterProgress(cm.num);
+    return cp.completed;
+  }).length;
+  const progressPercent = (completedChapters / 81) * 100;
+  document.getElementById('mapProgressFill').style.width = progressPercent + '%';
+  document.getElementById('mapProgressText').textContent = `${completedChapters}/81`;
+
+  // Pagination tabs
+  const pagination = document.getElementById('mapPagination');
+  pagination.innerHTML = '';
+  var totalPages = 9;
+  for (var p = 0; p < totalPages; p++) {
+    var pStart = p * 9 + 1;
+    var pEnd = Math.min((p + 1) * 9, 81);
+    var btn = document.createElement('button');
+    btn.className = 'map-page-btn' + (p === page ? ' active' : '');
+    btn.textContent = pStart === pEnd ? String(pStart) : pStart + '-' + pEnd;
+    btn.onclick = (function(pg) { return function() { renderChapterMap(pg); }; })(p);
+    pagination.appendChild(btn);
+  }
+
+  // Render current page chapters
+  var path = document.getElementById('chapterPath');
+  path.innerHTML = '';
+  var sliceStart = page * 9;
+  var sliceEnd = Math.min(sliceStart + 9, 81);
+  var pageMetas = CHAPTERS_META.slice(sliceStart, sliceEnd);
+
+  pageMetas.forEach(meta => {
+    const lessons = LESSON_PLAN.filter(l => l.chapter === meta.num);
+    const chProgress = getChapterProgress(meta.num);
+    const unlocked = isChapterUnlocked(meta.num);
+    const hasContent = hasChapterContent(meta.num);
+    const isCurrent = getCurrentLesson().chapter === meta.num;
+    
+    const group = document.createElement('div');
+    group.className = 'chapter-group';
+    
+    // Header
+    const header = document.createElement('div');
+    header.className = 'chapter-group-header';
+    
+    // Status icon
+    let statusIcon = '·'; // locked
+    if (chProgress.completed) statusIcon = '✓';
+    else if (isCurrent) statusIcon = '→';
+    else if (unlocked) statusIcon = '●';
+    
+    header.innerHTML = `
+      <span class="chapter-group-num">Ch.${meta.num}</span>
+      <span class="chapter-group-theme">${meta.cn} ${meta.theme}</span>
+      <span class="chapter-group-lessons">
+        ${lessons.map(l => {
+          const lp = getLessonProgress(l.id);
+          let cls = 'lesson-dot';
+          if (lp.completed) cls += ' completed';
+          else if (state.currentLesson === l.id) cls += ' current';
+          else if (isLessonUnlocked(l.id)) cls += ' unlocked';
+          return `<span class="${cls}" data-lesson="${l.id}" title="第${l.chapter}章${l.total > 1 ? ' 第' + l.part + '/' + l.total + '课' : ''}"></span>`;
+        }).join('')}
+      </span>
+      <span class="chapter-group-status">${statusIcon}</span>
+    `;
+    
+    if (unlocked && hasContent) {
+      header.onclick = () => selectChapter(meta.num);
+    }
+    
+    group.appendChild(header);
+    
+    // Quote preview
+    if (unlocked || isCurrent) {
+      const quotePreview = document.createElement('div');
+      quotePreview.className = 'chapter-group quote-preview';
+      quotePreview.textContent = meta.quote;
+      group.appendChild(quotePreview);
+    }
+    
+    // Coming soon label
+    if (!hasContent && unlocked) {
+      const cs = document.createElement('div');
+      cs.className = 'chapter-group quote-preview';
+    cs.textContent = '🌱 Content coming soon...';
+      cs.style.fontStyle = 'normal';
+      cs.style.color = 'var(--accent)';
+      group.appendChild(cs);
+    }
+    
+    path.appendChild(group);
+  });
+
+}
+
+// First map load: jump to current chapter's page
+var _mapInitialized = false;
+function _initMapPage() {
+  if (_mapInitialized) return;
+  _mapInitialized = true;
+  var curChapter = getCurrentLesson().chapter;
+  var curPage = Math.floor((curChapter - 1) / 9);
+  if (curPage !== _mapPage) renderChapterMap(curPage);
+}
+
+// ===== WRITING =====
+function insertKeyword(word) {
+  if (!word) {
+    const chapter = getCurrentChapter();
+    const words = Object.keys(chapter.words);
+    if (words.length > 0) {
+      word = words[Math.floor(Math.random() * words.length)];
+    }
+  }
+
+  const box = document.getElementById('writingBox');
+  const start = box.selectionStart;
+  const end = box.selectionEnd;
+  const text = box.value;
+  box.value = text.substring(0, start) + word + ' ' + text.substring(end);
+  box.selectionStart = box.selectionEnd = start + word.length + 1;
+  box.focus();
+}
+
+function clearWriting() {
+  document.getElementById('writingBox').value = '';
+  const btn = document.getElementById('writingSaveBtn');
+  btn.textContent = 'Save Reflection';
+  btn.style.opacity = '1';
+  btn.style.pointerEvents = 'auto';
+  state.writingSaved = false;
+  updateLessonProgress(state.currentLesson, { writingSaved: false });
+}
+
+function saveWriting() {
+  const text = document.getElementById('writingBox').value.trim();
+  if (!text) {
+    alert('Please write something before saving.');
+    return;
+  }
+  
+  state.marks.express = true;
+  state.writingSaved = true;
+  
+  // Update or add diary entry
+  const existingIdx = state.diary.findIndex(d => d.lesson === state.currentLesson);
+  const lesson = getCurrentLesson();
+  const entry = {
+    lesson: state.currentLesson,
+    chapter: lesson.chapter,
+    text: text,
+    date: new Date().toLocaleDateString()
+  };
+  
+  if (existingIdx >= 0) {
+    state.diary[existingIdx] = entry;
+  } else {
+    state.diary.unshift(entry);
+  }
+  
+  updateLessonProgress(state.currentLesson, {
+    marks: { ...state.marks },
+    writingSaved: true
+  });
+  
+  saveState();
+  
+  const btn = document.getElementById('writingSaveBtn');
+  btn.textContent = '✓ Saved';
+  btn.style.opacity = '0.6';
+  btn.style.pointerEvents = 'none';
+  
+  updateMarks();
+  
+  if (Object.values(state.gamesCompleted).every(v => v)) {
+    completeLesson();
+  }
+}
+
+function renderDiary() {
+  const list = document.getElementById('diaryList');
+  const entries = state.diary.slice(0, 10);
+  
+  if (entries.length === 0) {
+    list.innerHTML = '<div style="text-align: center; color: var(--text-muted); font-size: 0.85rem; padding: 2rem;">Your reflections will appear here</div>';
+    return;
+  }
+  
+  list.innerHTML = entries.map(entry => {
+    const meta = CHAPTERS_META.find(m => m.num === entry.chapter);
+    const lesson = LESSON_PLAN.find(l => l.id === entry.lesson);
+    return `
+      <div class="diary-entry">
+        <div class="diary-entry-header">
+          <span class="diary-chapter">第${entry.chapter}章 · ${meta ? meta.theme : ''}</span>
+          <span class="diary-date">${entry.date}</span>
+        </div>
+        <div class="diary-text">${entry.text}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ===== STATE PERSISTENCE =====
+function saveState() {
+  try {
+    localStorage.setItem('tao_learning_state', JSON.stringify({
+      learnerProfile: state.learnerProfile,
+      currentLesson: state.currentLesson,
+      lessonProgress: state.lessonProgress,
+      diary: state.diary,
+      touchedWords: [...state.touchedWords],
+      marks: state.marks,
+      gamesCompleted: state.gamesCompleted,
+      writingSaved: state.writingSaved
+    }));
+  } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem('tao_learning_state'));
+    if (saved) {
+      state.learnerProfile = saved.learnerProfile;
+      // Migration: support old chapterProgress ←new lessonProgress
+      if (saved.currentLesson) {
+        state.currentLesson = saved.currentLesson;
+      } else if (saved.currentChapter) {
+        // Migrate: find first lesson of old chapter
+        const migrated = LESSON_PLAN.find(l => l.chapter === saved.currentChapter);
+        state.currentLesson = migrated ? migrated.id : 1;
+      }
+      if (saved.lessonProgress) {
+        state.lessonProgress = saved.lessonProgress;
+      } else if (saved.chapterProgress) {
+        // Migrate old chapterProgress to lessonProgress
+        state.lessonProgress = {};
+        Object.entries(saved.chapterProgress).forEach(([chId, p]) => {
+          const lessons = LESSON_PLAN.filter(l => l.chapter === parseInt(chId));
+          lessons.forEach(l => {
+            state.lessonProgress[l.id] = { ...p };
+          });
+        });
+      }
+      state.diary = saved.diary || [];
+      state.touchedWords = new Set(saved.touchedWords || []);
+      state.marks = saved.marks || { touch: false, deep: false, observe: false, express: false };
+      state.gamesCompleted = saved.gamesCompleted || { match: false, fill: false, order: false, dictate: false };
+      state.writingSaved = saved.writingSaved || false;
+    }
+  } catch(e) {}
+}
+
+// ===== INIT =====
+loadState();
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeWordPanel();
+    closeMeditation();
+    closeEnlightenment();
+  }
+});
+
+// Dictation input handler
+document.addEventListener('DOMContentLoaded', () => {
+  const input = document.getElementById('dictateInput');
+  if (input) {
+    input.addEventListener('input', updateDictateHint);
+  }
+});
+</script>
+</body>
+</html>
