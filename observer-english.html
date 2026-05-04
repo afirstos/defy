@@ -128,7 +128,11 @@
   #app { display:none; flex-direction:column; height:100vh; max-width:520px; margin:0 auto; }
   #app.active { display:flex; animation: fadeIn 0.6s ease; }
   .page { display:none; flex:1; overflow-y:auto; padding:1rem 1rem 5rem 1rem; }
-  .page.active { display:block; animation: fadeIn 0.3s ease; }
+  .page.active { display:flex; flex-direction:column; animation: fadeIn 0.3s ease; }
+  /* Hide scrollbar but keep scrolling */
+  .page::-webkit-scrollbar { display: none; }
+  * { scrollbar-width: none; -ms-overflow-style: none; }
+  #page-journal { padding-bottom: 5rem; }
   #page-observe .game-tabs { margin-top: 0.5rem; }
 
   /* --- NAV --- */
@@ -537,6 +541,19 @@
     border-radius: 14px;
     padding: 1.3rem 1.5rem;
     position: relative;
+    margin-bottom: 2rem;
+  }
+  .writing-area::before {
+    content: 'Write your truth...';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    opacity: 0.06;
+    font-style: italic;
+    pointer-events: none;
+    white-space: nowrap;
   }
   .writing-area::before {
     content: 'Write your truth...';
@@ -657,7 +674,59 @@
     pointer-events: none;
   }
 
-  /* --- MARKS SECTION --- */
+  /* --- TOAST / HINT MESSAGE --- */
+  .toast {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    background: var(--bg-card);
+    border: 1px solid var(--gold);
+    border-radius: 16px;
+    padding: 1.2rem 1.5rem;
+    max-width: 320px;
+    width: calc(100% - 3rem);
+    text-align: center;
+    z-index: 300;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.22,1,0.36,1);
+    box-shadow: var(--shadow), 0 0 30px var(--gold-dim);
+  }
+  .toast.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+  .toast .toast-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--gold);
+  }
+  .toast .toast-word {
+    font-size: 1.1rem;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+  .toast .toast-pos {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-bottom: 0.8rem;
+  }
+  .toast .toast-meaning {
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+  .toast .toast-dismiss {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-style: italic;
+  }
+  .toast .toast-dismiss:hover { color: var(--text); }
   .marks-row {
     display: flex; gap: 0.8rem; justify-content: center;
     margin: 2rem 0;
@@ -670,6 +739,13 @@
     transition: all 0.3s;
   }
   .mark.earned { color: var(--accent); }
+  .marks-hint {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
   .mark-icon {
     width: 44px; height: 44px;
     border-radius: 50%;
@@ -789,7 +865,7 @@
     border-radius: 10px;
   }
   .diary-entry .de-day { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-  .diary-entry .de-text { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; font-style: italic; }
+  .diary-entry .de-text { font-size: 0.88rem; color: var(--text-dim); line-height: 1.7; font-style: italic; max-height: 4.8em; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
   .diary-empty { text-align: center; color: var(--text-muted); font-style: italic; font-size: 0.85rem; padding: 2rem 0; }
 
   /* --- STREAK VISUAL --- */
@@ -893,6 +969,7 @@
       <div class="mark" id="markQuiz"><div class="mark-icon">🍃</div>Observe</div>
       <div class="mark" id="markWrite"><div class="mark-icon">🌳</div>Express</div>
     </div>
+    <div class="marks-hint">touch words · complete activities · reflect in writing</div>
   </div>
 
   <!-- ===== PAGE: OBSERVE (Games) ===== -->
@@ -971,10 +1048,6 @@
         <div class="quiz-options" id="quizOptions"></div>
         <div class="observation" id="observation"></div>
       </div>
-    </div>
-
-    <!-- WRITE -->
-    <div class="game-panel" id="panel-write">
     </div>
   </div>
 
@@ -1059,6 +1132,15 @@
   <div class="meditation-breath"></div>
   <div class="meditation-text" id="meditationText"></div>
   <button class="meditation-close" onclick="closeMeditation()">Return to observation</button>
+</div>
+
+<!-- TOAST HINT -->
+<div class="toast" id="toastHint">
+  <div class="toast-icon">💡</div>
+  <div class="toast-word"></div>
+  <div class="toast-pos"></div>
+  <div class="toast-meaning"></div>
+  <div class="toast-dismiss" onclick="dismissToast()">tap to dismiss</div>
 </div>
 
 <script>
@@ -1927,7 +2009,16 @@ function showHint() {
   const words = Object.keys(lesson.words);
   const random = words[Math.floor(Math.random() * words.length)];
   const w = lesson.words[random];
-  alert(`💡 Try using "${random}" (${w.pos})\n\n"${random}" ${w.meaning.split('.')[0]}.`);
+  const toast = document.getElementById('toastHint');
+  toast.querySelector('.toast-word').textContent = random;
+  toast.querySelector('.toast-pos').textContent = w.pos;
+  toast.querySelector('.toast-meaning').textContent = `"${random}" ${w.meaning.split('.')[0]}.`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+function dismissToast() {
+  document.getElementById('toastHint').classList.remove('show');
 }
 
 function insertKeyword(word) {
@@ -2120,11 +2211,12 @@ function renderJournalPage() {
   if (state.diary.length === 0) {
     entriesDiv.innerHTML = '<div class="diary-empty">Your journal is empty.<br>Scroll up to write your reflection for today.</div>';
   } else {
-    entriesDiv.innerHTML = '';
+    const escapeHtml = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    entriesDiv.innerHTML = '<div class="section-label" style="margin-top:0.5rem">Past Reflections</div>';
     state.diary.slice(0, 20).forEach(e => {
       const entry = document.createElement('div');
       entry.className = 'diary-entry';
-      entry.innerHTML = `<div class="de-day">Day ${e.day} · ${e.theme} · ${e.date}</div><div class="de-text">${e.text}</div>`;
+      entry.innerHTML = `<div class="de-day">Day ${e.day} · ${e.theme} · ${e.date}</div><div class="de-text">${escapeHtml(e.text)}</div>`;
       entriesDiv.appendChild(entry);
     });
   }
@@ -2236,8 +2328,8 @@ function checkMeditationMoment() {
   const now = Date.now();
   const timeSinceLast = now - _lastMeditationTime;
   
-  // Show meditation after 3 minutes OR 20 interactions
-  if (timeSinceLast > 180000 || _activityCount >= 20) {
+  // Show meditation after 15 minutes
+  if (timeSinceLast > 900000) {
     _lastMeditationTime = now;
     _activityCount = 0;
     showMeditation();
@@ -2246,7 +2338,23 @@ function checkMeditationMoment() {
 
 // Hook meditation check into user interactions
 document.addEventListener('click', checkMeditationMoment);
-document.addEventListener('keydown', checkMeditationMoment);
+document.addEventListener('keydown', function(e) {
+  // Escape to close panels
+  if (e.key === 'Escape') {
+    closeWordPanel();
+    closeMeditation();
+    document.getElementById('dayPickerModal').classList.remove('open');
+    document.getElementById('toastHint').classList.remove('show');
+  }
+  // Cmd/Ctrl + Enter to save writing (when on journal page)
+  if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+    const journalPage = document.getElementById('page-journal');
+    if (journalPage.classList.contains('active')) {
+      e.preventDefault();
+      saveWriting();
+    }
+  }
+});
 
 // ===== RIPPLE EFFECT =====
 function addRipple(element, event) {
