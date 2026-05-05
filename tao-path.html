@@ -1130,9 +1130,17 @@
   .bnav-icon { font-size: 1.2rem; }
 
   /* ===== TAOPATH ===== */
-  .taopath-header { text-align: center; padding: 2rem 1rem 1.5rem; }
-  .taopath-header h2 { color: var(--accent); font-size: 1.6rem; margin-bottom: 0.3rem; letter-spacing: 0.1em; }
-  .taopath-header p { color: var(--text-dim); font-size: 0.85rem; }
+  .taopath-header { text-align: center; padding: 2rem 1rem 1rem; }
+  .taopath-title-row { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 0.3rem; }
+  .taopath-title-row h2 { color: var(--accent); font-size: 1.6rem; letter-spacing: 0.1em; margin: 0; }
+  .taopath-lang-tabs { display: flex; gap: 2px; }
+  .taopath-lang-btn { padding: 2px 8px; border: 1px solid var(--border); border-radius: 10px; background: transparent; color: var(--text-muted); font-size: 0.65rem; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+  .taopath-lang-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  .taopath-header p { color: var(--text-dim); font-size: 0.85rem; margin-bottom: 0.6rem; }
+  .taopath-group-tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3rem; margin-bottom: 0.4rem; }
+  .taopath-group-tab { padding: 3px 10px; border: 1px solid var(--border); border-radius: 12px; background: transparent; color: var(--text-muted); font-size: 0.68rem; cursor: pointer; font-family: inherit; transition: all 0.2s; white-space: nowrap; }
+  .taopath-group-tab:hover { border-color: var(--text-dim); color: var(--text-dim); }
+  .taopath-group-tab.active { background: var(--gold-dim); color: var(--gold); border-color: var(--gold); }
   .taopath-milestones { padding: 0 1rem 6rem; }
   .tao-milestone { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1rem; margin-bottom: 1rem; transition: all 0.3s; opacity: 0.35; position: relative; overflow: hidden; }
   .tao-milestone.unlocked { opacity: 1; border-color: var(--gold-dim); }
@@ -1335,8 +1343,15 @@
 
   <div class="page" id="page-taopath">
     <div class="taopath-header">
-      <h2>道 途</h2>
-      <p>九章一小结，八十一归真</p>
+      <div class="taopath-title-row">
+        <h2 id="taopathTitle">道 途</h2>
+        <div class="taopath-lang-tabs">
+          <button class="taopath-lang-btn active" id="taoLangZh" onclick="switchTaoLang('zh')">中</button>
+          <button class="taopath-lang-btn" id="taoLangEn" onclick="switchTaoLang('en')">EN</button>
+        </div>
+      </div>
+      <p id="taopathSub">九章一小结，八十一归真</p>
+      <div class="taopath-group-tabs" id="taopathGroupTabs"></div>
     </div>
     <div class="taopath-milestones" id="taopathMilestones"></div>
   </div>
@@ -14183,27 +14198,80 @@ function loadState() {
   } catch(e) {}
 }
 
+var _taoLang = 'zh';
+var _taoGroup = 0;
+
+function switchTaoLang(lang) {
+  _taoLang = lang;
+  document.getElementById('taoLangZh').className = 'taopath-lang-btn' + (lang === 'zh' ? ' active' : '');
+  document.getElementById('taoLangEn').className = 'taopath-lang-btn' + (lang === 'en' ? ' active' : '');
+  renderTaoPath();
+}
+function switchTaoGroup(g) {
+  _taoGroup = g;
+  renderTaoPath();
+}
+
 function renderTaoPath() {
+  var isZh = _taoLang === 'zh';
+  var zh = {
+    subtitle: '\u4e5d\u7ae0\u4e00\u5c0f\u7ed3\uff0c\u516b\u5341\u4e00\u5f52\u771f',
+    statusDone: '\u2713 \u5df2\u609f',
+    statusActive: '\u8fdb\u884c\u4e2d',
+    statusLocked: '\ud83d\udd12 \u672a\u542f',
+    statusCurrent: '\ud83d\udccd \u5f53\u524d',
+    chapter: '\u7ae0',
+    range: '\u7b2c ',
+    summaryTitle: '\u516b\u5341\u4e00\u5f52\u771f',
+    summaryLocked: '\u524d\u8def\u6f2b\u6f2b\uff0c\u4e14\u884c\u4e14\u609f\u3002\u5f85\u516b\u5341\u4e00\u65e5\u6bd5\uff0c\u6b64\u95f4\u81ea\u73b0\u3002',
+    summaryDone: '\u516b\u5341\u4e00\uff0c\u662f\u4e5d\u4e58\u4e5d\u2014\u2014\u4e5d\u6bb5\u5c0f\u609f\uff0c\u5408\u6210\u4e00\u6b21\u5927\u5f52\u3002<br><br>\u4f60\u4ece\u201c\u9053\u53ef\u9053\u975e\u5e38\u9053\u201d\u51fa\u53d1\uff0c\u7a7f\u8fc7\u540d\u4e0e\u65e0\u540d\u7684\u8ff7\u96fe\uff0c\u5b66\u4f1a\u865a\u9759\u4e0e\u77e5\u6b62\u3002\u4f60\u8ba9\u8eab\u4f53\u67d4\u8f6f\u5982\u5a74\u513f\uff0c\u5728\u5ba0\u8fb1\u4e4b\u95f4\u770b\u6e05\u201c\u6211\u201d\u7684\u865a\u5984\u3002\u4f60\u5265\u6389\u77e5\u8bc6\u7684\u5c42\u5c42\u7c89\u9970\uff0c\u56de\u5230\u6700\u521d\u7684\u7eaf\u771f\u3002\u4f60\u77e5\u96c4\u5374\u5b88\u96cc\u2014\u2014\u8fd9\u662f\u6574\u90e8\u7ecf\u7684\u5bc6\u94a5\uff1a\u660e\u4e86\u4e00\u5207\uff0c\u5374\u7518\u5c45\u6697\u5904\u3002<br><br>\u4f60\u4e0d\u4e89\uff0c\u5929\u9053\u66ff\u4f60\u4e89\uff1b\u4f60\u4e0d\u8a00\uff0c\u5929\u4e0b\u81ea\u5f52\u5f80\u3002\u4f60\u628a\u4e09\u5b9d\u2014\u2014\u6148\u3001\u4fed\u3001\u4e0d\u6562\u4e3a\u5929\u4e0b\u5148\u2014\u2014\u62ff\u5728\u624b\u4e0a\uff0c\u53d1\u73b0\u52c7\u6c14\u4ece\u6e29\u67d4\u91cc\u6765\uff0c\u5bbd\u5e7f\u4ece\u8282\u4fed\u91cc\u751f\u3002\u6700\u540e\u4f60\u770b\u89c1\uff1a\u67d4\u5f31\u624d\u662f\u751f\uff0c\u521a\u5f3a\u901a\u5411\u6b7b\uff1b\u771f\u8bdd\u4e0d\u6f02\u4eae\uff0c\u6f02\u4eae\u7684\u8bdd\u4e0d\u771f\u3002<br><br>\u516b\u5341\u4e00\u5929\uff0c\u4e0d\u662f\u7ec8\u70b9\u3002\u9053\u5df2\u7ecf\u5728\u4f60\u7684\u6bcf\u4e00\u6b65\u91cc\u4e86\u3002'
+  };
+  var en = {
+    subtitle: 'Nine chapters a milestone, eighty-one returning to One',
+    statusDone: '\u2713 Realized',
+    statusActive: 'In Progress',
+    statusLocked: '\ud83d\udd12 Locked',
+    statusCurrent: '\ud83d\udccd Current',
+    chapter: 'Ch',
+    range: '',
+    summaryTitle: 'The One Return',
+    summaryLocked: 'The path stretches far. Walk step by step. When the eighty-first day dawns, the gate will open.',
+    summaryDone: 'Eighty-one is nine times nine \u2014 nine small awakenings flow into one great homecoming.<br><br>You began with \"The Tao that can be told is not the eternal Tao,\" crossed the mist of the Named and the Nameless, and learned to rest in stillness. You softened your body like an infant, saw through the illusion of \"I\" amidst favor and disgrace. You stripped away layer after layer of knowledge, returning to original purity. You knew the masculine yet kept to the feminine \u2014 that is the master key of the entire canon: understanding everything, yet abiding in the low place.<br><br>When you stopped striving, Heaven strove for you. When you stopped speaking, the world came calling. You took hold of the Three Treasures \u2014 compassion, frugality, daring not to be first \u2014 and discovered that courage is born of gentleness, abundance of simplicity. At last you saw: the soft and yielding belong to life, the rigid and unyielding to death; true words are not beautiful, beautiful words are not true.<br><br>The eighty-first day is not the end. The Way was already in every step you took.'
+  };
+  var L = isZh ? zh : en;
+  document.getElementById('taopathTitle').textContent = '\u9053 \u9014';
+  document.getElementById('taopathSub').textContent = L.subtitle;
+
   var milestones = [
-    { start:1, end:9, title:'道之本源', unlock:9,
-      body:'道不可言说，却是一切的开端。这九章反复追问：何为终极实在？名与无名、有与无，并非对立而是相生——正如天地始于无名，万物生于有名。圣人虚其心、实其腹，不尚贤、不贵难得之货。最高的善如水，利万物而不争；最深的智慧是知止，因为锋芒毕露者必折。九章读完，你触摸到了道的轮廓：它不在远方，而在虚静之中。'},
-    { start:10, end:18, title:'修身之门', unlock:18,
-      body:'知道了道，如何修于身？婴儿般的自然、车轮中的空、五官的诱惑——它们指向同一个问题：什么在干扰你回归本真？宠辱若惊，是因为太在乎“我”。古之善为道者，微妙玄通、深不可识；他们豫兮若冬涉川，犹兮若畏四邻。归根曰静，静曰复命——回到生命的根，就是回到静。最好的领导者，百姓只知有之；大道废，才有仁义。这九章教的是：先解决自己，再谈其他。'},
-    { start:19, end:27, title:'返朴归真', unlock:27,
-      body:'绝圣弃智，民利百倍；绝仁弃义，民复孝慈。这不是反智，而是剥掉多余的粉饰。曲则全，枉则直，洼则盈——示弱反而完整。飘风不终朝，骤雨不终日，天地尚且不能久，何况人？人法地，地法天，天法道，道法自然。这四重效法像一条锁链，把我们从虚妄中拉回。重为轻根，静为躁君——轻浮者失根，躁动者丧主。善行无辙迹，真正的功夫看不出痕迹。这九章是一场剥离：剥掉知识，剥掉欲望，露出最初的纯真。'},
-    { start:28, end:36, title:'知雄守雌', unlock:36,
-      body:'知其雄，守其雌，为天下溪。知白守黑、知荣守辱——这些悖论是老子的核心心法。你明知刚强，却选择柔和；你洞察一切，却甘守低处。天下神器，不可为也——强扭的瓜不甜，强取的世界不归你。兵者不祥之器，物或恶之，故有道者不处。知人者智，自知者明；胜人者有力，自胜者强。大道泛兮，其可左右；执大象，天下往。将欲歙之，必固张之——柔弱胜刚强，不是鸡汤，是宇宙规律。这九章让你的力量向内生长，而非向外挥霍。'},
-    { start:37, end:45, title:'无为之道', unlock:45,
-      body:'道常无为而无不为。无为不是躺平，是顺着道的流向。上德不德，是以有德——真正的德性不标榜自己。昔之得一者：天得一以清，地得一以宁，万物得一以生。这个“一”是万物的源头。反者道之动，弱者道之用——万物终将回归本源。上士闻道，勤而行之；中士闻道，若存若亡。道生一，一生二，二生三，三生万物。天下之至柔，驰骋天下之至坚。名与身孰亲？大成若缺、大盈若冲——圆满看起来像残缺。这九章的核心是：别对抗，顺应。'},
-    { start:46, end:54, title:'知足常足', unlock:54,
-      body:'天下有道，却走马以粪；天下无道，戎马生于郊。祸莫大于不知足，咎莫大于欲得——这九个字是整部道德经的枢纽。不出户，知天下；不窥牖，见天道。为学日益，为道日损，损之又损，以至于无为。圣人无常心，以百姓心为心。出生入死——生就是走向死的旅程，善摄生者不入死地。道生之，德畜之，物形之，势成之——万物都遵循道的四重哺育。天下有始，以为天下母。修之于身，其德乃真。这九章把“知足”从个人心态扩展为宇宙秩序。'},
-    { start:55, end:63, title:'玄德之修', unlock:63,
-      body:'含德之厚，比于赤子——婴儿不知道毒虫、猛兽、攫鸟，因他没有敌意。知者不言，言者不知；塞其兑，闭其门，挫其锐，解其纷，和其光，同其尘，是谓玄同。以正治国，以奇用兵，以无事取天下。治大国若烹小鲜——多翻就会碎。大国者下流，天下之牝，牝常以静胜牡。道者万物之奥，善人之宝，不善人之所保。为无为，事无事，味无味——大小多少，报怨以德。图难于其易，为大于其细。这九章把“玄德”具象化了：不是神秘，是极致的柔弱。'},
-    { start:64, end:72, title:'三宝之守', unlock:72,
-      body:'其安易持，其未兆易谋——在平静时守住，在未萌时谋划。合抱之木生于毫末，九层之台起于累土，千里之行始于足下。古之善为道者，非以明民，将以愚之——不是愚弄，是让人回归淳朴。江海所以能为百谷王者，以其善下之。我有三宝，持而保之：一曰慈，二曰俭，三曰不敢为天下先。慈故能勇，俭故能广，不敢为天下先故能成器长。善为士者不武，善战者不怒。吾言甚易知，甚易行——天下莫能知，莫能行。这九章给了具体的修身工具：三宝。'},
-    { start:73, end:81, title:'天道之归', unlock:81,
-      body:'勇于敢则杀，勇于不敢则活。天之道，不争而善胜，不言而善应，不召而自来。人之生也柔弱，其死也坚强——草木生也柔脆，其死也枯槁。故坚强者死之徒，柔弱者生之徒。天之道，其犹张弓与？高者抑之，下者举之——天道永远在做平衡。天下莫柔弱于水，而攻坚强者莫之能胜。和大怨，必有余怨——以德报怨不如不结怨，是以圣人执左契而不责于人。小国寡民——鸡犬之声相闻，民至老死不相往来。信言不美，美言不信。九九归一：始于不可道之道，终于不言之美。整部经，是你自己的路。'}
+    { start:1, end:9, titleZh:'\u9053\u4e4b\u672c\u6e90', titleEn:'Origin of the Way', unlock:9,
+      bodyZh:'\u9053\u4e0d\u53ef\u8a00\u8bf4\uff0c\u5374\u662f\u4e00\u5207\u7684\u5f00\u7aef\u3002\u8fd9\u4e5d\u7ae0\u53cd\u590d\u8ffd\u95ee\uff1a\u4f55\u4e3a\u7ec8\u6781\u5b9e\u5728\uff1f\u540d\u4e0e\u65e0\u540d\u3001\u6709\u4e0e\u65e0\uff0c\u5e76\u975e\u5bf9\u7acb\u800c\u662f\u76f8\u751f\u2014\u2014\u6b63\u5982\u5929\u5730\u59cb\u4e8e\u65e0\u540d\uff0c\u4e07\u7269\u751f\u4e8e\u6709\u540d\u3002\u5723\u4eba\u865a\u5176\u5fc3\u3001\u5b9e\u5176\u8179\uff0c\u4e0d\u5c1a\u8d24\u3001\u4e0d\u8d35\u96be\u5f97\u4e4b\u8d27\u3002\u6700\u9ad8\u7684\u5584\u5982\u6c34\uff0c\u5229\u4e07\u7269\u800c\u4e0d\u4e89\uff1b\u6700\u6df1\u7684\u667a\u6167\u662f\u77e5\u6b62\uff0c\u56e0\u4e3a\u950b\u8292\u6bd5\u9732\u8005\u5fc5\u6298\u3002\u4e5d\u7ae0\u8bfb\u5b8c\uff0c\u4f60\u89e6\u6478\u5230\u4e86\u9053\u7684\u8f6e\u5ed3\uff1a\u5b83\u4e0d\u5728\u8fdc\u65b9\uff0c\u800c\u5728\u865a\u9759\u4e4b\u4e2d\u3002',
+      bodyEn:'The Tao that can be spoken is not the eternal Tao \u2014 yet it is the origin of everything. These nine chapters circle one question: what is ultimate reality? The Named and the Nameless, Being and Non-being \u2014 not opposing forces but mutual births, just as heaven and earth arise from the unnamed and the ten thousand things from the named. The sage empties the heart, fills the belly, honors no elites, treasures nothing rare. The highest good is like water, nourishing all without contending. The deepest wisdom is knowing when to stop, for a blade honed too sharp will snap. After these nine chapters, you have touched the outline of the Way: it is not somewhere far, but in stillness and emptiness.' },
+    { start:10, end:18, titleZh:'\u4fee\u8eab\u4e4b\u95e8', titleEn:'Gate of Self-Cultivation', unlock:18,
+      bodyZh:'\u77e5\u9053\u4e86\u9053\uff0c\u5982\u4f55\u4fee\u4e8e\u8eab\uff1f\u5a74\u513f\u822c\u7684\u81ea\u7136\u3001\u8f66\u8f6e\u4e2d\u7684\u7a7a\u3001\u4e94\u5b98\u7684\u8bf1\u60d1\u2014\u2014\u5b83\u4eec\u6307\u5411\u540c\u4e00\u4e2a\u95ee\u9898\uff1a\u4ec0\u4e48\u5728\u5e72\u6270\u4f60\u56de\u5f52\u672c\u771f\uff1f\u5ba0\u8fb1\u82e5\u60ca\uff0c\u662f\u56e0\u4e3a\u592a\u5728\u4e4e\u201c\u6211\u201d\u3002\u53e4\u4e4b\u5584\u4e3a\u9053\u8005\uff0c\u5fae\u5999\u7384\u901a\u3001\u6df1\u4e0d\u53ef\u8bc6\uff1b\u4ed6\u4eec\u8c6b\u516e\u82e5\u51ac\u6d89\u5ddd\uff0c\u72b9\u516e\u82e5\u754f\u56db\u90bb\u3002\u5f52\u6839\u66f0\u9759\uff0c\u9759\u66f0\u590d\u547d\u2014\u2014\u56de\u5230\u751f\u547d\u7684\u6839\uff0c\u5c31\u662f\u56de\u5230\u9759\u3002\u6700\u597d\u7684\u9886\u5bfc\u8005\uff0c\u767e\u59d3\u53ea\u77e5\u6709\u4e4b\uff1b\u5927\u9053\u5e9f\uff0c\u624d\u6709\u4ec1\u4e49\u3002\u8fd9\u4e5d\u7ae0\u6559\u7684\u662f\uff1a\u5148\u89e3\u51b3\u81ea\u5df1\uff0c\u518d\u8c08\u5176\u4ed6\u3002',
+      bodyEn:'You have glimpsed the Way. Now how to cultivate it in yourself? The infant\'s naturalness, the emptiness at the wheel\'s hub, the five colors that blind the eye \u2014 they all ask the same thing: what disturbs your original nature? Favor and disgrace feel like shocks because you cling too tightly to the self. The ancient masters of the Way were subtle, mysterious, profoundly deep \u2014 hesitant like crossing a winter stream, watchful like one aware of neighbors on all sides. Returning to the root is stillness; stillness is returning to life\'s mandate. The best leader is one the people hardly know exists. When the great Way declines, then come benevolence and righteousness. These nine chapters teach: settle yourself first, then speak of the world.' },
+    { start:19, end:27, titleZh:'\u8fd4\u6734\u5f52\u771f', titleEn:'Return to Simplicity', unlock:27,
+      bodyZh:'\u7edd\u5723\u5f03\u667a\uff0c\u6c11\u5229\u767e\u500d\uff1b\u7edd\u4ec1\u5f03\u4e49\uff0c\u6c11\u590d\u5b5d\u6148\u3002\u8fd9\u4e0d\u662f\u53cd\u667a\uff0c\u800c\u662f\u5265\u6389\u591a\u4f59\u7684\u7c89\u9970\u3002\u66f2\u5219\u5168\uff0c\u6789\u5219\u76f4\uff0c\u6d3c\u5219\u76c8\u2014\u2014\u793a\u5f31\u53cd\u800c\u5b8c\u6574\u3002\u98d8\u98ce\u4e0d\u7ec8\u671d\uff0c\u9aa4\u96e8\u4e0d\u7ec8\u65e5\uff0c\u5929\u5730\u5c1a\u4e14\u4e0d\u80fd\u4e45\uff0c\u4f55\u51b5\u4eba\uff1f\u4eba\u6cd5\u5730\uff0c\u5730\u6cd5\u5929\uff0c\u5929\u6cd5\u9053\uff0c\u9053\u6cd5\u81ea\u7136\u3002\u91cd\u4e3a\u8f7b\u6839\uff0c\u9759\u4e3a\u8e81\u541b\u2014\u2014\u8f7b\u6d6e\u8005\u5931\u6839\uff0c\u8e81\u52a8\u8005\u4e27\u4e3b\u3002\u5584\u884c\u65e0\u8f99\u8ff9\uff0c\u771f\u6b63\u7684\u529f\u592b\u770b\u4e0d\u51fa\u75d5\u8ff9\u3002\u8fd9\u4e5d\u7ae0\u662f\u4e00\u573a\u5265\u79bb\uff1a\u5265\u6389\u77e5\u8bc6\uff0c\u5265\u6389\u6b32\u671b\uff0c\u9732\u51fa\u6700\u521d\u7684\u7eaf\u771f\u3002',
+      bodyEn:'Banish sageliness, discard knowledge, and the people benefit a hundredfold. Banish benevolence, discard righteousness, and the people return to filial love. This is not anti-intellect \u2014 it is stripping away excess adornment. Bend and be whole; yield and be straight; be empty and be full \u2014 weakness, paradoxically, makes you complete. A whirlwind does not last the morning, a rainstorm does not last the day. If even heaven and earth cannot sustain extremes, how much less can we? Humanity follows Earth, Earth follows Heaven, Heaven follows the Way, the Way follows its own nature. The heavy is the root of the light; stillness is the master of restlessness. True skill leaves no trace. These nine chapters are an undressing: peel away knowledge, peel away desire, and reveal the original innocence beneath.' },
+    { start:28, end:36, titleZh:'\u77e5\u96c4\u5b88\u96cc', titleEn:'Know the Masculine, Keep to the Feminine', unlock:36,
+      bodyZh:'\u77e5\u5176\u96c4\uff0c\u5b88\u5176\u96cc\uff0c\u4e3a\u5929\u4e0b\u6eaa\u3002\u77e5\u767d\u5b88\u9ed1\u3001\u77e5\u8363\u5b88\u8fb1\u2014\u2014\u8fd9\u4e9b\u6096\u8bba\u662f\u8001\u5b50\u7684\u6838\u5fc3\u5fc3\u6cd5\u3002\u4f60\u660e\u77e5\u521a\u5f3a\uff0c\u5374\u9009\u62e9\u67d4\u548c\uff1b\u4f60\u6d1e\u5bdf\u4e00\u5207\uff0c\u5374\u7518\u5b88\u4f4e\u5904\u3002\u5929\u4e0b\u795e\u5668\uff0c\u4e0d\u53ef\u4e3a\u4e5f\u2014\u2014\u5f3a\u626d\u7684\u74dc\u4e0d\u751c\uff0c\u5f3a\u53d6\u7684\u4e16\u754c\u4e0d\u5f52\u4f60\u3002\u5175\u8005\u4e0d\u7965\u4e4b\u5668\uff0c\u7269\u6216\u6076\u4e4b\uff0c\u6545\u6709\u9053\u8005\u4e0d\u5904\u3002\u77e5\u4eba\u8005\u667a\uff0c\u81ea\u77e5\u8005\u660e\uff1b\u80dc\u4eba\u8005\u6709\u529b\uff0c\u81ea\u80dc\u8005\u5f3a\u3002\u5927\u9053\u6cdb\u516e\uff0c\u5176\u53ef\u5de6\u53f3\uff1b\u6267\u5927\u8c61\uff0c\u5929\u4e0b\u5f80\u3002\u5c06\u6b32\u6b59\u4e4b\uff0c\u5fc5\u56fa\u5f20\u4e4b\u2014\u2014\u67d4\u5f31\u80dc\u521a\u5f3a\uff0c\u4e0d\u662f\u9e21\u6c64\uff0c\u662f\u5b87\u5b99\u89c4\u5f8b\u3002\u8fd9\u4e5d\u7ae0\u8ba9\u4f60\u7684\u529b\u91cf\u5411\u5185\u751f\u957f\uff0c\u800c\u975e\u5411\u5916\u6325\u970d\u3002',
+      bodyEn:'Know the masculine, yet keep to the feminine, and become the valley of the world. Know the white, keep to the black; know honor, keep to disgrace \u2014 these paradoxes are Lao Tzu\'s core method. You clearly understand strength, yet choose softness; you see through everything, yet abide in the low place. The world is a sacred vessel \u2014 it cannot be forced. Weapons are instruments of ill omen; those who follow the Way do not dwell with them. Knowing others is intelligence; knowing yourself is true wisdom. Mastering others is strength; mastering yourself is true power. The great Way flows everywhere, to the left and to the right. Hold the great image and the world will come. What is to be contracted must first be expanded \u2014 the soft overcomes the hard not as wishful thinking, but as cosmic law. These nine chapters grow your power inward, not outward.' },
+    { start:37, end:45, titleZh:'\u65e0\u4e3a\u4e4b\u9053', titleEn:'The Way of Non-Action', unlock:45,
+      bodyZh:'\u9053\u5e38\u65e0\u4e3a\u800c\u65e0\u4e0d\u4e3a\u3002\u65e0\u4e3a\u4e0d\u662f\u8eba\u5e73\uff0c\u662f\u987a\u7740\u9053\u7684\u6d41\u5411\u3002\u4e0a\u5fb7\u4e0d\u5fb7\uff0c\u662f\u4ee5\u6709\u5fb7\u2014\u2014\u771f\u6b63\u7684\u5fb7\u6027\u4e0d\u6807\u699c\u81ea\u5df1\u3002\u6614\u4e4b\u5f97\u4e00\u8005\uff1a\u5929\u5f97\u4e00\u4ee5\u6e05\uff0c\u5730\u5f97\u4e00\u4ee5\u5b81\uff0c\u4e07\u7269\u5f97\u4e00\u4ee5\u751f\u3002\u8fd9\u4e2a\u201c\u4e00\u201d\u662f\u4e07\u7269\u7684\u6e90\u5934\u3002\u53cd\u8005\u9053\u4e4b\u52a8\uff0c\u5f31\u8005\u9053\u4e4b\u7528\u2014\u2014\u4e07\u7269\u7ec8\u5c06\u56de\u5f52\u672c\u6e90\u3002\u4e0a\u58eb\u95fb\u9053\uff0c\u52e4\u800c\u884c\u4e4b\uff1b\u4e2d\u58eb\u95fb\u9053\uff0c\u82e5\u5b58\u82e5\u4ea1\u3002\u9053\u751f\u4e00\uff0c\u4e00\u751f\u4e8c\uff0c\u4e8c\u751f\u4e09\uff0c\u4e09\u751f\u4e07\u7269\u3002\u5929\u4e0b\u4e4b\u81f3\u67d4\uff0c\u9a70\u9a8b\u5929\u4e0b\u4e4b\u81f3\u575a\u3002\u540d\u4e0e\u8eab\u5b70\u4eb2\uff1f\u5927\u6210\u82e5\u7f3a\u3001\u5927\u76c8\u82e5\u51b2\u2014\u2014\u5706\u6ee1\u770b\u8d77\u6765\u50cf\u6b8b\u7f3a\u3002\u8fd9\u4e5d\u7ae0\u7684\u6838\u5fc3\u662f\uff1a\u522b\u5bf9\u6297\uff0c\u987a\u5e94\u3002',
+      bodyEn:'The Way never acts, yet nothing is left undone. Wu-wei is not passivity \u2014 it is moving with the current of the Way. The highest virtue is not virtuous, therefore it has virtue \u2014 true goodness does not label itself. Of old, those who attained the One: Heaven attained it and became clear; Earth attained it and became still; the ten thousand things attained it and came to life. This "One" is the source of all. Returning is the movement of the Way; yielding is its function \u2014 all things eventually return to their origin. The highest student hears the Way and practices diligently; the middling student hears and half-believes. The Way gave birth to One, One to Two, Two to Three, Three to the ten thousand things. The softest thing in the world overcomes the hardest. Fame or your body \u2014 which is dearer? Great perfection seems flawed, great fullness seems empty. These nine chapters say one thing: stop fighting, start flowing.' },
+    { start:46, end:54, titleZh:'\u77e5\u8db3\u5e38\u8db3', titleEn:'Contentment is True Wealth', unlock:54,
+      bodyZh:'\u5929\u4e0b\u6709\u9053\uff0c\u5374\u8d70\u9a6c\u4ee5\u7caa\uff1b\u5929\u4e0b\u65e0\u9053\uff0c\u620e\u9a6c\u751f\u4e8e\u90ca\u3002\u7978\u83ab\u5927\u4e8e\u4e0d\u77e5\u8db3\uff0c\u548e\u83ab\u5927\u4e8e\u6b32\u5f97\u2014\u2014\u8fd9\u4e5d\u4e2a\u5b57\u662f\u6574\u90e8\u9053\u5fb7\u7ecf\u7684\u67a2\u7ebd\u3002\u4e0d\u51fa\u6237\uff0c\u77e5\u5929\u4e0b\uff1b\u4e0d\u7aa5\u724a\uff0c\u89c1\u5929\u9053\u3002\u4e3a\u5b66\u65e5\u76ca\uff0c\u4e3a\u9053\u65e5\u635f\uff0c\u635f\u4e4b\u53c8\u635f\uff0c\u4ee5\u81f3\u4e8e\u65e0\u4e3a\u3002\u5723\u4eba\u65e0\u5e38\u5fc3\uff0c\u4ee5\u767e\u59d3\u5fc3\u4e3a\u5fc3\u3002\u51fa\u751f\u5165\u6b7b\u2014\u2014\u751f\u5c31\u662f\u8d70\u5411\u6b7b\u7684\u65c5\u7a0b\uff0c\u5584\u6444\u751f\u8005\u4e0d\u5165\u6b7b\u5730\u3002\u9053\u751f\u4e4b\uff0c\u5fb7\u755c\u4e4b\uff0c\u7269\u5f62\u4e4b\uff0c\u52bf\u6210\u4e4b\u2014\u2014\u4e07\u7269\u90fd\u9075\u5faa\u9053\u7684\u56db\u91cd\u54fa\u80b2\u3002\u5929\u4e0b\u6709\u59cb\uff0c\u4ee5\u4e3a\u5929\u4e0b\u6bcd\u3002\u4fee\u4e4b\u4e8e\u8eab\uff0c\u5176\u5fb7\u4e43\u771f\u3002\u8fd9\u4e5d\u7ae0\u628a\u201c\u77e5\u8db3\u201d\u4ece\u4e2a\u4eba\u5fc3\u6001\u6269\u5c55\u4e3a\u5b87\u5b99\u79e9\u5e8f\u3002',
+      bodyEn:'When the Way prevails, horses haul manure to the fields; when the Way is lost, war-horses are bred in the suburbs. There is no greater curse than discontent, no greater fault than the desire to possess \u2014 these nine words are the hinge of the entire Tao Te Ching. Without going out the door, know the world; without peering through the window, see the Way of Heaven. In learning, accumulate daily; in the Way, shed daily \u2014 shed and shed until you reach non-action. The sage has no fixed heart; the heart of the people becomes the sage\'s heart. To come forth into life is to enter death \u2014 the one who is good at preserving life does not enter the realm of death. The Way gives birth, Virtue nourishes, Matter shapes, Circumstance completes \u2014 all things follow the Way\'s fourfold nurture. The world has a beginning, which is the mother of the world. Cultivate it in yourself, and its virtue becomes genuine. These nine chapters elevate contentment from personal attitude to cosmic order.' },
+    { start:55, end:63, titleZh:'\u7384\u5fb7\u4e4b\u4fee', titleEn:'Cultivating Mysterious Virtue', unlock:63,
+      bodyZh:'\u542b\u5fb7\u4e4b\u539a\uff0c\u6bd4\u4e8e\u8d64\u5b50\u2014\u2014\u5a74\u513f\u4e0d\u77e5\u9053\u6bd2\u866b\u3001\u731b\u517d\u3001\u652b\u9e1f\uff0c\u56e0\u4ed6\u6ca1\u6709\u654c\u610f\u3002\u77e5\u8005\u4e0d\u8a00\uff0c\u8a00\u8005\u4e0d\u77e5\uff1b\u585e\u5176\u5151\uff0c\u95ed\u5176\u95e8\uff0c\u631b\u5176\u9510\uff0c\u89e3\u5176\u7eb7\uff0c\u548c\u5176\u5149\uff0c\u540c\u5176\u5c18\uff0c\u662f\u8c13\u7384\u540c\u3002\u4ee5\u6b63\u6cbb\u56fd\uff0c\u4ee5\u5947\u7528\u5175\uff0c\u4ee5\u65e0\u4e8b\u53d6\u5929\u4e0b\u3002\u6cbb\u5927\u56fd\u82e5\u70f9\u5c0f\u9c9c\u2014\u2014\u591a\u7ffb\u5c31\u4f1a\u788e\u3002\u5927\u56fd\u8005\u4e0b\u6d41\uff0c\u5929\u4e0b\u4e4b\u726d\uff0c\u726d\u5e38\u4ee5\u9759\u80dc\u7261\u3002\u9053\u8005\u4e07\u7269\u4e4b\u5965\uff0c\u5584\u4eba\u4e4b\u5b9d\uff0c\u4e0d\u5584\u4eba\u4e4b\u6240\u4fdd\u3002\u4e3a\u65e0\u4e3a\uff0c\u4e8b\u65e0\u4e8b\uff0c\u5473\u65e0\u5473\u2014\u2014\u5927\u5c0f\u591a\u5c11\uff0c\u62a5\u6028\u4ee5\u5fb7\u3002\u56fe\u96be\u4e8e\u5176\u6613\uff0c\u4e3a\u5927\u4e8e\u5176\u7ec6\u3002\u8fd9\u4e5d\u7ae0\u628a\u201c\u7384\u5fb7\u201d\u5177\u8c61\u5316\u4e86\uff1a\u4e0d\u662f\u795e\u79d8\uff0c\u662f\u6781\u81f4\u7684\u67d4\u5f31\u3002',
+      bodyEn:'One who is thick with virtue is like a newborn infant \u2014 unaware of poisonous insects, fierce beasts, or birds of prey, because they harbor no hostility. Those who know do not speak; those who speak do not know. Block the openings, shut the doors, blunt the sharpness, untie the tangles, soften the glare, settle the dust \u2014 this is called the Mysterious Sameness. Govern the state with correctness, deploy the army with surprise, win the world without meddling. Rule a great country as you would cook a small fish \u2014 too much handling and it falls apart. The great country is the lower reaches, the female of the world; the female overcomes the male through stillness. The Way is the hidden sanctuary of all things \u2014 the treasure of the good, the refuge of the not-good. Act without action, attend without affairs, taste without flavor \u2014 great and small, repay resentment with virtue. Plan for the difficult while it is easy; act on the great while it is small. These nine chapters make Mysterious Virtue tangible: it is not mystery, it is ultimate softness.' },
+    { start:64, end:72, titleZh:'\u4e09\u5b9d\u4e4b\u5b88', titleEn:'Guarding the Three Treasures', unlock:72,
+      bodyZh:'\u5176\u5b89\u6613\u6301\uff0c\u5176\u672a\u5146\u6613\u8c0b\u2014\u2014\u5728\u5e73\u9759\u65f6\u5b88\u4f4f\uff0c\u5728\u672a\u840c\u65f6\u8c0b\u5212\u3002\u5408\u62b1\u4e4b\u6728\u751f\u4e8e\u6beb\u672b\uff0c\u4e5d\u5c42\u4e4b\u53f0\u8d77\u4e8e\u7d2f\u571f\uff0c\u5343\u91cc\u4e4b\u884c\u59cb\u4e8e\u8db3\u4e0b\u3002\u53e4\u4e4b\u5584\u4e3a\u9053\u8005\uff0c\u975e\u4ee5\u660e\u6c11\uff0c\u5c06\u4ee5\u611a\u4e4b\u2014\u2014\u4e0d\u662f\u611a\u5f04\uff0c\u662f\u8ba9\u4eba\u56de\u5f52\u6df3\u6734\u3002\u6c5f\u6d77\u6240\u4ee5\u80fd\u4e3a\u767e\u8c37\u738b\u8005\uff0c\u4ee5\u5176\u5584\u4e0b\u4e4b\u3002\u6211\u6709\u4e09\u5b9d\uff0c\u6301\u800c\u4fdd\u4e4b\uff1a\u4e00\u66f0\u6148\uff0c\u4e8c\u66f0\u4fed\uff0c\u4e09\u66f0\u4e0d\u6562\u4e3a\u5929\u4e0b\u5148\u3002\u6148\u6545\u80fd\u52c7\uff0c\u4fed\u6545\u80fd\u5e7f\uff0c\u4e0d\u6562\u4e3a\u5929\u4e0b\u5148\u6545\u80fd\u6210\u5668\u957f\u3002\u5584\u4e3a\u58eb\u8005\u4e0d\u6b66\uff0c\u5584\u6218\u8005\u4e0d\u6012\u3002\u543e\u8a00\u751a\u6613\u77e5\uff0c\u751a\u6613\u884c\u2014\u2014\u5929\u4e0b\u83ab\u80fd\u77e5\uff0c\u83ab\u80fd\u884c\u3002\u8fd9\u4e5d\u7ae0\u7ed9\u4e86\u5177\u4f53\u7684\u4fee\u8eab\u5de5\u5177\uff1a\u4e09\u5b9d\u3002',
+      bodyEn:'What is at rest is easy to hold; what has not yet stirred is easy to plan for \u2014 hold it while it is still, arrange it before it sprouts. A tree that fills the arms\' embrace grows from a tiny shoot; a terrace nine stories high rises from a basket of earth; a journey of a thousand miles begins beneath your feet. The ancient masters of the Way did not enlighten the people \u2014 they kept them simple. Not out of contempt, but to let them return to unadorned wholeness. Why is the sea king of a hundred valleys? Because it lies lower than all of them. I have three treasures that I hold and guard: the first is compassion, the second is frugality, the third is daring not to be first in the world. Compassion gives true courage; frugality gives true abundance; daring not to be first gives true leadership. A good warrior is not violent; a good fighter is not angry. My words are easy to understand, easy to practice \u2014 yet no one in the world can understand or practice them. These nine chapters hand you concrete tools: the Three Treasures.' },
+    { start:73, end:81, titleZh:'\u5929\u9053\u4e4b\u5f52', titleEn:'Return of Heaven\'s Way', unlock:81,
+      bodyZh:'\u52c7\u4e8e\u6562\u5219\u6740\uff0c\u52c7\u4e8e\u4e0d\u6562\u5219\u6d3b\u3002\u5929\u4e4b\u9053\uff0c\u4e0d\u4e89\u800c\u5584\u80dc\uff0c\u4e0d\u8a00\u800c\u5584\u5e94\uff0c\u4e0d\u53ec\u800c\u81ea\u6765\u3002\u4eba\u4e4b\u751f\u4e5f\u67d4\u5f31\uff0c\u5176\u6b7b\u4e5f\u575a\u5f3a\u2014\u2014\u8349\u6728\u751f\u4e5f\u67d4\u8106\uff0c\u5176\u6b7b\u4e5f\u67af\u69cc\u3002\u6545\u575a\u5f3a\u8005\u6b7b\u4e4b\u5f92\uff0c\u67d4\u5f31\u8005\u751f\u4e4b\u5f92\u3002\u5929\u4e4b\u9053\uff0c\u5176\u72b9\u5f20\u5f13\u4e0e\uff1f\u9ad8\u8005\u6291\u4e4b\uff0c\u4e0b\u8005\u4e3e\u4e4b\u2014\u2014\u5929\u9053\u6c38\u8fdc\u5728\u505a\u5e73\u8861\u3002\u5929\u4e0b\u83ab\u67d4\u5f31\u4e8e\u6c34\uff0c\u800c\u653b\u575a\u5f3a\u8005\u83ab\u4e4b\u80fd\u80dc\u3002\u548c\u5927\u6028\uff0c\u5fc5\u6709\u4f59\u6028\u2014\u2014\u4ee5\u5fb7\u62a5\u6028\u4e0d\u5982\u4e0d\u7ed3\u6028\uff0c\u662f\u4ee5\u5723\u4eba\u6267\u5de6\u5951\u800c\u4e0d\u8d23\u4e8e\u4eba\u3002\u5c0f\u56fd\u5be1\u6c11\u2014\u2014\u9e21\u72ac\u4e4b\u58f0\u76f8\u95fb\uff0c\u6c11\u81f3\u8001\u6b7b\u4e0d\u76f8\u5f80\u6765\u3002\u4fe1\u8a00\u4e0d\u7f8e\uff0c\u7f8e\u8a00\u4e0d\u4fe1\u3002\u4e5d\u4e5d\u5f52\u4e00\uff1a\u59cb\u4e8e\u4e0d\u53ef\u9053\u4e4b\u9053\uff0c\u7ec8\u4e8e\u4e0d\u8a00\u4e4b\u7f8e\u3002\u6574\u90e8\u7ecf\uff0c\u662f\u4f60\u81ea\u5df1\u7684\u8def\u3002',
+      bodyEn:'Courage that dares brings death; courage that dares not brings life. The Way of Heaven excels at winning without contending, answering without speaking, summoning without calling. People are born soft and supple; at death they are stiff and hard. Plants are born tender and pliant; at death they are brittle and dry. Therefore the stiff and unyielding belong to death; the soft and yielding belong to life. The Way of Heaven is like drawing a bow \u2014 it lowers what is high and raises what is low; it always restores balance. Nothing in the world is softer than water, yet nothing surpasses it in overcoming the hard. When a great grudge is settled, some resentment remains \u2014 better to hold the left side of the contract and demand nothing. A small country with few people \u2014 let them hear each other\'s roosters and dogs, yet grow old and die without visiting. True words are not beautiful; beautiful words are not true. Nine times nine returns to One: from the Tao beyond words to the beauty beyond speech. The entire canon \u2014 it is your own path.' }
   ];
+
 
   var allDone = true;
   for (var i = 1; i <= 81; i++) {
@@ -14212,9 +14280,21 @@ function renderTaoPath() {
   }
 
   var currentChapter = getCurrentLesson().chapter;
+
+  // Build group tabs
+  var tabHtml = '<button class="taopath-group-tab' + (_taoGroup === 0 ? ' active' : '') + '" onclick="switchTaoGroup(0)">' + (isZh ? '\u5168\u90e8' : 'All') + '</button>';
+  milestones.forEach(function(ms, idx) {
+    var g = idx + 1;
+    tabHtml += '<button class="taopath-group-tab' + (_taoGroup === g ? ' active' : '') + '" onclick="switchTaoGroup(' + g + ')\">' + ms.start + '\u2013' + ms.end + '</button>';
+  });
+  document.getElementById('taopathGroupTabs').innerHTML = tabHtml;
+
   var html = '';
 
-  milestones.forEach(function(ms) {
+  milestones.forEach(function(ms, idx) {
+    var g = idx + 1;
+    if (_taoGroup > 0 && g !== _taoGroup) return;
+
     var completed = true;
     for (var c = ms.start; c <= ms.end; c++) {
       var cp = getChapterProgress(c);
@@ -14227,8 +14307,8 @@ function renderTaoPath() {
     if (!completed && !unlocked) cls = 'tao-milestone';
     if (currentChapter >= ms.start && currentChapter <= ms.end) cls += ' current';
 
-    var statusText = completed ? '✓ 已悟' : (unlocked ? '进行中' : '🔒 未启');
-    if (currentChapter >= ms.start && currentChapter <= ms.end && !completed) statusText = '📍 当前';
+    var statusText = completed ? L.statusDone : (unlocked ? L.statusActive : L.statusLocked);
+    if (currentChapter >= ms.start && currentChapter <= ms.end && !completed) statusText = L.statusCurrent;
 
     var chaptersHtml = '';
     for (var c = ms.start; c <= ms.end; c++) {
@@ -14241,29 +14321,30 @@ function renderTaoPath() {
 
     html += '<div class="' + cls + '">'
       + '<div class="tao-milestone-header">'
-      + '<span class="tao-milestone-range">第 ' + ms.start + ' – ' + ms.end + ' 章</span>'
-      + '<span class="tao-milestone-title">' + ms.title + '</span>'
+      + '<span class="tao-milestone-range">' + L.range + ms.start + ' \u2013 ' + ms.end + ' ' + L.chapter + '</span>'
+      + '<span class="tao-milestone-title">' + (isZh ? ms.titleZh : ms.titleEn) + '</span>'
       + '<span class="tao-milestone-status">' + statusText + '</span>'
       + '</div>'
-      + '<div class="tao-milestone-body">' + ms.body + '</div>'
+      + '<div class="tao-milestone-body">' + (isZh ? ms.bodyZh : ms.bodyEn) + '</div>'
       + '<div class="tao-milestone-chapters">' + chaptersHtml + '</div>'
       + '</div>';
   });
 
   // Full summary
-  var summaryCls = 'tao-summary' + (allDone ? ' unlocked' : '');
-  html += '<div class="' + summaryCls + '">'
-    + '<div class="tao-summary-icon">☯️</div>'
-    + '<div class="tao-summary-title">八十一归真</div>'
-    + '<div class="tao-summary-body">'
-    + (allDone
-      ? '八十一，是九乘九——九段小悟，合成一次大归。<br><br>你从“道可道非常道”出发，穿过名与无名的迷雾，学会虚静与知止。你让身体柔软如婴儿，在宠辱之间看清“我”的虚妄。你剥掉知识的层层粉饰，回到最初的纯真。你知雄却守雌——这是整部经的密钥：明了一切，却甘居暗处。<br><br>你不争，天道替你争；你不言，天下自归往。你把三宝——慈、俭、不敢为天下先——拿在手上，发现勇气从温柔里来，宽广从节俭里生。最后你看见：柔弱才是生，刚强通向死；真话不漂亮，漂亮的话不真。<br><br>八十一天，不是终点。道已经在你的每一步里了。'
-      : '前路漫漫，且行且悟。待八十一日毕，此间自现。')
-    + '</div>'
-    + '</div>';
+  if (_taoGroup === 0) {
+    var summaryCls = 'tao-summary' + (allDone ? ' unlocked' : '');
+    html += '<div class="' + summaryCls + '">'
+      + '<div class="tao-summary-icon">\u262f\ufe0f</div>'
+      + '<div class="tao-summary-title">' + L.summaryTitle + '</div>'
+      + '<div class="tao-summary-body">'
+      + (allDone ? L.summaryDone : L.summaryLocked)
+      + '</div>'
+      + '</div>';
+  }
 
   document.getElementById('taopathMilestones').innerHTML = html;
 }
+
 
 // ===== INIT =====
 loadState();
