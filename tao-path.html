@@ -1153,6 +1153,9 @@
   .tao-milestone.unlocked .tao-milestone-status { background: var(--gold-dim); color: var(--gold); }
   .tao-milestone.completed .tao-milestone-status { background: var(--accent-glow); color: var(--accent); }
   .tao-milestone-body { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+  .tao-milestone-body.partial { max-height: 4.2em; overflow: hidden; position: relative; }
+  .tao-milestone-body.partial::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2em; background: linear-gradient(to bottom, transparent, var(--bg-card)); pointer-events: none; }
+  .tao-milestone.completed .tao-milestone-body.partial::after { background: linear-gradient(to bottom, transparent, var(--bg-card)); }
   .tao-milestone-chapters { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.6rem; }
   .tao-milestone-ch { width: 1.6rem; height: 1.6rem; border-radius: 50%; font-size: 0.6rem; display: flex; align-items: center; justify-content: center; background: var(--bg-hover); color: var(--text-muted); transition: all 0.3s; }
   .tao-milestone-ch.done { background: var(--accent-glow); color: var(--accent); }
@@ -14325,7 +14328,7 @@ function renderTaoPath() {
       + '<span class="tao-milestone-title">' + (isZh ? ms.titleZh : ms.titleEn) + '</span>'
       + '<span class="tao-milestone-status">' + statusText + '</span>'
       + '</div>'
-      + '<div class="tao-milestone-body">' + (isZh ? ms.bodyZh : ms.bodyEn) + '</div>'
+      + '<div class="tao-milestone-body' + (completed ? '' : ' partial') + '">' + (completed ? (isZh ? ms.bodyZh : ms.bodyEn) : (isZh ? ms.bodyZh : ms.bodyEn).substring(0, 80) + '…') + '</div>'
       + '<div class="tao-milestone-chapters">' + chaptersHtml + '</div>'
       + '</div>';
   });
