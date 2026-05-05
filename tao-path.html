@@ -1128,6 +1128,32 @@
   }
   .bnav-item:hover, .bnav-item.active { color: var(--accent); }
   .bnav-icon { font-size: 1.2rem; }
+
+  /* ===== TAOPATH ===== */
+  .taopath-header { text-align: center; padding: 2rem 1rem 1.5rem; }
+  .taopath-header h2 { color: var(--accent); font-size: 1.6rem; margin-bottom: 0.3rem; letter-spacing: 0.1em; }
+  .taopath-header p { color: var(--text-dim); font-size: 0.85rem; }
+  .taopath-milestones { padding: 0 1rem 6rem; }
+  .tao-milestone { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem 1rem; margin-bottom: 1rem; transition: all 0.3s; opacity: 0.35; position: relative; overflow: hidden; }
+  .tao-milestone.unlocked { opacity: 1; border-color: var(--gold-dim); }
+  .tao-milestone.unlocked:hover { border-color: var(--gold); }
+  .tao-milestone.current { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
+  .tao-milestone-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+  .tao-milestone-range { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.05em; }
+  .tao-milestone-title { font-size: 1rem; color: var(--accent); font-weight: bold; }
+  .tao-milestone-status { font-size: 0.65rem; padding: 2px 8px; border-radius: 10px; background: var(--bg-hover); color: var(--text-muted); margin-left: auto; }
+  .tao-milestone.unlocked .tao-milestone-status { background: var(--gold-dim); color: var(--gold); }
+  .tao-milestone.completed .tao-milestone-status { background: var(--accent-glow); color: var(--accent); }
+  .tao-milestone-body { font-size: 0.82rem; color: var(--text-dim); line-height: 1.7; }
+  .tao-milestone-chapters { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.6rem; }
+  .tao-milestone-ch { width: 1.6rem; height: 1.6rem; border-radius: 50%; font-size: 0.6rem; display: flex; align-items: center; justify-content: center; background: var(--bg-hover); color: var(--text-muted); transition: all 0.3s; }
+  .tao-milestone-ch.done { background: var(--accent-glow); color: var(--accent); }
+  .tao-milestone-ch.cur { background: var(--gold-dim); color: var(--gold); box-shadow: 0 0 8px var(--gold-dim); }
+  .tao-summary { background: linear-gradient(135deg, var(--bg-card), var(--bg-hover)); border: 1px solid var(--gold); border-radius: 14px; padding: 1.5rem 1.2rem; margin-top: 2rem; opacity: 0.35; transition: all 0.5s; }
+  .tao-summary.unlocked { opacity: 1; box-shadow: 0 0 30px var(--gold-dim); }
+  .tao-summary-icon { text-align: center; font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .tao-summary-title { text-align: center; font-size: 1.1rem; color: var(--gold); margin-bottom: 0.8rem; font-weight: bold; }
+  .tao-summary-body { font-size: 0.85rem; color: var(--text); line-height: 1.85; }
 </style>
 </head>
 <body class="theme-forest">
@@ -1308,6 +1334,15 @@
   </div>
 </div>
 
+  <div class="page" id="page-taopath">
+    <div class="taopath-header">
+      <h2>道 途</h2>
+      <p>九章一小结，八十一归真</p>
+    </div>
+    <div class="taopath-milestones" id="taopathMilestones"></div>
+  </div>
+</div>
+
 <!-- WORD PANEL -->
 <div class="word-panel-backdrop" id="wordPanelBackdrop" onclick="closeWordPanel()"></div>
 <div class="word-panel" id="wordPanel">
@@ -1356,6 +1391,9 @@
   </button>
   <button class="bnav-item" onclick="navTo('journal')">
     <span class="bnav-icon">📓</span>Journal
+  </button>
+  <button class="bnav-item" onclick="navTo('taopath')">
+    <span class="bnav-icon">🛤️</span>Path
   </button>
 </div>
 
@@ -13841,14 +13879,16 @@ function navTo(section) {
     'map': 'page-map',
     'today': 'page-today',
     'observe': 'page-observe',
-    'journal': 'page-journal'
+    'journal': 'page-journal',
+    'taopath': 'page-taopath'
   };
 
   const navMap = {
     'map': 0,
     'today': 1,
     'observe': 2,
-    'journal': 3
+    'journal': 3,
+    'taopath': 4
   };
 
   document.getElementById(pageMap[section]).classList.add('active');
@@ -13856,6 +13896,8 @@ function navTo(section) {
 
   if (section === 'today') updateProgressCard();
   if (section === 'map') { renderChapterMap(); _initMapPage(); }
+  if (section === 'taopath') renderTaoPath();
+  if (section === 'journal') renderDiary();
 
   // Show/hide back button
   const backBtn = document.getElementById('navBackBtn');
@@ -14140,6 +14182,88 @@ function loadState() {
       state.writingSaved = saved.writingSaved || false;
     }
   } catch(e) {}
+}
+
+function renderTaoPath() {
+  var milestones = [
+    { start:1, end:9, title:'道之本源', unlock:9,
+      body:'道不可言说，却是一切的开端。这九章反复追问：何为终极实在？名与无名、有与无，并非对立而是相生——正如天地始于无名，万物生于有名。圣人虚其心、实其腹，不尚贤、不贵难得之货。最高的善如水，利万物而不争；最深的智慧是知止，因为锋芒毕露者必折。九章读完，你触摸到了道的轮廓：它不在远方，而在虚静之中。'},
+    { start:10, end:18, title:'修身之门', unlock:18,
+      body:'知道了道，如何修于身？婴儿般的自然、车轮中的空、五官的诱惑——它们指向同一个问题：什么在干扰你回归本真？宠辱若惊，是因为太在乎“我”。古之善为道者，微妙玄通、深不可识；他们豫兮若冬涉川，犹兮若畏四邻。归根曰静，静曰复命——回到生命的根，就是回到静。最好的领导者，百姓只知有之；大道废，才有仁义。这九章教的是：先解决自己，再谈其他。'},
+    { start:19, end:27, title:'返朴归真', unlock:27,
+      body:'绝圣弃智，民利百倍；绝仁弃义，民复孝慈。这不是反智，而是剥掉多余的粉饰。曲则全，枉则直，洼则盈——示弱反而完整。飘风不终朝，骤雨不终日，天地尚且不能久，何况人？人法地，地法天，天法道，道法自然。这四重效法像一条锁链，把我们从虚妄中拉回。重为轻根，静为躁君——轻浮者失根，躁动者丧主。善行无辙迹，真正的功夫看不出痕迹。这九章是一场剥离：剥掉知识，剥掉欲望，露出最初的纯真。'},
+    { start:28, end:36, title:'知雄守雌', unlock:36,
+      body:'知其雄，守其雌，为天下溪。知白守黑、知荣守辱——这些悖论是老子的核心心法。你明知刚强，却选择柔和；你洞察一切，却甘守低处。天下神器，不可为也——强扭的瓜不甜，强取的世界不归你。兵者不祥之器，物或恶之，故有道者不处。知人者智，自知者明；胜人者有力，自胜者强。大道泛兮，其可左右；执大象，天下往。将欲歙之，必固张之——柔弱胜刚强，不是鸡汤，是宇宙规律。这九章让你的力量向内生长，而非向外挥霍。'},
+    { start:37, end:45, title:'无为之道', unlock:45,
+      body:'道常无为而无不为。无为不是躺平，是顺着道的流向。上德不德，是以有德——真正的德性不标榜自己。昔之得一者：天得一以清，地得一以宁，万物得一以生。这个“一”是万物的源头。反者道之动，弱者道之用——万物终将回归本源。上士闻道，勤而行之；中士闻道，若存若亡。道生一，一生二，二生三，三生万物。天下之至柔，驰骋天下之至坚。名与身孰亲？大成若缺、大盈若冲——圆满看起来像残缺。这九章的核心是：别对抗，顺应。'},
+    { start:46, end:54, title:'知足常足', unlock:54,
+      body:'天下有道，却走马以粪；天下无道，戎马生于郊。祸莫大于不知足，咎莫大于欲得——这九个字是整部道德经的枢纽。不出户，知天下；不窥牖，见天道。为学日益，为道日损，损之又损，以至于无为。圣人无常心，以百姓心为心。出生入死——生就是走向死的旅程，善摄生者不入死地。道生之，德畜之，物形之，势成之——万物都遵循道的四重哺育。天下有始，以为天下母。修之于身，其德乃真。这九章把“知足”从个人心态扩展为宇宙秩序。'},
+    { start:55, end:63, title:'玄德之修', unlock:63,
+      body:'含德之厚，比于赤子——婴儿不知道毒虫、猛兽、攫鸟，因他没有敌意。知者不言，言者不知；塞其兑，闭其门，挫其锐，解其纷，和其光，同其尘，是谓玄同。以正治国，以奇用兵，以无事取天下。治大国若烹小鲜——多翻就会碎。大国者下流，天下之牝，牝常以静胜牡。道者万物之奥，善人之宝，不善人之所保。为无为，事无事，味无味——大小多少，报怨以德。图难于其易，为大于其细。这九章把“玄德”具象化了：不是神秘，是极致的柔弱。'},
+    { start:64, end:72, title:'三宝之守', unlock:72,
+      body:'其安易持，其未兆易谋——在平静时守住，在未萌时谋划。合抱之木生于毫末，九层之台起于累土，千里之行始于足下。古之善为道者，非以明民，将以愚之——不是愚弄，是让人回归淳朴。江海所以能为百谷王者，以其善下之。我有三宝，持而保之：一曰慈，二曰俭，三曰不敢为天下先。慈故能勇，俭故能广，不敢为天下先故能成器长。善为士者不武，善战者不怒。吾言甚易知，甚易行——天下莫能知，莫能行。这九章给了具体的修身工具：三宝。'},
+    { start:73, end:81, title:'天道之归', unlock:81,
+      body:'勇于敢则杀，勇于不敢则活。天之道，不争而善胜，不言而善应，不召而自来。人之生也柔弱，其死也坚强——草木生也柔脆，其死也枯槁。故坚强者死之徒，柔弱者生之徒。天之道，其犹张弓与？高者抑之，下者举之——天道永远在做平衡。天下莫柔弱于水，而攻坚强者莫之能胜。和大怨，必有余怨——以德报怨不如不结怨，是以圣人执左契而不责于人。小国寡民——鸡犬之声相闻，民至老死不相往来。信言不美，美言不信。九九归一：始于不可道之道，终于不言之美。整部经，是你自己的路。'}
+  ];
+
+  var allDone = true;
+  for (var i = 1; i <= 81; i++) {
+    var cp = getChapterProgress(i);
+    if (!cp || !cp.completed) { allDone = false; break; }
+  }
+
+  var currentChapter = getCurrentLesson().chapter;
+  var html = '';
+
+  milestones.forEach(function(ms) {
+    var completed = true;
+    for (var c = ms.start; c <= ms.end; c++) {
+      var cp = getChapterProgress(c);
+      if (!cp || !cp.completed) { completed = false; break; }
+    }
+    var unlocked = currentChapter >= ms.start;
+    var cls = 'tao-milestone';
+    if (completed) cls += ' completed';
+    else if (unlocked) cls += ' unlocked';
+    if (!completed && !unlocked) cls = 'tao-milestone';
+    if (currentChapter >= ms.start && currentChapter <= ms.end) cls += ' current';
+
+    var statusText = completed ? '✓ 已悟' : (unlocked ? '进行中' : '🔒 未启');
+    if (currentChapter >= ms.start && currentChapter <= ms.end && !completed) statusText = '📍 当前';
+
+    var chaptersHtml = '';
+    for (var c = ms.start; c <= ms.end; c++) {
+      var cp = getChapterProgress(c);
+      var chCls = 'tao-milestone-ch';
+      if (cp && cp.completed) chCls += ' done';
+      if (c === currentChapter) chCls += ' cur';
+      chaptersHtml += '<span class="' + chCls + '">' + c + '</span>';
+    }
+
+    html += '<div class="' + cls + '">'
+      + '<div class="tao-milestone-header">'
+      + '<span class="tao-milestone-range">第 ' + ms.start + ' – ' + ms.end + ' 章</span>'
+      + '<span class="tao-milestone-title">' + ms.title + '</span>'
+      + '<span class="tao-milestone-status">' + statusText + '</span>'
+      + '</div>'
+      + '<div class="tao-milestone-body">' + ms.body + '</div>'
+      + '<div class="tao-milestone-chapters">' + chaptersHtml + '</div>'
+      + '</div>';
+  });
+
+  // Full summary
+  var summaryCls = 'tao-summary' + (allDone ? ' unlocked' : '');
+  html += '<div class="' + summaryCls + '">'
+    + '<div class="tao-summary-icon">☯️</div>'
+    + '<div class="tao-summary-title">八十一归真</div>'
+    + '<div class="tao-summary-body">'
+    + (allDone
+      ? '八十一，是九乘九——九段小悟，合成一次大归。<br><br>你从“道可道非常道”出发，穿过名与无名的迷雾，学会虚静与知止。你让身体柔软如婴儿，在宠辱之间看清“我”的虚妄。你剥掉知识的层层粉饰，回到最初的纯真。你知雄却守雌——这是整部经的密钥：明了一切，却甘居暗处。<br><br>你不争，天道替你争；你不言，天下自归往。你把三宝——慈、俭、不敢为天下先——拿在手上，发现勇气从温柔里来，宽广从节俭里生。最后你看见：柔弱才是生，刚强通向死；真话不漂亮，漂亮的话不真。<br><br>八十一天，不是终点。道已经在你的每一步里了。'
+      : '前路漫漫，且行且悟。待八十一日毕，此间自现。')
+    + '</div>'
+    + '</div>';
+
+  document.getElementById('taopathMilestones').innerHTML = html;
 }
 
 // ===== INIT =====
